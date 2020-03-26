@@ -40,8 +40,14 @@
             this.EditActTempBtn = new MaterialSkin.Controls.MaterialFlatButton();
             this.RemoveActTempBtn = new MaterialSkin.Controls.MaterialFlatButton();
             this.actLbl = new MaterialSkin.Controls.MaterialLabel();
-            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.SaveChangesBtn = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton2 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllActTempGrid)).BeginInit();
             this.SuspendLayout();
@@ -155,14 +161,14 @@
             this.CreateTemplateBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CreateTemplateBtn.Depth = 0;
             this.CreateTemplateBtn.Icon = null;
-            this.CreateTemplateBtn.Location = new System.Drawing.Point(764, 517);
+            this.CreateTemplateBtn.Location = new System.Drawing.Point(1195, 795);
             this.CreateTemplateBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateTemplateBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateTemplateBtn.Name = "CreateTemplateBtn";
             this.CreateTemplateBtn.Primary = false;
             this.CreateTemplateBtn.Size = new System.Drawing.Size(190, 36);
             this.CreateTemplateBtn.TabIndex = 12;
-            this.CreateTemplateBtn.Text = "Vytvoriť novú aktivitu";
+            this.CreateTemplateBtn.Text = "Vytvoriť novú šablónu\r\n";
             this.CreateTemplateBtn.UseVisualStyleBackColor = true;
             this.CreateTemplateBtn.Click += new System.EventHandler(this.CreateTemplateBtn_Click);
             // 
@@ -170,9 +176,9 @@
             // 
             this.AllActTempGrid.BackgroundColor = System.Drawing.Color.White;
             this.AllActTempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AllActTempGrid.Location = new System.Drawing.Point(764, 133);
+            this.AllActTempGrid.Location = new System.Drawing.Point(1074, 144);
             this.AllActTempGrid.Name = "AllActTempGrid";
-            this.AllActTempGrid.Size = new System.Drawing.Size(383, 306);
+            this.AllActTempGrid.Size = new System.Drawing.Size(311, 306);
             this.AllActTempGrid.TabIndex = 13;
             // 
             // EditActTempBtn
@@ -181,14 +187,14 @@
             this.EditActTempBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.EditActTempBtn.Depth = 0;
             this.EditActTempBtn.Icon = null;
-            this.EditActTempBtn.Location = new System.Drawing.Point(764, 448);
+            this.EditActTempBtn.Location = new System.Drawing.Point(1074, 459);
             this.EditActTempBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.EditActTempBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.EditActTempBtn.Name = "EditActTempBtn";
             this.EditActTempBtn.Primary = false;
-            this.EditActTempBtn.Size = new System.Drawing.Size(149, 36);
+            this.EditActTempBtn.Size = new System.Drawing.Size(151, 36);
             this.EditActTempBtn.TabIndex = 14;
-            this.EditActTempBtn.Text = "Zobraziť aktivitu";
+            this.EditActTempBtn.Text = "Zobraziť šablónu";
             this.EditActTempBtn.UseVisualStyleBackColor = true;
             this.EditActTempBtn.Click += new System.EventHandler(this.EditActTempBtn_Click);
             // 
@@ -198,14 +204,14 @@
             this.RemoveActTempBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.RemoveActTempBtn.Depth = 0;
             this.RemoveActTempBtn.Icon = null;
-            this.RemoveActTempBtn.Location = new System.Drawing.Point(988, 448);
+            this.RemoveActTempBtn.Location = new System.Drawing.Point(1289, 459);
             this.RemoveActTempBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.RemoveActTempBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.RemoveActTempBtn.Name = "RemoveActTempBtn";
             this.RemoveActTempBtn.Primary = false;
-            this.RemoveActTempBtn.Size = new System.Drawing.Size(159, 36);
+            this.RemoveActTempBtn.Size = new System.Drawing.Size(96, 36);
             this.RemoveActTempBtn.TabIndex = 15;
-            this.RemoveActTempBtn.Text = "Odstrániť aktivitu";
+            this.RemoveActTempBtn.Text = "Odstrániť";
             this.RemoveActTempBtn.UseVisualStyleBackColor = true;
             this.RemoveActTempBtn.Click += new System.EventHandler(this.RemoveActTempBtn_Click);
             // 
@@ -213,30 +219,31 @@
             // 
             this.actLbl.AutoSize = true;
             this.actLbl.Depth = 0;
-            this.actLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.actLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.actLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.actLbl.Location = new System.Drawing.Point(761, 112);
+            this.actLbl.Location = new System.Drawing.Point(1070, 112);
             this.actLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.actLbl.Name = "actLbl";
-            this.actLbl.Size = new System.Drawing.Size(123, 18);
+            this.actLbl.Size = new System.Drawing.Size(241, 19);
             this.actLbl.TabIndex = 16;
-            this.actLbl.Text = "Existujúce aktivity";
+            this.actLbl.Text = "Zoznam existujúcich šablón aktivít";
             // 
-            // materialFlatButton1
+            // SaveChangesBtn
             // 
-            this.materialFlatButton1.AutoSize = true;
-            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton1.Depth = 0;
-            this.materialFlatButton1.Icon = null;
-            this.materialFlatButton1.Location = new System.Drawing.Point(1030, 795);
-            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Primary = false;
-            this.materialFlatButton1.Size = new System.Drawing.Size(117, 36);
-            this.materialFlatButton1.TabIndex = 17;
-            this.materialFlatButton1.Text = "Uložiť zmeny";
-            this.materialFlatButton1.UseVisualStyleBackColor = true;
+            this.SaveChangesBtn.AutoSize = true;
+            this.SaveChangesBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.SaveChangesBtn.Depth = 0;
+            this.SaveChangesBtn.Icon = null;
+            this.SaveChangesBtn.Location = new System.Drawing.Point(1268, 507);
+            this.SaveChangesBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.SaveChangesBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SaveChangesBtn.Name = "SaveChangesBtn";
+            this.SaveChangesBtn.Primary = false;
+            this.SaveChangesBtn.Size = new System.Drawing.Size(117, 36);
+            this.SaveChangesBtn.TabIndex = 17;
+            this.SaveChangesBtn.Text = "Uložiť zmeny";
+            this.SaveChangesBtn.UseVisualStyleBackColor = true;
+            this.SaveChangesBtn.Click += new System.EventHandler(this.SaveChangesBtn_Click);
             // 
             // materialFlatButton2
             // 
@@ -254,13 +261,82 @@
             this.materialFlatButton2.Text = "Späť";
             this.materialFlatButton2.UseVisualStyleBackColor = true;
             // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel2.Location = new System.Drawing.Point(730, 168);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(124, 19);
+            this.materialLabel2.TabIndex = 19;
+            this.materialLabel2.Text = "Prvé upozornenie";
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(730, 259);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(134, 19);
+            this.materialLabel3.TabIndex = 20;
+            this.materialLabel3.Text = "Tretie upozornenie";
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel5.Location = new System.Drawing.Point(730, 210);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(134, 19);
+            this.materialLabel5.TabIndex = 21;
+            this.materialLabel5.Text = "Druhé upozornenie";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(878, 166);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 22;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(878, 211);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 23;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(878, 260);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(121, 21);
+            this.comboBox3.TabIndex = 24;
+            // 
             // CreateTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 846);
+            this.ClientSize = new System.Drawing.Size(1410, 846);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.materialLabel5);
+            this.Controls.Add(this.materialLabel3);
+            this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.materialFlatButton2);
-            this.Controls.Add(this.materialFlatButton1);
+            this.Controls.Add(this.SaveChangesBtn);
             this.Controls.Add(this.actLbl);
             this.Controls.Add(this.RemoveActTempBtn);
             this.Controls.Add(this.EditActTempBtn);
@@ -295,7 +371,13 @@
         private MaterialSkin.Controls.MaterialFlatButton RemoveActTempBtn;
         private MaterialSkin.Controls.MaterialFlatButton DeleteTaskBtn;
         private MaterialSkin.Controls.MaterialLabel actLbl;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
+        private MaterialSkin.Controls.MaterialFlatButton SaveChangesBtn;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }

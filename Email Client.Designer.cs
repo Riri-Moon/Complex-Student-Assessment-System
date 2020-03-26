@@ -35,6 +35,9 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.CreateEmailTemplateContext = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // save_email
@@ -107,6 +110,24 @@
             this.textBox2.Size = new System.Drawing.Size(160, 20);
             this.textBox2.TabIndex = 8;
             // 
+            // materialContextMenuStrip1
+            // 
+            this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip1.Depth = 0;
+            this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateEmailTemplateContext});
+            this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(214, 26);
+            this.materialContextMenuStrip1.Text = "Vytvoriť";
+            // 
+            // CreateEmailTemplateContext
+            // 
+            this.CreateEmailTemplateContext.Name = "CreateEmailTemplateContext";
+            this.CreateEmailTemplateContext.Size = new System.Drawing.Size(213, 22);
+            this.CreateEmailTemplateContext.Text = "Vytvoriť emailovú šablónu";
+            this.CreateEmailTemplateContext.Click += new System.EventHandler(this.CreateEmailTemplateContext_Click);
+            // 
             // Email_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,6 +142,7 @@
             this.Controls.Add(this.save_email);
             this.Name = "Email_Client";
             this.Text = "Email Client";
+            this.materialContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,5 +157,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem CreateEmailTemplateContext;
     }
 }

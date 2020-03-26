@@ -19,6 +19,9 @@ namespace CSAS
 
         }
 
+        bool warnUser = false;
+        List<int> notAddedStuds = new List<int>();
+        bool didntHappened = false;
 
         public void Querys(StudentSkupina skupina)
         {
@@ -42,9 +45,13 @@ namespace CSAS
 
                     for (int i = excelDataTable.Rows.Count - 1; i >= 0; i--)
                     {
-                        if (excelDataTable.Rows[i]["Meno"] == DBNull.Value || excelDataTable.Rows[i]["Číslo karty"] == DBNull.Value || (string)excelDataTable.Rows[i].ItemArray[5] == "A")
+                        if (string.IsNullOrEmpty((string)excelDataTable.Rows[i]["Meno"]) || string.IsNullOrEmpty((string)excelDataTable.Rows[i]["Číslo karty"]) || (string)excelDataTable.Rows[i].ItemArray[5] == "A")
                         {
+                            didntHappened = true;
+
+                            notAddedStuds.Add(i+7);
                             excelDataTable.Rows[i].Delete();
+
                         }
                     }
                     excelDataTable.AcceptChanges();
@@ -56,19 +63,28 @@ namespace CSAS
 
                         for (int i = 0; i <= excelDataTable.Rows.Count - 1; i++)
                         {
+                           var form= (string)excelDataTable.Rows[i].ItemArray[2];
+                            if (form.ElementAt(form.Length-3) =='D' && !skupina.Forma.Contains("Denná") || form.ElementAt(form.Length - 3) == 'E' && !skupina.Forma.Contains("Externá"))
+                            {
+                                didntHappened = false;
+                                warnUser = true;
+                                continue;
+                            }
+
+
 
                             Student students = new Student
                             {
                                 Meno = excelDataTable.Rows[i].ItemArray[0].ToString(),
+                                Priezvisko = excelDataTable.Rows[i].ItemArray[1].ToString(),
+                                Stud_program = excelDataTable.Rows[i].ItemArray[2].ToString(),
                                 ID_stud_skupina = skupina.Id,
                                 ID_Kruzok = excelDataTable.Rows[i].ItemArray[3].ToString(),
-                                Priezvisko = excelDataTable.Rows[i].ItemArray[1].ToString(),
                                 Email = excelDataTable.Rows[i].ItemArray[8].ToString(),
                                 Email_UCM = excelDataTable.Rows[i].ItemArray[7].ToString(),
-                                Stud_program = excelDataTable.Rows[i].ItemArray[2].ToString(),
                                 Rocnik = Convert.ToInt32(excelDataTable.Rows[i].ItemArray[6]),
                                 ISIC = excelDataTable.Rows[i].ItemArray[5].ToString().Remove(0, 5),
-                                Forma = "Denná"
+                                Forma = skupina.Forma
 
 
                             };
@@ -84,6 +100,18 @@ namespace CSAS
                             }
 
                         };
+
+                        if (warnUser == true )
+                        {
+                            MessageBox.Show("Nie je možné pridávať študentov externej formy do skupiny určenej pre denných študentov.","Upozornenie");
+                        }
+
+                        if (notAddedStuds.Count >= 1 && didntHappened == true)
+                        {
+
+                            string warning = $"Študenti z tabuľky na pozíciach"+ " "+ string.Join(string.Empty,notAddedStuds.ToArray()) +" "+ "neboli pridaný";
+                            MessageBox.Show(warning);
+                        }
                     }
                 }
                 else
@@ -91,9 +119,10 @@ namespace CSAS
                     return;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                 MessageBox.Show("Vybrali ste nesprávny súbor alebo štruktúra súboru je chybná","Chyba pri načítaní súboru",MessageBoxButtons.OK);
+                MessageBox.Show(ex.ToString()) ;
+                // MessageBox.Show("Vybrali ste nesprávny súbor alebo štruktúra súboru je chybná","Chyba pri načítaní súboru",MessageBoxButtons.OK);
             }
         }
 

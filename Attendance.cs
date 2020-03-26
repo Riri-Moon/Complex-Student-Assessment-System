@@ -5,6 +5,10 @@ using System.Data.Linq;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
+/// <summary>
+/// TODO: Ak mam zvolenu skupinu a vytvorim pre nu attendance tak to vytvori pre vsetkych!
+/// </summary>
 namespace CSAS
 {
     public partial class Dochádzka : MaterialSkin.Controls.MaterialForm
@@ -116,8 +120,20 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    var studentId = con.GetTable<Student>().Where(x => x.Forma == StudentSkup.Forma);
-                    foreach (var x in studentId)
+                    IQueryable<Student> student;
+
+                    if(comboBox1.SelectedIndex==0)
+                    {
+                        var studentId = con.GetTable<Student>().Where(x => x.Forma == StudentSkup.Forma);
+                        student = studentId;
+                    }
+                    else
+                    {
+                        var studentId = con.GetTable<Student>().Where(x => x.Forma == StudentSkup.Forma && x.ID_Kruzok == (string)comboBox1.SelectedItem);
+                        student = studentId;
+                    }
+
+                    foreach (var x in student)
                     {
                         var insert = new AttendanceStud
                         {

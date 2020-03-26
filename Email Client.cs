@@ -44,9 +44,27 @@ namespace CSAS
             StudentDBDataContext con = new StudentDBDataContext(conn_str);
 
             User user = con.Users.FirstOrDefault(x => x.Id == activeUser.Id);
-            user.ApiKey = textBox1.Text;
-            user.Email = textBox2.Text;
+            if(string.IsNullOrEmpty(textBox1.Text))
+            {
 
+                user.ApiKey = user.ApiKey;
+
+            }
+            else
+            {
+                user.ApiKey = textBox1.Text;
+
+            }
+            if (string.IsNullOrEmpty(textBox2.Text))
+            {
+                user.Email = textBox2.Text;
+            }
+            else
+            {
+                user.Email = user.Email;
+
+
+            }
             con.SubmitChanges();
 
             textBox1.Text = "";
@@ -60,6 +78,10 @@ namespace CSAS
             {
                 Application.Exit();
             }
+        }
+
+        private void CreateEmailTemplateContext_Click(object sender, EventArgs e)
+        {
         }
     }
 }

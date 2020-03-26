@@ -44,29 +44,52 @@ namespace CSAS
                 MaterialSkin.TextShade.WHITE);
             currUser = currentuser;
             GetTableTemp();
+            GetEmailTemplates();
+
         }
 
 
-        private IQueryable GetTableTemp()
+
+
+        private void GetEmailTemplates()
         {
             using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
             {
-                var templ = con.GetTable<ActivityTemplate>();
 
-                var dataTemp = from act in templ where act.IdUser == currUser.Id select new { act.ActivityName, act.MaxPoints, act.Id };
-                AllActTempGrid.DataSource = dataTemp;
-                AllActTempGrid.RowHeadersVisible = false;
-                AllActTempGrid.AllowUserToAddRows = false;
-                AllActTempGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                AllActTempGrid.AllowUserToDeleteRows = false;
-                AllActTempGrid.AllowUserToResizeColumns = false;
-                AllActTempGrid.ReadOnly = true;
-                AllActTempGrid.Columns["Id"].Visible = false;
+                var emailTemps = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currUser.Id);
 
-                return dataTemp;
+                foreach (var email in emailTemps.Distinct())
+                {
+
+                    comboBox1.Items.Add(email.EmailTemplateName);
+                    comboBox2.Items.Add(email.EmailTemplateName);
+                    comboBox3.Items.Add(email.EmailTemplateName);
+                }
 
             }
         }
+
+            private IQueryable GetTableTemp()
+            {
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                {
+                    var templ = con.GetTable<ActivityTemplate>();
+
+                    var dataTemp = from act in templ where act.IdUser == currUser.Id select new { act.ActivityName, act.MaxPoints, act.Id };
+                    AllActTempGrid.DataSource = dataTemp;
+                    AllActTempGrid.RowHeadersVisible = false;
+                    AllActTempGrid.AllowUserToAddRows = false;
+                    AllActTempGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    AllActTempGrid.AllowUserToDeleteRows = false;
+                    AllActTempGrid.AllowUserToResizeColumns = false;
+                    AllActTempGrid.ReadOnly = true;
+                    AllActTempGrid.Columns["Id"].Visible = false;
+
+                    return dataTemp;
+
+                }
+            }
+        
 
 
 
@@ -180,11 +203,17 @@ namespace CSAS
                         return;
                     }
 
+
+
+
                     var ActTemp = new ActivityTemplate()
                     {
                         IdUser = currUser.Id,
                         MaxPoints = Math.Round(float.Parse(MaxPtsLabel.Text), 2),
-                        ActivityName = ActNameTxtBox.Text
+                        ActivityName = ActNameTxtBox.Text,
+                        FirstRem=GetEmailTemps(comboBox1),
+                        SecondRem= GetEmailTemps(comboBox2),
+                        ThirdRem= GetEmailTemps(comboBox3)
                     };
 
                     if (ActTemp.MaxPoints != 0 && !string.IsNullOrWhiteSpace(ActTemp.MaxPoints.ToString()) && ActTemp.ActivityName != string.Empty)
@@ -251,23 +280,59 @@ namespace CSAS
                     MessageBox.Show("Šablóna bola úspešne vytvorená", "Dáta úspešne zapísané", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-                    ActNameTxtBox.Text = null;
-                    MaxPtsLabel.Text = 0.ToString();
-                    controlsPoints[0].Text = 0.ToString();
-                    foreach (var x in controlsNames.Zip(controlsPoints, (names, points) => new { controlsNames = names, controlsPoints = points }))
+                    try
                     {
+                        ActNameTxtBox.Text = null;
+                        MaxPtsLabel.Text = 0.ToString();
+                        controlsPoints[0].Text = 0.ToString();
+                        foreach (var x in controlsNames.Zip(controlsPoints, (names, points) => new { controlsNames = names, controlsPoints = points }))
+                        {
 
-                        x.controlsNames.Text = null;
-                        x.controlsPoints.Text = null;
+                            x.controlsNames.Text = null;
+                            x.controlsPoints.Text = null;
+                        }
+                        MaxPtsLabel.Text = 0.ToString();
+                        GetTableTemp();
+                        ClearTasks();
                     }
-                    MaxPtsLabel.Text = 0.ToString();
-                    GetTableTemp();
-
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Niekde nastala chyba.\n Skúste vytvoriť šablónu odznova");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+        private Nullable<int> GetEmailTemps(ComboBox x)
+        {
+            try
+            {
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);             
+                    if (!string.IsNullOrEmpty(x.Text))
+                    {
+                        var temps = con.GetTable<EmailTemplate>().Where(y => y.IdUser == currUser.Id);
+
+                        var emailTmp = from email in temps where email.EmailTemplateName == x.Text select email.Id;
+                        return emailTmp.FirstOrDefault();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+
+                return null;
             }
         }
 
@@ -294,7 +359,7 @@ namespace CSAS
                     con.ActivityTemplates.DeleteOnSubmit(selectedAct.FirstOrDefault());
                     con.SubmitChanges();
                 }
-                    
+
 
                 GetTableTemp();
             }
@@ -304,6 +369,11 @@ namespace CSAS
             }
         }
 
+        /// <summary>
+        /// Btn an Zobrazenie vybranej aktivity z datagridview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void EditActTempBtn_Click(object sender, EventArgs e)
           {
@@ -318,29 +388,19 @@ namespace CSAS
 
                 var labelCounts = Labels.Count - 1;
                 //Odstranenie controls aby sa neopakovali pri editovani
-                foreach (var x in controlNamesForEdit.Zip(controlPointsForEdit, (names, points) => new { controlPointsForEdit = points, controlNamesForEdit = names }))
-                {
-                    if (Labels.Count > 0)
-                    {
-                        foreach (var y in Labels)
-                        {
-                            panel1.Controls.Remove(y);
-                            ///TUTO TO NECLEARUJE LABELS
-                        }
-                        Labels.Clear();
-                    }
 
-                    panel1.Controls.Remove(x.controlNamesForEdit);
-                    panel1.Controls.Remove(x.controlPointsForEdit);
-
-                }
-                controlPointsForEdit.Clear();
-                controlNamesForEdit.Clear();
-
+                ClearTasks();
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     var selectedTaskTemp = con.TaskTemplates.Where(a => a.IdActivityTemplate == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
                     var selectedAct = con.ActivityTemplates.Where(a => a.Id == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
+
+
+                    var emailTemps = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currUser.Id);
+                    comboBox1.Text= (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().FirstRem select email.EmailTemplateName).FirstOrDefault();
+                    comboBox2.Text = (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().SecondRem select email.EmailTemplateName).FirstOrDefault();
+                    comboBox3.Text = (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().ThirdRem select email.EmailTemplateName).FirstOrDefault();
+
 
                     foreach (var x in selectedAct)
                     {
@@ -500,6 +560,47 @@ namespace CSAS
                 MessageBox.Show("Už nie je čo odstrániť");
             }
         }
+
+        private void SaveChangesBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void ClearTasks()
+        {
+            try
+            {
+          
+
+                foreach (var x in controlNamesForEdit.Zip(controlPointsForEdit, (names, points) => new { controlPointsForEdit = points, controlNamesForEdit = names }))
+                {
+                    if (Labels.Count > 0)
+                    {
+                        foreach (var y in Labels)
+                        {
+                            panel1.Controls.Remove(y);
+                        }
+                        Labels.Clear();
+                    }
+
+                    panel1.Controls.Remove(x.controlNamesForEdit);
+                    panel1.Controls.Remove(x.controlPointsForEdit);
+
+                }
+                controlPointsForEdit.Clear();
+                controlNamesForEdit.Clear();
+
+                this.AddTaskBtn.Location = new Point(25, 40 );
+                this.DeleteTaskBtn.Location = new Point(500, 40);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString()) ;
+            }
+
+        }
+
     }
 }
 

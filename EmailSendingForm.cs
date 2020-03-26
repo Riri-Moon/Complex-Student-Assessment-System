@@ -34,7 +34,7 @@ namespace CSAS
 
 
             var students = con.GetTable<Student>();
-
+            var groups = con.GetTable<StudentSkupina>().Where(x => x.Id == skupina.Id);
             var skup = from student in students where student.ID_stud_skupina == currentGroup.Id select new { student.Meno, student.Email, student.Priezvisko, student.Email_UCM };
             var columnWidth = new int[] { 100, 120 };
             autocompleteMenu1.MaximumSize = new System.Drawing.Size(250, 200);
@@ -42,7 +42,16 @@ namespace CSAS
                 {
             
                 autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { RWS(student.Meno) + " " + RWS(student.Priezvisko), RWS(student.Email) }, RWS(student.Email)) { ColumnWidth = columnWidth });
-                autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { "", RWS(student.Email_UCM) }, RWS(student.Email_UCM)) { ColumnWidth = columnWidth });
+                autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { "", RWS(student.Email_UCM) }, RWS(student.Email_UCM)) { ColumnWidth = columnWidth });                
+            }
+
+            var kruzok = from stud in students where stud.ID_stud_skupina == skupina.Id select (string)stud.ID_Kruzok;
+            kruzok.ToList<string>();
+
+            foreach (var kruz in kruzok.Distinct())
+            {
+
+                GroupComboEmail.Items.Add(kruz);
             }
             autocompleteMenu1.Enabled = true;
             autocompleteMenu1.AllowsTabKey = true;
@@ -74,40 +83,55 @@ namespace CSAS
                     To = emailAddList
                 };
 
-
                 if (body.Subject != string.Empty && body.PlainTextContent != string.Empty && emailAddList != null)
                 {
-
-
-                    if (SelectAllBtnPrimaryEmail.Checked == true && SelectAllSecondaryEmail.Checked == false)
+                    if (SelectAllBtnPrimaryEmail.Checked == true && SelectAllSecondaryEmail.Checked == false && GroupCheckBtn.Checked == false)
                     {
                         using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                         {
+                            emailAddList.Clear();
                             var students = con.GetTable<Student>();
-                            var skup = from student in students where student.ID_stud_skupina == currentGroup.Id select new { student.Email, student.Email_UCM };
+                            var skup = from student in students where student.ID_stud_skupina == currentGroup.Id select student.Email;
 
                             foreach (var mail in skup)
                             {
-                                emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail.Email)));
+                                emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail)));
                             }
                         }
                     }
-                    else if (SelectAllBtnPrimaryEmail.Checked == false && SelectAllSecondaryEmail.Checked == true)
+                    else if (SelectAllBtnPrimaryEmail.Checked == false && SelectAllSecondaryEmail.Checked == true && GroupCheckBtn.Checked == false)
                     {
                         using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                         {
+                            emailAddList.Clear();
                             var students = con.GetTable<Student>();
-                            var skup = from student in students where student.ID_stud_skupina == currentGroup.Id select new { student.Email, student.Email_UCM };
+                            var skup = from student in students where student.ID_stud_skupina == currentGroup.Id select student.Email_UCM;
 
                             foreach (var mail in skup)
                             {
-                                emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail.Email_UCM)));
+                                emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail)));
                             }
                         }
                     }
+                    else if (SelectAllBtnPrimaryEmail.Checked == false && SelectAllSecondaryEmail.Checked == false && GroupCheckBtn.Checked == true)
+                    {
+                        using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                        {
+                            emailAddList.Clear();
+                            var students = con.GetTable<Student>();
+                            var skup = from student in students
+                                       where student.ID_stud_skupina == currentGroup.Id && student.ID_Kruzok == GroupComboEmail.Text
+                                       select student.Email;
 
+                            foreach (var mail in skup)
+                            {/// Nastavene na osobny email
+                                emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail)));
+                            }
+                        }
+                    }
                     else
                     {
+                        emailAddList.Clear();
                         ToTextBox.Text.Replace(" ", string.Empty);
                         var splitted = ToTextBox.Text.Split(',');
                         splitted.ToList();
@@ -115,21 +139,18 @@ namespace CSAS
 
                         foreach (var mail in splitted)
                         {
-                            emailAddList.Add(MailHelper.StringToEmailAddress(mail));
+                            emailAddList.Add(MailHelper.StringToEmailAddress(RWS(mail)));
                         }
                     }
                 }
-
                 else
                 {
                     MessageBox.Show("Niektorá časť nie je vyplnená. Prosím skontrolujte správu, ktorú chcete odoslať a uistite sa subjekt alebo správa nie sú prázdne", "Prázdne polia");
                     return;
                 }
-
                 int timestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
                 var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject, body.PlainTextContent, body.HtmlContent);
-                /// Nastavenie kedy sa EMAIL odosle
                 msg.SetSendAt(timestamp);
 
                 var result = await client.SendEmailAsync(msg);
@@ -160,16 +181,33 @@ namespace CSAS
         private void SelectAllSecondaryEmail_CheckedChanged(object sender, EventArgs e)
         {
             ToTextBox.Enabled = false;
+            GroupComboEmail.Enabled = false;
+
         }
 
         private void SelectAllBtnPrimaryEmail_CheckedChanged(object sender, EventArgs e)
         {
             ToTextBox.Enabled = false;
+            GroupComboEmail.Enabled = false;
+
         }
 
         private void SelectManually_CheckedChanged(object sender, EventArgs e)
         {
             ToTextBox.Enabled = true;
+            GroupComboEmail.Enabled = false;
+
+        }
+
+        private void materialFlatButton1_Click(object sender, EventArgs e)
+        {
+        }
+ 
+        private void GroupCheckBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            GroupComboEmail.Enabled = true;
+            ToTextBox.Enabled = false;
+
         }
     }
 }

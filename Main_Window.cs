@@ -5,48 +5,61 @@ using System.Windows.Forms;
 using System.Data.Linq;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Timers;
 
 namespace CSAS
 {
     public partial class Main_Window : MaterialSkin.Controls.MaterialForm
     {
-        /// <summary>
-        /// Username: BCTest001
-        /// Password: Testovanie1
-        /// ApiKey: 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
-        /// </summary>
+
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         protected bool isCollapsed_4 = true;
         protected bool isCollapsed_3 = true;
         protected bool isCollapsed_2 = true;
         protected bool isCollapsed = true;
         public StudentSkupina studentSkupina = new StudentSkupina();
-        public User currentUser = new User();
+        protected static User currentUser = new User();
 
 
 
         public Main_Window(StudentSkupina skupina, User user)
         {
-            InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
                 MaterialSkin.TextShade.WHITE);
+
             try
             {
+                InitializeComponent();
                 currentUser = user;
                 studentSkupina = skupina;
-                ProgressBar1.Visible = false;
+                //SendEmailCheck emailCheck = new SendEmailCheck();
+                /// emailCheck.AutomatedEmailSending(currentUser);
 
+                //var aTimer = new System.Timers.Timer(60 * 60 * 1000); 
+                // aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+                //aTimer.Start();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
             }
         }
-       
+
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            try
+            {
+                SendEmailCheck emailCheck = new SendEmailCheck();
+                emailCheck.AutomatedEmailSending(currentUser);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
 
         private void GetTable()
         {
@@ -69,7 +82,6 @@ namespace CSAS
                     Student_Grid.Columns["Stud_Program"].Visible = false;
 
 
-
                 }
             }
             catch (DataException ex)
@@ -77,6 +89,35 @@ namespace CSAS
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        private void GetActivities()
+        {
+
+            try
+            {
+
+                using (DataContext con = new DataContext(conn_str))
+                {
+
+                    var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
+                    var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id );
+
+                    var dataSource = from studAct in acts where studAct.IdStudent == selectedStudent select new { studAct.ActivityName, studAct.MaxPoints, studAct.Hodnotenie, studAct.Id };
+                    Activity_Grid.RowHeadersVisible = false;
+                    Activity_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+
+                    Activity_Grid.DataSource = dataSource;
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+    
 
 
 
@@ -201,6 +242,24 @@ namespace CSAS
         {
             var template = new CreateTemplate(currentUser);
             template.Show();
+        }
+
+        private void Create_Act_Btn_Click(object sender, EventArgs e)
+        {
+            var createActivity = new CreateActivity(currentUser,studentSkupina);
+            createActivity.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var createEmailTemplate = new EmailTemplateForm(currentUser);
+            createEmailTemplate.Show();
+        }
+
+        private void Student_Grid_SelectionChanged(object sender, EventArgs e)
+        {
+            if(Student_Grid.SelectedRows.Count>=1) 
+            GetActivities();
         }
     }
 

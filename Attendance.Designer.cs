@@ -92,7 +92,7 @@
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(137, 20);
             this.CreateButton.TabIndex = 9;
-            this.CreateButton.Text = "Create";
+            this.CreateButton.Text = "Vytvoriť";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
@@ -144,7 +144,7 @@
             this.RemoveBtn.Name = "RemoveBtn";
             this.RemoveBtn.Size = new System.Drawing.Size(137, 21);
             this.RemoveBtn.TabIndex = 15;
-            this.RemoveBtn.Text = "Remove";
+            this.RemoveBtn.Text = "Odstrániť";
             this.RemoveBtn.UseVisualStyleBackColor = true;
             this.RemoveBtn.Click += new System.EventHandler(this.RemoveBtn_Click);
             // 

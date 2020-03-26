@@ -41,6 +41,8 @@
             this.SelectAllBtnPrimaryEmail = new MaterialSkin.Controls.MaterialRadioButton();
             this.SelectAllSecondaryEmail = new MaterialSkin.Controls.MaterialRadioButton();
             this.SelectManually = new MaterialSkin.Controls.MaterialRadioButton();
+            this.GroupComboEmail = new System.Windows.Forms.ComboBox();
+            this.GroupCheckBtn = new MaterialSkin.Controls.MaterialRadioButton();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -199,16 +201,43 @@
             this.SelectManually.Ripple = true;
             this.SelectManually.Size = new System.Drawing.Size(107, 30);
             this.SelectManually.TabIndex = 8;
-            this.SelectManually.TabStop = true;
             this.SelectManually.Text = "Vybrať ručne";
             this.SelectManually.UseVisualStyleBackColor = true;
             this.SelectManually.CheckedChanged += new System.EventHandler(this.SelectManually_CheckedChanged);
+            // 
+            // GroupComboEmail
+            // 
+            this.GroupComboEmail.Enabled = false;
+            this.GroupComboEmail.FormattingEnabled = true;
+            this.GroupComboEmail.Location = new System.Drawing.Point(972, 166);
+            this.GroupComboEmail.Name = "GroupComboEmail";
+            this.GroupComboEmail.Size = new System.Drawing.Size(121, 21);
+            this.GroupComboEmail.TabIndex = 10;
+            // 
+            // GroupCheckBtn
+            // 
+            this.GroupCheckBtn.AutoSize = true;
+            this.GroupCheckBtn.Depth = 0;
+            this.GroupCheckBtn.Font = new System.Drawing.Font("Roboto", 10F);
+            this.GroupCheckBtn.Location = new System.Drawing.Point(835, 157);
+            this.GroupCheckBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.GroupCheckBtn.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.GroupCheckBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.GroupCheckBtn.Name = "GroupCheckBtn";
+            this.GroupCheckBtn.Ripple = true;
+            this.GroupCheckBtn.Size = new System.Drawing.Size(114, 30);
+            this.GroupCheckBtn.TabIndex = 11;
+            this.GroupCheckBtn.Text = "Vybrať krúžok";
+            this.GroupCheckBtn.UseVisualStyleBackColor = true;
+            this.GroupCheckBtn.CheckedChanged += new System.EventHandler(this.GroupCheckBtn_CheckedChanged);
             // 
             // EmailSendingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 545);
+            this.Controls.Add(this.GroupCheckBtn);
+            this.Controls.Add(this.GroupComboEmail);
             this.Controls.Add(this.SelectManually);
             this.Controls.Add(this.SelectAllSecondaryEmail);
             this.Controls.Add(this.SelectAllBtnPrimaryEmail);
@@ -241,5 +270,7 @@
         private MaterialSkin.Controls.MaterialRadioButton SelectAllBtnPrimaryEmail;
         private MaterialSkin.Controls.MaterialRadioButton SelectAllSecondaryEmail;
         private MaterialSkin.Controls.MaterialRadioButton SelectManually;
+        private System.Windows.Forms.ComboBox GroupComboEmail;
+        private MaterialSkin.Controls.MaterialRadioButton GroupCheckBtn;
     }
 }

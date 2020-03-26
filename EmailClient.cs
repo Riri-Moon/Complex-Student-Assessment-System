@@ -12,11 +12,6 @@ using RestSharp;
 namespace CSAS
 {
 
-    /// <summary>
-    /// BcTestovanie1
-    /// Testovanie1
-    /// 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
-    /// </summary>
 
     public class EmailSettings
     {
@@ -24,14 +19,14 @@ namespace CSAS
         public string EmailAddress { get; set; }
     }
 
+   
     public class EmailBody
     {
         public string Subject { get; set; }
         public List<EmailAddress> To { get; set; }
         public string PlainTextContent { get; set; }
         public string HtmlContent { get; set; }
-        public string Message { get; set; }
-       // public string Result { get; set; }
+
     }
 
 
@@ -41,7 +36,7 @@ namespace CSAS
     public class EmailClient
     {
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        User currUser;
         public void ToJsonEmail(EmailSettings settings)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -72,19 +67,28 @@ namespace CSAS
         // Change user to get from login
         public string SetEnvironmentVar()
         {
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
-            var users = con.GetTable<User>();
-            var x = from user in users where user.Id == 1 select (string)user.ApiKey;
-
-
-            var key = x.FirstOrDefault();
-
-            if (Environment.GetEnvironmentVariable("SENDGRID_API_KEY") == null || Environment.GetEnvironmentVariable("SENDGRID_API_KEY") != key)
+            try
             {
-                Environment.SetEnvironmentVariable("SENDGRID_API_KEY", key);
-            }
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
+                var users = con.GetTable<User>();
+                var apikey = from user in users where user.Id == 1 select (string)user.ApiKey;
 
-            return key;
+
+                var key = apikey.FirstOrDefault();
+
+                if (Environment.GetEnvironmentVariable("SENDGRID_API_KEY") == null ||
+                    Environment.GetEnvironmentVariable("SENDGRID_API_KEY") != key)
+                {
+                    Environment.SetEnvironmentVariable("SENDGRID_API_KEY", key);
+                }
+
+                return key;
+            }
+            catch(InvalidDataException)
+            {
+                System.Windows.Forms.MessageBox.Show("Nie je nastavený kľúč");
+                return null;
+            }
 
         }
 

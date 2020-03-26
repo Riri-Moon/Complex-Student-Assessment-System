@@ -31,7 +31,6 @@
             this.Activity_Grid = new System.Windows.Forms.DataGridView();
             this.Student_Grid = new System.Windows.Forms.DataGridView();
             this.Study_Panel = new System.Windows.Forms.Panel();
-            this.Stud_G_Button = new System.Windows.Forms.Button();
             this.Import_Btn = new System.Windows.Forms.Button();
             this.Stat_Btn = new System.Windows.Forms.Button();
             this.Open_Btn = new System.Windows.Forms.Button();
@@ -41,18 +40,20 @@
             this.Activity_panel = new System.Windows.Forms.Panel();
             this.Create_Templ = new System.Windows.Forms.Button();
             this.Create_Act_Btn = new System.Windows.Forms.Button();
-            this.Activity_Button = new System.Windows.Forms.Button();
             this.Student_Panel = new System.Windows.Forms.Panel();
             this.Add_Stud_Button = new System.Windows.Forms.Button();
-            this.Student_Button = new System.Windows.Forms.Button();
             this.Settings_Panel = new System.Windows.Forms.Panel();
             this.Archive_Btn = new System.Windows.Forms.Button();
             this.Delete_all_data_btn = new System.Windows.Forms.Button();
             this.Email_client_btn = new System.Windows.Forms.Button();
-            this.Gear_Button = new System.Windows.Forms.Button();
             this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
             this.Ext_Btn = new System.Windows.Forms.Button();
             this.ProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
+            this.Stud_G_Button = new System.Windows.Forms.Button();
+            this.Activity_Button = new System.Windows.Forms.Button();
+            this.Student_Button = new System.Windows.Forms.Button();
+            this.Gear_Button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).BeginInit();
             this.Study_Panel.SuspendLayout();
@@ -86,6 +87,7 @@
             this.Student_Grid.Name = "Student_Grid";
             this.Student_Grid.Size = new System.Drawing.Size(689, 468);
             this.Student_Grid.TabIndex = 1;
+            this.Student_Grid.SelectionChanged += new System.EventHandler(this.Student_Grid_SelectionChanged);
             // 
             // Study_Panel
             // 
@@ -102,27 +104,6 @@
             this.Study_Panel.Name = "Study_Panel";
             this.Study_Panel.Size = new System.Drawing.Size(175, 168);
             this.Study_Panel.TabIndex = 4;
-            // 
-            // Stud_G_Button
-            // 
-            this.Stud_G_Button.AutoEllipsis = true;
-            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Stud_G_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
-            this.Stud_G_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Stud_G_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Stud_G_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Stud_G_Button.Location = new System.Drawing.Point(-3, -3);
-            this.Stud_G_Button.Margin = new System.Windows.Forms.Padding(0);
-            this.Stud_G_Button.Name = "Stud_G_Button";
-            this.Stud_G_Button.Size = new System.Drawing.Size(182, 51);
-            this.Stud_G_Button.TabIndex = 1;
-            this.Stud_G_Button.Text = "Študijná skupina";
-            this.Stud_G_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Stud_G_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.Stud_G_Button.UseVisualStyleBackColor = false;
-            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
             // 
             // Import_Btn
             // 
@@ -203,6 +184,7 @@
             this.flowLayoutPanel1.Controls.Add(this.Student_Panel);
             this.flowLayoutPanel1.Controls.Add(this.Settings_Panel);
             this.flowLayoutPanel1.Controls.Add(this.OdoslatEmailBtnMainMenu);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 64);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(182, 703);
@@ -273,26 +255,7 @@
             this.Create_Act_Btn.Text = "Vytvoriť aktivitu";
             this.Create_Act_Btn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.Create_Act_Btn.UseVisualStyleBackColor = false;
-            // 
-            // Activity_Button
-            // 
-            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Activity_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Activity_Button.FlatAppearance.BorderSize = 0;
-            this.Activity_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Activity_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Activity_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Activity_Button.Location = new System.Drawing.Point(0, 0);
-            this.Activity_Button.MinimumSize = new System.Drawing.Size(179, 48);
-            this.Activity_Button.Name = "Activity_Button";
-            this.Activity_Button.Size = new System.Drawing.Size(179, 48);
-            this.Activity_Button.TabIndex = 3;
-            this.Activity_Button.Text = "Aktivita";
-            this.Activity_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Activity_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.Activity_Button.UseVisualStyleBackColor = false;
-            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
+            this.Create_Act_Btn.Click += new System.EventHandler(this.Create_Act_Btn_Click);
             // 
             // Student_Panel
             // 
@@ -319,30 +282,8 @@
             this.Add_Stud_Button.Name = "Add_Stud_Button";
             this.Add_Stud_Button.Size = new System.Drawing.Size(175, 30);
             this.Add_Stud_Button.TabIndex = 5;
-            this.Add_Stud_Button.Text = "New Student";
+            this.Add_Stud_Button.Text = "Pridať študenta";
             this.Add_Stud_Button.UseVisualStyleBackColor = false;
-            // 
-            // Student_Button
-            // 
-            this.Student_Button.AutoEllipsis = true;
-            this.Student_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Student_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Student_Button.FlatAppearance.BorderSize = 0;
-            this.Student_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Student_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Student_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Student_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Student_Button.Location = new System.Drawing.Point(0, 0);
-            this.Student_Button.Margin = new System.Windows.Forms.Padding(0);
-            this.Student_Button.MinimumSize = new System.Drawing.Size(179, 48);
-            this.Student_Button.Name = "Student_Button";
-            this.Student_Button.Size = new System.Drawing.Size(179, 48);
-            this.Student_Button.TabIndex = 4;
-            this.Student_Button.Text = "Študent";
-            this.Student_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Student_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.Student_Button.UseVisualStyleBackColor = false;
-            this.Student_Button.Click += new System.EventHandler(this.Student_Button_Click);
             // 
             // Settings_Panel
             // 
@@ -370,7 +311,7 @@
             this.Archive_Btn.Name = "Archive_Btn";
             this.Archive_Btn.Size = new System.Drawing.Size(179, 30);
             this.Archive_Btn.TabIndex = 9;
-            this.Archive_Btn.Text = "Archive";
+            this.Archive_Btn.Text = "Archivovať";
             this.Archive_Btn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.Archive_Btn.UseVisualStyleBackColor = false;
             // 
@@ -386,7 +327,7 @@
             this.Delete_all_data_btn.Name = "Delete_all_data_btn";
             this.Delete_all_data_btn.Size = new System.Drawing.Size(179, 30);
             this.Delete_all_data_btn.TabIndex = 8;
-            this.Delete_all_data_btn.Text = "Delete All Data";
+            this.Delete_all_data_btn.Text = "Vymazať všetky údaje";
             this.Delete_all_data_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.Delete_all_data_btn.UseVisualStyleBackColor = false;
             // 
@@ -402,30 +343,10 @@
             this.Email_client_btn.Name = "Email_client_btn";
             this.Email_client_btn.Size = new System.Drawing.Size(179, 30);
             this.Email_client_btn.TabIndex = 7;
-            this.Email_client_btn.Text = "Email Client";
+            this.Email_client_btn.Text = "Emailový klient";
             this.Email_client_btn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.Email_client_btn.UseVisualStyleBackColor = false;
             this.Email_client_btn.Click += new System.EventHandler(this.Email_client_btn_Click_1);
-            // 
-            // Gear_Button
-            // 
-            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Gear_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Gear_Button.FlatAppearance.BorderSize = 0;
-            this.Gear_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Gear_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Gear_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Gear_Button.Location = new System.Drawing.Point(-1, 0);
-            this.Gear_Button.MinimumSize = new System.Drawing.Size(179, 48);
-            this.Gear_Button.Name = "Gear_Button";
-            this.Gear_Button.Size = new System.Drawing.Size(179, 48);
-            this.Gear_Button.TabIndex = 5;
-            this.Gear_Button.Text = "Nastavenia";
-            this.Gear_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Gear_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.Gear_Button.UseVisualStyleBackColor = false;
-            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
             // 
             // OdoslatEmailBtnMainMenu
             // 
@@ -459,7 +380,7 @@
             this.Ext_Btn.Name = "Ext_Btn";
             this.Ext_Btn.Size = new System.Drawing.Size(179, 53);
             this.Ext_Btn.TabIndex = 10;
-            this.Ext_Btn.Text = "Exit";
+            this.Ext_Btn.Text = "Ukončiť";
             this.Ext_Btn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.Ext_Btn.UseVisualStyleBackColor = false;
             this.Ext_Btn.Click += new System.EventHandler(this.Ext_Btn_Click);
@@ -473,6 +394,109 @@
             this.ProgressBar1.Size = new System.Drawing.Size(689, 5);
             this.ProgressBar1.TabIndex = 11;
             // 
+            // Stud_G_Button
+            // 
+            this.Stud_G_Button.AutoEllipsis = true;
+            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Stud_G_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
+            this.Stud_G_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Stud_G_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Stud_G_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Stud_G_Button.Location = new System.Drawing.Point(-3, -3);
+            this.Stud_G_Button.Margin = new System.Windows.Forms.Padding(0);
+            this.Stud_G_Button.Name = "Stud_G_Button";
+            this.Stud_G_Button.Size = new System.Drawing.Size(182, 51);
+            this.Stud_G_Button.TabIndex = 1;
+            this.Stud_G_Button.Text = "Študijná skupina";
+            this.Stud_G_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Stud_G_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.Stud_G_Button.UseVisualStyleBackColor = false;
+            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
+            // 
+            // Activity_Button
+            // 
+            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Activity_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Activity_Button.FlatAppearance.BorderSize = 0;
+            this.Activity_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Activity_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Activity_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Activity_Button.Location = new System.Drawing.Point(0, 0);
+            this.Activity_Button.MinimumSize = new System.Drawing.Size(179, 48);
+            this.Activity_Button.Name = "Activity_Button";
+            this.Activity_Button.Size = new System.Drawing.Size(179, 48);
+            this.Activity_Button.TabIndex = 3;
+            this.Activity_Button.Text = "Aktivita";
+            this.Activity_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Activity_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.Activity_Button.UseVisualStyleBackColor = false;
+            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
+            // 
+            // Student_Button
+            // 
+            this.Student_Button.AutoEllipsis = true;
+            this.Student_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Student_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Student_Button.FlatAppearance.BorderSize = 0;
+            this.Student_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Student_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.Student_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Student_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Student_Button.Location = new System.Drawing.Point(0, 0);
+            this.Student_Button.Margin = new System.Windows.Forms.Padding(0);
+            this.Student_Button.MinimumSize = new System.Drawing.Size(179, 48);
+            this.Student_Button.Name = "Student_Button";
+            this.Student_Button.Size = new System.Drawing.Size(179, 48);
+            this.Student_Button.TabIndex = 4;
+            this.Student_Button.Text = "Študent";
+            this.Student_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Student_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.Student_Button.UseVisualStyleBackColor = false;
+            this.Student_Button.Click += new System.EventHandler(this.Student_Button_Click);
+            // 
+            // Gear_Button
+            // 
+            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Gear_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Gear_Button.FlatAppearance.BorderSize = 0;
+            this.Gear_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Gear_Button.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Gear_Button.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Gear_Button.Location = new System.Drawing.Point(-1, 0);
+            this.Gear_Button.MinimumSize = new System.Drawing.Size(179, 48);
+            this.Gear_Button.Name = "Gear_Button";
+            this.Gear_Button.Size = new System.Drawing.Size(179, 48);
+            this.Gear_Button.TabIndex = 5;
+            this.Gear_Button.Text = "Nastavenia";
+            this.Gear_Button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Gear_Button.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.Gear_Button.UseVisualStyleBackColor = false;
+            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(3, 651);
+            this.button1.MaximumSize = new System.Drawing.Size(179, 48);
+            this.button1.MinimumSize = new System.Drawing.Size(179, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(179, 48);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Vytvoriť emailovú šablónu";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Main_Window
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -483,6 +507,8 @@
             this.Controls.Add(this.Activity_Grid);
             this.Controls.Add(this.Ext_Btn);
             this.Name = "Main_Window";
+            this.Sizable = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Main_Window_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).EndInit();
@@ -522,5 +548,6 @@
         private System.Windows.Forms.Button Stud_G_Button;
         private MaterialSkin.Controls.MaterialProgressBar ProgressBar1;
         private System.Windows.Forms.Button OdoslatEmailBtnMainMenu;
+        private System.Windows.Forms.Button button1;
     }
 }

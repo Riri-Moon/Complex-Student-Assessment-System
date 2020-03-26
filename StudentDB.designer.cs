@@ -42,12 +42,21 @@ namespace CSAS
     partial void InsertStudentSkupina(StudentSkupina instance);
     partial void UpdateStudentSkupina(StudentSkupina instance);
     partial void DeleteStudentSkupina(StudentSkupina instance);
-    partial void InsertActivityTemplate(ActivityTemplate instance);
-    partial void UpdateActivityTemplate(ActivityTemplate instance);
-    partial void DeleteActivityTemplate(ActivityTemplate instance);
     partial void InsertTaskTemplate(TaskTemplate instance);
     partial void UpdateTaskTemplate(TaskTemplate instance);
     partial void DeleteTaskTemplate(TaskTemplate instance);
+    partial void InsertActivityTemplate(ActivityTemplate instance);
+    partial void UpdateActivityTemplate(ActivityTemplate instance);
+    partial void DeleteActivityTemplate(ActivityTemplate instance);
+    partial void InsertEmailTemplate(EmailTemplate instance);
+    partial void UpdateEmailTemplate(EmailTemplate instance);
+    partial void DeleteEmailTemplate(EmailTemplate instance);
+    partial void InsertActivity(Activity instance);
+    partial void UpdateActivity(Activity instance);
+    partial void DeleteActivity(Activity instance);
+    partial void InsertTask(Task instance);
+    partial void UpdateTask(Task instance);
+    partial void DeleteTask(Task instance);
     #endregion
 		
 		public StudentDBDataContext() : 
@@ -112,6 +121,14 @@ namespace CSAS
 			}
 		}
 		
+		public System.Data.Linq.Table<TaskTemplate> TaskTemplates
+		{
+			get
+			{
+				return this.GetTable<TaskTemplate>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ActivityTemplate> ActivityTemplates
 		{
 			get
@@ -120,11 +137,27 @@ namespace CSAS
 			}
 		}
 		
-		public System.Data.Linq.Table<TaskTemplate> TaskTemplates
+		public System.Data.Linq.Table<EmailTemplate> EmailTemplates
 		{
 			get
 			{
-				return this.GetTable<TaskTemplate>();
+				return this.GetTable<EmailTemplate>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Activity> Activities
+		{
+			get
+			{
+				return this.GetTable<Activity>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Task> Tasks
+		{
+			get
+			{
+				return this.GetTable<Task>();
 			}
 		}
 	}
@@ -413,6 +446,10 @@ namespace CSAS
 		
 		private EntitySet<ActivityTemplate> _ActivityTemplates;
 		
+		private EntitySet<EmailTemplate> _EmailTemplates;
+		
+		private EntitySet<Activity> _Activities;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -433,6 +470,8 @@ namespace CSAS
 		{
 			this._StudentSkupinas = new EntitySet<StudentSkupina>(new Action<StudentSkupina>(this.attach_StudentSkupinas), new Action<StudentSkupina>(this.detach_StudentSkupinas));
 			this._ActivityTemplates = new EntitySet<ActivityTemplate>(new Action<ActivityTemplate>(this.attach_ActivityTemplates), new Action<ActivityTemplate>(this.detach_ActivityTemplates));
+			this._EmailTemplates = new EntitySet<EmailTemplate>(new Action<EmailTemplate>(this.attach_EmailTemplates), new Action<EmailTemplate>(this.detach_EmailTemplates));
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
 			OnCreated();
 		}
 		
@@ -562,6 +601,32 @@ namespace CSAS
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_EmailTemplate", Storage="_EmailTemplates", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<EmailTemplate> EmailTemplates
+		{
+			get
+			{
+				return this._EmailTemplates;
+			}
+			set
+			{
+				this._EmailTemplates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_Activities", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -605,6 +670,30 @@ namespace CSAS
 			this.SendPropertyChanging();
 			entity.User = null;
 		}
+		
+		private void attach_EmailTemplates(EmailTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_EmailTemplates(EmailTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Student")]
@@ -637,6 +726,10 @@ namespace CSAS
 		
 		private EntitySet<AttendanceStud> _AttendanceStuds;
 		
+		private EntitySet<Activity> _Activities;
+		
+		private EntitySet<Task> _Tasks;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -668,6 +761,8 @@ namespace CSAS
 		public Student()
 		{
 			this._AttendanceStuds = new EntitySet<AttendanceStud>(new Action<AttendanceStud>(this.attach_AttendanceStuds), new Action<AttendanceStud>(this.detach_AttendanceStuds));
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
 			OnCreated();
 		}
 		
@@ -904,6 +999,32 @@ namespace CSAS
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Activity", Storage="_Activities", ThisKey="Id", OtherKey="IdStudent")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Task", Storage="_Tasks", ThisKey="Id", OtherKey="IdStudent")]
+		public EntitySet<Task> Tasks
+		{
+			get
+			{
+				return this._Tasks;
+			}
+			set
+			{
+				this._Tasks.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -935,6 +1056,30 @@ namespace CSAS
 			this.SendPropertyChanging();
 			entity.Student = null;
 		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StudentSkupina")]
@@ -952,6 +1097,8 @@ namespace CSAS
 		private int _Id_User;
 		
 		private EntitySet<AttendanceStud> _AttendanceStuds;
+		
+		private EntitySet<Activity> _Activities;
 		
 		private EntityRef<User> _User;
 		
@@ -972,6 +1119,7 @@ namespace CSAS
 		public StudentSkupina()
 		{
 			this._AttendanceStuds = new EntitySet<AttendanceStud>(new Action<AttendanceStud>(this.attach_AttendanceStuds), new Action<AttendanceStud>(this.detach_AttendanceStuds));
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
 			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
@@ -1073,6 +1221,19 @@ namespace CSAS
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StudentSkupina_Activity", Storage="_Activities", ThisKey="Id", OtherKey="IdSkupina")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_StudentSkupina", Storage="_User", ThisKey="Id_User", OtherKey="Id", IsForeignKey=true)]
 		public User User
 		{
@@ -1138,208 +1299,17 @@ namespace CSAS
 			this.SendPropertyChanging();
 			entity.StudentSkupina = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActivityTemplate")]
-	public partial class ActivityTemplate : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _ActivityName;
-		
-		private System.Nullable<double> _MaxPoints;
-		
-		private System.Nullable<int> _IdUser;
-		
-		private EntitySet<TaskTemplate> _TaskTemplates;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnActivityNameChanging(string value);
-    partial void OnActivityNameChanged();
-    partial void OnMaxPointsChanging(System.Nullable<double> value);
-    partial void OnMaxPointsChanged();
-    partial void OnIdUserChanging(System.Nullable<int> value);
-    partial void OnIdUserChanged();
-    #endregion
-		
-		public ActivityTemplate()
-		{
-			this._TaskTemplates = new EntitySet<TaskTemplate>(new Action<TaskTemplate>(this.attach_TaskTemplates), new Action<TaskTemplate>(this.detach_TaskTemplates));
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityName", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string ActivityName
-		{
-			get
-			{
-				return this._ActivityName;
-			}
-			set
-			{
-				if ((this._ActivityName != value))
-				{
-					this.OnActivityNameChanging(value);
-					this.SendPropertyChanging();
-					this._ActivityName = value;
-					this.SendPropertyChanged("ActivityName");
-					this.OnActivityNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxPoints", DbType="Float")]
-		public System.Nullable<double> MaxPoints
-		{
-			get
-			{
-				return this._MaxPoints;
-			}
-			set
-			{
-				if ((this._MaxPoints != value))
-				{
-					this.OnMaxPointsChanging(value);
-					this.SendPropertyChanging();
-					this._MaxPoints = value;
-					this.SendPropertyChanged("MaxPoints");
-					this.OnMaxPointsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int")]
-		public System.Nullable<int> IdUser
-		{
-			get
-			{
-				return this._IdUser;
-			}
-			set
-			{
-				if ((this._IdUser != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdUserChanging(value);
-					this.SendPropertyChanging();
-					this._IdUser = value;
-					this.SendPropertyChanged("IdUser");
-					this.OnIdUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActivityTemplate_TaskTemplate", Storage="_TaskTemplates", ThisKey="Id", OtherKey="IdActivityTemplate")]
-		public EntitySet<TaskTemplate> TaskTemplates
-		{
-			get
-			{
-				return this._TaskTemplates;
-			}
-			set
-			{
-				this._TaskTemplates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityTemplate", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.ActivityTemplates.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityTemplates.Add(this);
-						this._IdUser = value.Id;
-					}
-					else
-					{
-						this._IdUser = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_TaskTemplates(TaskTemplate entity)
+		private void attach_Activities(Activity entity)
 		{
 			this.SendPropertyChanging();
-			entity.ActivityTemplate = this;
+			entity.StudentSkupina = this;
 		}
 		
-		private void detach_TaskTemplates(TaskTemplate entity)
+		private void detach_Activities(Activity entity)
 		{
 			this.SendPropertyChanging();
-			entity.ActivityTemplate = null;
+			entity.StudentSkupina = null;
 		}
 	}
 	
@@ -1493,6 +1463,1365 @@ namespace CSAS
 						this._IdActivityTemplate = default(int);
 					}
 					this.SendPropertyChanged("ActivityTemplate");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActivityTemplate")]
+	public partial class ActivityTemplate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _ActivityName;
+		
+		private double _MaxPoints;
+		
+		private int _IdUser;
+		
+		private System.Nullable<int> _FirstRem;
+		
+		private System.Nullable<int> _SecondRem;
+		
+		private System.Nullable<int> _ThirdRem;
+		
+		private EntitySet<TaskTemplate> _TaskTemplates;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnActivityNameChanging(string value);
+    partial void OnActivityNameChanged();
+    partial void OnMaxPointsChanging(double value);
+    partial void OnMaxPointsChanged();
+    partial void OnIdUserChanging(int value);
+    partial void OnIdUserChanged();
+    partial void OnFirstRemChanging(System.Nullable<int> value);
+    partial void OnFirstRemChanged();
+    partial void OnSecondRemChanging(System.Nullable<int> value);
+    partial void OnSecondRemChanged();
+    partial void OnThirdRemChanging(System.Nullable<int> value);
+    partial void OnThirdRemChanged();
+    #endregion
+		
+		public ActivityTemplate()
+		{
+			this._TaskTemplates = new EntitySet<TaskTemplate>(new Action<TaskTemplate>(this.attach_TaskTemplates), new Action<TaskTemplate>(this.detach_TaskTemplates));
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityName", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string ActivityName
+		{
+			get
+			{
+				return this._ActivityName;
+			}
+			set
+			{
+				if ((this._ActivityName != value))
+				{
+					this.OnActivityNameChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityName = value;
+					this.SendPropertyChanged("ActivityName");
+					this.OnActivityNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxPoints", DbType="Float NOT NULL")]
+		public double MaxPoints
+		{
+			get
+			{
+				return this._MaxPoints;
+			}
+			set
+			{
+				if ((this._MaxPoints != value))
+				{
+					this.OnMaxPointsChanging(value);
+					this.SendPropertyChanging();
+					this._MaxPoints = value;
+					this.SendPropertyChanged("MaxPoints");
+					this.OnMaxPointsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
+		public int IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstRem", DbType="Int")]
+		public System.Nullable<int> FirstRem
+		{
+			get
+			{
+				return this._FirstRem;
+			}
+			set
+			{
+				if ((this._FirstRem != value))
+				{
+					this.OnFirstRemChanging(value);
+					this.SendPropertyChanging();
+					this._FirstRem = value;
+					this.SendPropertyChanged("FirstRem");
+					this.OnFirstRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecondRem", DbType="Int")]
+		public System.Nullable<int> SecondRem
+		{
+			get
+			{
+				return this._SecondRem;
+			}
+			set
+			{
+				if ((this._SecondRem != value))
+				{
+					this.OnSecondRemChanging(value);
+					this.SendPropertyChanging();
+					this._SecondRem = value;
+					this.SendPropertyChanged("SecondRem");
+					this.OnSecondRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThirdRem", DbType="Int")]
+		public System.Nullable<int> ThirdRem
+		{
+			get
+			{
+				return this._ThirdRem;
+			}
+			set
+			{
+				if ((this._ThirdRem != value))
+				{
+					this.OnThirdRemChanging(value);
+					this.SendPropertyChanging();
+					this._ThirdRem = value;
+					this.SendPropertyChanged("ThirdRem");
+					this.OnThirdRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ActivityTemplate_TaskTemplate", Storage="_TaskTemplates", ThisKey="Id", OtherKey="IdActivityTemplate")]
+		public EntitySet<TaskTemplate> TaskTemplates
+		{
+			get
+			{
+				return this._TaskTemplates;
+			}
+			set
+			{
+				this._TaskTemplates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityTemplate", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.ActivityTemplates.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.ActivityTemplates.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TaskTemplates(TaskTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActivityTemplate = this;
+		}
+		
+		private void detach_TaskTemplates(TaskTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.ActivityTemplate = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmailTemplate")]
+	public partial class EmailTemplate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _EmailSubject;
+		
+		private string _EmailContent;
+		
+		private int _IdUser;
+		
+		private string _EmailTemplateName;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnEmailSubjectChanging(string value);
+    partial void OnEmailSubjectChanged();
+    partial void OnEmailContentChanging(string value);
+    partial void OnEmailContentChanged();
+    partial void OnIdUserChanging(int value);
+    partial void OnIdUserChanged();
+    partial void OnEmailTemplateNameChanging(string value);
+    partial void OnEmailTemplateNameChanged();
+    #endregion
+		
+		public EmailTemplate()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailSubject", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string EmailSubject
+		{
+			get
+			{
+				return this._EmailSubject;
+			}
+			set
+			{
+				if ((this._EmailSubject != value))
+				{
+					this.OnEmailSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._EmailSubject = value;
+					this.SendPropertyChanged("EmailSubject");
+					this.OnEmailSubjectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailContent", DbType="NChar(1000) NOT NULL", CanBeNull=false)]
+		public string EmailContent
+		{
+			get
+			{
+				return this._EmailContent;
+			}
+			set
+			{
+				if ((this._EmailContent != value))
+				{
+					this.OnEmailContentChanging(value);
+					this.SendPropertyChanging();
+					this._EmailContent = value;
+					this.SendPropertyChanged("EmailContent");
+					this.OnEmailContentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
+		public int IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailTemplateName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string EmailTemplateName
+		{
+			get
+			{
+				return this._EmailTemplateName;
+			}
+			set
+			{
+				if ((this._EmailTemplateName != value))
+				{
+					this.OnEmailTemplateNameChanging(value);
+					this.SendPropertyChanging();
+					this._EmailTemplateName = value;
+					this.SendPropertyChanged("EmailTemplateName");
+					this.OnEmailTemplateNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_EmailTemplate", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.EmailTemplates.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.EmailTemplates.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Activity")]
+	public partial class Activity : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _ActivityName;
+		
+		private int _IdStudent;
+		
+		private int _IdUser;
+		
+		private int _IdSkupina;
+		
+		private System.DateTime _Deadline;
+		
+		private double _MaxPoints;
+		
+		private bool _EmailSendingActive;
+		
+		private System.Nullable<int> _Hodnotenie;
+		
+		private System.Nullable<bool> _Hodnotene;
+		
+		private System.Nullable<int> _DaysBeforeDeadline;
+		
+		private System.Nullable<int> _IdFirstRem;
+		
+		private System.Nullable<int> _IdSecRem;
+		
+		private System.Nullable<int> _IdThirdRem;
+		
+		private System.Nullable<bool> _SendFirst;
+		
+		private System.Nullable<bool> _SendSecond;
+		
+		private System.Nullable<bool> _SendThird;
+		
+		private EntitySet<Task> _Tasks;
+		
+		private EntityRef<User> _User;
+		
+		private EntityRef<StudentSkupina> _StudentSkupina;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnActivityNameChanging(string value);
+    partial void OnActivityNameChanged();
+    partial void OnIdStudentChanging(int value);
+    partial void OnIdStudentChanged();
+    partial void OnIdUserChanging(int value);
+    partial void OnIdUserChanged();
+    partial void OnIdSkupinaChanging(int value);
+    partial void OnIdSkupinaChanged();
+    partial void OnDeadlineChanging(System.DateTime value);
+    partial void OnDeadlineChanged();
+    partial void OnMaxPointsChanging(double value);
+    partial void OnMaxPointsChanged();
+    partial void OnEmailSendingActiveChanging(bool value);
+    partial void OnEmailSendingActiveChanged();
+    partial void OnHodnotenieChanging(System.Nullable<int> value);
+    partial void OnHodnotenieChanged();
+    partial void OnHodnoteneChanging(System.Nullable<bool> value);
+    partial void OnHodnoteneChanged();
+    partial void OnDaysBeforeDeadlineChanging(System.Nullable<int> value);
+    partial void OnDaysBeforeDeadlineChanged();
+    partial void OnIdFirstRemChanging(System.Nullable<int> value);
+    partial void OnIdFirstRemChanged();
+    partial void OnIdSecRemChanging(System.Nullable<int> value);
+    partial void OnIdSecRemChanged();
+    partial void OnIdThirdRemChanging(System.Nullable<int> value);
+    partial void OnIdThirdRemChanged();
+    partial void OnSendFirstChanging(System.Nullable<bool> value);
+    partial void OnSendFirstChanged();
+    partial void OnSendSecondChanging(System.Nullable<bool> value);
+    partial void OnSendSecondChanged();
+    partial void OnSendThirdChanging(System.Nullable<bool> value);
+    partial void OnSendThirdChanged();
+    #endregion
+		
+		public Activity()
+		{
+			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
+			this._User = default(EntityRef<User>);
+			this._StudentSkupina = default(EntityRef<StudentSkupina>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ActivityName
+		{
+			get
+			{
+				return this._ActivityName;
+			}
+			set
+			{
+				if ((this._ActivityName != value))
+				{
+					this.OnActivityNameChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityName = value;
+					this.SendPropertyChanged("ActivityName");
+					this.OnActivityNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdStudent", DbType="Int NOT NULL")]
+		public int IdStudent
+		{
+			get
+			{
+				return this._IdStudent;
+			}
+			set
+			{
+				if ((this._IdStudent != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdStudentChanging(value);
+					this.SendPropertyChanging();
+					this._IdStudent = value;
+					this.SendPropertyChanged("IdStudent");
+					this.OnIdStudentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUser", DbType="Int NOT NULL")]
+		public int IdUser
+		{
+			get
+			{
+				return this._IdUser;
+			}
+			set
+			{
+				if ((this._IdUser != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUserChanging(value);
+					this.SendPropertyChanging();
+					this._IdUser = value;
+					this.SendPropertyChanged("IdUser");
+					this.OnIdUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSkupina", DbType="Int NOT NULL")]
+		public int IdSkupina
+		{
+			get
+			{
+				return this._IdSkupina;
+			}
+			set
+			{
+				if ((this._IdSkupina != value))
+				{
+					if (this._StudentSkupina.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdSkupinaChanging(value);
+					this.SendPropertyChanging();
+					this._IdSkupina = value;
+					this.SendPropertyChanged("IdSkupina");
+					this.OnIdSkupinaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deadline", DbType="DateTime NOT NULL")]
+		public System.DateTime Deadline
+		{
+			get
+			{
+				return this._Deadline;
+			}
+			set
+			{
+				if ((this._Deadline != value))
+				{
+					this.OnDeadlineChanging(value);
+					this.SendPropertyChanging();
+					this._Deadline = value;
+					this.SendPropertyChanged("Deadline");
+					this.OnDeadlineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaxPoints", DbType="Float NOT NULL")]
+		public double MaxPoints
+		{
+			get
+			{
+				return this._MaxPoints;
+			}
+			set
+			{
+				if ((this._MaxPoints != value))
+				{
+					this.OnMaxPointsChanging(value);
+					this.SendPropertyChanging();
+					this._MaxPoints = value;
+					this.SendPropertyChanged("MaxPoints");
+					this.OnMaxPointsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailSendingActive", DbType="Bit NOT NULL")]
+		public bool EmailSendingActive
+		{
+			get
+			{
+				return this._EmailSendingActive;
+			}
+			set
+			{
+				if ((this._EmailSendingActive != value))
+				{
+					this.OnEmailSendingActiveChanging(value);
+					this.SendPropertyChanging();
+					this._EmailSendingActive = value;
+					this.SendPropertyChanged("EmailSendingActive");
+					this.OnEmailSendingActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hodnotenie", DbType="Int")]
+		public System.Nullable<int> Hodnotenie
+		{
+			get
+			{
+				return this._Hodnotenie;
+			}
+			set
+			{
+				if ((this._Hodnotenie != value))
+				{
+					this.OnHodnotenieChanging(value);
+					this.SendPropertyChanging();
+					this._Hodnotenie = value;
+					this.SendPropertyChanged("Hodnotenie");
+					this.OnHodnotenieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hodnotene", DbType="Bit")]
+		public System.Nullable<bool> Hodnotene
+		{
+			get
+			{
+				return this._Hodnotene;
+			}
+			set
+			{
+				if ((this._Hodnotene != value))
+				{
+					this.OnHodnoteneChanging(value);
+					this.SendPropertyChanging();
+					this._Hodnotene = value;
+					this.SendPropertyChanged("Hodnotene");
+					this.OnHodnoteneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DaysBeforeDeadline", DbType="Int")]
+		public System.Nullable<int> DaysBeforeDeadline
+		{
+			get
+			{
+				return this._DaysBeforeDeadline;
+			}
+			set
+			{
+				if ((this._DaysBeforeDeadline != value))
+				{
+					this.OnDaysBeforeDeadlineChanging(value);
+					this.SendPropertyChanging();
+					this._DaysBeforeDeadline = value;
+					this.SendPropertyChanged("DaysBeforeDeadline");
+					this.OnDaysBeforeDeadlineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdFirstRem", DbType="Int")]
+		public System.Nullable<int> IdFirstRem
+		{
+			get
+			{
+				return this._IdFirstRem;
+			}
+			set
+			{
+				if ((this._IdFirstRem != value))
+				{
+					this.OnIdFirstRemChanging(value);
+					this.SendPropertyChanging();
+					this._IdFirstRem = value;
+					this.SendPropertyChanged("IdFirstRem");
+					this.OnIdFirstRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSecRem", DbType="Int")]
+		public System.Nullable<int> IdSecRem
+		{
+			get
+			{
+				return this._IdSecRem;
+			}
+			set
+			{
+				if ((this._IdSecRem != value))
+				{
+					this.OnIdSecRemChanging(value);
+					this.SendPropertyChanging();
+					this._IdSecRem = value;
+					this.SendPropertyChanged("IdSecRem");
+					this.OnIdSecRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdThirdRem", DbType="Int")]
+		public System.Nullable<int> IdThirdRem
+		{
+			get
+			{
+				return this._IdThirdRem;
+			}
+			set
+			{
+				if ((this._IdThirdRem != value))
+				{
+					this.OnIdThirdRemChanging(value);
+					this.SendPropertyChanging();
+					this._IdThirdRem = value;
+					this.SendPropertyChanged("IdThirdRem");
+					this.OnIdThirdRemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SendFirst", DbType="Bit")]
+		public System.Nullable<bool> SendFirst
+		{
+			get
+			{
+				return this._SendFirst;
+			}
+			set
+			{
+				if ((this._SendFirst != value))
+				{
+					this.OnSendFirstChanging(value);
+					this.SendPropertyChanging();
+					this._SendFirst = value;
+					this.SendPropertyChanged("SendFirst");
+					this.OnSendFirstChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SendSecond", DbType="Bit")]
+		public System.Nullable<bool> SendSecond
+		{
+			get
+			{
+				return this._SendSecond;
+			}
+			set
+			{
+				if ((this._SendSecond != value))
+				{
+					this.OnSendSecondChanging(value);
+					this.SendPropertyChanging();
+					this._SendSecond = value;
+					this.SendPropertyChanged("SendSecond");
+					this.OnSendSecondChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SendThird", DbType="Bit")]
+		public System.Nullable<bool> SendThird
+		{
+			get
+			{
+				return this._SendThird;
+			}
+			set
+			{
+				if ((this._SendThird != value))
+				{
+					this.OnSendThirdChanging(value);
+					this.SendPropertyChanging();
+					this._SendThird = value;
+					this.SendPropertyChanged("SendThird");
+					this.OnSendThirdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Task", Storage="_Tasks", ThisKey="Id", OtherKey="IdActivity")]
+		public EntitySet<Task> Tasks
+		{
+			get
+			{
+				return this._Tasks;
+			}
+			set
+			{
+				this._Tasks.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StudentSkupina_Activity", Storage="_StudentSkupina", ThisKey="IdSkupina", OtherKey="Id", IsForeignKey=true)]
+		public StudentSkupina StudentSkupina
+		{
+			get
+			{
+				return this._StudentSkupina.Entity;
+			}
+			set
+			{
+				StudentSkupina previousValue = this._StudentSkupina.Entity;
+				if (((previousValue != value) 
+							|| (this._StudentSkupina.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StudentSkupina.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._StudentSkupina.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._IdSkupina = value.Id;
+					}
+					else
+					{
+						this._IdSkupina = default(int);
+					}
+					this.SendPropertyChanged("StudentSkupina");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Activity", Storage="_Student", ThisKey="IdStudent", OtherKey="Id", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._IdStudent = value.Id;
+					}
+					else
+					{
+						this._IdStudent = default(int);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = this;
+		}
+		
+		private void detach_Tasks(Task entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Task")]
+	public partial class Task : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _TaskName;
+		
+		private int _IdActivity;
+		
+		private double _Points;
+		
+		private int _IdStudent;
+		
+		private string _Comment;
+		
+		private System.Nullable<double> _Hodnotenie;
+		
+		private EntityRef<Activity> _Activity;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTaskNameChanging(string value);
+    partial void OnTaskNameChanged();
+    partial void OnIdActivityChanging(int value);
+    partial void OnIdActivityChanged();
+    partial void OnPointsChanging(double value);
+    partial void OnPointsChanged();
+    partial void OnIdStudentChanging(int value);
+    partial void OnIdStudentChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    partial void OnHodnotenieChanging(System.Nullable<double> value);
+    partial void OnHodnotenieChanged();
+    #endregion
+		
+		public Task()
+		{
+			this._Activity = default(EntityRef<Activity>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaskName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string TaskName
+		{
+			get
+			{
+				return this._TaskName;
+			}
+			set
+			{
+				if ((this._TaskName != value))
+				{
+					this.OnTaskNameChanging(value);
+					this.SendPropertyChanging();
+					this._TaskName = value;
+					this.SendPropertyChanged("TaskName");
+					this.OnTaskNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdActivity", DbType="Int NOT NULL")]
+		public int IdActivity
+		{
+			get
+			{
+				return this._IdActivity;
+			}
+			set
+			{
+				if ((this._IdActivity != value))
+				{
+					if (this._Activity.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdActivityChanging(value);
+					this.SendPropertyChanging();
+					this._IdActivity = value;
+					this.SendPropertyChanged("IdActivity");
+					this.OnIdActivityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Points", DbType="Float NOT NULL")]
+		public double Points
+		{
+			get
+			{
+				return this._Points;
+			}
+			set
+			{
+				if ((this._Points != value))
+				{
+					this.OnPointsChanging(value);
+					this.SendPropertyChanging();
+					this._Points = value;
+					this.SendPropertyChanged("Points");
+					this.OnPointsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdStudent", DbType="Int NOT NULL")]
+		public int IdStudent
+		{
+			get
+			{
+				return this._IdStudent;
+			}
+			set
+			{
+				if ((this._IdStudent != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdStudentChanging(value);
+					this.SendPropertyChanging();
+					this._IdStudent = value;
+					this.SendPropertyChanged("IdStudent");
+					this.OnIdStudentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="VarChar(250)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hodnotenie", DbType="Float")]
+		public System.Nullable<double> Hodnotenie
+		{
+			get
+			{
+				return this._Hodnotenie;
+			}
+			set
+			{
+				if ((this._Hodnotenie != value))
+				{
+					this.OnHodnotenieChanging(value);
+					this.SendPropertyChanging();
+					this._Hodnotenie = value;
+					this.SendPropertyChanged("Hodnotenie");
+					this.OnHodnotenieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Task", Storage="_Activity", ThisKey="IdActivity", OtherKey="Id", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.Tasks.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.Tasks.Add(this);
+						this._IdActivity = value.Id;
+					}
+					else
+					{
+						this._IdActivity = default(int);
+					}
+					this.SendPropertyChanged("Activity");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Task", Storage="_Student", ThisKey="IdStudent", OtherKey="Id", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Tasks.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Tasks.Add(this);
+						this._IdStudent = value.Id;
+					}
+					else
+					{
+						this._IdStudent = default(int);
+					}
+					this.SendPropertyChanged("Student");
 				}
 			}
 		}
