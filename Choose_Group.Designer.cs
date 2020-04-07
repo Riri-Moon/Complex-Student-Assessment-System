@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Skupiny_Grid = new System.Windows.Forms.DataGridView();
             this.Select_G_Panel = new System.Windows.Forms.Panel();
             this.Exit_Button = new System.Windows.Forms.Button();
@@ -43,13 +46,42 @@
             this.Skupiny_Grid.AllowUserToAddRows = false;
             this.Skupiny_Grid.AllowUserToDeleteRows = false;
             this.Skupiny_Grid.AllowUserToResizeColumns = false;
-            this.Skupiny_Grid.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Skupiny_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal;
+            this.Skupiny_Grid.BackgroundColor = System.Drawing.Color.White;
+            this.Skupiny_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.Skupiny_Grid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Skupiny_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.Skupiny_Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Skupiny_Grid.DefaultCellStyle = dataGridViewCellStyle2;
             this.Skupiny_Grid.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.Skupiny_Grid.Location = new System.Drawing.Point(0, 106);
             this.Skupiny_Grid.MultiSelect = false;
             this.Skupiny_Grid.Name = "Skupiny_Grid";
+            this.Skupiny_Grid.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Skupiny_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Skupiny_Grid.RowHeadersVisible = false;
             this.Skupiny_Grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.Skupiny_Grid.RowTemplate.ReadOnly = true;
@@ -103,7 +135,7 @@
             // 
             // Select_Button
             // 
-            this.Select_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Select_Button.BackColor = System.Drawing.Color.White;
             this.Select_Button.FlatAppearance.BorderSize = 0;
             this.Select_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Select_Button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -134,13 +166,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(401, 439);
             this.Controls.Add(this.Skupiny_Grid);
             this.Controls.Add(this.Select_G_Panel);
             this.HelpButton = true;
             this.MaximizeBox = false;
             this.Name = "Choose_Group";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Select Study Group";
             this.Load += new System.EventHandler(this.Choose_Group_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Skupiny_Grid)).EndInit();

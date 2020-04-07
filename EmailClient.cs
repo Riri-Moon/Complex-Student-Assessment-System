@@ -44,7 +44,7 @@ namespace CSAS
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
 
-            using (StreamWriter sw = new StreamWriter(@"\emailsetting.json"))
+            StreamWriter sw = new StreamWriter(@"\emailsetting.json");
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, settings);
@@ -112,7 +112,7 @@ namespace CSAS
 
         //}
 
-        public async void SendMessageToAllNow(EmailBody email)
+        public  void SendMessageToAllNow(EmailBody email)
         {
 
      

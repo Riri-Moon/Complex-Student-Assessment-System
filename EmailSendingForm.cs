@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using AutocompleteMenuNS;
-
+using System.IO;
 
 namespace CSAS
 {
@@ -18,12 +18,13 @@ namespace CSAS
         AutoCompleteStringCollection suggestionList = new AutoCompleteStringCollection();
         List<EmailAddress> emailAddList = new List<EmailAddress>();
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        List<SendGrid.Helpers.Mail.Attachment> attachmentList = new List<SendGrid.Helpers.Mail.Attachment>();
 
         public EmailSendingForm(User user, StudentSkupina skupina)
         {
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+            skinManager.EnforceBackcolorOnAllComponents = false;    
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
@@ -39,10 +40,10 @@ namespace CSAS
             var columnWidth = new int[] { 100, 120 };
             autocompleteMenu1.MaximumSize = new System.Drawing.Size(250, 200);
             foreach (var student in skup)
-                {
-            
+            {
+
                 autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { RWS(student.Meno) + " " + RWS(student.Priezvisko), RWS(student.Email) }, RWS(student.Email)) { ColumnWidth = columnWidth });
-                autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { "", RWS(student.Email_UCM) }, RWS(student.Email_UCM)) { ColumnWidth = columnWidth });                
+                autocompleteMenu1.AddItem(new MulticolumnAutocompleteItem(new[] { "", RWS(student.Email_UCM) }, RWS(student.Email_UCM)) { ColumnWidth = columnWidth });
             }
 
             var kruzok = from stud in students where stud.ID_stud_skupina == skupina.Id select (string)stud.ID_Kruzok;
@@ -55,14 +56,14 @@ namespace CSAS
             }
             autocompleteMenu1.Enabled = true;
             autocompleteMenu1.AllowsTabKey = true;
-            
+
         }
 
 
         //remove white space in text
-       private string RWS(string text)
+        private string RWS(string text)
         {
-            text= text.Replace(" ", string.Empty);
+            text = text.Replace(" ", string.Empty);
 
             return text;
         }
@@ -77,7 +78,7 @@ namespace CSAS
                 SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar());
                 EmailBody body = new EmailBody()
                 {
-                    HtmlContent = richTextBox1.Text,
+                    HtmlContent = richTextBox1.Text.Replace("\u00A0","<br/>"),// +"<br/> <br/> " + currentUser.Signature
                     PlainTextContent = richTextBox1.Text,
                     Subject = subjectTextBox.Text,
                     To = emailAddList
@@ -148,33 +149,36 @@ namespace CSAS
                     MessageBox.Show("Niektorá časť nie je vyplnená. Prosím skontrolujte správu, ktorú chcete odoslať a uistite sa subjekt alebo správa nie sú prázdne", "Prázdne polia");
                     return;
                 }
-                int timestamp = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
-                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject, body.PlainTextContent, body.HtmlContent);
-                msg.SetSendAt(timestamp);
-
+                MessageBox.Show(richTextBox1.Text);
+                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject,body.HtmlContent, body.HtmlContent);
+                if (attachmentList.Count >= 1)
+                {
+                    msg.AddAttachments(attachmentList);
+                }
                 var result = await client.SendEmailAsync(msg);
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
-                    MessageBox.Show("Email bol úspešne odoslaný", "Status");
+                    attachmentList.Clear();
+                    MessageBox.Show("Email bol úspešne prijatý", "Status");
                 }
                 else
                 {
-                    MessageBox.Show(result.StatusCode.ToString());
+                    MessageBox.Show("Email nebol úspešne odoslaný\n " + "Status emailu: " + result.StatusCode.ToString(), "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
 
                 ToTextBox.Text = "";
                 subjectTextBox.Text = "";
                 richTextBox1.Text = "";
+                emailAddList.Clear();
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-                                   
+
 
         }
 
@@ -202,12 +206,125 @@ namespace CSAS
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
         }
- 
+
         private void GroupCheckBtn_CheckedChanged(object sender, EventArgs e)
         {
             GroupComboEmail.Enabled = true;
             ToTextBox.Enabled = false;
 
         }
+
+
+
+        private void materialFlatButton1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                EmailAttachments emailAttachments = new EmailAttachments();
+                var attach = emailAttachments.BrowseForFile();
+                var notAddedList = new List<string>();
+                if (attach != (null, null))
+                {
+                    foreach (var files in attach.Item1.Zip(attach.Item2, (paths, names) => (paths, names)))
+                    {
+                        var bytes = File.ReadAllBytes(files.paths);
+                        var file = Convert.ToBase64String(bytes);
+                        var type = emailAttachments.GetMIMEType(files.paths);
+                        if (type == null)
+                        {
+                            notAddedList.Add(files.names);
+                            continue;
+                        }
+                        SendGrid.Helpers.Mail.Attachment attachment = new SendGrid.Helpers.Mail.Attachment()
+                        {
+                            Content = file,
+                            Filename = files.names,
+                            Type = type
+                        };
+                        attachmentList.Add(attachment);
+                    }
+                    if (attachmentList.Count >= 1)
+                    {
+                        AttachmentsGrid.DataSource = null;
+                        AttachmentsGrid.DataSource = attachmentList;
+                        AttachmentsGrid.Columns["Content"].Visible = false;
+                        AttachmentsGrid.Columns["Type"].Visible = false;
+                        AttachmentsGrid.Columns["ContentId"].Visible = false;
+                        AttachmentsGrid.Columns["Disposition"].Visible = false;
+                    }
+                    if (notAddedList.Count >= 1)
+                    {
+                        string list = null;
+
+                        foreach (var x in notAddedList)
+                        {
+                            list += x + " ";
+                        }
+                        var msg = $"Súbor/y {list} nebol pridaný, lebo tento typ súboru nie je možné odoslať emailom. Pre informácie o tom, ktoré " +
+                        "súbory nie je možné odoslať otvorte BlockedExtensions.txt";
+                        MessageBox.Show(msg);
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AttachmentsGrid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void AttachmentsGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Delete && attachmentList.Count>=1)
+                {
+                    var currentAttachment = (string)AttachmentsGrid.CurrentCell.Value;
+                    var attachment = attachmentList.Where(x => x.Filename == currentAttachment).FirstOrDefault();
+                    attachmentList.Remove(attachment);
+                    
+                    if (attachmentList.Count >= 1)
+                    {
+                        AttachmentsGrid.DataSource = attachmentList;
+                    }
+                    else
+                    {
+                        AttachmentsGrid.DataSource = null;
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        //Insert non printable character in order to replace it later with <br/>
+        private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode== Keys.Enter)
+            {
+                richTextBox1.AppendText("\u00A0");
+            }
+        }
     }
 }
+

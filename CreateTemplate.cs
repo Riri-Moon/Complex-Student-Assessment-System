@@ -38,6 +38,8 @@ namespace CSAS
         {
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+            skinManager.EnforceBackcolorOnAllComponents = false;
+
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
@@ -63,7 +65,6 @@ namespace CSAS
 
                     comboBox1.Items.Add(email.EmailTemplateName);
                     comboBox2.Items.Add(email.EmailTemplateName);
-                    comboBox3.Items.Add(email.EmailTemplateName);
                 }
 
             }
@@ -115,8 +116,8 @@ namespace CSAS
 
             MaterialLabel label = new MaterialLabel
             {
-                Name = "DynamicLabel" + countAdd++,
-                Location = new Point(21, 19 + (30 * countAdd)),
+                Name = "DynamicLabel" + countAdd,
+                Location = new Point(21, 24 + (30 * countAdd)),
                 Text = "Názov úlohy:"
             };
             Labels.Add(label);
@@ -125,26 +126,29 @@ namespace CSAS
             MaterialLabel labelPoints = new MaterialLabel
             {
                 Name = "DynamicLabelPoints" + countAdd,
-                Location = new Point(420, 19 + (30 * countAdd)),
+                Location = new Point(420, 24 + (30 * countAdd)),
                 Text = "Max bodov:"
             };
             this.panel1.Controls.Add(labelPoints);
             Labels.Add(labelPoints);
 
-            MaterialSingleLineTextField taskName = new MaterialSingleLineTextField()
+            MaterialTextBox taskName = new MaterialTextBox()
             {
                 Name = "DynName" + countAdd,
-                Location = new Point(134, 19 + (30 * countAdd)),
-                Size = new System.Drawing.Size(223, 23)
+                Location = new Point(124, 17 + (30 * countAdd)),
+                MaxLength = 45,
+                SelectionBullet = false,
+                Size = new System.Drawing.Size(245, 18)
 
             };
             this.panel1.Controls.Add(taskName);
 
-            MaterialSingleLineTextField taskPoints = new MaterialSingleLineTextField()
+            MaterialTextBox taskPoints = new MaterialTextBox()
             {
                 Name = "DynPoints" + countAdd,
-                Location = new Point(604, 19 + (30 * countAdd)),
-                Size = new System.Drawing.Size(43, 23)
+                Location = new Point(520, 17 + (30 * countAdd++)),
+                MaxLength = 5,
+                Size = new System.Drawing.Size(70, 18)
 
             };
             controlNamesForEdit.Add(taskName);
@@ -169,8 +173,13 @@ namespace CSAS
                 //Changed from controlsPoints
                 foreach (var contr in controlPointsForEdit)
                 {
-                    if (contr.Text != string.Empty)
-                    {   
+                    if (contr.Text != string.Empty )
+                    {
+                        var chars = contr.Text;
+                        if (contr.Text.Length > 3 &&( !chars.Contains('.') || chars.Contains(',')))
+                        {
+                           contr.Text= contr.Text.Insert(2, ".");
+                        }
                         xy += (float)Math.Round(float.Parse(contr.Text.Replace(",", ".")), 2);
 
                    //     MaxPtsLabel.Text = xy.ToString();
@@ -182,7 +191,19 @@ namespace CSAS
             }
             catch (FormatException)
             {
-                MessageBox.Show("Zly format cisla", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                foreach (var contr in controlPointsForEdit)
+                {
+                    if (contr.Text != string.Empty)
+                    {
+                        var lastCharNotNum = contr.Text.LastIndexOf(contr.Text.Last());
+                        if ( char.IsLetter(contr.Text.ElementAt(lastCharNotNum)))
+                        {
+                            var newText = contr.Text.Remove(lastCharNotNum);
+                            contr.Text = newText;
+                        }
+
+                    }
+                }
                 return;
             }
         }
@@ -213,7 +234,6 @@ namespace CSAS
                         ActivityName = ActNameTxtBox.Text,
                         FirstRem=GetEmailTemps(comboBox1),
                         SecondRem= GetEmailTemps(comboBox2),
-                        ThirdRem= GetEmailTemps(comboBox3)
                     };
 
                     if (ActTemp.MaxPoints != 0 && !string.IsNullOrWhiteSpace(ActTemp.MaxPoints.ToString()) && ActTemp.ActivityName != string.Empty)
@@ -399,7 +419,6 @@ namespace CSAS
                     var emailTemps = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currUser.Id);
                     comboBox1.Text= (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().FirstRem select email.EmailTemplateName).FirstOrDefault();
                     comboBox2.Text = (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().SecondRem select email.EmailTemplateName).FirstOrDefault();
-                    comboBox3.Text = (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().ThirdRem select email.EmailTemplateName).FirstOrDefault();
 
 
                     foreach (var x in selectedAct)
@@ -424,8 +443,9 @@ namespace CSAS
                         MaterialLabel label = new MaterialLabel
                         {
                             Name = "DynamicLabel" + count++,
-                            Location = new Point(21, 19 + (30 * count)),
-                            Text = "Názov úlohy:"
+                            Location = new Point(21, 24 + (30 * count)),
+                            Text = "Názov úlohy: ",
+                            AutoSize = true,
                         };
                         countAdd++;
 
@@ -436,29 +456,32 @@ namespace CSAS
                         MaterialLabel labelPoints = new MaterialLabel
                         {
                             Name = "DynamicLabelPoints" + count,
-                            Location = new Point(420, 19 + (30 * count)),
-                            Text = "Max bodov:"
+                            Location = new Point(420, 24 + (30 * count)),
+                            AutoSize = true,
+                            Text = "Max bodov: ",
                         };
 
                         Labels.Add(labelPoints);
                         this.panel1.Controls.Add(labelPoints);
 
-                        MaterialSingleLineTextField taskName = new MaterialSingleLineTextField()
+                        MaterialTextBox taskName = new MaterialTextBox()
                         {
                             Name = "DynName" + count,
-                            Location = new Point(134, 19 + (30 * count)),
-                            Size = new System.Drawing.Size(223, 23),
-                            Text = x.TaskName
+                            Location = new Point(124, 17 + (30 * count)),
+                            Size = new Size(245, 23),
+                            Text = x.TaskName,
+                            MaxLength= 45,
 
                         };
                         this.panel1.Controls.Add(taskName);
 
-                        MaterialSingleLineTextField taskPoints = new MaterialSingleLineTextField()
+                        MaterialTextBox taskPoints = new MaterialTextBox()
                         {
                             Name = "DynPoints" + count,
-                            Location = new Point(604, 19 + (30 * count)),
-                            Size = new System.Drawing.Size(43, 23),
-                            Text = x.MaxPts.ToString()
+                            Location = new Point(520, 17 + (30 * count)),
+                            Size = new Size(70, 23),
+                            Text = x.MaxPts.ToString(),
+                            MaxLength = 5
 
                         };
 
@@ -570,9 +593,7 @@ namespace CSAS
         private void ClearTasks()
         {
             try
-            {
-          
-
+            {         
                 foreach (var x in controlNamesForEdit.Zip(controlPointsForEdit, (names, points) => new { controlPointsForEdit = points, controlNamesForEdit = names }))
                 {
                     if (Labels.Count > 0)
@@ -583,22 +604,21 @@ namespace CSAS
                         }
                         Labels.Clear();
                     }
-
                     panel1.Controls.Remove(x.controlNamesForEdit);
                     panel1.Controls.Remove(x.controlPointsForEdit);
-
                 }
                 controlPointsForEdit.Clear();
                 controlNamesForEdit.Clear();
 
                 this.AddTaskBtn.Location = new Point(25, 40 );
                 this.DeleteTaskBtn.Location = new Point(500, 40);
+                comboBox1.Text = string.Empty;
+                comboBox2.Text = string.Empty;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString()) ;
             }
-
         }
 
     }

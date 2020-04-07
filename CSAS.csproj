@@ -51,8 +51,8 @@
     <Reference Include="AutocompleteMenu, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AutocompleteMenu.1.3.5.0\lib\net40\AutocompleteMenu.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>Referenced assemblies\Bunifu_UI_v1.52.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -60,8 +60,8 @@
     <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="SendGrid, Version=9.13.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>packages\SendGrid.9.13.1\lib\net452\SendGrid.dll</HintPath>
+    <Reference Include="SendGrid, Version=9.13.2.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>packages\SendGrid.9.13.2\lib\net452\SendGrid.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -77,6 +77,7 @@
     <Reference Include="System.Geometry.Text, Version=0.3.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Font.0.3.0.3\lib\netstandard2.0\System.Geometry.Text.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.1.1\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -102,6 +103,12 @@
     </Compile>
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddStudentForm.Designer.cs">
+      <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Attendance.cs">
       <SubType>Form</SubType>
@@ -133,6 +140,7 @@
     <Compile Include="Email Client.Designer.cs">
       <DependentUpon>Email Client.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmailAttachments.cs" />
     <Compile Include="EmailClient.cs" />
     <Compile Include="EmailSendingForm.cs">
       <SubType>Form</SubType>
@@ -145,6 +153,12 @@
     </Compile>
     <Compile Include="EmailTemplateForm.Designer.cs">
       <DependentUpon>EmailTemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GradeActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GradeActivityForm.Designer.cs">
+      <DependentUpon>GradeActivityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Import_Cl.cs" />
     <Compile Include="Main_Window.cs">
@@ -170,13 +184,22 @@
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddStudentForm.resx">
+      <DependentUpon>AddStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Attendance.resx">
       <DependentUpon>Attendance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Choose_Group.resx">
       <DependentUpon>Choose_Group.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateActivity.es-419.resx">
+      <DependentUpon>CreateActivity.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateActivity.resx">
+      <DependentUpon>CreateActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateActivity.sk-SK.resx">
       <DependentUpon>CreateActivity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateTemplate.resx">
@@ -191,7 +214,13 @@
     <EmbeddedResource Include="EmailTemplateForm.resx">
       <DependentUpon>EmailTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GradeActivityForm.resx">
+      <DependentUpon>GradeActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main_Window.resx">
+      <DependentUpon>Main_Window.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main_Window.sk-SK.resx">
       <DependentUpon>Main_Window.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -264,6 +293,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaterialSkin\MaterialSkin\MaterialSkin.csproj">
+      <Project>{8eb7611b-68cd-4b8b-987a-11717e2b250c}</Project>
+      <Name>MaterialSkin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

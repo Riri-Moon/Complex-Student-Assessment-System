@@ -21,13 +21,15 @@ namespace CSAS
             InitializeComponent();
             studentSkup = skup;
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
+            skinManager.EnforceBackcolorOnAllComponents = false;
+
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
                 MaterialSkin.TextShade.WHITE);
             currUser = currentUser;
-
             GetTableActivity();
+            groupCmbo.SelectedIndex = 0;
 
         }
 
@@ -54,7 +56,6 @@ namespace CSAS
                     ///Whether, and what reminders should be send 
                     var first = false;
                     var second = false;
-                    var third = false;
                     if (actTempl.FirstRem.HasValue)
                     {
                         first = true;
@@ -62,10 +63,6 @@ namespace CSAS
                     if (actTempl.SecondRem.HasValue)
                     {
                         second = true;
-                    }
-                    if (actTempl.ThirdRem.HasValue)
-                    {
-                        third = true;
                     }
 
                     IQueryable<Student> studs;
@@ -94,7 +91,6 @@ namespace CSAS
                             ActivityName = actTempl.ActivityName,
                             IdFirstRem = actTempl.FirstRem,
                             IdSecRem = actTempl.SecondRem,
-                            IdThirdRem = actTempl.ThirdRem,
                             MaxPoints = actTempl.MaxPoints,
                             Deadline = GetDate(),
                             EmailSendingActive = IsSendingChecked(),
@@ -103,7 +99,6 @@ namespace CSAS
                             Hodnotene = false,
                             SendFirst = first,
                             SendSecond = second,
-                            SendThird = third,
                             IdStudent = student.Id,
 
                         };
@@ -130,7 +125,7 @@ namespace CSAS
                             };
                             con.Tasks.InsertOnSubmit(task);
                         }
-                        studentsAddresses.Add(MailHelper.StringToEmailAddress(student.Email));
+                 //studentsAddresses.Add(MailHelper.StringToEmailAddress(student.Email));
 
                         con.SubmitChanges();
                     }
@@ -215,7 +210,7 @@ namespace CSAS
                     ActivityGridView.Columns["Id"].Visible = false;
 
                     dateTimePicker2.Format = DateTimePickerFormat.Custom;
-                    dateTimePicker2.CustomFormat = "hh:mm";
+                    dateTimePicker2.CustomFormat = "HH:mm";
                     dateTimePicker2.ShowUpDown = true;
 
                     var studs = con.GetTable<Student>();
@@ -242,7 +237,10 @@ namespace CSAS
 
         private DateTime GetDate()
         {
-            return dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay;
+
+
+            return TimeZone.CurrentTimeZone.ToLocalTime(dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay);
+
         }
 
 

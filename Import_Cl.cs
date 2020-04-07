@@ -42,10 +42,9 @@ namespace CSAS
                     excelCon.Close();
 
                     DataTable excelDataTable = excelDataSet.Tables[0];
-
                     for (int i = excelDataTable.Rows.Count - 1; i >= 0; i--)
                     {
-                        if (string.IsNullOrEmpty((string)excelDataTable.Rows[i]["Meno"]) || string.IsNullOrEmpty((string)excelDataTable.Rows[i]["Číslo karty"]) || (string)excelDataTable.Rows[i].ItemArray[5] == "A")
+                        if ( (string)excelDataTable.Rows[i].ItemArray[5] == "A")
                         {
                             didntHappened = true;
 
@@ -53,6 +52,7 @@ namespace CSAS
                             excelDataTable.Rows[i].Delete();
 
                         }
+
                     }
                     excelDataTable.AcceptChanges();
 
@@ -73,6 +73,13 @@ namespace CSAS
 
 
 
+                            string isic = null;
+                            if (!string.IsNullOrEmpty((string)excelDataTable.Rows[i].ItemArray[5]))
+                            {
+                                 isic = excelDataTable.Rows[i].ItemArray[5].ToString().Remove(0, 5);
+                            }
+                  
+
                             Student students = new Student
                             {
                                 Meno = excelDataTable.Rows[i].ItemArray[0].ToString(),
@@ -80,10 +87,11 @@ namespace CSAS
                                 Stud_program = excelDataTable.Rows[i].ItemArray[2].ToString(),
                                 ID_stud_skupina = skupina.Id,
                                 ID_Kruzok = excelDataTable.Rows[i].ItemArray[3].ToString(),
+                                IdGroupForAttendance= excelDataTable.Rows[i].ItemArray[3].ToString(),
                                 Email = excelDataTable.Rows[i].ItemArray[8].ToString(),
                                 Email_UCM = excelDataTable.Rows[i].ItemArray[7].ToString(),
                                 Rocnik = Convert.ToInt32(excelDataTable.Rows[i].ItemArray[6]),
-                                ISIC = excelDataTable.Rows[i].ItemArray[5].ToString().Remove(0, 5),
+                                ISIC =   isic, 
                                 Forma = skupina.Forma
 
 
