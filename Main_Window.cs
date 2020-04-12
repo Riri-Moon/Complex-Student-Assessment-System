@@ -54,6 +54,9 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -103,19 +106,38 @@ namespace CSAS
                 using (var con = new StudentDBDataContext(conn_str))
                 {
 
-                   
-                    var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma);
+
+                    // var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma);
+
+                    var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma).
+                  Select(x => new
+                  {
+                      x.Id,
+                      x.Meno,
+                      x.Priezvisko,
+                      x.Email,
+                      Email2 = x.Email_UCM,
+                      x.ISIC,
+                      Ročník = x.Rocnik,
+                      x.Forma,
+                      Krúžok = x.IdGroupForAttendance,
+                      x.ID_Kruzok,
+                      Body = x.FinalGrades.Where(y => y.IdStudent == x.Id).Select(z => z.GotPoints).FirstOrDefault(),
+                      Známka = x.FinalGrades.Where(y => y.IdStudent == x.Id).Select(z => z.Grade).FirstOrDefault()
+
+                  });
+
+
                     Student_Grid.RowHeadersVisible = false;
                     Student_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     Student_Grid.MultiSelect = false;
                     Student_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     Student_Grid.DataSource = students.OrderBy(x => x.Priezvisko);
                     Student_Grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-                    Student_Grid.Columns["ID"].Visible = false;
-                    Student_Grid.Columns["Id_Stud_skupina"].Visible = false;
-                    Student_Grid.Columns["Stud_Program"].Visible = false;
-                    Student_Grid.Columns["IdGroupForAttendance"].Visible = false;
-                  
+
+                    Student_Grid.Columns["Id"].Visible = false;               
+                    Student_Grid.Columns["ID_Kruzok"].Visible = false;
+
 
                     foreach (var stud in students)
                     {
@@ -138,6 +160,8 @@ namespace CSAS
             }
             catch (DataException ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -147,6 +171,7 @@ namespace CSAS
         {
             try
             {
+                
                 if (Student_Grid != null)
                 {
                     foreach (DataGridViewRow row in Student_Grid.Rows)
@@ -157,10 +182,9 @@ namespace CSAS
                         }
                         else
                         {
-                            row.Cells[8].Style.BackColor = Color.White;
-
+                            row.Cells[5].Style.BackColor = Color.White;
                         }
-                        if (!row.Cells[11].Value.ToString().Equals(row.Cells[8].Value.ToString()))
+                        if (!row.Cells[8].Value.ToString().Equals(row.Cells[9].Value.ToString()))
                         {
                             row.Cells[8].Style.BackColor = Color.Yellow;
                         }
@@ -171,9 +195,12 @@ namespace CSAS
                         }
                     }
                 }
+                
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
 
@@ -182,26 +209,37 @@ namespace CSAS
 
         private void GetActivities()
         {
-
             try
             {
-
                 using (var con = new StudentDBDataContext(conn_str))
                 {
+                    if (Student_Grid.Rows.Count>0 
+                        )
+                    {
+                        var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
+                        var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id);
 
-                    var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
-                    var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id );
-
-                    var dataSource = from studAct in acts where studAct.IdStudent == selectedStudent select new { studAct.ActivityName, studAct.MaxPoints, studAct.Hodnotenie, studAct.Id,studAct.Deadline };
-                    Activity_Grid.RowHeadersVisible = false;
-                    Activity_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    Activity_Grid.DataSource = dataSource;
-                    Activity_Grid.Columns["Id"].Visible = false;
+                        var dataSource = from studAct in acts
+                                         where studAct.IdStudent == selectedStudent
+                                         select new
+                                         {
+                                             Názov = studAct.ActivityName,
+                                             Maximum = studAct.MaxPoints,
+                                             studAct.Hodnotenie,
+                                             studAct.Id,
+                                             Odovzdanie = studAct.Deadline
+                                         };
+                        Activity_Grid.RowHeadersVisible = false;
+                        Activity_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                        Activity_Grid.DataSource = dataSource;
+                        Activity_Grid.Columns["Id"].Visible = false;
+                    }
                 }
-
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -214,7 +252,6 @@ namespace CSAS
         private void Import_Btn_Click(object sender, EventArgs e)
         {
             Import_Cl import = new Import_Cl();
-
             try
             {
                 import.Querys(studentSkupina);
@@ -222,6 +259,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -231,16 +270,13 @@ namespace CSAS
             {
                 Stud_G_Button.Image = Properties.Resources.icons8_windows_10_32;
                 Study_Panel.Size = Study_Panel.MaximumSize;
-
                 isCollapsed = false;
-
             }
             else
             {
                 Stud_G_Button.Image = Properties.Resources.icons8_expand_arrow_32;
                 Study_Panel.Size = Study_Panel.MinimumSize;
                 isCollapsed = true;
-
             }
         }
         private void OdoslatEmailBtnMainMenu_Click(object sender, EventArgs e)
@@ -248,24 +284,7 @@ namespace CSAS
             var openSendMail = new EmailSendingForm(currentUser,studentSkupina);
             openSendMail.ShowDialog();
         }
-        private void Student_Button_Click(object sender, EventArgs e)
-        {            
-            if (isCollapsed_2)
-            {
-                Student_Button.Image = Properties.Resources.icons8_windows_10_32;
-                Student_Panel.Size = Student_Panel.MaximumSize;
-
-                isCollapsed_2 = false;
-
-            }
-            else
-            {
-                Student_Button.Image = Properties.Resources.icons8_expand_arrow_32;
-                Student_Panel.Size = Student_Panel.MinimumSize;
-                isCollapsed_2 = true;
-
-            }
-        }
+       
         private void Ext_Btn_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to close?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -312,8 +331,9 @@ namespace CSAS
         }
         private void Email_client_btn_Click_1(object sender, EventArgs e)
         {
-            var email_c = new Email_Client(currentUser);
-            email_c.ShowDialog();
+            var emailClient = new Email_Client(currentUser,studentSkupina);
+            emailClient.FormClosed += IsClosed;
+            emailClient.ShowDialog();
         }
         private void Stat_Btn_Click(object sender, EventArgs e)
         {
@@ -333,7 +353,6 @@ namespace CSAS
         private void Create_Templ_Click(object sender, EventArgs e)
         {
             var template = new CreateTemplate(currentUser);
-
             template.ShowDialog();
         }
 
@@ -341,7 +360,6 @@ namespace CSAS
         {
             var createActivity = new CreateActivity(currentUser,studentSkupina);
             createActivity.FormClosed += IsClosed;
-
             createActivity.ShowDialog();
 
         }
@@ -365,22 +383,13 @@ namespace CSAS
             AddStudentForm addStudentForm = new AddStudentForm(currentUser, studentSkupina);
             addStudentForm.FormClosed += IsClosed;
             addStudentForm.ShowDialog();
-            addStudentForm.GetTable += Reload;
-        }
-
-        void Reload()
-        {
-            GetTable();
         }
 
         private void Activity_Grid_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
         {
             DataGridViewRow dataGridViewRow1 = Activity_Grid.Rows[e.RowIndex];
-            e.ContextMenuStrip = materialContextMenuStrip1;
-            
+            e.ContextMenuStrip = materialContextMenuStrip1;            
         }
-
-
 
         private void hodnotiťToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -391,17 +400,11 @@ namespace CSAS
                 var stud = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkupina.Id && x.Id == (int)Student_Grid.CurrentRow.Cells[0].Value).FirstOrDefault();
                 var act = con.GetTable<Activity>().Where(x => x.IdStudent == stud.Id && x.Id == (int)Activity_Grid.CurrentRow.Cells[3].Value).FirstOrDefault();
 
-
-            var gradeForm = new GradeActivityForm(studentSkupina,stud,act);
+                var gradeForm = new GradeActivityForm(studentSkupina, stud, act);
                 gradeForm.FormClosed += IsClosed;
                 gradeForm.ShowDialog();
-
-
-
             }
             this.UseWaitCursor = false;
-
-
         }
 
         private void IsClosed(object sender, EventArgs e)
@@ -410,11 +413,101 @@ namespace CSAS
             GetActivities();
         }
         private void Main_Window_Shown(object sender, EventArgs e)
+        {         
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
-          
+            var singleActivity = new IndividualActivity(currentUser, studentSkupina);
+            singleActivity.FormClosed += IsClosed;
+            singleActivity.ShowDialog();
+        }
+
+
+        // Zmazanie vsetkych dat skupiny / Tyka sa to len studentov
+    
+
+
+        private void bodyZaAktivituCvičenieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PointsForActivity(currentUser.PointsForActSem);              
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
+        }
+
+        private void bodyZaAktivituPrednáškaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PointsForActivity(currentUser.PointsForActLec);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.","Upozornenie",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
+        }
+       /// <summary>
+       /// Vytvorenie aktivity, body za aktivitu
+       /// </summary>
+       /// <param name="id"></param>
+        private void PointsForActivity(int? id)
+        {
+            try
+            {
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                {
+                    var actTempl = con.GetTable<ActivityTemplate>().Where(x => x.Id == id).FirstOrDefault();
+                    Activity activity = new Activity()
+                    {
+                        ActivityName = actTempl.ActivityName,
+                        IdFirstRem = null,
+                        IdSecRem = null,
+                        MaxPoints = actTempl.MaxPoints,
+                        Deadline = DateTime.Now,
+                        EmailSendingActive = false,
+                        IdSkupina = studentSkupina.Id,
+                        IdUser = currentUser.Id,
+                        Hodnotene = false,
+                        SendFirst = false,
+                        SendSecond = false,
+                        IdStudent = (int)Student_Grid.CurrentRow.Cells[0].Value,
+
+                    };
+                    con.Activities.InsertOnSubmit(activity);
+                    con.SubmitChanges();
+
+                }
+                GetActivities();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
+        }
+
+
+        private void Student_Grid_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
+        {
+            DataGridViewRow dataGridViewRow1 = Student_Grid.Rows[e.RowIndex];
+            e.ContextMenuStrip = materialContextMenuStrip2;
 
         }
+
+        private void FinalGradeBtn_Click(object sender, EventArgs e)
+        {
+            var final = new FinalGradeForm(currentUser, studentSkupina);
+            final.FormClosed += IsClosed;
+            final.ShowDialog();
+        }
     }
-
-
 }

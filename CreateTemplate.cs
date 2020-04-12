@@ -323,6 +323,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -350,6 +352,8 @@ namespace CSAS
 
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
 
                 return null;
@@ -385,6 +389,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -504,6 +510,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
 
@@ -617,6 +625,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString()) ;
             }
         }

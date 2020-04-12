@@ -50,20 +50,7 @@ namespace CSAS
                 serializer.Serialize(writer, settings);
             }
         }
-
-        public EmailSettings FromJsonEmail()
-        {
-            JsonSerializer streamReader = new JsonSerializer();
-            var jsonString = File.ReadAllText(@"\emailsetting.json");
-            var emailsetting = JsonConvert.DeserializeObject<EmailSettings>(jsonString);
-            return emailsetting;
-        }
-
-
-
-
-
-
+     
         // Change user to get from login
         public string SetEnvironmentVar()
         {
@@ -92,42 +79,6 @@ namespace CSAS
 
         }
 
-        List<EmailAddress> emailAdresses = new List<EmailAddress>();
-        EmailAddress x = new EmailAddress();
-        EmailBody body = new EmailBody();
-
-        //object json = JsonConvert.DeserializeObject(data);
-        //public async Task<Response> SendMessageToAllNow(EmailBody email)
-        //{x
-
-        //    var key = SetEnvironmentVar();
-        //    var client = new SendGridClient(key);
-        //    await client.RequestAsync(SendGridClient.Method.POST, urlPath: "/templates/", requestBody: data);
-        //   // var msg = MailHelper.CreateSingleEmailToMultipleRecipients(email.From, email.To, email.Subject, email.PlainTextContent, email.HtmlContent);
-
-
-        //   // var result = await client.SendEmailAsync(msg);
-
-        //    //return result;
-
-        //}
-
-        public  void SendMessageToAllNow(EmailBody email)
-        {
-
-     
-
-           // var key = SetEnvironmentVar();
-           // var client = new SendGridClient(key);
-
-          //  await client.RequestAsync(SendGridClient.Method.POST, urlPath: "/templates/", requestBody: data);
-            // var msg = MailHelper.CreateSingleEmailToMultipleRecipients(email.From, email.To, email.Subject, email.PlainTextContent, email.HtmlContent);
-
-
-            // var result = await client.SendEmailAsync(msg);
-
-            //return result;
-
-        }
+        
     }
 }

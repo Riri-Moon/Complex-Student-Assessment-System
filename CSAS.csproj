@@ -51,9 +51,7 @@
     <Reference Include="AutocompleteMenu, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AutocompleteMenu.1.3.5.0\lib\net40\AutocompleteMenu.dll</HintPath>
     </Reference>
-    <Reference Include="Bunifu_UI_v1.52">
-      <HintPath>Referenced assemblies\Bunifu_UI_v1.52.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -154,6 +152,12 @@
     <Compile Include="EmailTemplateForm.Designer.cs">
       <DependentUpon>EmailTemplateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FinalGradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinalGradeForm.Designer.cs">
+      <DependentUpon>FinalGradeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GradeActivityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +165,13 @@
       <DependentUpon>GradeActivityForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Import_Cl.cs" />
+    <Compile Include="IndividualActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IndividualActivity.Designer.cs">
+      <DependentUpon>IndividualActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
     <Compile Include="Main_Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,8 +225,14 @@
     <EmbeddedResource Include="EmailTemplateForm.resx">
       <DependentUpon>EmailTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FinalGradeForm.resx">
+      <DependentUpon>FinalGradeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GradeActivityForm.resx">
       <DependentUpon>GradeActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IndividualActivity.resx">
+      <DependentUpon>IndividualActivity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main_Window.resx">
       <DependentUpon>Main_Window.cs</DependentUpon>

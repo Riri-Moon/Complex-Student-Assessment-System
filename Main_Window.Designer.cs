@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Window));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Activity_Grid = new System.Windows.Forms.DataGridView();
             this.Student_Grid = new System.Windows.Forms.DataGridView();
             this.Study_Panel = new System.Windows.Forms.Panel();
+            this.FinalGradeBtn = new System.Windows.Forms.Button();
             this.Stud_G_Button = new System.Windows.Forms.Button();
             this.Import_Btn = new System.Windows.Forms.Button();
             this.Stat_Btn = new System.Windows.Forms.Button();
@@ -46,15 +47,13 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Attendance_Button = new System.Windows.Forms.Button();
             this.Activity_panel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.Create_Templ = new System.Windows.Forms.Button();
             this.Create_Act_Btn = new System.Windows.Forms.Button();
             this.Activity_Button = new System.Windows.Forms.Button();
             this.Student_Panel = new System.Windows.Forms.Panel();
             this.Add_Stud_Button = new System.Windows.Forms.Button();
-            this.Student_Button = new System.Windows.Forms.Button();
             this.Settings_Panel = new System.Windows.Forms.Panel();
-            this.Archive_Btn = new System.Windows.Forms.Button();
-            this.Delete_all_data_btn = new System.Windows.Forms.Button();
             this.Email_client_btn = new System.Windows.Forms.Button();
             this.Gear_Button = new System.Windows.Forms.Button();
             this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
@@ -63,6 +62,10 @@
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.hodnotiťToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odstrániťToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialContextMenuStrip2 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.bodyZaAktivituCvičenieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bodyZaAktivituPrednáškaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odstrániťToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).BeginInit();
             this.Study_Panel.SuspendLayout();
@@ -71,6 +74,7 @@
             this.Student_Panel.SuspendLayout();
             this.Settings_Panel.SuspendLayout();
             this.materialContextMenuStrip1.SuspendLayout();
+            this.materialContextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Activity_Grid
@@ -80,38 +84,38 @@
             this.Activity_Grid.AllowUserToResizeRows = false;
             this.Activity_Grid.BackgroundColor = System.Drawing.Color.White;
             this.Activity_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Activity_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Activity_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.Activity_Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Activity_Grid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Activity_Grid.DefaultCellStyle = dataGridViewCellStyle14;
             this.Activity_Grid.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.Activity_Grid, "Activity_Grid");
             this.Activity_Grid.Name = "Activity_Grid";
             this.Activity_Grid.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Activity_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Activity_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.Activity_Grid.RowHeadersVisible = false;
             this.Activity_Grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.Activity_Grid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
@@ -133,38 +137,38 @@
             this.Student_Grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Student_Grid.BackgroundColor = System.Drawing.Color.White;
             this.Student_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Student_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Student_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.Student_Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Student_Grid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Student_Grid.DefaultCellStyle = dataGridViewCellStyle17;
             this.Student_Grid.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.Student_Grid, "Student_Grid");
             this.Student_Grid.MultiSelect = false;
             this.Student_Grid.Name = "Student_Grid";
             this.Student_Grid.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Student_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Student_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.Student_Grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.Student_Grid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.Student_Grid.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto", 8.25F);
@@ -172,12 +176,14 @@
             this.Student_Grid.RowTemplate.DefaultCellStyle.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
             this.Student_Grid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Control;
             this.Student_Grid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            this.Student_Grid.RowContextMenuStripNeeded += new System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventHandler(this.Student_Grid_RowContextMenuStripNeeded);
             this.Student_Grid.SelectionChanged += new System.EventHandler(this.Student_Grid_SelectionChanged);
             // 
             // Study_Panel
             // 
             this.Study_Panel.AllowDrop = true;
             this.Study_Panel.BackColor = System.Drawing.Color.Transparent;
+            this.Study_Panel.Controls.Add(this.FinalGradeBtn);
             this.Study_Panel.Controls.Add(this.Stud_G_Button);
             this.Study_Panel.Controls.Add(this.Import_Btn);
             this.Study_Panel.Controls.Add(this.Stat_Btn);
@@ -185,6 +191,16 @@
             this.Study_Panel.Controls.Add(this.Export_Btn);
             resources.ApplyResources(this.Study_Panel, "Study_Panel");
             this.Study_Panel.Name = "Study_Panel";
+            // 
+            // FinalGradeBtn
+            // 
+            this.FinalGradeBtn.AutoEllipsis = true;
+            this.FinalGradeBtn.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.FinalGradeBtn, "FinalGradeBtn");
+            this.FinalGradeBtn.FlatAppearance.BorderSize = 0;
+            this.FinalGradeBtn.Name = "FinalGradeBtn";
+            this.FinalGradeBtn.UseVisualStyleBackColor = false;
+            this.FinalGradeBtn.Click += new System.EventHandler(this.FinalGradeBtn_Click);
             // 
             // Stud_G_Button
             // 
@@ -260,11 +276,21 @@
             // Activity_panel
             // 
             this.Activity_panel.BackColor = System.Drawing.Color.Transparent;
+            this.Activity_panel.Controls.Add(this.button2);
             this.Activity_panel.Controls.Add(this.Create_Templ);
             this.Activity_panel.Controls.Add(this.Create_Act_Btn);
             this.Activity_panel.Controls.Add(this.Activity_Button);
             resources.ApplyResources(this.Activity_panel, "Activity_panel");
             this.Activity_panel.Name = "Activity_panel";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Create_Templ
             // 
@@ -299,7 +325,6 @@
             this.Student_Panel.AllowDrop = true;
             this.Student_Panel.BackColor = System.Drawing.Color.Transparent;
             this.Student_Panel.Controls.Add(this.Add_Stud_Button);
-            this.Student_Panel.Controls.Add(this.Student_Button);
             resources.ApplyResources(this.Student_Panel, "Student_Panel");
             this.Student_Panel.Name = "Student_Panel";
             // 
@@ -312,42 +337,13 @@
             this.Add_Stud_Button.UseVisualStyleBackColor = false;
             this.Add_Stud_Button.Click += new System.EventHandler(this.Add_Stud_Button_Click);
             // 
-            // Student_Button
-            // 
-            this.Student_Button.AutoEllipsis = true;
-            this.Student_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Student_Button, "Student_Button");
-            this.Student_Button.FlatAppearance.BorderSize = 0;
-            this.Student_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Student_Button.Name = "Student_Button";
-            this.Student_Button.UseVisualStyleBackColor = false;
-            this.Student_Button.Click += new System.EventHandler(this.Student_Button_Click);
-            // 
             // Settings_Panel
             // 
             this.Settings_Panel.BackColor = System.Drawing.Color.Transparent;
-            this.Settings_Panel.Controls.Add(this.Archive_Btn);
-            this.Settings_Panel.Controls.Add(this.Delete_all_data_btn);
             this.Settings_Panel.Controls.Add(this.Email_client_btn);
             this.Settings_Panel.Controls.Add(this.Gear_Button);
             resources.ApplyResources(this.Settings_Panel, "Settings_Panel");
             this.Settings_Panel.Name = "Settings_Panel";
-            // 
-            // Archive_Btn
-            // 
-            this.Archive_Btn.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Archive_Btn, "Archive_Btn");
-            this.Archive_Btn.FlatAppearance.BorderSize = 0;
-            this.Archive_Btn.Name = "Archive_Btn";
-            this.Archive_Btn.UseVisualStyleBackColor = false;
-            // 
-            // Delete_all_data_btn
-            // 
-            this.Delete_all_data_btn.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Delete_all_data_btn, "Delete_all_data_btn");
-            this.Delete_all_data_btn.FlatAppearance.BorderSize = 0;
-            this.Delete_all_data_btn.Name = "Delete_all_data_btn";
-            this.Delete_all_data_btn.UseVisualStyleBackColor = false;
             // 
             // Email_client_btn
             // 
@@ -417,6 +413,35 @@
             this.odstrániťToolStripMenuItem.Name = "odstrániťToolStripMenuItem";
             resources.ApplyResources(this.odstrániťToolStripMenuItem, "odstrániťToolStripMenuItem");
             // 
+            // materialContextMenuStrip2
+            // 
+            this.materialContextMenuStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialContextMenuStrip2.Depth = 0;
+            this.materialContextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bodyZaAktivituCvičenieToolStripMenuItem,
+            this.bodyZaAktivituPrednáškaToolStripMenuItem,
+            this.odstrániťToolStripMenuItem1});
+            this.materialContextMenuStrip2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialContextMenuStrip2.Name = "materialContextMenuStrip2";
+            resources.ApplyResources(this.materialContextMenuStrip2, "materialContextMenuStrip2");
+            // 
+            // bodyZaAktivituCvičenieToolStripMenuItem
+            // 
+            this.bodyZaAktivituCvičenieToolStripMenuItem.Name = "bodyZaAktivituCvičenieToolStripMenuItem";
+            resources.ApplyResources(this.bodyZaAktivituCvičenieToolStripMenuItem, "bodyZaAktivituCvičenieToolStripMenuItem");
+            this.bodyZaAktivituCvičenieToolStripMenuItem.Click += new System.EventHandler(this.bodyZaAktivituCvičenieToolStripMenuItem_Click);
+            // 
+            // bodyZaAktivituPrednáškaToolStripMenuItem
+            // 
+            this.bodyZaAktivituPrednáškaToolStripMenuItem.Name = "bodyZaAktivituPrednáškaToolStripMenuItem";
+            resources.ApplyResources(this.bodyZaAktivituPrednáškaToolStripMenuItem, "bodyZaAktivituPrednáškaToolStripMenuItem");
+            this.bodyZaAktivituPrednáškaToolStripMenuItem.Click += new System.EventHandler(this.bodyZaAktivituPrednáškaToolStripMenuItem_Click);
+            // 
+            // odstrániťToolStripMenuItem1
+            // 
+            this.odstrániťToolStripMenuItem1.Name = "odstrániťToolStripMenuItem1";
+            resources.ApplyResources(this.odstrániťToolStripMenuItem1, "odstrániťToolStripMenuItem1");
+            // 
             // Main_Window
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -438,6 +463,7 @@
             this.Student_Panel.ResumeLayout(false);
             this.Settings_Panel.ResumeLayout(false);
             this.materialContextMenuStrip1.ResumeLayout(false);
+            this.materialContextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -446,7 +472,6 @@
 
         private System.Windows.Forms.DataGridView Activity_Grid;
         private System.Windows.Forms.DataGridView Student_Grid;
-        private System.Windows.Forms.Button Student_Button;
         private System.Windows.Forms.Button Activity_Button;
         private System.Windows.Forms.Panel Study_Panel;
         private System.Windows.Forms.Button Import_Btn;
@@ -463,8 +488,6 @@
         private System.Windows.Forms.Button Create_Templ;
         private System.Windows.Forms.Button Create_Act_Btn;
         private System.Windows.Forms.Panel Settings_Panel;
-        private System.Windows.Forms.Button Archive_Btn;
-        private System.Windows.Forms.Button Delete_all_data_btn;
         private System.Windows.Forms.Button Email_client_btn;
         private System.Windows.Forms.Button Stud_G_Button;
         private System.Windows.Forms.Button OdoslatEmailBtnMainMenu;
@@ -472,5 +495,11 @@
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem hodnotiťToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem odstrániťToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem bodyZaAktivituCvičenieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bodyZaAktivituPrednáškaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odstrániťToolStripMenuItem1;
+        private System.Windows.Forms.Button FinalGradeBtn;
     }
 }

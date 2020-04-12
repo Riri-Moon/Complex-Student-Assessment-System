@@ -129,6 +129,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return false;
             }
@@ -315,6 +317,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -355,12 +359,21 @@ namespace CSAS
                 }
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.ToString()); }
+            {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
+                MessageBox.Show(ex.ToString()); 
+            }
         }
 
         private void AddStudentForm_Leave(object sender, EventArgs e)
         {
             GetTable();
+        }
+
+        private void GroupCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

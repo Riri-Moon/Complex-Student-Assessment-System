@@ -138,7 +138,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Activity_Grid.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Student_Grid.Location" type="System.Drawing.Point, System.Drawing">
     <value>190, 175</value>
@@ -159,9 +159,51 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Student_Grid.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FinalGradeBtn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="FinalGradeBtn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="FinalGradeBtn.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="FinalGradeBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="FinalGradeBtn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 168</value>
+  </data>
+  <data name="FinalGradeBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="FinalGradeBtn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 30</value>
+  </data>
+  <data name="FinalGradeBtn.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="FinalGradeBtn.Text" xml:space="preserve">
+    <value>Konečné hodnotenie</value>
+  </data>
+  <data name="FinalGradeBtn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.Name" xml:space="preserve">
+    <value>FinalGradeBtn</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Stud_G_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Center</value>
   </data>
@@ -169,10 +211,13 @@
     <value>Flat</value>
   </data>
   <data name="Stud_G_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="Stud_G_Button.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Stud_G_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Stud_G_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>-3, -3</value>
@@ -205,7 +250,7 @@
     <value>Study_Panel</value>
   </data>
   <data name="&gt;&gt;Stud_G_Button.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="Import_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -214,7 +259,10 @@
     <value>Flat</value>
   </data>
   <data name="Import_Btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="Import_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Import_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 108</value>
@@ -244,7 +292,7 @@
     <value>Study_Panel</value>
   </data>
   <data name="&gt;&gt;Import_Btn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Stat_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -253,7 +301,10 @@
     <value>Flat</value>
   </data>
   <data name="Stat_Btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="Stat_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Stat_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 138</value>
@@ -283,7 +334,7 @@
     <value>Study_Panel</value>
   </data>
   <data name="&gt;&gt;Stat_Btn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="Open_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -292,7 +343,10 @@
     <value>Flat</value>
   </data>
   <data name="Open_Btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="Open_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Open_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 48</value>
@@ -322,7 +376,7 @@
     <value>Study_Panel</value>
   </data>
   <data name="&gt;&gt;Open_Btn.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="Export_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -331,7 +385,10 @@
     <value>Flat</value>
   </data>
   <data name="Export_Btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="Export_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Export_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 78</value>
@@ -361,19 +418,19 @@
     <value>Study_Panel</value>
   </data>
   <data name="&gt;&gt;Export_Btn.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="Study_Panel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="Study_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>175, 168</value>
+    <value>175, 198</value>
   </data>
   <data name="Study_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>175, 48</value>
   </data>
   <data name="Study_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 168</value>
+    <value>175, 48</value>
   </data>
   <data name="Study_Panel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -397,13 +454,16 @@
     <value>Flat</value>
   </data>
   <data name="Attendance_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="Attendance_Button.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="Attendance_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Attendance_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 177</value>
+    <value>3, 57</value>
   </data>
   <data name="Attendance_Button.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -438,6 +498,51 @@
   <data name="&gt;&gt;Attendance_Button.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="button2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="button2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="button2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8pt, style=Bold, Italic</value>
+  </data>
+  <data name="button2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-2, 117</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 30</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>Vytvoriť pre jednotlivca</value>
+  </data>
+  <data name="button2.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>TextBeforeImage</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="Create_Templ.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="Create_Templ.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -449,6 +554,9 @@
   </data>
   <data name="Create_Templ.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Create_Templ.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Create_Templ.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 87</value>
@@ -475,7 +583,7 @@
     <value>Activity_panel</value>
   </data>
   <data name="&gt;&gt;Create_Templ.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="Create_Act_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -488,6 +596,9 @@
   </data>
   <data name="Create_Act_Btn.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Create_Act_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Create_Act_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>-1, 51</value>
@@ -514,7 +625,7 @@
     <value>Activity_panel</value>
   </data>
   <data name="&gt;&gt;Create_Act_Btn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Activity_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -523,10 +634,13 @@
     <value>Flat</value>
   </data>
   <data name="Activity_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="Activity_Button.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Activity_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Activity_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -559,19 +673,19 @@
     <value>Activity_panel</value>
   </data>
   <data name="&gt;&gt;Activity_Button.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="Activity_panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 231</value>
+    <value>3, 111</value>
   </data>
   <data name="Activity_panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>177, 122</value>
+    <value>177, 150</value>
   </data>
   <data name="Activity_panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>177, 48</value>
   </data>
   <data name="Activity_panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 117</value>
+    <value>177, 48</value>
   </data>
   <data name="Activity_panel.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -595,22 +709,25 @@
     <value>Flat</value>
   </data>
   <data name="Add_Stud_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
+    <value>Roboto, 9pt, style=Bold, Italic</value>
+  </data>
+  <data name="Add_Stud_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Add_Stud_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>-1, 0</value>
   </data>
   <data name="Add_Stud_Button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="Add_Stud_Button.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 30</value>
+    <value>179, 48</value>
   </data>
   <data name="Add_Stud_Button.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="Add_Stud_Button.Text" xml:space="preserve">
-    <value>Pridať študenta</value>
+    <value>Pridať / Upraviť študenta</value>
   </data>
   <data name="&gt;&gt;Add_Stud_Button.Name" xml:space="preserve">
     <value>Add_Stud_Button</value>
@@ -624,56 +741,8 @@
   <data name="&gt;&gt;Add_Stud_Button.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Student_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="Student_Button.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="Student_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
-  </data>
-  <data name="Student_Button.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="Student_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Student_Button.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="Student_Button.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>179, 48</value>
-  </data>
-  <data name="Student_Button.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 48</value>
-  </data>
-  <data name="Student_Button.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="Student_Button.Text" xml:space="preserve">
-    <value>Študent</value>
-  </data>
-  <data name="Student_Button.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="Student_Button.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>TextBeforeImage</value>
-  </data>
-  <data name="&gt;&gt;Student_Button.Name" xml:space="preserve">
-    <value>Student_Button</value>
-  </data>
-  <data name="&gt;&gt;Student_Button.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Student_Button.Parent" xml:space="preserve">
-    <value>Student_Panel</value>
-  </data>
-  <data name="&gt;&gt;Student_Button.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Student_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 354</value>
+    <value>3, 165</value>
   </data>
   <data name="Student_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>176, 78</value>
@@ -682,7 +751,7 @@
     <value>176, 48</value>
   </data>
   <data name="Student_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 78</value>
+    <value>176, 48</value>
   </data>
   <data name="Student_Panel.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -699,84 +768,6 @@
   <data name="&gt;&gt;Student_Panel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Archive_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="Archive_Btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="Archive_Btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
-  </data>
-  <data name="Archive_Btn.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="Archive_Btn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 120</value>
-  </data>
-  <data name="Archive_Btn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 30</value>
-  </data>
-  <data name="Archive_Btn.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="Archive_Btn.Text" xml:space="preserve">
-    <value>Archivovať</value>
-  </data>
-  <data name="Archive_Btn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>TextBeforeImage</value>
-  </data>
-  <data name="&gt;&gt;Archive_Btn.Name" xml:space="preserve">
-    <value>Archive_Btn</value>
-  </data>
-  <data name="&gt;&gt;Archive_Btn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Archive_Btn.Parent" xml:space="preserve">
-    <value>Settings_Panel</value>
-  </data>
-  <data name="&gt;&gt;Archive_Btn.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Delete_all_data_btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="Delete_all_data_btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="Delete_all_data_btn.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8pt, style=Bold, Italic</value>
-  </data>
-  <data name="Delete_all_data_btn.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="Delete_all_data_btn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 88</value>
-  </data>
-  <data name="Delete_all_data_btn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 30</value>
-  </data>
-  <data name="Delete_all_data_btn.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="Delete_all_data_btn.Text" xml:space="preserve">
-    <value>Vymazať všetky údaje</value>
-  </data>
-  <data name="Delete_all_data_btn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>TextBeforeImage</value>
-  </data>
-  <data name="&gt;&gt;Delete_all_data_btn.Name" xml:space="preserve">
-    <value>Delete_all_data_btn</value>
-  </data>
-  <data name="&gt;&gt;Delete_all_data_btn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Delete_all_data_btn.Parent" xml:space="preserve">
-    <value>Settings_Panel</value>
-  </data>
-  <data name="&gt;&gt;Delete_all_data_btn.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Email_client_btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -789,6 +780,9 @@
   <data name="Email_client_btn.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="Email_client_btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Email_client_btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>2, 52</value>
   </data>
@@ -799,7 +793,7 @@
     <value>7</value>
   </data>
   <data name="Email_client_btn.Text" xml:space="preserve">
-    <value>Emailový klient</value>
+    <value>Nastavenia používateľa</value>
   </data>
   <data name="Email_client_btn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>TextBeforeImage</value>
@@ -814,7 +808,7 @@
     <value>Settings_Panel</value>
   </data>
   <data name="&gt;&gt;Email_client_btn.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="Gear_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -823,10 +817,13 @@
     <value>Flat</value>
   </data>
   <data name="Gear_Button.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="Gear_Button.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Gear_Button.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Gear_Button.Location" type="System.Drawing.Point, System.Drawing">
     <value>-1, 0</value>
@@ -859,19 +856,19 @@
     <value>Settings_Panel</value>
   </data>
   <data name="&gt;&gt;Gear_Button.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="Settings_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 438</value>
+    <value>3, 219</value>
   </data>
   <data name="Settings_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>179, 153</value>
+    <value>179, 78</value>
   </data>
   <data name="Settings_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
   </data>
   <data name="Settings_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 153</value>
+    <value>179, 48</value>
   </data>
   <data name="Settings_Panel.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -895,13 +892,16 @@
     <value>Flat</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="OdoslatEmailBtnMainMenu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="OdoslatEmailBtnMainMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 597</value>
+    <value>3, 273</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -943,13 +943,16 @@
     <value>Flat</value>
   </data>
   <data name="button1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9.75pt, style=Bold, Italic</value>
+    <value>Roboto, 9.5pt, style=Bold, Italic</value>
   </data>
   <data name="button1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 651</value>
+    <value>3, 327</value>
   </data>
   <data name="button1.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -1003,7 +1006,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="Ext_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -1016,6 +1019,9 @@
   </data>
   <data name="Ext_Btn.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
+  </data>
+  <data name="Ext_Btn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Ext_Btn.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 773</value>
@@ -1042,11 +1048,20 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Ext_Btn.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="materialContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="materialContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 48</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip1.Name" xml:space="preserve">
+    <value>materialContextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip1.Type" xml:space="preserve">
+    <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="hodnotiťToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 22</value>
   </data>
@@ -1059,14 +1074,35 @@
   <data name="odstrániťToolStripMenuItem.Text" xml:space="preserve">
     <value>Odstrániť</value>
   </data>
-  <data name="materialContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 48</value>
+  <metadata name="materialContextMenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>219, 17</value>
+  </metadata>
+  <data name="materialContextMenuStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 70</value>
   </data>
-  <data name="&gt;&gt;materialContextMenuStrip1.Name" xml:space="preserve">
-    <value>materialContextMenuStrip1</value>
+  <data name="&gt;&gt;materialContextMenuStrip2.Name" xml:space="preserve">
+    <value>materialContextMenuStrip2</value>
   </data>
-  <data name="&gt;&gt;materialContextMenuStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;materialContextMenuStrip2.Type" xml:space="preserve">
     <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="bodyZaAktivituCvičenieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="bodyZaAktivituCvičenieToolStripMenuItem.Text" xml:space="preserve">
+    <value>Body za aktivitu- Cvičenie</value>
+  </data>
+  <data name="bodyZaAktivituPrednáškaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="bodyZaAktivituPrednáškaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Body za aktivitu - Prednáška</value>
+  </data>
+  <data name="odstrániťToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="odstrániťToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Odstrániť</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1090,6 +1126,24 @@
     <value>odstrániťToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;odstrániťToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bodyZaAktivituCvičenieToolStripMenuItem.Name" xml:space="preserve">
+    <value>bodyZaAktivituCvičenieToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;bodyZaAktivituCvičenieToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bodyZaAktivituPrednáškaToolStripMenuItem.Name" xml:space="preserve">
+    <value>bodyZaAktivituPrednáškaToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;bodyZaAktivituPrednáškaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;odstrániťToolStripMenuItem1.Name" xml:space="preserve">
+    <value>odstrániťToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;odstrániťToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

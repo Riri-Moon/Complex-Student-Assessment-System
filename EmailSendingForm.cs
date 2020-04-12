@@ -74,11 +74,12 @@ namespace CSAS
         {
             try
             {
+                Logger logger = new Logger();
                 EmailClient eClient = new EmailClient();
                 SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar());
                 EmailBody body = new EmailBody()
                 {
-                    HtmlContent = richTextBox1.Text.Replace("\u00A0","<br/>"),// +"<br/> <br/> " + currentUser.Signature
+                    HtmlContent = richTextBox1.Text.Replace("\u00A0","<br/>") +"<br/> <br/> " + currentUser.Signature.Replace("\u00A0", "<br/>"),
                     PlainTextContent = richTextBox1.Text,
                     Subject = subjectTextBox.Text,
                     To = emailAddList
@@ -149,7 +150,6 @@ namespace CSAS
                     MessageBox.Show("Niektorá časť nie je vyplnená. Prosím skontrolujte správu, ktorú chcete odoslať a uistite sa subjekt alebo správa nie sú prázdne", "Prázdne polia");
                     return;
                 }
-                MessageBox.Show(richTextBox1.Text);
                 var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject,body.HtmlContent, body.HtmlContent);
                 if (attachmentList.Count >= 1)
                 {
@@ -159,23 +159,28 @@ namespace CSAS
 
                 if (result.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
+                    logger.LogEmail(DateTime.Now, body.To, body.Subject, body.HtmlContent, attachmentList);
                     attachmentList.Clear();
                     MessageBox.Show("Email bol úspešne prijatý", "Status");
                 }
                 else
                 {
                     MessageBox.Show("Email nebol úspešne odoslaný\n " + "Status emailu: " + result.StatusCode.ToString(), "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
 
                 ToTextBox.Text = "";
                 subjectTextBox.Text = "";
                 richTextBox1.Text = "";
+                AttachmentsGrid.DataSource = null;
                 emailAddList.Clear();
 
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
 
@@ -186,21 +191,18 @@ namespace CSAS
         {
             ToTextBox.Enabled = false;
             GroupComboEmail.Enabled = false;
-
         }
 
         private void SelectAllBtnPrimaryEmail_CheckedChanged(object sender, EventArgs e)
         {
             ToTextBox.Enabled = false;
             GroupComboEmail.Enabled = false;
-
         }
 
         private void SelectManually_CheckedChanged(object sender, EventArgs e)
         {
             ToTextBox.Enabled = true;
             GroupComboEmail.Enabled = false;
-
         }
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
@@ -211,10 +213,7 @@ namespace CSAS
         {
             GroupComboEmail.Enabled = true;
             ToTextBox.Enabled = false;
-
         }
-
-
 
         private void materialFlatButton1_Click_1(object sender, EventArgs e)
         {
@@ -278,7 +277,6 @@ namespace CSAS
 
         private void AttachmentsGrid_KeyPress(object sender, KeyPressEventArgs e)
         {
-
         }
 
         private void AttachmentsGrid_KeyUp(object sender, KeyEventArgs e)
@@ -313,8 +311,7 @@ namespace CSAS
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            
+        {            
         }
 
         //Insert non printable character in order to replace it later with <br/>

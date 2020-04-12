@@ -89,10 +89,13 @@
             // 
             // StudentsCombo
             // 
+            this.StudentsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.StudentsCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.StudentsCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.StudentsCombo.FormattingEnabled = true;
             this.StudentsCombo.Location = new System.Drawing.Point(180, 123);
             this.StudentsCombo.Name = "StudentsCombo";
-            this.StudentsCombo.Size = new System.Drawing.Size(155, 21);
+            this.StudentsCombo.Size = new System.Drawing.Size(186, 25);
             this.StudentsCombo.TabIndex = 2;
             // 
             // LoadStudentBtn
@@ -102,7 +105,7 @@
             this.LoadStudentBtn.DrawShadows = true;
             this.LoadStudentBtn.HighEmphasis = true;
             this.LoadStudentBtn.Icon = null;
-            this.LoadStudentBtn.Location = new System.Drawing.Point(358, 114);
+            this.LoadStudentBtn.Location = new System.Drawing.Point(409, 118);
             this.LoadStudentBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadStudentBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadStudentBtn.Name = "LoadStudentBtn";
@@ -246,7 +249,7 @@
             this.SurnameBox.MouseState = MaterialSkin.MouseState.OUT;
             this.SurnameBox.Multiline = false;
             this.SurnameBox.Name = "SurnameBox";
-            this.SurnameBox.Size = new System.Drawing.Size(133, 25);
+            this.SurnameBox.Size = new System.Drawing.Size(139, 25);
             this.SurnameBox.TabIndex = 13;
             this.SurnameBox.TabStop = false;
             this.SurnameBox.Text = "";
@@ -322,18 +325,25 @@
             // 
             // GroupCombo
             // 
+            this.GroupCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GroupCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupCombo.FormattingEnabled = true;
             this.GroupCombo.Location = new System.Drawing.Point(90, 359);
             this.GroupCombo.Name = "GroupCombo";
-            this.GroupCombo.Size = new System.Drawing.Size(68, 21);
+            this.GroupCombo.Size = new System.Drawing.Size(68, 25);
             this.GroupCombo.TabIndex = 18;
+            this.GroupCombo.SelectedIndexChanged += new System.EventHandler(this.GroupCombo_SelectedIndexChanged);
             // 
             // GroupAttCombo
             // 
+            this.GroupAttCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GroupAttCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupAttCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupAttCombo.FormattingEnabled = true;
             this.GroupAttCombo.Location = new System.Drawing.Point(424, 359);
             this.GroupAttCombo.Name = "GroupAttCombo";
-            this.GroupAttCombo.Size = new System.Drawing.Size(68, 21);
+            this.GroupAttCombo.Size = new System.Drawing.Size(68, 25);
             this.GroupAttCombo.TabIndex = 19;
             // 
             // SaveBtn

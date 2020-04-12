@@ -217,11 +217,14 @@
             // 
             // GroupComboEmail
             // 
+            this.GroupComboEmail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GroupComboEmail.Enabled = false;
+            this.GroupComboEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupComboEmail.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupComboEmail.FormattingEnabled = true;
             this.GroupComboEmail.Location = new System.Drawing.Point(954, 222);
             this.GroupComboEmail.Name = "GroupComboEmail";
-            this.GroupComboEmail.Size = new System.Drawing.Size(121, 21);
+            this.GroupComboEmail.Size = new System.Drawing.Size(121, 25);
             this.GroupComboEmail.TabIndex = 10;
             // 
             // GroupCheckBtn

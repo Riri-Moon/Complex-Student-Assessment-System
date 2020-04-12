@@ -151,7 +151,7 @@
     <value>4, 6, 4, 6</value>
   </data>
   <data name="CreateActBtn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 36</value>
+    <value>158, 36</value>
   </data>
   <data name="CreateActBtn.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -181,7 +181,7 @@
     <value>4, 6, 4, 6</value>
   </data>
   <data name="materialFlatButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 36</value>
+    <value>58, 36</value>
   </data>
   <data name="materialFlatButton2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -342,11 +342,17 @@
   <data name="&gt;&gt;SendingEmailCheck.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="groupCmbo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="groupCmbo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Roboto, 14px</value>
+  </data>
   <data name="groupCmbo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 182</value>
+    <value>829, 179</value>
   </data>
   <data name="groupCmbo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
+    <value>121, 25</value>
   </data>
   <data name="groupCmbo.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>

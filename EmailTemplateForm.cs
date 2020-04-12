@@ -57,6 +57,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -179,6 +181,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return;
             }
@@ -227,6 +231,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -306,6 +312,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -330,6 +338,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return true;
             }
@@ -413,6 +423,8 @@ namespace CSAS
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -442,8 +454,10 @@ namespace CSAS
                 }
 
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show("Je nutné označiť prílohu, ktorú chcete otvoriť");
             }
         }

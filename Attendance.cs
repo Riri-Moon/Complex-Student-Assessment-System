@@ -6,16 +6,13 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using AutocompleteMenuNS;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
 
-/// <summary>
-/// TODO: Ak mam zvolenu skupinu a vytvorim pre nu attendance tak to vytvori pre vsetkych!
-/// </summary>
+
 namespace CSAS
 {
     public partial class Dochádzka : MaterialSkin.Controls.MaterialForm
     {
-        //AutocompleteMenuNS.AutocompleteMenu autocompleteMenu1;
-
         StudentSkupina StudentSkup { get; set; }
         public Student DeleteStud { get; set; }
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -33,11 +30,13 @@ namespace CSAS
 
             StudentSkup = studentSkupina;
 
+            //Pritomnost
             comboBox2.Items.Add("Prítomný");
             comboBox2.Items.Add("Neprítomný");
             comboBox2.Items.Add("Ospravedlnené");
             comboBox2.Items.Add("Zrušené");
 
+            //Filter combobox
             comboBox4.Items.Add("Posledný deň");
             comboBox4.Items.Add("Všetka dochádzka");
             comboBox4.Items.Add("Dátum");
@@ -45,15 +44,16 @@ namespace CSAS
             comboBox4.Items.Add("Krúžok");
             comboBox4.Items.Add("Študent");
 
+            //
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.SelectedItem = comboBox2.Items[0];
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.SelectedItem = comboBox4.Items[0];
+
             using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
             {
                 var students = con.GetTable<Student>();
                 var groups = con.GetTable<StudentSkupina>().Where(x => x.Id == StudentSkup.Id);
-
                 var skup = from student in students where student.ID_stud_skupina == StudentSkup.Id select new { student.Meno, student.Priezvisko, student.Id };
                 var kruzok = from stud in students where stud.ID_stud_skupina == StudentSkup.Id select (string)stud.ID_Kruzok;
 
@@ -63,29 +63,25 @@ namespace CSAS
                     studentsManual.Add(RWS(stud.Meno) + " " + RWS(stud.Priezvisko), stud.Id);
                 }
 
+                //Pridanie kruzkov do comboboxu
                 var studs = con.GetTable<Student>();
                 kruzok.ToList<string>();
                 comboBox1.Items.Add("Všetky");
                 foreach (var kruz in kruzok.Distinct())
                 {
-
                     comboBox1.Items.Add(kruz);
                 }
 
             }
             comboBox1.SelectedItem = comboBox1.Items[0];
 
-
-
-
-            // GetAttendance();
             Filter();
         }
 
+        /// Funkcia na odstranenie medzier z textu
         private string RWS(string text)
         {
             text = text.Replace(" ", string.Empty);
-
             return text;
         }
 
@@ -118,13 +114,8 @@ namespace CSAS
 
                     var lastDate = AttList.Where(t => t.Type == CheckType()).OrderByDescending(x => x.Date).Select(x => x.Date);
 
-
-
-
                     switch (comboBox4.SelectedItem)
-                    {
-                       
-
+                    {                      
                         case "Posledný deň":
                             attGrid.DataSource = AttList.Where(t => t.Type == CheckType() && t.Date == lastDate.FirstOrDefault());
                             comboBox5.Enabled = false;
@@ -134,6 +125,7 @@ namespace CSAS
                             attGrid.DataSource = AttList.Where(t => t.Type == CheckType()).OrderByDescending(x => x.Date);
                             comboBox5.Enabled = false;
                             break;
+
                         case "Dátum":
                             comboBox5.Items.Clear();
                             comboBox5.ResetText();
@@ -141,50 +133,55 @@ namespace CSAS
                             foreach (var date in lastDate.Distinct())
                             {
                                 if (date != null)
-                                comboBox5.Items.Add(date);
+                                {
+                                    comboBox5.Items.Add(date);
+                                }
                             }
                             comboBox5.Enabled = true;
-
                             break;
 
                         case "Status":
                             var statuses = AttList.Where(t => t.Type == CheckType()).Select(x => x.Status);
                             comboBox5.ResetText();
                             comboBox5.Items.Clear();
+
                             foreach (var stat in statuses.Distinct())
                             {
                                 if (stat != null)
-                                comboBox5.Items.Add(stat);
+                                {
+                                    comboBox5.Items.Add(stat);
+                                }
                             }
                             comboBox5.Enabled = true;
-
                             break;
 
                         case "Krúžok":
                             var groups = AttList.Where(t => t.Type == CheckType()).Select(x => x.ID_Kruzok);
                             comboBox5.ResetText();
-
                             comboBox5.Items.Clear();
+
                             foreach (var grp in groups.Distinct())
                             {
                                 if (grp != null)
-                                comboBox5.Items.Add(grp);
+                                {
+                                    comboBox5.Items.Add(grp);
+                                }
                             }
                             comboBox5.Enabled = true;
-
                             break;
 
                         case "Študent":
                             var studs = AttList.Where(t => t.Type == CheckType()).Select(x => x.Meno + " " + x.Priezvisko);
                             comboBox5.ResetText();
-
                             comboBox5.Items.Clear();
+
                             foreach (var std in studs.Distinct())
                             {
                                 if (std != null)
-                                comboBox5.Items.Add(std);
+                                {
+                                    comboBox5.Items.Add(std);
+                                }
                             }
-
                             comboBox5.Enabled = true;
                             break;
 
@@ -192,14 +189,13 @@ namespace CSAS
                     attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     attGrid.Columns["Id"].Visible = false;
                     attGrid.Columns["IdAttendance"].Visible = false;
-
                     attGrid.MultiSelect = true;
-
-
                 }
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -222,17 +218,12 @@ namespace CSAS
 
 
                     var lastDate = AttList.Where(t => t.Type == CheckType()).OrderByDescending(x => x.Date).Select(x => x.Date);
-
                     var statuses = AttList.Where(t => t.Type == CheckType()).Select(x => x.Status);
-
                     var groups = AttList.Where(t => t.Type == CheckType()).Select(x => x.ID_Kruzok);
-
                     var studs = AttList.Where(t => t.Type == CheckType()).Select(x => x.Meno + " " + x.Priezvisko);
 
                     switch (comboBox4.SelectedItem)
                     {
-
-
                         case "Posledný deň":
                             attGrid.DataSource = AttList.Where(t => t.Type == CheckType() && t.Date == lastDate.FirstOrDefault());
                             comboBox5.Enabled = false;
@@ -242,6 +233,7 @@ namespace CSAS
                             attGrid.DataSource = AttList.Where(t => t.Type == CheckType()).OrderByDescending(x => x.Date);
                             comboBox5.Enabled = false;
                             break;
+
                         case "Dátum":
 
                             if (comboBox5.SelectedItem != null)
@@ -253,7 +245,6 @@ namespace CSAS
                                 attGrid.DataSource = AttList.Where(t => t.Type == CheckType());
                             }
                             comboBox5.Enabled = true;
-
                             break;
 
                         case "Status":
@@ -267,7 +258,6 @@ namespace CSAS
                                 attGrid.DataSource = AttList.Where(t => t.Type == CheckType() && t.Status == string.Empty);
                             }
                             comboBox5.Enabled = true;
-
                             break;
 
                         case "Krúžok":
@@ -281,9 +271,6 @@ namespace CSAS
                                 attGrid.DataSource = AttList.Where(t => t.Type == CheckType());
                             }
                             comboBox5.Enabled = true;
-
-
-
                             break;
 
                         case "Študent":
@@ -292,7 +279,6 @@ namespace CSAS
                             {
                                 attGrid.DataSource = AttList.Where(t => t.Type == CheckType() && t.Meno + " " + t.Priezvisko == (string)comboBox5.SelectedItem);
                             }
-
                             comboBox5.Enabled = true;
                             break;
 
@@ -303,18 +289,21 @@ namespace CSAS
                     attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     attGrid.Columns["IdAttendance"].Visible = false;
                     attGrid.Columns["Id"].Visible = false;
+                    //attGrid.Columns["Comment"].Visible = false;
                     attGrid.MultiSelect = true;
-
-
                 }
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
-
+        /// <summary>
+        ///  Odstranit ak nebude potrebne
+        /// </summary>
         private void GetAttendance()
         {
             try
@@ -335,12 +324,12 @@ namespace CSAS
 
                     if ((string)comboBox1.Text == "Všetky")
                     {
+                        AttList.Where(t => t.Type == CheckType());
                     }
                     else
                     {
                         attGrid.DataSource = AttList.Where(t => t.Type == CheckType() && t.ID_Kruzok == comboBox1.Text).OrderByDescending(x => x.Date.Day);
                     }
-                    //attGrid.Columns["Type"].Visible = false;
                     attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     attGrid.Columns["IdAttendance"].Visible = false;
                     attGrid.Columns["Id"].Visible = false;
@@ -349,25 +338,17 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
         }
 
-        /// <summary>
-        /// Get attendance table based on radiobutton in Attendance
-        /// </summary>
-        //
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-        {
-            
+        {            
             FilterBy();
             ResetLabels();
         }
-
-        /// <summary>
-        /// Create attendance date 
-        /// </summary>
-
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
@@ -413,19 +394,19 @@ namespace CSAS
                         if ((int?)attGrid.CurrentRow.Cells[7].Value != null)
                         {
                             idStud = (int?)attGrid.CurrentRow.Cells[7].Value;
-
                             if (idStud != null)
                             {
                                 PresenceCounter(idStud.GetValueOrDefault());
                             }
-                        }
-                        
+                        }                        
                     }
                     ResetLabels();
                 }
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
             }
         }
@@ -455,11 +436,9 @@ namespace CSAS
 
                         switch (x.Status)
                         {
-
                             case "Neprítomný":
                                 if (x.Type == "Cvičenie" && !x.IsReplacable)
                                 {
-
                                     if (date != null)
                                     {
                                         var attDate = con.AttendanceStuds.Where(a => a.IDStudent == (int)attGrid.CurrentRow.Cells[7].Value && a.Date == date && a.Type == "Cvičenie" && a.Status == "Nahradené").FirstOrDefault();
@@ -469,16 +448,14 @@ namespace CSAS
                                         }
                                     }
                                 }
-
                                 break;
+
                             case "Nahradené":
                                 date = GetClosestAbsentDate((int)attGrid.CurrentRow.Cells[7].Value, x);
-
                                 if (!x.IsReplacable)
                                 {
                                     var id = (int)attGrid.CurrentRow.Cells[7].Value;
                                     var attDate = con.AttendanceStuds.Where(a => a.IDStudent == id && a.Date == date && a.Type == "Cvičenie" && a.Status == "Neprítomný").FirstOrDefault();
-
 
                                     if (attDate != null)
                                     {
@@ -486,6 +463,7 @@ namespace CSAS
                                     }
                                 }
                                 break;
+
                             default: break;
                         }
                         if ((int?)attGrid.CurrentRow.Cells[7].Value != null)
@@ -497,8 +475,6 @@ namespace CSAS
 
                     };
                     con.SubmitChanges();
-
-                    // GetAttendance();
                     Filter();
                     if (idStud != null)
                     {
@@ -540,18 +516,13 @@ namespace CSAS
             return null;
         }
 
-        /// <summary>
-        /// Confirming student's attendance and moving one line below
-        /// </summary>
-
-
+        //Najdenie najblizsieho datumu kde studen chybal na cviceni
         private Nullable<DateTime> GetClosestAbsentDate(int studentId, AttendanceStud attend)
         {
             try
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-
                     var attendance = con.AttendanceStuds.Where(a => a.IDStudent == studentId && a.Type == "Cvičenie" && a.Status == "Neprítomný");
 
                     var date = attendance.Select(x => x.Date).OrderByDescending(x => x.Date);
@@ -572,6 +543,8 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return null;
             }
@@ -583,7 +556,6 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-
                     var attendance = con.AttendanceStuds.Where(a => a.IDStudent == studentId && a.Type == "Cvičenie");
 
                     var date = attendance.Select(x => x.Date).OrderByDescending(x => x.Date);
@@ -604,6 +576,9 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
+
                 MessageBox.Show(ex.ToString());
                 return null;
             }
@@ -615,8 +590,6 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-
-
                     var type = CheckType();
 
                     foreach (DataGridViewRow selected in attGrid.SelectedRows)
@@ -648,17 +621,13 @@ namespace CSAS
                                     {
                                         attendance.IsReplacable = true;
                                     }
-
                                 }
-
-
-
                                 break;
+
                             case "Nahradené":
-
                                 date = GetLatestDate((int)selected.Cells[7].Value);
-
                                 attDate = con.AttendanceStuds.Where(a => a.IDStudent == (int)selected.Cells[7].Value && a.Date == date && a.Type == "Cvičenie").FirstOrDefault();
+
                                 if (attDate != null)
                                 {
                                     if (CheckType() == "Cvičenie" && attDate.IsReplacable == true && RWS(attDate.Status) == "Neprítomný" || attDate.Status == "Ospravedlnené")
@@ -681,8 +650,8 @@ namespace CSAS
 
                             case "Zrušené":
                                 attendance.IsReplacable = false;
-
                                 break;
+
                             default: break;
                         }
                         con.SubmitChanges();
@@ -696,7 +665,6 @@ namespace CSAS
                     {
                         var value = comboBox5.SelectedItem;
                         FilterBy();
-
                         comboBox5.SelectedItem = value;
                     }
                     else
@@ -706,31 +674,32 @@ namespace CSAS
 
                     var row = attGrid.CurrentRow.Index;
                     var cell = attGrid.CurrentCell.ColumnIndex;
-                    //// Pridat VisualBasic InputBox, v pripade ak uzivatel zada zrusenie, tak pre vsetkych, ktorych ma v danom kruzku
-                    //  GetAttendance();
-                   // Filter();
+                    
                     this.attGrid.ClearSelection();
-
                     this.attGrid.CurrentCell.Selected = false;
+
                     try
                     {
-
                         this.attGrid.Rows[row + 1].Selected = true;
                         this.attGrid.Focus();
                         attGrid.CurrentCell = attGrid[cell, row + 1];
                     }
                     catch (Exception)
                     {
-
                     }
                     if (comboBox2.Text == "Zrušené")
                     {
                         IQueryable<AttendanceStud> attCancelled;
+                        var cancelledComment = Interaction.InputBox("Uveďte dôvod zrušenia výučby", "Dôvod zrušenia", "Zrušená hodina", -1, -1);
+                        
+
+
                         switch (comboBox1.SelectedIndex)
                         {
                             case 0:
                                 attCancelled = con.AttendanceStuds.Where(a => a.Type == CheckType() && a.Date == (DateTime)attGrid.CurrentRow.Cells[2].Value);
                                 break;
+
                             default:
                                 attCancelled = con.AttendanceStuds
                               .Where(a => a.Type == CheckType() && a.Date == (DateTime)attGrid.CurrentRow.Cells[2].Value && a.Student.ID_Kruzok == comboBox1.Text);
@@ -738,18 +707,20 @@ namespace CSAS
                         }
                         foreach (var x in attCancelled)
                         {
+
                             AttendanceStud attStud = con.AttendanceStuds.Where(st => st.IDStudent == x.IDStudent).FirstOrDefault();
                             attStud.Status = comboBox2.Text;
+                            attStud.Comment = cancelledComment;
                             con.SubmitChanges();
                         }
-
-                       // Filter();
                     }
                     ResetLabels();
                 }
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -770,12 +741,9 @@ namespace CSAS
             {
                 if ((string)comboBox3.SelectedValue != string.Empty)
                 {
-
-                    var student = studentsManual.TryGetValue(comboBox3.Text, out int value);
-
                     using (var con = new StudentDBDataContext(conn_str))
                     {
-
+                        var student = studentsManual.TryGetValue(comboBox3.Text, out int value);
                         var std = con.GetTable<Student>().Where(x => x.Id == value).FirstOrDefault();
                         var insert = new AttendanceStud
                         {
@@ -795,7 +763,6 @@ namespace CSAS
                             con.AttendanceStuds.InsertOnSubmit(insert);
                             con.SubmitChanges(ConflictMode.FailOnFirstConflict);
                         }
-                        // GetAttendance();
                         Filter();
                         ResetLabels();
                     }
@@ -803,35 +770,46 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
         private void attGrid_SelectionChanged(object sender, EventArgs e)
-        {
-           
+        {           
             try
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    PresenceCounter((int)attGrid.CurrentRow.Cells[7].Value);
-                    ResetLabels();
+                    if (attGrid.SelectedRows.Count != 0)
+                    {
+                        PresenceCounter((int)attGrid.CurrentRow.Cells[7].Value);
+                        ResetLabels();
+                    }
                 }
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
+                //return;
                 MessageBox.Show(ex.ToString());
             }
         }
 
 
+
+        /// <summary>
+        /// zobrazenie labels zobrazene v Attendance s aktualnymi hodnotami
+        /// </summary>
         private void ResetLabels()
         {
             try
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    if (attGrid.Rows.Count > 0)
+                    if (attGrid.SelectedRows.Count > 0)
                     {
                         var labels = con.GetTable<TotalAttendance>().Where(x => x.IdStudent == (int)attGrid.CurrentRow.Cells[7].Value).FirstOrDefault();
                         if (CheckType() == "Prednáška")
@@ -867,41 +845,11 @@ namespace CSAS
             }
             catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
-        /// <summary>
-        /// remove later
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (var con = new StudentDBDataContext(conn_str))
-            {
-                var x = con.GetTable<TotalAttendance>();
-                foreach (var z in x)
-                {
-                    z.TotalAbsentLecture = 0;
-                    z.TotalPresentLecture = 0;
-                    z.TotalExcusedLecture = 0;
-                    z.TotalLecture = 0;
-                    z.TotalSeminar = 0;
-                    z.TotalPresentSeminar = 0;
-                    z.TotalExcusedSeminar = 0;
-                    z.TotalAbsentSeminar = 0;
-
-
-                }
-
-                con.SubmitChanges();
-
-            }
-        }
-        /// <summary>
-        /// Please 
-        /// </summary>
-        /// <param name="studentId"></param>
 
         private void PresenceCounter(int studentId)
         {
@@ -909,12 +857,12 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    var getAttendance = con.GetTable<AttendanceStud>().Where(x => x.Type == CheckType() && x.IDSkupina == StudentSkup.Id && x.IDStudent == studentId);
+                    var getAttendance = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == StudentSkup.Id && x.IDStudent == studentId);
 
                     var stud = con.GetTable<Student>().Where(f => f.Id == studentId).FirstOrDefault();
                     var z = con.GetTable<TotalAttendance>().Where(x => x.IdStudent == studentId).FirstOrDefault();
-                //    var seminarCount = 0;
                     List<DateTime> dateList = new List<DateTime>();
+
                     z.TotalAbsentLecture = 0;
                     z.TotalPresentLecture = 0;
                     z.TotalExcusedLecture = 0;
@@ -924,11 +872,8 @@ namespace CSAS
                     z.TotalAbsentSeminar = 0;
 
                     con.SubmitChanges();
-
                     
-                  //  var fpf = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == StudentSkup.Id && x.IdGroup == stud.ID_Kruzok);// && x.Status);!= "Nahradené" && x.Type == "Cvičenie").Select(x => x.Date);
                     z.TotalLecture = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == StudentSkup.Id && x.IdGroup == stud.ID_Kruzok && x.Type == "Prednáška").Select(x => x.Date).Distinct().Count();
-
                     var xxx = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == StudentSkup.Id && x.IdGroup == stud.ID_Kruzok && x.Type == "Cvičenie");
 
                     foreach( var o in xxx)
@@ -999,19 +944,17 @@ namespace CSAS
                             if (z.TotalSeminar > 0)
                                 z.TotalSeminar -= 1;
                         }
-
                         con.SubmitChanges();
-
                         ResetLabels();
                     }
                     con.SubmitChanges();
                     ResetLabels();
-
-
                 }
             }
             catch(Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }

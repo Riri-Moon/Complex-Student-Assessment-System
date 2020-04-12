@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateActivity));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ActivityGridView = new System.Windows.Forms.DataGridView();
             this.CreateActBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialFlatButton2 = new MaterialSkin.Controls.MaterialButton();
@@ -52,14 +56,33 @@
             this.ActivityGridView.AllowUserToAddRows = false;
             this.ActivityGridView.AllowUserToDeleteRows = false;
             this.ActivityGridView.AllowUserToResizeColumns = false;
+            this.ActivityGridView.AllowUserToResizeRows = false;
             this.ActivityGridView.BackgroundColor = System.Drawing.Color.White;
             this.ActivityGridView.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ActivityGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ActivityGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.ActivityGridView.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.ActivityGridView, "ActivityGridView");
             this.ActivityGridView.MultiSelect = false;
             this.ActivityGridView.Name = "ActivityGridView";
             this.ActivityGridView.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ActivityGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ActivityGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.ActivityGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ActivityGridView.SelectionChanged += new System.EventHandler(this.ActivityGridView_SelectionChanged);
@@ -133,8 +156,9 @@
             // 
             // groupCmbo
             // 
-            this.groupCmbo.FormattingEnabled = true;
+            this.groupCmbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.groupCmbo, "groupCmbo");
+            this.groupCmbo.FormattingEnabled = true;
             this.groupCmbo.Name = "groupCmbo";
             this.groupCmbo.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -148,16 +172,36 @@
             this.TaskGrid.AllowUserToAddRows = false;
             this.TaskGrid.AllowUserToDeleteRows = false;
             this.TaskGrid.AllowUserToResizeColumns = false;
+            this.TaskGrid.AllowUserToResizeRows = false;
             this.TaskGrid.BackgroundColor = System.Drawing.Color.White;
             this.TaskGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TaskGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.TaskGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.TaskGrid.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.TaskGrid, "TaskGrid");
             this.TaskGrid.MultiSelect = false;
             this.TaskGrid.Name = "TaskGrid";
             this.TaskGrid.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TaskGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.TaskGrid.RowHeadersVisible = false;
             this.TaskGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.TaskGrid.SelectionChanged += new System.EventHandler(this.TaskGrid_SelectionChanged);
             // 
             // ActCreatedCheckBox
             // 

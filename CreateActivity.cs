@@ -1,12 +1,8 @@
 ﻿using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
@@ -16,7 +12,7 @@ namespace CSAS
         User currUser;
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         StudentSkupina studentSkup;
-        public CreateActivity(User currentUser,StudentSkupina skup)
+        public CreateActivity(User currentUser, StudentSkupina skup)
         {
             InitializeComponent();
             studentSkup = skup;
@@ -125,7 +121,7 @@ namespace CSAS
                             };
                             con.Tasks.InsertOnSubmit(task);
                         }
-                 //studentsAddresses.Add(MailHelper.StringToEmailAddress(student.Email));
+                        //studentsAddresses.Add(MailHelper.StringToEmailAddress(student.Email));
 
                         con.SubmitChanges();
                     }
@@ -138,8 +134,10 @@ namespace CSAS
                     MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return;
             }
@@ -152,8 +150,8 @@ namespace CSAS
         {
             EmailClient client = new EmailClient();
             SendGrid.SendGridClient gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
-            var content = $"Milí študenti, \n dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
-                $" ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()}";
+            var content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()}";
 
             EmailBody body = new EmailBody()
             {
@@ -163,11 +161,12 @@ namespace CSAS
                 Subject = "Nová aktivita"
             };
 
-            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currUser.Email), body.To, body.Subject, body.PlainTextContent, body.HtmlContent);
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currUser.Email), body.To, body.Subject, body.HtmlContent, body.HtmlContent);
             gridClient.SendEmailAsync(msg);
 
-
-
+            Logger logger = new Logger();
+            logger.LogEmail(DateTime.Now, body.To, body.Subject, body.HtmlContent, null);
+                
         }
 
         private void GetTableTasks()
@@ -188,8 +187,10 @@ namespace CSAS
 
                 }
             }
-            catch(Exception ex )
+            catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return;
             }
@@ -198,7 +199,8 @@ namespace CSAS
 
         private IQueryable GetTableActivity()
         {
-            try {
+            try
+            {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     var templ = con.GetTable<ActivityTemplate>();
@@ -219,16 +221,15 @@ namespace CSAS
                     groupCmbo.Items.Add("Všetky");
                     foreach (var kruz in kruzok.Distinct())
                     {
-
                         groupCmbo.Items.Add(kruz);
                     }
-
-
                     return dataTemp;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return null;
             }
@@ -237,17 +238,10 @@ namespace CSAS
 
         private DateTime GetDate()
         {
-
-
             return TimeZone.CurrentTimeZone.ToLocalTime(dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay);
-
         }
 
 
-        private void materialLabel4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -267,14 +261,19 @@ namespace CSAS
 
         private void ActivityGridView_SelectionChanged(object sender, EventArgs e)
         {
-            if(ActivityGridView.SelectedRows.Count>=1)
-            GetTableTasks();
+            if (ActivityGridView.SelectedRows.Count >= 1)
+                GetTableTasks();
 
         }
 
         private void ActCreatedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void TaskGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            this.TaskGrid.CurrentRow.Selected = false;
         }
     }
 }
