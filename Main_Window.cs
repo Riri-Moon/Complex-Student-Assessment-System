@@ -87,12 +87,15 @@ namespace CSAS
         private void CreateBlockedExtensionFile()
         {
             var path = AppDomain.CurrentDomain.BaseDirectory + "/BlockedExtensions.txt";
-            using (StreamWriter sw = File.AppendText(path))
+            if (!File.Exists(path))
             {
-                EmailAttachments attachments = new EmailAttachments();
-                foreach (var line in attachments.blockedExtensions)
+                using (StreamWriter sw = File.AppendText(path))
                 {
-                    sw.WriteLine(line);                  
+                    EmailAttachments attachments = new EmailAttachments();
+                    foreach (var line in attachments.blockedExtensions)
+                    {
+                        sw.WriteLine(line);
+                    }
                 }
             }
         }
@@ -105,10 +108,6 @@ namespace CSAS
 
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-
-
-                    // var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma);
-
                     var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma).
                   Select(x => new
                   {
@@ -146,8 +145,7 @@ namespace CSAS
                         if (exists == null)
                         {
                             TotalAttendance totalAttendance = new TotalAttendance() { IdStudent = stud.Id };
-                            con.TotalAttendances.InsertOnSubmit(totalAttendance);
-                           
+                            con.TotalAttendances.InsertOnSubmit(totalAttendance);                           
                         }
                         else
                         {
@@ -166,6 +164,8 @@ namespace CSAS
             }
         }
         
+
+
 
         private void OnLoadStudent()
         {
@@ -213,8 +213,8 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    if (Student_Grid.Rows.Count>0 
-                        )
+                    
+                    if (Student_Grid.SelectedRows.Count > 0 )
                     {
                         var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
                         var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id);
@@ -240,12 +240,8 @@ namespace CSAS
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
-                MessageBox.Show(ex.ToString());
             }
-        }
-    
-
-
+        }    
 
 
 
@@ -337,7 +333,7 @@ namespace CSAS
         }
         private void Stat_Btn_Click(object sender, EventArgs e)
         {
-            var stat = new Statistics();
+            var stat = new Statistics(currentUser,studentSkupina);
             stat.FormClosed += IsClosed;
             stat.ShowDialog();
         }
@@ -393,24 +389,37 @@ namespace CSAS
 
         private void hodnotiťToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.UseWaitCursor = true;
-
-            using (var con = new StudentDBDataContext(conn_str))
+            try
             {
-                var stud = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkupina.Id && x.Id == (int)Student_Grid.CurrentRow.Cells[0].Value).FirstOrDefault();
-                var act = con.GetTable<Activity>().Where(x => x.IdStudent == stud.Id && x.Id == (int)Activity_Grid.CurrentRow.Cells[3].Value).FirstOrDefault();
+                this.UseWaitCursor = true;
 
-                var gradeForm = new GradeActivityForm(studentSkupina, stud, act);
-                gradeForm.FormClosed += IsClosed;
-                gradeForm.ShowDialog();
+                using (var con = new StudentDBDataContext(conn_str))
+                {
+                    var stud = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkupina.Id && x.Id == (int)Student_Grid.CurrentRow.Cells[0].Value).FirstOrDefault();
+                    var act = con.GetTable<Activity>().Where(x => x.IdStudent == stud.Id && x.Id == (int)Activity_Grid.CurrentRow.Cells[3].Value).FirstOrDefault();
+
+                    var gradeForm = new GradeActivityForm(studentSkupina, stud, act);
+                    gradeForm.FormClosed += IsClosed;
+                    gradeForm.ShowDialog();
+                }
+                this.UseWaitCursor = false;
             }
-            this.UseWaitCursor = false;
+            catch(Exception ex)
+            {
+                Logger newLog = new Logger();
+                newLog.LogError(ex);
+                MessageBox.Show("Aktivita bola vymazaná, nie je možné ju ohodnotiť");
+            }
         }
 
         private void IsClosed(object sender, EventArgs e)
         {
             GetTable();
             GetActivities();
+            using (var con = new StudentDBDataContext(conn_str))
+            {
+                currentUser = con.Users.Where(x => x.Id == currentUser.Id).FirstOrDefault();
+            }
         }
         private void Main_Window_Shown(object sender, EventArgs e)
         {         
@@ -432,6 +441,7 @@ namespace CSAS
         {
             try
             {
+                
                 PointsForActivity(currentUser.PointsForActSem);              
             }
             catch(Exception ex)
@@ -476,15 +486,35 @@ namespace CSAS
                         EmailSendingActive = false,
                         IdSkupina = studentSkupina.Id,
                         IdUser = currentUser.Id,
-                        Hodnotene = false,
+                        Hodnotene = true,
                         SendFirst = false,
                         SendSecond = false,
                         IdStudent = (int)Student_Grid.CurrentRow.Cells[0].Value,
+                        Hodnotenie = actTempl.MaxPoints,
+                        Comment = string.Empty
 
                     };
                     con.Activities.InsertOnSubmit(activity);
                     con.SubmitChanges();
 
+                    var tasks = con.GetTable<TaskTemplate>().Where(x => x.IdActivityTemplate == actTempl.Id);
+                    foreach (var tsk in tasks)
+                    {
+                        Task task = new Task()
+                        {
+                            IdActivity = activity.Id,
+                            TaskName = tsk.TaskName,
+                            Points = tsk.MaxPts,
+                            IdStudent = activity.IdStudent,
+                            Hodnotenie = tsk.MaxPts,
+                            Comment = string.Empty
+
+
+                        };
+                        con.Tasks.InsertOnSubmit(task);
+                    }
+
+                    con.SubmitChanges();
                 }
                 GetActivities();
             }
@@ -500,7 +530,6 @@ namespace CSAS
         {
             DataGridViewRow dataGridViewRow1 = Student_Grid.Rows[e.RowIndex];
             e.ContextMenuStrip = materialContextMenuStrip2;
-
         }
 
         private void FinalGradeBtn_Click(object sender, EventArgs e)
@@ -508,6 +537,26 @@ namespace CSAS
             var final = new FinalGradeForm(currentUser, studentSkupina);
             final.FormClosed += IsClosed;
             final.ShowDialog();
+        }
+
+        private void Open_Btn_Click(object sender, EventArgs e)
+        {
+            var choose = new Choose_Group();
+           DialogResult result = choose.ShowDialog();
+            if(result == DialogResult.Yes)
+            {
+                studentSkupina = choose.GetGroup();
+            }
+            Student_Grid.DataSource = null;
+            Activity_Grid.DataSource = null;
+            GetTable();
+            GetActivities();
+        }
+
+        private void Export_Btn_Click(object sender, EventArgs e)
+        {
+            var export = new ExportForm(studentSkupina, currentUser);
+            export.Show();
         }
     }
 }

@@ -238,11 +238,11 @@
             this.CreateActBtn.HighEmphasis = true;
             this.CreateActBtn.Icon = null;
             this.CreateActBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CreateActBtn.Location = new System.Drawing.Point(901, 387);
+            this.CreateActBtn.Location = new System.Drawing.Point(821, 385);
             this.CreateActBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateActBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateActBtn.Name = "CreateActBtn";
-            this.CreateActBtn.Size = new System.Drawing.Size(158, 36);
+            this.CreateActBtn.Size = new System.Drawing.Size(152, 36);
             this.CreateActBtn.TabIndex = 24;
             this.CreateActBtn.Text = "Vytvoriť aktivitu";
             this.CreateActBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;

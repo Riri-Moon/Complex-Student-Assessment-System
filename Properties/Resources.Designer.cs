@@ -63,26 +63,6 @@ namespace CSAS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap activity {
-            get {
-                object obj = ResourceManager.GetObject("activity", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap exit {
-            get {
-                object obj = ResourceManager.GetObject("exit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icons8_expand_arrow_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-expand-arrow-32", resourceCulture);
@@ -96,36 +76,6 @@ namespace CSAS.Properties {
         internal static System.Drawing.Bitmap icons8_windows_10_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8-windows-10-32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap settings {
-            get {
-                object obj = ResourceManager.GetObject("settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap student {
-            get {
-                object obj = ResourceManager.GetObject("student", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap studskup {
-            get {
-                object obj = ResourceManager.GetObject("studskup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

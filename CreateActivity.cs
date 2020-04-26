@@ -115,13 +115,13 @@ namespace CSAS
                                 IdActivity = activity.Id,
                                 TaskName = tsk.TaskName,
                                 Points = tsk.MaxPts,
-                                IdStudent = student.Id
+                                IdStudent = student.Id,
+                                Comment= string.Empty
 
 
                             };
                             con.Tasks.InsertOnSubmit(task);
                         }
-                        //studentsAddresses.Add(MailHelper.StringToEmailAddress(student.Email));
 
                         con.SubmitChanges();
                     }

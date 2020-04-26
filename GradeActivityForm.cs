@@ -67,10 +67,11 @@ namespace CSAS
             List<Control> controls = new List<Control>();
             RichTextBox comment = new RichTextBox
             {
+                Name ="comment",
                 Size = new Size(300, 190),
-                Location = new Point(30, 125)
+                Location = new Point(30, 125),
+                Text= activity.Comment
             };
-
             MaterialLabel label0 = new MaterialLabel
             {
                 Name = "TaskNameLabel" ,
@@ -78,8 +79,6 @@ namespace CSAS
                 AutoSize = true,
                 Text = "Názov: "+ activity.ActivityName.ToString()
             };
-
-
             MaterialLabel label = new MaterialLabel
             {
                 Name = "TotalPtsLabel" ,
@@ -87,16 +86,13 @@ namespace CSAS
                 AutoSize = true,
                 Text = "Maximum bodov: " + activity.MaxPoints.ToString()
             };
-
-
             MaterialLabel label3 = new MaterialLabel
             {
                 Name = "StudentPtsLabel" ,
                 Location = new Point(26, 70),
                 AutoSize = true,
                 Text = "Získané: " + activity.Hodnotenie.ToString(),
-            };
-          
+            };          
             MaterialLabel label5 = new MaterialLabel
             {
                 Name = "CommentLabel" ,
@@ -154,7 +150,8 @@ namespace CSAS
                         {
                             Name = "comment" ,
                             Size = new Size(300, 190),
-                            Location = new Point(30, 125)
+                            Location = new Point(30, 125),
+                            Text = task.Comment
                         };
 
                         MaterialLabel label0 = new MaterialLabel
@@ -178,7 +175,7 @@ namespace CSAS
 
                         MaterialLabel label2 = new MaterialLabel
                         {
-                            Name = "PtsLabel" + count,
+                            Name = "StudentPtsLabel" + count,
                             Location = new Point(26, 70),
                             AutoSize = true,
                             Text = "Získané: ",
@@ -233,9 +230,7 @@ namespace CSAS
                         page1.Controls.Add(button2);
 
                     }
-                }
-                
-
+                }               
             }
             catch(Exception ex)
             {
@@ -247,33 +242,36 @@ namespace CSAS
 
         private void GradeActivityBtnClick(object sender, EventArgs e)
         {
-
             try
             {
                 if (this.MaterialTabCOntrol.SelectedTab.Name == currActivity.ActivityName)
                 {
                     var labl = (Label)MaterialTabCOntrol.SelectedTab.Controls.Find("StudentPtsLabel", false).FirstOrDefault();
-
+                    var commentBox = (RichTextBox)MaterialTabCOntrol.SelectedTab.Controls.Find("comment", false).FirstOrDefault();
                     using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                     {
-
                         var act = con.GetTable<Task>().Where(x => x.IdActivity == currActivity.Id && x.IdStudent == currStud.Id);
                         double? gradeTotal = 0;
                         foreach (var tsk in act)
                         {
-                            if (tsk.Hodnotenie != null)
-                            {
-                                gradeTotal += tsk.Hodnotenie;
-                            }
-                        }
 
+                            gradeTotal += tsk.Hodnotenie;                      
+                        }
                         var insert = con.Activities.Where(x => x.IdSkupina == currGroup.Id && x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault();
 
                         if (gradeTotal.Value <= insert.MaxPoints)
                         {
                             ///ERROR 280 Line
                             insert.Hodnotene = true;
-                            insert.Hodnotenie = gradeTotal;
+                            insert.Hodnotenie =gradeTotal;
+                            if (!string.IsNullOrEmpty(commentBox.Text))
+                            {
+                                insert.Comment = commentBox.Text;
+                            }   
+                            else
+                            {
+                                insert.Comment = string.Empty;
+                            }
                             insert.EmailSendingActive = false;
                             insert.SendFirst = false;
                             insert.SendSecond = false;
@@ -281,7 +279,6 @@ namespace CSAS
 
                         con.SubmitChanges();
                         MessageBox.Show("Aktivita ohodnotená");
-
                     }
                 }
                 else
@@ -305,11 +302,10 @@ namespace CSAS
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     string taskTab = string.Empty;
-                   
-                        taskTab = MaterialTabCOntrol.SelectedTab.Name;
+
+                    taskTab = MaterialTabCOntrol.SelectedTab.Name;
 
                     tasksDictionary.TryGetValue(taskTab, out int Id);
-
 
                     Task task1 = con.Tasks.Where(x => x.IdActivity == currActivity.Id && x.Id == Id && x.IdStudent==currStud.Id).FirstOrDefault();
 
@@ -326,19 +322,22 @@ namespace CSAS
                         {
                             MessageBox.Show("Hodnotenie nemôže byť väčšie ako maximum bodov. Pred pridaním hodnotenia opravte hodnotu");
                             return;
-                        }
-                       
+                        }                       
+                    }
+                    else
+                    {                       
+                        task1.Hodnotenie = 0;
+                        return;
+                    }
+                    var commentBox = (RichTextBox)MaterialTabCOntrol.SelectedTab.Controls.Find("comment", false).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(commentBox.Text))
+                    {
+                        task1.Comment = commentBox.Text;
                     }
                     else
                     {
-                        MaterialMessageBox.Show("Hodnotenie nemôže byť prázdne", "Chyba", MessageBoxButtons.OK);
-                        return;
+                        task1.Comment = string.Empty;
                     }
-                    var commentBox = MaterialTabCOntrol.SelectedTab.Controls.Find("comment", false).FirstOrDefault();
-
-                   
-                        task1.Comment = textBox.Text;
-                 
                     con.SubmitChanges();
                 }
             }
@@ -387,17 +386,15 @@ namespace CSAS
                     double? gradeTotal = 0;
                     foreach(var tsk in act)
                     {
-                        if (tsk.Hodnotenie != null)
-                        {
-                            gradeTotal += tsk.Hodnotenie;
-                        }
+
+                        gradeTotal += tsk.Hodnotenie;
                     }
 
                     // var insert to act con.Activities.Where(x => x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault()
-
-                    MaterialTabCOntrol.SelectedTab.Controls.Find("StudentPtsLabel", false).FirstOrDefault().Text = "Získané: " + gradeTotal.ToString();
-                 //   labl.Text =
-
+                    if (MaterialTabCOntrol.SelectedIndex == 0)
+                    {
+                        MaterialTabCOntrol.SelectedTab.Controls.Find("StudentPtsLabel", false).FirstOrDefault().Text = "Získané: " + gradeTotal.ToString();
+                    }
                 }
             }
             else
@@ -413,6 +410,8 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
+
+
                     if (con.GetTable<Activity>().Where(x => x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault().Hodnotene == false)
                     {
                         DialogResult dialogResult = MessageBox.Show("Aktivita nebola ohodnotená, chcete naozaj skončiť ?", "Skončiť bez hodnotenia? ", MessageBoxButtons.YesNo);

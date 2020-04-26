@@ -430,7 +430,7 @@
     <value>175, 48</value>
   </data>
   <data name="Study_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 48</value>
+    <value>175, 130</value>
   </data>
   <data name="Study_Panel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -463,7 +463,7 @@
     <value>NoControl</value>
   </data>
   <data name="Attendance_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 57</value>
+    <value>3, 139</value>
   </data>
   <data name="Attendance_Button.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -676,7 +676,7 @@
     <value>3</value>
   </data>
   <data name="Activity_panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 111</value>
+    <value>3, 193</value>
   </data>
   <data name="Activity_panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>177, 150</value>
@@ -742,7 +742,7 @@
     <value>0</value>
   </data>
   <data name="Student_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 165</value>
+    <value>3, 247</value>
   </data>
   <data name="Student_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>176, 78</value>
@@ -859,7 +859,7 @@
     <value>1</value>
   </data>
   <data name="Settings_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 219</value>
+    <value>3, 301</value>
   </data>
   <data name="Settings_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 78</value>
@@ -901,7 +901,7 @@
     <value>NoControl</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 273</value>
+    <value>3, 355</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -952,7 +952,7 @@
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 327</value>
+    <value>3, 409</value>
   </data>
   <data name="button1.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -1053,15 +1053,6 @@
   <metadata name="materialContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="materialContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 48</value>
-  </data>
-  <data name="&gt;&gt;materialContextMenuStrip1.Name" xml:space="preserve">
-    <value>materialContextMenuStrip1</value>
-  </data>
-  <data name="&gt;&gt;materialContextMenuStrip1.Type" xml:space="preserve">
-    <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="hodnotiťToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 22</value>
   </data>
@@ -1074,18 +1065,18 @@
   <data name="odstrániťToolStripMenuItem.Text" xml:space="preserve">
     <value>Odstrániť</value>
   </data>
+  <data name="materialContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 48</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip1.Name" xml:space="preserve">
+    <value>materialContextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip1.Type" xml:space="preserve">
+    <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <metadata name="materialContextMenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>219, 17</value>
   </metadata>
-  <data name="materialContextMenuStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 70</value>
-  </data>
-  <data name="&gt;&gt;materialContextMenuStrip2.Name" xml:space="preserve">
-    <value>materialContextMenuStrip2</value>
-  </data>
-  <data name="&gt;&gt;materialContextMenuStrip2.Type" xml:space="preserve">
-    <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="bodyZaAktivituCvičenieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 22</value>
   </data>
@@ -1104,6 +1095,15 @@
   <data name="odstrániťToolStripMenuItem1.Text" xml:space="preserve">
     <value>Odstrániť</value>
   </data>
+  <data name="materialContextMenuStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 70</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip2.Name" xml:space="preserve">
+    <value>materialContextMenuStrip2</value>
+  </data>
+  <data name="&gt;&gt;materialContextMenuStrip2.Type" xml:space="preserve">
+    <value>MaterialSkin.Controls.MaterialContextMenuStrip, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1112,6 +1112,9 @@
   </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1341, 836</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

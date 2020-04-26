@@ -69,19 +69,6 @@
       <Association Name="User_StudentSkupina" Member="User" ThisKey="Id_User" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Task" Member="Tasks">
-    <Type Name="Task">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TaskName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IdActivity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Points" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Hodnotenie" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Student_Task" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
-      <Association Name="Activity_Task" Member="Activity" ThisKey="IdActivity" OtherKey="Id" Type="Activity" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Student" Member="Students">
     <Type Name="Student">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -97,10 +84,10 @@
       <Column Name="ID_stud_skupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdGroupForAttendance" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
       <Association Name="Student_TotalAttendance" Member="TotalAttendances" ThisKey="Id" OtherKey="IdStudent" Type="TotalAttendance" />
-      <Association Name="Student_Task" Member="Tasks" ThisKey="Id" OtherKey="IdStudent" Type="Task" />
       <Association Name="Student_AttendanceStud" Member="AttendanceStuds" ThisKey="Id" OtherKey="IDStudent" Type="AttendanceStud" />
       <Association Name="Student_FinalGrade" Member="FinalGrades" ThisKey="Id" OtherKey="IdStudent" Type="FinalGrade" />
       <Association Name="Student_Activity" Member="Activities" ThisKey="Id" OtherKey="IdStudent" Type="Activity" />
+      <Association Name="Student_Task" Member="Tasks" ThisKey="Id" OtherKey="IdStudent" Type="Task" />
     </Type>
   </Table>
   <Table Name="dbo.AttendanceStud" Member="AttendanceStuds">
@@ -172,10 +159,24 @@
       <Column Name="IdSecRem" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SendFirst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="SendSecond" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
       <Association Name="Activity_Task" Member="Tasks" ThisKey="Id" OtherKey="IdActivity" Type="Task" />
       <Association Name="User_Activity" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
       <Association Name="StudentSkupina_Activity" Member="StudentSkupina" ThisKey="IdSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
       <Association Name="Student_Activity" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Task" Member="Tasks">
+    <Type Name="Task">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TaskName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdActivity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Points" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Hodnotenie" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Activity_Task" Member="Activity" ThisKey="IdActivity" OtherKey="Id" Type="Activity" IsForeignKey="true" />
+      <Association Name="Student_Task" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

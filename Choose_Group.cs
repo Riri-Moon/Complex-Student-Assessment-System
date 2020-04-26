@@ -71,7 +71,7 @@ namespace CSAS
 
 
         }
-
+    
         private void Remove_button_Click(object sender, EventArgs e)
 
         {
@@ -82,7 +82,7 @@ namespace CSAS
         }
 
 
-        private void Started()
+        public void Started()
         {
             _worker.WorkerReportsProgress = true;
             _worker.WorkerSupportsCancellation = true;
@@ -90,12 +90,10 @@ namespace CSAS
             _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleWorkerCompleted);
             _worker.ProgressChanged += new ProgressChangedEventHandler(HandleProgressChanged);
             _worker.RunWorkerAsync();
-
-
             
         }
 
-        private void HandleDoWork(object sender, DoWorkEventArgs e)
+        public void HandleDoWork(object sender, DoWorkEventArgs e)
         {
 
             BeginInvoke(new Action(() => {
@@ -124,19 +122,23 @@ namespace CSAS
             }
         }
 
+        public StudentSkupina GetGroup()
+        {
+            Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
 
-        private void HandleWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+            return Selected;
+        }
+        public void HandleWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //this.Hide();
 
         }
 
-        private void HandleProgressChanged(object sender, ProgressChangedEventArgs e)
+        public void HandleProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // DO Progress Bar Updates Here
             SendOrPostCallback callback = new SendOrPostCallback((o) =>
             {
-                //label1.Text = "This is my Async content";
             });
             _syncContext.Send(callback, null);
         }
@@ -146,7 +148,7 @@ namespace CSAS
 
         }
 
-        private void Select_Button_Click_1(object sender, EventArgs e)
+        public void Select_Button_Click_1(object sender, EventArgs e)
         {
             Started();
             this.Hide();

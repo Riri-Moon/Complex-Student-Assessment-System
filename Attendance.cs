@@ -377,7 +377,8 @@ namespace CSAS
                             Type = CheckType(),
                             Date = dateTimePicker1.Value,
                             IDStudent = x.Id,
-                            IdGroup= x.ID_Kruzok
+                            IdGroup = x.ID_Kruzok,
+                            Comment = string.Empty
                         };
                         var attend = con.GetTable<AttendanceStud>();
                         var AttList = from AttendanceStud in attend
@@ -707,12 +708,12 @@ namespace CSAS
                         }
                         foreach (var x in attCancelled)
                         {
-
-                            AttendanceStud attStud = con.AttendanceStuds.Where(st => st.IDStudent == x.IDStudent).FirstOrDefault();
-                            attStud.Status = comboBox2.Text;
-                            attStud.Comment = cancelledComment;
+                            //AttendanceStud attStud = con.AttendanceStuds.Where(st => st.IDStudent == x.IDStudent).FirstOrDefault();
+                            x.Status = comboBox2.Text;
+                            x.Comment = cancelledComment;
                             con.SubmitChanges();
                         }
+                        Filter();
                     }
                     ResetLabels();
                 }
@@ -751,7 +752,8 @@ namespace CSAS
                             Type = CheckType(),
                             Date = dateTimePicker1.Value,
                             IDStudent = value,
-                            IdGroup = std.ID_Kruzok
+                            IdGroup = std.ID_Kruzok,
+                            Comment = string.Empty
                         };
                         var attend = con.GetTable<AttendanceStud>();
                         var AttList = from AttendanceStud in attend

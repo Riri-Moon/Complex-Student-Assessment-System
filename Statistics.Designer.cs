@@ -28,148 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.materialFlatButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialFlatButton3 = new MaterialSkin.Controls.MaterialButton();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.pieChart1 = new LiveCharts.WinForms.PieChart();
+            this.cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.AvgLabel = new System.Windows.Forms.Label();
+            this.ActCountLabel = new System.Windows.Forms.Label();
+            this.AvgActivity = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.SuspendLayout();
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(789, 318);
-            this.chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(278, 251);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "Chart";
-            // 
-            // chart2
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(708, 73);
-            this.chart2.Name = "chart2";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(443, 185);
-            this.chart2.TabIndex = 3;
-            this.chart2.Text = "Chart";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 73);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(647, 306);
-            this.dataGridView1.TabIndex = 4;
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.Font = new System.Drawing.Font("Roboto", 8.25F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(835, 610);
+            this.comboBox1.Location = new System.Drawing.Point(343, 403);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(201, 21);
+            this.comboBox1.Size = new System.Drawing.Size(180, 21);
             this.comboBox1.TabIndex = 5;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(39, 657);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(35, 19);
-            this.materialLabel1.TabIndex = 6;
-            this.materialLabel1.Text = "Data";
-            this.materialLabel1.Click += new System.EventHandler(this.materialLabel1_Click_1);
-            // 
-            // materialLabel2
-            // 
-            this.materialLabel2.AutoSize = true;
-            this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(366, 657);
-            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(35, 19);
-            this.materialLabel2.TabIndex = 8;
-            this.materialLabel2.Text = "Data";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox2.Font = new System.Drawing.Font("Roboto", 8.25F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(835, 274);
+            this.comboBox2.Location = new System.Drawing.Point(374, 430);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(201, 21);
+            this.comboBox2.Size = new System.Drawing.Size(149, 21);
             this.comboBox2.TabIndex = 7;
-            // 
-            // materialFlatButton1
-            // 
-            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton1.Depth = 0;
-            this.materialFlatButton1.DrawShadows = true;
-            this.materialFlatButton1.HighEmphasis = true;
-            this.materialFlatButton1.Icon = null;
-            this.materialFlatButton1.Location = new System.Drawing.Point(703, 640);
-            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Size = new System.Drawing.Size(95, 36);
-            this.materialFlatButton1.TabIndex = 29;
-            this.materialFlatButton1.Text = "New Data";
-            this.materialFlatButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialFlatButton1.UseAccentColor = false;
-            this.materialFlatButton1.UseVisualStyleBackColor = true;
-            // 
-            // materialFlatButton2
-            // 
-            this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton2.Depth = 0;
-            this.materialFlatButton2.DrawShadows = true;
-            this.materialFlatButton2.HighEmphasis = true;
-            this.materialFlatButton2.Icon = null;
-            this.materialFlatButton2.Location = new System.Drawing.Point(966, 640);
-            this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton2.Name = "materialFlatButton2";
-            this.materialFlatButton2.Size = new System.Drawing.Size(185, 36);
-            this.materialFlatButton2.TabIndex = 30;
-            this.materialFlatButton2.Text = "Export Current View";
-            this.materialFlatButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialFlatButton2.UseAccentColor = false;
-            this.materialFlatButton2.UseVisualStyleBackColor = true;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // materialFlatButton3
             // 
@@ -178,54 +75,176 @@
             this.materialFlatButton3.DrawShadows = true;
             this.materialFlatButton3.HighEmphasis = true;
             this.materialFlatButton3.Icon = null;
-            this.materialFlatButton3.Location = new System.Drawing.Point(448, 502);
+            this.materialFlatButton3.Location = new System.Drawing.Point(711, 645);
             this.materialFlatButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton3.Name = "materialFlatButton3";
-            this.materialFlatButton3.Size = new System.Drawing.Size(106, 36);
+            this.materialFlatButton3.Size = new System.Drawing.Size(199, 36);
             this.materialFlatButton3.TabIndex = 31;
-            this.materialFlatButton3.Text = "Export All";
+            this.materialFlatButton3.Text = "Exportovať štatistiky";
             this.materialFlatButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialFlatButton3.UseAccentColor = false;
             this.materialFlatButton3.UseVisualStyleBackColor = true;
+            this.materialFlatButton3.Click += new System.EventHandler(this.materialFlatButton3_Click);
+            // 
+            // pieChart1
+            // 
+            this.pieChart1.Location = new System.Drawing.Point(38, 403);
+            this.pieChart1.Name = "pieChart1";
+            this.pieChart1.Size = new System.Drawing.Size(277, 238);
+            this.pieChart1.TabIndex = 32;
+            this.pieChart1.Text = "pieChart1";
+            // 
+            // cartesianChart1
+            // 
+            this.cartesianChart1.Location = new System.Drawing.Point(12, 75);
+            this.cartesianChart1.Name = "cartesianChart1";
+            this.cartesianChart1.Size = new System.Drawing.Size(909, 283);
+            this.cartesianChart1.TabIndex = 33;
+            this.cartesianChart1.Text = "cartesianChart1";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox3.Font = new System.Drawing.Font("Roboto", 8.25F);
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(414, 457);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(109, 21);
+            this.comboBox3.TabIndex = 34;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox4.Font = new System.Drawing.Font("Roboto", 8.25F);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(554, 364);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(180, 21);
+            this.comboBox4.TabIndex = 35;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto", 10F);
+            this.label1.Location = new System.Drawing.Point(340, 515);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(182, 17);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Priemer bodov na študenta: ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto", 10F);
+            this.label2.Location = new System.Drawing.Point(340, 567);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 17);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "Počet aktivít: ";
+            // 
+            // AvgLabel
+            // 
+            this.AvgLabel.AutoSize = true;
+            this.AvgLabel.Font = new System.Drawing.Font("Roboto", 10F);
+            this.AvgLabel.Location = new System.Drawing.Point(528, 515);
+            this.AvgLabel.Name = "AvgLabel";
+            this.AvgLabel.Size = new System.Drawing.Size(0, 17);
+            this.AvgLabel.TabIndex = 38;
+            // 
+            // ActCountLabel
+            // 
+            this.ActCountLabel.AutoSize = true;
+            this.ActCountLabel.Font = new System.Drawing.Font("Roboto", 10F);
+            this.ActCountLabel.Location = new System.Drawing.Point(531, 567);
+            this.ActCountLabel.Name = "ActCountLabel";
+            this.ActCountLabel.Size = new System.Drawing.Size(0, 17);
+            this.ActCountLabel.TabIndex = 39;
+            // 
+            // AvgActivity
+            // 
+            this.AvgActivity.AutoSize = true;
+            this.AvgActivity.Font = new System.Drawing.Font("Roboto", 10F);
+            this.AvgActivity.Location = new System.Drawing.Point(531, 541);
+            this.AvgActivity.Name = "AvgActivity";
+            this.AvgActivity.Size = new System.Drawing.Size(0, 17);
+            this.AvgActivity.TabIndex = 41;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Roboto", 10F);
+            this.label4.Location = new System.Drawing.Point(340, 541);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(130, 17);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Priemer na aktivitu: ";
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.DrawShadows = true;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(554, 645);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.Size = new System.Drawing.Size(122, 36);
+            this.materialButton1.TabIndex = 42;
+            this.materialButton1.Text = "Pridať grafy";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
             // Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1176, 696);
+            this.ClientSize = new System.Drawing.Size(933, 696);
+            this.Controls.Add(this.materialButton1);
+            this.Controls.Add(this.AvgActivity);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ActCountLabel);
+            this.Controls.Add(this.AvgLabel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cartesianChart1);
+            this.Controls.Add(this.pieChart1);
             this.Controls.Add(this.materialFlatButton3);
-            this.Controls.Add(this.materialFlatButton2);
-            this.Controls.Add(this.materialFlatButton1);
-            this.Controls.Add(this.materialLabel2);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.chart2);
-            this.Controls.Add(this.chart1);
             this.Name = "Statistics";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Statistics";
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Statistics_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.ComboBox comboBox2;
-        private MaterialSkin.Controls.MaterialButton materialFlatButton1;
-        private MaterialSkin.Controls.MaterialButton materialFlatButton2;
         private MaterialSkin.Controls.MaterialButton materialFlatButton3;
+        private LiveCharts.WinForms.PieChart pieChart1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label AvgLabel;
+        private System.Windows.Forms.Label ActCountLabel;
+        private System.Windows.Forms.Label AvgActivity;
+        private System.Windows.Forms.Label label4;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

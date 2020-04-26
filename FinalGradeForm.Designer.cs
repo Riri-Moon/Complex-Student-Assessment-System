@@ -378,7 +378,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.StudentGrid);
             this.Name = "FinalGradeForm";
-            this.Text = "FinalGradeForm";
             ((System.ComponentModel.ISupportInitialize)(this.StudentGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

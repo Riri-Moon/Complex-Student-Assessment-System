@@ -130,9 +130,11 @@ namespace CSAS
                 foreach (var mail in loadTemplate)
                 {
                     AttachmentsGrid.DataSource = null;
+
                     ContentTextBox.Text = string.Empty;
                     SubjectTextbox.Text = string.Empty;
                     NameOfTempTextBox.Text = string.Empty;
+
                     NameOfTempTextBox.Text = mail.EmailTemplateName;
                     ContentTextBox.Text = mail.EmailContent;
                     SubjectTextbox.Text = mail.EmailSubject;

@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_Window));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Activity_Grid = new System.Windows.Forms.DataGridView();
             this.Student_Grid = new System.Windows.Forms.DataGridView();
             this.Study_Panel = new System.Windows.Forms.Panel();
             this.FinalGradeBtn = new System.Windows.Forms.Button();
-            this.Stud_G_Button = new System.Windows.Forms.Button();
             this.Import_Btn = new System.Windows.Forms.Button();
             this.Stat_Btn = new System.Windows.Forms.Button();
             this.Open_Btn = new System.Windows.Forms.Button();
@@ -50,12 +49,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.Create_Templ = new System.Windows.Forms.Button();
             this.Create_Act_Btn = new System.Windows.Forms.Button();
-            this.Activity_Button = new System.Windows.Forms.Button();
             this.Student_Panel = new System.Windows.Forms.Panel();
             this.Add_Stud_Button = new System.Windows.Forms.Button();
             this.Settings_Panel = new System.Windows.Forms.Panel();
             this.Email_client_btn = new System.Windows.Forms.Button();
-            this.Gear_Button = new System.Windows.Forms.Button();
             this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Ext_Btn = new System.Windows.Forms.Button();
@@ -66,6 +63,9 @@
             this.bodyZaAktivituCvičenieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bodyZaAktivituPrednáškaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odstrániťToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Stud_G_Button = new System.Windows.Forms.Button();
+            this.Activity_Button = new System.Windows.Forms.Button();
+            this.Gear_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).BeginInit();
             this.Study_Panel.SuspendLayout();
@@ -84,38 +84,38 @@
             this.Activity_Grid.AllowUserToResizeRows = false;
             this.Activity_Grid.BackgroundColor = System.Drawing.Color.White;
             this.Activity_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Activity_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Activity_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.Activity_Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Activity_Grid.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Activity_Grid.DefaultCellStyle = dataGridViewCellStyle2;
             this.Activity_Grid.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.Activity_Grid, "Activity_Grid");
             this.Activity_Grid.Name = "Activity_Grid";
             this.Activity_Grid.ReadOnly = true;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Activity_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Activity_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.Activity_Grid.RowHeadersVisible = false;
             this.Activity_Grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.Activity_Grid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
@@ -137,38 +137,38 @@
             this.Student_Grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Student_Grid.BackgroundColor = System.Drawing.Color.White;
             this.Student_Grid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Student_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Student_Grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.Student_Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Student_Grid.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Student_Grid.DefaultCellStyle = dataGridViewCellStyle5;
             this.Student_Grid.GridColor = System.Drawing.Color.White;
             resources.ApplyResources(this.Student_Grid, "Student_Grid");
             this.Student_Grid.MultiSelect = false;
             this.Student_Grid.Name = "Student_Grid";
             this.Student_Grid.ReadOnly = true;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Student_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Student_Grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.Student_Grid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.Student_Grid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.Student_Grid.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Roboto", 8.25F);
@@ -202,17 +202,6 @@
             this.FinalGradeBtn.UseVisualStyleBackColor = false;
             this.FinalGradeBtn.Click += new System.EventHandler(this.FinalGradeBtn_Click);
             // 
-            // Stud_G_Button
-            // 
-            this.Stud_G_Button.AutoEllipsis = true;
-            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Stud_G_Button, "Stud_G_Button");
-            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
-            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Stud_G_Button.Name = "Stud_G_Button";
-            this.Stud_G_Button.UseVisualStyleBackColor = false;
-            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
-            // 
             // Import_Btn
             // 
             this.Import_Btn.AutoEllipsis = true;
@@ -241,6 +230,7 @@
             this.Open_Btn.FlatAppearance.BorderSize = 0;
             this.Open_Btn.Name = "Open_Btn";
             this.Open_Btn.UseVisualStyleBackColor = false;
+            this.Open_Btn.Click += new System.EventHandler(this.Open_Btn_Click);
             // 
             // Export_Btn
             // 
@@ -250,6 +240,7 @@
             this.Export_Btn.FlatAppearance.BorderSize = 0;
             this.Export_Btn.Name = "Export_Btn";
             this.Export_Btn.UseVisualStyleBackColor = false;
+            this.Export_Btn.Click += new System.EventHandler(this.Export_Btn_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -310,16 +301,6 @@
             this.Create_Act_Btn.UseVisualStyleBackColor = false;
             this.Create_Act_Btn.Click += new System.EventHandler(this.Create_Act_Btn_Click);
             // 
-            // Activity_Button
-            // 
-            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Activity_Button, "Activity_Button");
-            this.Activity_Button.FlatAppearance.BorderSize = 0;
-            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Activity_Button.Name = "Activity_Button";
-            this.Activity_Button.UseVisualStyleBackColor = false;
-            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
-            // 
             // Student_Panel
             // 
             this.Student_Panel.AllowDrop = true;
@@ -353,16 +334,6 @@
             this.Email_client_btn.Name = "Email_client_btn";
             this.Email_client_btn.UseVisualStyleBackColor = false;
             this.Email_client_btn.Click += new System.EventHandler(this.Email_client_btn_Click_1);
-            // 
-            // Gear_Button
-            // 
-            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Gear_Button, "Gear_Button");
-            this.Gear_Button.FlatAppearance.BorderSize = 0;
-            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Gear_Button.Name = "Gear_Button";
-            this.Gear_Button.UseVisualStyleBackColor = false;
-            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
             // 
             // OdoslatEmailBtnMainMenu
             // 
@@ -441,6 +412,37 @@
             // 
             this.odstrániťToolStripMenuItem1.Name = "odstrániťToolStripMenuItem1";
             resources.ApplyResources(this.odstrániťToolStripMenuItem1, "odstrániťToolStripMenuItem1");
+            // 
+            // Stud_G_Button
+            // 
+            this.Stud_G_Button.AutoEllipsis = true;
+            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Stud_G_Button, "Stud_G_Button");
+            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
+            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Stud_G_Button.Name = "Stud_G_Button";
+            this.Stud_G_Button.UseVisualStyleBackColor = false;
+            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
+            // 
+            // Activity_Button
+            // 
+            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Activity_Button, "Activity_Button");
+            this.Activity_Button.FlatAppearance.BorderSize = 0;
+            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Activity_Button.Name = "Activity_Button";
+            this.Activity_Button.UseVisualStyleBackColor = false;
+            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
+            // 
+            // Gear_Button
+            // 
+            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Gear_Button, "Gear_Button");
+            this.Gear_Button.FlatAppearance.BorderSize = 0;
+            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Gear_Button.Name = "Gear_Button";
+            this.Gear_Button.UseVisualStyleBackColor = false;
+            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
             // 
             // Main_Window
             // 

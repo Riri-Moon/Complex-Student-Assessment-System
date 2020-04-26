@@ -109,7 +109,7 @@
             this.LoadStudentBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadStudentBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadStudentBtn.Name = "LoadStudentBtn";
-            this.LoadStudentBtn.Size = new System.Drawing.Size(83, 36);
+            this.LoadStudentBtn.Size = new System.Drawing.Size(80, 36);
             this.LoadStudentBtn.TabIndex = 3;
             this.LoadStudentBtn.Text = "Načítať";
             this.LoadStudentBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -162,11 +162,11 @@
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel4.Location = new System.Drawing.Point(251, 251);
+            this.materialLabel4.Location = new System.Drawing.Point(251, 237);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(79, 19);
-            this.materialLabel4.TabIndex = 7;
+            this.materialLabel4.TabIndex = 40;
             this.materialLabel4.Text = "Email UCM";
             // 
             // materialLabel5
@@ -179,7 +179,7 @@
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(29, 19);
-            this.materialLabel5.TabIndex = 8;
+            this.materialLabel5.TabIndex = 41;
             this.materialLabel5.Text = "ISIC";
             // 
             // materialLabel6
@@ -192,7 +192,7 @@
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(49, 19);
-            this.materialLabel6.TabIndex = 9;
+            this.materialLabel6.TabIndex = 42;
             this.materialLabel6.Text = "Ročník";
             // 
             // materialLabel7
@@ -233,7 +233,7 @@
             this.NameBox.Multiline = false;
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(133, 25);
-            this.NameBox.TabIndex = 12;
+            this.NameBox.TabIndex = 4;
             this.NameBox.TabStop = false;
             this.NameBox.Text = "";
             this.NameBox.UseTallSize = false;
@@ -250,7 +250,7 @@
             this.SurnameBox.Multiline = false;
             this.SurnameBox.Name = "SurnameBox";
             this.SurnameBox.Size = new System.Drawing.Size(139, 25);
-            this.SurnameBox.TabIndex = 13;
+            this.SurnameBox.TabIndex = 5;
             this.SurnameBox.TabStop = false;
             this.SurnameBox.Text = "";
             this.SurnameBox.UseTallSize = false;
@@ -267,7 +267,7 @@
             this.EmailBox.Multiline = false;
             this.EmailBox.Name = "EmailBox";
             this.EmailBox.Size = new System.Drawing.Size(133, 25);
-            this.EmailBox.TabIndex = 14;
+            this.EmailBox.TabIndex = 6;
             this.EmailBox.TabStop = false;
             this.EmailBox.Text = "";
             this.EmailBox.UseTallSize = false;
@@ -278,13 +278,13 @@
             this.EmailUcmBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EmailUcmBox.Depth = 0;
             this.EmailUcmBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.EmailUcmBox.Location = new System.Drawing.Point(336, 245);
+            this.EmailUcmBox.Location = new System.Drawing.Point(336, 231);
             this.EmailUcmBox.MaxLength = 32767;
             this.EmailUcmBox.MouseState = MaterialSkin.MouseState.OUT;
             this.EmailUcmBox.Multiline = false;
             this.EmailUcmBox.Name = "EmailUcmBox";
             this.EmailUcmBox.Size = new System.Drawing.Size(133, 25);
-            this.EmailUcmBox.TabIndex = 15;
+            this.EmailUcmBox.TabIndex = 7;
             this.EmailUcmBox.TabStop = false;
             this.EmailUcmBox.Text = "";
             this.EmailUcmBox.UseTallSize = false;
@@ -301,7 +301,7 @@
             this.IsicBox.Multiline = false;
             this.IsicBox.Name = "IsicBox";
             this.IsicBox.Size = new System.Drawing.Size(133, 25);
-            this.IsicBox.TabIndex = 16;
+            this.IsicBox.TabIndex = 8;
             this.IsicBox.TabStop = false;
             this.IsicBox.Text = "";
             this.IsicBox.UseTallSize = false;
@@ -318,7 +318,7 @@
             this.GradeBox.Multiline = false;
             this.GradeBox.Name = "GradeBox";
             this.GradeBox.Size = new System.Drawing.Size(133, 25);
-            this.GradeBox.TabIndex = 17;
+            this.GradeBox.TabIndex = 9;
             this.GradeBox.TabStop = false;
             this.GradeBox.Text = "";
             this.GradeBox.UseTallSize = false;
@@ -332,7 +332,7 @@
             this.GroupCombo.Location = new System.Drawing.Point(90, 359);
             this.GroupCombo.Name = "GroupCombo";
             this.GroupCombo.Size = new System.Drawing.Size(68, 25);
-            this.GroupCombo.TabIndex = 18;
+            this.GroupCombo.TabIndex = 10;
             this.GroupCombo.SelectedIndexChanged += new System.EventHandler(this.GroupCombo_SelectedIndexChanged);
             // 
             // GroupAttCombo
@@ -344,7 +344,7 @@
             this.GroupAttCombo.Location = new System.Drawing.Point(424, 359);
             this.GroupAttCombo.Name = "GroupAttCombo";
             this.GroupAttCombo.Size = new System.Drawing.Size(68, 25);
-            this.GroupAttCombo.TabIndex = 19;
+            this.GroupAttCombo.TabIndex = 11;
             // 
             // SaveBtn
             // 
@@ -357,8 +357,8 @@
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SaveBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(90, 36);
-            this.SaveBtn.TabIndex = 20;
+            this.SaveBtn.Size = new System.Drawing.Size(88, 36);
+            this.SaveBtn.TabIndex = 12;
             this.SaveBtn.Text = "Vytvoriť";
             this.SaveBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.SaveBtn.UseAccentColor = false;
@@ -376,8 +376,8 @@
             this.BackBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BackBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(58, 36);
-            this.BackBtn.TabIndex = 21;
+            this.BackBtn.Size = new System.Drawing.Size(56, 36);
+            this.BackBtn.TabIndex = 13;
             this.BackBtn.Text = "Späť";
             this.BackBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.BackBtn.UseAccentColor = false;

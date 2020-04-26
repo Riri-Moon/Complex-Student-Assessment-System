@@ -197,6 +197,7 @@ namespace CSAS
                         SendFirst = first,
                         SendSecond = second,
                         IdStudent = student.Id,
+                        Comment = string.Empty
 
                     };
 
@@ -216,7 +217,9 @@ namespace CSAS
                             IdActivity = activity.Id,
                             TaskName = tsk.TaskName,
                             Points = tsk.MaxPts,
-                            IdStudent = student.Id
+                            IdStudent = student.Id,
+                            Comment=string.Empty
+                            
                         };
                         con.Tasks.InsertOnSubmit(task);
                     }
