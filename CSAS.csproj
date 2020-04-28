@@ -193,6 +193,12 @@
     <Compile Include="CreateActivity.Designer.cs">
       <DependentUpon>CreateActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewGroupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewGroupForm.Designer.cs">
+      <DependentUpon>CreateNewGroupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,12 @@
     <Compile Include="FinalGradeForm.Designer.cs">
       <DependentUpon>FinalGradeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ForgetPasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForgetPasswordForm.Designer.cs">
+      <DependentUpon>ForgetPasswordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GradeActivityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +258,12 @@
       <DependentUpon>IndividualActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main_Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,6 +272,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SendEmailCheck.cs" />
     <Compile Include="Statistics.cs">
       <SubType>Form</SubType>
@@ -287,6 +311,9 @@
     <EmbeddedResource Include="CreateActivity.sk-SK.resx">
       <DependentUpon>CreateActivity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewGroupForm.resx">
+      <DependentUpon>CreateNewGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateTemplate.resx">
       <DependentUpon>CreateTemplate.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +338,9 @@
     <EmbeddedResource Include="IndividualActivity.resx">
       <DependentUpon>IndividualActivity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main_Window.resx">
       <DependentUpon>Main_Window.cs</DependentUpon>
     </EmbeddedResource>
@@ -327,6 +357,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Statistics.resx">
       <DependentUpon>Statistics.cs</DependentUpon>
     </EmbeddedResource>

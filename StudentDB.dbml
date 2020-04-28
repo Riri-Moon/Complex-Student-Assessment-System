@@ -105,29 +105,6 @@
       <Association Name="Student_AttendanceStud" Member="Student" ThisKey="IDStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Meno" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="Heslo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ApiKey" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
-      <Column Name="Signature" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="AGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="BGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="DGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="EGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="FxGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PointsForActLec" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PointsForActSem" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="User_Attachment" Member="Attachments" ThisKey="Id" OtherKey="IdUser" Type="Attachment" />
-      <Association Name="User_ActivityTemplate" Member="ActivityTemplates" ThisKey="Id" OtherKey="IdUser" Type="ActivityTemplate" />
-      <Association Name="User_EmailTemplate" Member="EmailTemplates" ThisKey="Id" OtherKey="IdUser" Type="EmailTemplate" />
-      <Association Name="User_StudentSkupina" Member="StudentSkupinas" ThisKey="Id" OtherKey="Id_User" Type="StudentSkupina" />
-      <Association Name="User_Activity" Member="Activities" ThisKey="Id" OtherKey="IdUser" Type="Activity" />
-    </Type>
-  </Table>
   <Table Name="dbo.FinalGrade" Member="FinalGrades">
     <Type Name="FinalGrade">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -161,9 +138,9 @@
       <Column Name="SendSecond" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
       <Association Name="Activity_Task" Member="Tasks" ThisKey="Id" OtherKey="IdActivity" Type="Task" />
-      <Association Name="User_Activity" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
       <Association Name="StudentSkupina_Activity" Member="StudentSkupina" ThisKey="IdSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
       <Association Name="Student_Activity" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+      <Association Name="User_Activity" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Task" Member="Tasks">
@@ -177,6 +154,29 @@
       <Column Name="Hodnotenie" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Activity_Task" Member="Activity" ThisKey="IdActivity" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="Student_Task" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Meno" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Heslo" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ApiKey" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Signature" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="AGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FxGrade" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PointsForActLec" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PointsForActSem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Attachment" Member="Attachments" ThisKey="Id" OtherKey="IdUser" Type="Attachment" />
+      <Association Name="User_ActivityTemplate" Member="ActivityTemplates" ThisKey="Id" OtherKey="IdUser" Type="ActivityTemplate" />
+      <Association Name="User_EmailTemplate" Member="EmailTemplates" ThisKey="Id" OtherKey="IdUser" Type="EmailTemplate" />
+      <Association Name="User_StudentSkupina" Member="StudentSkupinas" ThisKey="Id" OtherKey="Id_User" Type="StudentSkupina" />
+      <Association Name="User_Activity" Member="Activities" ThisKey="Id" OtherKey="IdUser" Type="Activity" />
     </Type>
   </Table>
 </Database>

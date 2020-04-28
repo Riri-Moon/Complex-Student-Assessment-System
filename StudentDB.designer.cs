@@ -54,9 +54,6 @@ namespace CSAS
     partial void InsertAttendanceStud(AttendanceStud instance);
     partial void UpdateAttendanceStud(AttendanceStud instance);
     partial void DeleteAttendanceStud(AttendanceStud instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
     partial void InsertFinalGrade(FinalGrade instance);
     partial void UpdateFinalGrade(FinalGrade instance);
     partial void DeleteFinalGrade(FinalGrade instance);
@@ -66,6 +63,9 @@ namespace CSAS
     partial void InsertTask(Task instance);
     partial void UpdateTask(Task instance);
     partial void DeleteTask(Task instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public StudentDBDataContext() : 
@@ -162,14 +162,6 @@ namespace CSAS
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
-			}
-		}
-		
 		public System.Data.Linq.Table<FinalGrade> FinalGrades
 		{
 			get
@@ -191,6 +183,14 @@ namespace CSAS
 			get
 			{
 				return this.GetTable<Task>();
+			}
+		}
+		
+		public System.Data.Linq.Table<User> Users
+		{
+			get
+			{
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -2440,520 +2440,6 @@ namespace CSAS
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Meno;
-		
-		private string _Heslo;
-		
-		private string _Email;
-		
-		private string _ApiKey;
-		
-		private string _Signature;
-		
-		private System.Nullable<double> _AGrade;
-		
-		private System.Nullable<double> _BGrade;
-		
-		private System.Nullable<double> _CGrade;
-		
-		private System.Nullable<double> _DGrade;
-		
-		private System.Nullable<double> _EGrade;
-		
-		private System.Nullable<double> _FxGrade;
-		
-		private System.Nullable<int> _PointsForActLec;
-		
-		private System.Nullable<int> _PointsForActSem;
-		
-		private EntitySet<Attachment> _Attachments;
-		
-		private EntitySet<ActivityTemplate> _ActivityTemplates;
-		
-		private EntitySet<EmailTemplate> _EmailTemplates;
-		
-		private EntitySet<StudentSkupina> _StudentSkupinas;
-		
-		private EntitySet<Activity> _Activities;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnMenoChanging(string value);
-    partial void OnMenoChanged();
-    partial void OnHesloChanging(string value);
-    partial void OnHesloChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnApiKeyChanging(string value);
-    partial void OnApiKeyChanged();
-    partial void OnSignatureChanging(string value);
-    partial void OnSignatureChanged();
-    partial void OnAGradeChanging(System.Nullable<double> value);
-    partial void OnAGradeChanged();
-    partial void OnBGradeChanging(System.Nullable<double> value);
-    partial void OnBGradeChanged();
-    partial void OnCGradeChanging(System.Nullable<double> value);
-    partial void OnCGradeChanged();
-    partial void OnDGradeChanging(System.Nullable<double> value);
-    partial void OnDGradeChanged();
-    partial void OnEGradeChanging(System.Nullable<double> value);
-    partial void OnEGradeChanged();
-    partial void OnFxGradeChanging(System.Nullable<double> value);
-    partial void OnFxGradeChanged();
-    partial void OnPointsForActLecChanging(System.Nullable<int> value);
-    partial void OnPointsForActLecChanged();
-    partial void OnPointsForActSemChanging(System.Nullable<int> value);
-    partial void OnPointsForActSemChanged();
-    #endregion
-		
-		public User()
-		{
-			this._Attachments = new EntitySet<Attachment>(new Action<Attachment>(this.attach_Attachments), new Action<Attachment>(this.detach_Attachments));
-			this._ActivityTemplates = new EntitySet<ActivityTemplate>(new Action<ActivityTemplate>(this.attach_ActivityTemplates), new Action<ActivityTemplate>(this.detach_ActivityTemplates));
-			this._EmailTemplates = new EntitySet<EmailTemplate>(new Action<EmailTemplate>(this.attach_EmailTemplates), new Action<EmailTemplate>(this.detach_EmailTemplates));
-			this._StudentSkupinas = new EntitySet<StudentSkupina>(new Action<StudentSkupina>(this.attach_StudentSkupinas), new Action<StudentSkupina>(this.detach_StudentSkupinas));
-			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Meno", DbType="VarChar(30)")]
-		public string Meno
-		{
-			get
-			{
-				return this._Meno;
-			}
-			set
-			{
-				if ((this._Meno != value))
-				{
-					this.OnMenoChanging(value);
-					this.SendPropertyChanging();
-					this._Meno = value;
-					this.SendPropertyChanged("Meno");
-					this.OnMenoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Heslo", DbType="VarChar(20)")]
-		public string Heslo
-		{
-			get
-			{
-				return this._Heslo;
-			}
-			set
-			{
-				if ((this._Heslo != value))
-				{
-					this.OnHesloChanging(value);
-					this.SendPropertyChanging();
-					this._Heslo = value;
-					this.SendPropertyChanged("Heslo");
-					this.OnHesloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApiKey", DbType="VarChar(80)")]
-		public string ApiKey
-		{
-			get
-			{
-				return this._ApiKey;
-			}
-			set
-			{
-				if ((this._ApiKey != value))
-				{
-					this.OnApiKeyChanging(value);
-					this.SendPropertyChanging();
-					this._ApiKey = value;
-					this.SendPropertyChanged("ApiKey");
-					this.OnApiKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Signature", DbType="VarChar(300)")]
-		public string Signature
-		{
-			get
-			{
-				return this._Signature;
-			}
-			set
-			{
-				if ((this._Signature != value))
-				{
-					this.OnSignatureChanging(value);
-					this.SendPropertyChanging();
-					this._Signature = value;
-					this.SendPropertyChanged("Signature");
-					this.OnSignatureChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AGrade", DbType="Float")]
-		public System.Nullable<double> AGrade
-		{
-			get
-			{
-				return this._AGrade;
-			}
-			set
-			{
-				if ((this._AGrade != value))
-				{
-					this.OnAGradeChanging(value);
-					this.SendPropertyChanging();
-					this._AGrade = value;
-					this.SendPropertyChanged("AGrade");
-					this.OnAGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BGrade", DbType="Float")]
-		public System.Nullable<double> BGrade
-		{
-			get
-			{
-				return this._BGrade;
-			}
-			set
-			{
-				if ((this._BGrade != value))
-				{
-					this.OnBGradeChanging(value);
-					this.SendPropertyChanging();
-					this._BGrade = value;
-					this.SendPropertyChanged("BGrade");
-					this.OnBGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CGrade", DbType="Float")]
-		public System.Nullable<double> CGrade
-		{
-			get
-			{
-				return this._CGrade;
-			}
-			set
-			{
-				if ((this._CGrade != value))
-				{
-					this.OnCGradeChanging(value);
-					this.SendPropertyChanging();
-					this._CGrade = value;
-					this.SendPropertyChanged("CGrade");
-					this.OnCGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DGrade", DbType="Float")]
-		public System.Nullable<double> DGrade
-		{
-			get
-			{
-				return this._DGrade;
-			}
-			set
-			{
-				if ((this._DGrade != value))
-				{
-					this.OnDGradeChanging(value);
-					this.SendPropertyChanging();
-					this._DGrade = value;
-					this.SendPropertyChanged("DGrade");
-					this.OnDGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGrade", DbType="Float")]
-		public System.Nullable<double> EGrade
-		{
-			get
-			{
-				return this._EGrade;
-			}
-			set
-			{
-				if ((this._EGrade != value))
-				{
-					this.OnEGradeChanging(value);
-					this.SendPropertyChanging();
-					this._EGrade = value;
-					this.SendPropertyChanged("EGrade");
-					this.OnEGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FxGrade", DbType="Float")]
-		public System.Nullable<double> FxGrade
-		{
-			get
-			{
-				return this._FxGrade;
-			}
-			set
-			{
-				if ((this._FxGrade != value))
-				{
-					this.OnFxGradeChanging(value);
-					this.SendPropertyChanging();
-					this._FxGrade = value;
-					this.SendPropertyChanged("FxGrade");
-					this.OnFxGradeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PointsForActLec", DbType="Int")]
-		public System.Nullable<int> PointsForActLec
-		{
-			get
-			{
-				return this._PointsForActLec;
-			}
-			set
-			{
-				if ((this._PointsForActLec != value))
-				{
-					this.OnPointsForActLecChanging(value);
-					this.SendPropertyChanging();
-					this._PointsForActLec = value;
-					this.SendPropertyChanged("PointsForActLec");
-					this.OnPointsForActLecChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PointsForActSem", DbType="Int")]
-		public System.Nullable<int> PointsForActSem
-		{
-			get
-			{
-				return this._PointsForActSem;
-			}
-			set
-			{
-				if ((this._PointsForActSem != value))
-				{
-					this.OnPointsForActSemChanging(value);
-					this.SendPropertyChanging();
-					this._PointsForActSem = value;
-					this.SendPropertyChanged("PointsForActSem");
-					this.OnPointsForActSemChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Attachment", Storage="_Attachments", ThisKey="Id", OtherKey="IdUser")]
-		public EntitySet<Attachment> Attachments
-		{
-			get
-			{
-				return this._Attachments;
-			}
-			set
-			{
-				this._Attachments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityTemplate", Storage="_ActivityTemplates", ThisKey="Id", OtherKey="IdUser")]
-		public EntitySet<ActivityTemplate> ActivityTemplates
-		{
-			get
-			{
-				return this._ActivityTemplates;
-			}
-			set
-			{
-				this._ActivityTemplates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_EmailTemplate", Storage="_EmailTemplates", ThisKey="Id", OtherKey="IdUser")]
-		public EntitySet<EmailTemplate> EmailTemplates
-		{
-			get
-			{
-				return this._EmailTemplates;
-			}
-			set
-			{
-				this._EmailTemplates.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_StudentSkupina", Storage="_StudentSkupinas", ThisKey="Id", OtherKey="Id_User")]
-		public EntitySet<StudentSkupina> StudentSkupinas
-		{
-			get
-			{
-				return this._StudentSkupinas;
-			}
-			set
-			{
-				this._StudentSkupinas.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_Activities", ThisKey="Id", OtherKey="IdUser")]
-		public EntitySet<Activity> Activities
-		{
-			get
-			{
-				return this._Activities;
-			}
-			set
-			{
-				this._Activities.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Attachments(Attachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Attachments(Attachment entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_ActivityTemplates(ActivityTemplate entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_ActivityTemplates(ActivityTemplate entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_EmailTemplates(EmailTemplate entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_EmailTemplates(EmailTemplate entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_StudentSkupinas(StudentSkupina entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_StudentSkupinas(StudentSkupina entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Activities(Activity entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Activities(Activity entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FinalGrade")]
 	public partial class FinalGrade : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3311,11 +2797,11 @@ namespace CSAS
 		
 		private EntitySet<Task> _Tasks;
 		
-		private EntityRef<User> _User;
-		
 		private EntityRef<StudentSkupina> _StudentSkupina;
 		
 		private EntityRef<Student> _Student;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3356,9 +2842,9 @@ namespace CSAS
 		public Activity()
 		{
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
-			this._User = default(EntityRef<User>);
 			this._StudentSkupina = default(EntityRef<StudentSkupina>);
 			this._Student = default(EntityRef<Student>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -3687,40 +3173,6 @@ namespace CSAS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Activities.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Activities.Add(this);
-						this._IdUser = value.Id;
-					}
-					else
-					{
-						this._IdUser = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StudentSkupina_Activity", Storage="_StudentSkupina", ThisKey="IdSkupina", OtherKey="Id", IsForeignKey=true)]
 		public StudentSkupina StudentSkupina
 		{
@@ -3785,6 +3237,40 @@ namespace CSAS
 						this._IdStudent = default(int);
 					}
 					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_User", ThisKey="IdUser", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._IdUser = value.Id;
+					}
+					else
+					{
+						this._IdUser = default(int);
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -4107,6 +3593,520 @@ namespace CSAS
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Meno;
+		
+		private string _Heslo;
+		
+		private string _Email;
+		
+		private string _ApiKey;
+		
+		private string _Signature;
+		
+		private System.Nullable<double> _AGrade;
+		
+		private System.Nullable<double> _BGrade;
+		
+		private System.Nullable<double> _CGrade;
+		
+		private System.Nullable<double> _DGrade;
+		
+		private System.Nullable<double> _EGrade;
+		
+		private System.Nullable<double> _FxGrade;
+		
+		private System.Nullable<int> _PointsForActLec;
+		
+		private System.Nullable<int> _PointsForActSem;
+		
+		private EntitySet<Attachment> _Attachments;
+		
+		private EntitySet<ActivityTemplate> _ActivityTemplates;
+		
+		private EntitySet<EmailTemplate> _EmailTemplates;
+		
+		private EntitySet<StudentSkupina> _StudentSkupinas;
+		
+		private EntitySet<Activity> _Activities;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnMenoChanging(string value);
+    partial void OnMenoChanged();
+    partial void OnHesloChanging(string value);
+    partial void OnHesloChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnApiKeyChanging(string value);
+    partial void OnApiKeyChanged();
+    partial void OnSignatureChanging(string value);
+    partial void OnSignatureChanged();
+    partial void OnAGradeChanging(System.Nullable<double> value);
+    partial void OnAGradeChanged();
+    partial void OnBGradeChanging(System.Nullable<double> value);
+    partial void OnBGradeChanged();
+    partial void OnCGradeChanging(System.Nullable<double> value);
+    partial void OnCGradeChanged();
+    partial void OnDGradeChanging(System.Nullable<double> value);
+    partial void OnDGradeChanged();
+    partial void OnEGradeChanging(System.Nullable<double> value);
+    partial void OnEGradeChanged();
+    partial void OnFxGradeChanging(System.Nullable<double> value);
+    partial void OnFxGradeChanged();
+    partial void OnPointsForActLecChanging(System.Nullable<int> value);
+    partial void OnPointsForActLecChanged();
+    partial void OnPointsForActSemChanging(System.Nullable<int> value);
+    partial void OnPointsForActSemChanged();
+    #endregion
+		
+		public User()
+		{
+			this._Attachments = new EntitySet<Attachment>(new Action<Attachment>(this.attach_Attachments), new Action<Attachment>(this.detach_Attachments));
+			this._ActivityTemplates = new EntitySet<ActivityTemplate>(new Action<ActivityTemplate>(this.attach_ActivityTemplates), new Action<ActivityTemplate>(this.detach_ActivityTemplates));
+			this._EmailTemplates = new EntitySet<EmailTemplate>(new Action<EmailTemplate>(this.attach_EmailTemplates), new Action<EmailTemplate>(this.detach_EmailTemplates));
+			this._StudentSkupinas = new EntitySet<StudentSkupina>(new Action<StudentSkupina>(this.attach_StudentSkupinas), new Action<StudentSkupina>(this.detach_StudentSkupinas));
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Meno", DbType="NVarChar(30)")]
+		public string Meno
+		{
+			get
+			{
+				return this._Meno;
+			}
+			set
+			{
+				if ((this._Meno != value))
+				{
+					this.OnMenoChanging(value);
+					this.SendPropertyChanging();
+					this._Meno = value;
+					this.SendPropertyChanged("Meno");
+					this.OnMenoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Heslo", DbType="NVarChar(128)")]
+		public string Heslo
+		{
+			get
+			{
+				return this._Heslo;
+			}
+			set
+			{
+				if ((this._Heslo != value))
+				{
+					this.OnHesloChanging(value);
+					this.SendPropertyChanging();
+					this._Heslo = value;
+					this.SendPropertyChanged("Heslo");
+					this.OnHesloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApiKey", DbType="NVarChar(80)")]
+		public string ApiKey
+		{
+			get
+			{
+				return this._ApiKey;
+			}
+			set
+			{
+				if ((this._ApiKey != value))
+				{
+					this.OnApiKeyChanging(value);
+					this.SendPropertyChanging();
+					this._ApiKey = value;
+					this.SendPropertyChanged("ApiKey");
+					this.OnApiKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Signature", DbType="NVarChar(300)")]
+		public string Signature
+		{
+			get
+			{
+				return this._Signature;
+			}
+			set
+			{
+				if ((this._Signature != value))
+				{
+					this.OnSignatureChanging(value);
+					this.SendPropertyChanging();
+					this._Signature = value;
+					this.SendPropertyChanged("Signature");
+					this.OnSignatureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AGrade", DbType="Float")]
+		public System.Nullable<double> AGrade
+		{
+			get
+			{
+				return this._AGrade;
+			}
+			set
+			{
+				if ((this._AGrade != value))
+				{
+					this.OnAGradeChanging(value);
+					this.SendPropertyChanging();
+					this._AGrade = value;
+					this.SendPropertyChanged("AGrade");
+					this.OnAGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BGrade", DbType="Float")]
+		public System.Nullable<double> BGrade
+		{
+			get
+			{
+				return this._BGrade;
+			}
+			set
+			{
+				if ((this._BGrade != value))
+				{
+					this.OnBGradeChanging(value);
+					this.SendPropertyChanging();
+					this._BGrade = value;
+					this.SendPropertyChanged("BGrade");
+					this.OnBGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CGrade", DbType="Float")]
+		public System.Nullable<double> CGrade
+		{
+			get
+			{
+				return this._CGrade;
+			}
+			set
+			{
+				if ((this._CGrade != value))
+				{
+					this.OnCGradeChanging(value);
+					this.SendPropertyChanging();
+					this._CGrade = value;
+					this.SendPropertyChanged("CGrade");
+					this.OnCGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DGrade", DbType="Float")]
+		public System.Nullable<double> DGrade
+		{
+			get
+			{
+				return this._DGrade;
+			}
+			set
+			{
+				if ((this._DGrade != value))
+				{
+					this.OnDGradeChanging(value);
+					this.SendPropertyChanging();
+					this._DGrade = value;
+					this.SendPropertyChanged("DGrade");
+					this.OnDGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EGrade", DbType="Float")]
+		public System.Nullable<double> EGrade
+		{
+			get
+			{
+				return this._EGrade;
+			}
+			set
+			{
+				if ((this._EGrade != value))
+				{
+					this.OnEGradeChanging(value);
+					this.SendPropertyChanging();
+					this._EGrade = value;
+					this.SendPropertyChanged("EGrade");
+					this.OnEGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FxGrade", DbType="Float")]
+		public System.Nullable<double> FxGrade
+		{
+			get
+			{
+				return this._FxGrade;
+			}
+			set
+			{
+				if ((this._FxGrade != value))
+				{
+					this.OnFxGradeChanging(value);
+					this.SendPropertyChanging();
+					this._FxGrade = value;
+					this.SendPropertyChanged("FxGrade");
+					this.OnFxGradeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PointsForActLec", DbType="Int")]
+		public System.Nullable<int> PointsForActLec
+		{
+			get
+			{
+				return this._PointsForActLec;
+			}
+			set
+			{
+				if ((this._PointsForActLec != value))
+				{
+					this.OnPointsForActLecChanging(value);
+					this.SendPropertyChanging();
+					this._PointsForActLec = value;
+					this.SendPropertyChanged("PointsForActLec");
+					this.OnPointsForActLecChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PointsForActSem", DbType="Int")]
+		public System.Nullable<int> PointsForActSem
+		{
+			get
+			{
+				return this._PointsForActSem;
+			}
+			set
+			{
+				if ((this._PointsForActSem != value))
+				{
+					this.OnPointsForActSemChanging(value);
+					this.SendPropertyChanging();
+					this._PointsForActSem = value;
+					this.SendPropertyChanged("PointsForActSem");
+					this.OnPointsForActSemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Attachment", Storage="_Attachments", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Attachment> Attachments
+		{
+			get
+			{
+				return this._Attachments;
+			}
+			set
+			{
+				this._Attachments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityTemplate", Storage="_ActivityTemplates", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<ActivityTemplate> ActivityTemplates
+		{
+			get
+			{
+				return this._ActivityTemplates;
+			}
+			set
+			{
+				this._ActivityTemplates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_EmailTemplate", Storage="_EmailTemplates", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<EmailTemplate> EmailTemplates
+		{
+			get
+			{
+				return this._EmailTemplates;
+			}
+			set
+			{
+				this._EmailTemplates.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_StudentSkupina", Storage="_StudentSkupinas", ThisKey="Id", OtherKey="Id_User")]
+		public EntitySet<StudentSkupina> StudentSkupinas
+		{
+			get
+			{
+				return this._StudentSkupinas;
+			}
+			set
+			{
+				this._StudentSkupinas.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Activity", Storage="_Activities", ThisKey="Id", OtherKey="IdUser")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Attachments(Attachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Attachments(Attachment entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_ActivityTemplates(ActivityTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_ActivityTemplates(ActivityTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_EmailTemplates(EmailTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_EmailTemplates(EmailTemplate entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_StudentSkupinas(StudentSkupina entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_StudentSkupinas(StudentSkupina entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 }

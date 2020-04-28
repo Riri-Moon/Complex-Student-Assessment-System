@@ -73,13 +73,13 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    FinalGrade grade = con.FinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent == (int)StudentGrid.CurrentRow.Cells[0].Value).FirstOrDefault();
 
                     if(!Validator())
                     {
                         return;
                     }
 
+                    FinalGrade grade = con.FinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent == (int)StudentGrid.CurrentRow.Cells[0].Value).FirstOrDefault();
                     float.TryParse(MaxPtsBox.Text, out float maxPoints);
                     float.TryParse(SemPtsBox.Text, out float semPts);
                     float.TryParse(LecPtsBox.Text, out float lecPts);     
@@ -122,9 +122,13 @@ namespace CSAS
                     var allFinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id);
                     bool isAdded = false;
 
+                    if (allStudents.Count() <=0 || allStudents==null)
+                    {
+                        return;
+                    }
                     foreach (var student in allStudents)
                     {
-                        var exists = allFinalGrades.Where(x => x.IdSkupina == student.Id);
+                        var exists = allFinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent==student.Id);
 
                         if (exists.Count() > 0)
                         {
@@ -169,6 +173,12 @@ namespace CSAS
                     double? acquiredPoints = 0;
                     double? bonusSem = 0;
                     double? bonusLec = 0;
+                    if(StudentGrid.Rows.Count <=0)
+                    {
+                        MessageBox.Show("Nenašiel sa žiaden študent.");
+                        return;
+                    }
+
                     var selectedStudentId = (int)StudentGrid.CurrentRow.Cells[0].Value;
 
                     if (materialRadioButton1.Checked)
@@ -323,6 +333,12 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
+                    if (StudentGrid.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Nenašiel sa žiaden študent.");
+                        return false;
+                    }
+
                     FinalGrade grade = con.FinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent == (int)StudentGrid.CurrentRow.Cells[0].Value).FirstOrDefault();
 
                     var notGradedActivity = con.GetTable<Activity>().Where(x => x.IdStudent == (int)StudentGrid.CurrentRow.Cells[0].Value && x.Hodnotene == false);
@@ -394,6 +410,11 @@ namespace CSAS
                 newLog.LogError(ex);
                 return false;
             }
+        }
+
+        private void BackBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
             

@@ -44,15 +44,15 @@ namespace CSAS
                 CBox.Text = user.CGrade.ToString();
                 DBox.Text = user.DGrade.ToString();
                 EBox.Text = user.EGrade.ToString();
-
+                textBox2.Text = user.Email;
                 materialMultiLineTextBox1.Text = user.Signature;
                 LoadComboBoxes(activeUser);
 
-                if (actTempLec != null)
+                if (actTempLec != null && comboBox1.Items.Count > 0)
                 {
                     comboBox1.SelectedItem = actTempSem.ActivityName;
                 }
-                if (actTempSem != null)
+                if (actTempSem != null && comboBox1.Items.Count > 0)
                 {
                     comboBox2.SelectedItem = actTempLec.ActivityName;
                 }

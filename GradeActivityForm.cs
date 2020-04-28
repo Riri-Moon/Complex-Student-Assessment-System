@@ -389,8 +389,6 @@ namespace CSAS
 
                         gradeTotal += tsk.Hodnotenie;
                     }
-
-                    // var insert to act con.Activities.Where(x => x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault()
                     if (MaterialTabCOntrol.SelectedIndex == 0)
                     {
                         MaterialTabCOntrol.SelectedTab.Controls.Find("StudentPtsLabel", false).FirstOrDefault().Text = "Získané: " + gradeTotal.ToString();

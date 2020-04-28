@@ -265,10 +265,15 @@ namespace CSAS
                             newStudent.IdGroupForAttendance = (string)GroupAttCombo.SelectedItem;
                             newStudent.ID_Kruzok = (string)GroupCombo.SelectedItem;
                         }
+                        else if(!string.IsNullOrEmpty(GroupCombo.Text))
+                        {
+                            newStudent.IdGroupForAttendance = GroupCombo.Text;
+                            newStudent.ID_Kruzok = GroupCombo.Text;
+                        }
                         else
                         {
-                            newStudent.IdGroupForAttendance = GroupAttCombo.Text;
-                            newStudent.ID_Kruzok = GroupCombo.Text;
+                            MessageBox.Show("Krúžok musí byť vyplnený, ak nemáte žiadne možnosti, tak napíšte manuálne");
+                            return;
                         }
                         if (StudentBoxesValidator() && IsicValidator())
                         {

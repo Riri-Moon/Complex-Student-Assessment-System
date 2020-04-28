@@ -293,7 +293,7 @@
             this.GradeBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.GradeBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.GradeBtn.Name = "GradeBtn";
-            this.GradeBtn.Size = new System.Drawing.Size(94, 36);
+            this.GradeBtn.Size = new System.Drawing.Size(92, 36);
             this.GradeBtn.TabIndex = 10;
             this.GradeBtn.Text = "Hodnotiť";
             this.GradeBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -312,12 +312,13 @@
             this.BackBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BackBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(58, 36);
+            this.BackBtn.Size = new System.Drawing.Size(56, 36);
             this.BackBtn.TabIndex = 11;
             this.BackBtn.Text = "Späť";
             this.BackBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.BackBtn.UseAccentColor = false;
             this.BackBtn.UseVisualStyleBackColor = true;
+            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
             // 
             // materialRadioButton1
             // 

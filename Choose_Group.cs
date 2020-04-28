@@ -18,9 +18,11 @@ namespace CSAS
         BackgroundWorker _worker = new BackgroundWorker();
         SynchronizationContext _syncContext;
 
-        public Choose_Group()
+        public Choose_Group(User user)
         {
             InitializeComponent();
+
+
             _syncContext = SynchronizationContext.Current;
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
             skinManager.EnforceBackcolorOnAllComponents = false;
@@ -31,19 +33,17 @@ namespace CSAS
 
             DataContext con = new DataContext(conn_str);
             con.Connection.Open();
+            loggedUser = user;
 
             Skupiny_Grid.RowHeadersVisible = false;
             Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Skupiny_Grid.MultiSelect = false;
             Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            //// CHANGE TO GET ACTUAL USER
-            Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == 1);
+            Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
             Skupiny_Grid.Columns["ID"].Visible = false;
             Skupiny_Grid.Columns["Id_User"].Visible = false;
             Skupiny_Grid.Columns["User"].Visible = false;
-            ////// THIS ONE TOO
-            loggedUser = con.GetTable<User>().Where(x => x.Id == 1).FirstOrDefault();
             skinManager.AddFormToManage(this);
 
         }
@@ -104,14 +104,12 @@ namespace CSAS
             else
             {
                 Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
-
                 Main_Window main_ = new Main_Window(Selected, loggedUser);
-                main_.Closed += (s, args) => this.Close();
-
-                main_.Show();
+                    main_.FormClosed += (s, args) => this.Close();
+                    main_.Show();
             }
             }));
-
+            
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -130,8 +128,7 @@ namespace CSAS
         }
         public void HandleWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //this.Hide();
-
+            this.Hide();
         }
 
         public void HandleProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -150,8 +147,8 @@ namespace CSAS
 
         public void Select_Button_Click_1(object sender, EventArgs e)
         {
+           // this.Hide();
             Started();
-            this.Hide();
         }
 
 
@@ -162,7 +159,33 @@ namespace CSAS
 
         private void Exit_Button_Click_1(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (MessageBox.Show("Naozaj chcete skončiť?","Ukončiť",MessageBoxButtons.YesNo,MessageBoxIcon.Question) ==DialogResult.Yes)
+            {
+                Environment.Exit(1);
+            }
+        }
+
+        private void Create_Button_Click(object sender, EventArgs e)
+        {
+            var newgrp = new CreateNewGroupForm(loggedUser);
+            DialogResult result = newgrp.ShowDialog();
+            if(result== DialogResult.OK)
+            {
+                DataContext con = new DataContext(conn_str);
+                con.Connection.Open();
+
+                Skupiny_Grid.RowHeadersVisible = false;
+                Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                Skupiny_Grid.MultiSelect = false;
+                Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                //// CHANGE TO GET ACTUAL USER
+                Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
+                Skupiny_Grid.Columns["ID"].Visible = false;
+                Skupiny_Grid.Columns["Id_User"].Visible = false;
+                Skupiny_Grid.Columns["User"].Visible = false;
+            }
+            
         }
     }
 }

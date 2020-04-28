@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
+using Microsoft.VisualBasic;
 using SendGrid.Helpers.Mail;
 
 namespace CSAS
@@ -115,12 +116,24 @@ namespace CSAS
         }
 
 
-        private async void SendActivityCreated(List<EmailAddress> mails, Activity activity)
+        private async void SendActivityCreated(List<EmailAddress> mails, Activity activity,string link)
         {
             EmailClient client = new EmailClient();
-            SendGrid.SendGridClient gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
-            var content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
-                $" <br/> ktorú je potrebné odovzdať do {activity.Deadline}";
+            string content = string.Empty;
+            SendGrid.SendGridClient gridClient;
+            if (!string.IsNullOrEmpty(link))
+            {
+                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                   $" <br/> ktorú je potrebné odovzdať do {activity.Deadline} <br/> {link}";
+            }
+            else
+            {
+                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                 content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline}";
+            }
+   
 
             EmailBody body = new EmailBody()
             {
@@ -227,7 +240,9 @@ namespace CSAS
 
                     if (ActCreatedCheckBox.Checked == true)
                     {
-                        SendActivityCreated(studentAddress, activityForEmailSending);
+                        var link = Interaction.InputBox("Dodatočná správa", "Ak si neželáte zaslať dodatočné informácie o úlohe, nechajte prázdne", "Viac informácií nájdete na: ", -1, -1);
+
+                        SendActivityCreated(studentAddress, activityForEmailSending,link);
                     }
 
                     MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");

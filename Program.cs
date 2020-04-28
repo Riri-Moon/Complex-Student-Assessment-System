@@ -17,8 +17,9 @@ namespace CSAS
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Choose_Group());
-            
+
+
+            Application.Run(new LoginForm());           
         }
     }
 }

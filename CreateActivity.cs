@@ -1,4 +1,5 @@
-﻿using SendGrid.Helpers.Mail;
+﻿using Microsoft.VisualBasic;
+using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -66,6 +67,7 @@ namespace CSAS
                     if (groupCmbo.Text == "Všetky")
                     {
                         studs = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkup.Id);
+
                     }
 
                     else
@@ -73,6 +75,12 @@ namespace CSAS
                         studs = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkup.Id && x.ID_Kruzok == groupCmbo.Text);
                     }
 
+                    if(studs.Count() <=0)
+                    {
+                        MessageBox.Show("Skupina neobsahuje žiadnych študentov. Nie je možné vytvoriť aktivitu.");
+                        return;
+
+                    }
 
                     List<EmailAddress> studentsAddresses = new List<EmailAddress>();
                     Activity activityForEmailSending = null;
@@ -124,14 +132,17 @@ namespace CSAS
                         }
 
                         con.SubmitChanges();
+                        MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
+
                     }
 
                     if (ActCreatedCheckBox.Checked == true)
                     {
-                        SendActivityCreated(studentsAddresses, activityForEmailSending);
+                        var link = Interaction.InputBox("Dodatočná správa", "Ak si neželáte zaslať dodatočné informácie o úlohe, nechajte prázdne", "Viac informácií nájdete na: ", -1, -1);
+
+                        SendActivityCreated(studentsAddresses, activityForEmailSending,link);
                     }
 
-                    MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
                 }
             }
             catch (Exception ex)
@@ -146,12 +157,23 @@ namespace CSAS
 
 
 
-        private void SendActivityCreated(List<EmailAddress> mails, Activity activity)
+        private void SendActivityCreated(List<EmailAddress> mails, Activity activity, string link)
         {
             EmailClient client = new EmailClient();
-            SendGrid.SendGridClient gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
-            var content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
-                $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()}";
+            string content = string.Empty;
+            SendGrid.SendGridClient gridClient;
+            if (!string.IsNullOrEmpty(link))
+            {
+                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                 content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()} <br/> {link}";
+            }
+            else
+            {
+                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                 content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()}";
+            }
 
             EmailBody body = new EmailBody()
             {

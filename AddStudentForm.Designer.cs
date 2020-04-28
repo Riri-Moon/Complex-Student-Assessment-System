@@ -234,7 +234,6 @@
             this.NameBox.Name = "NameBox";
             this.NameBox.Size = new System.Drawing.Size(133, 25);
             this.NameBox.TabIndex = 4;
-            this.NameBox.TabStop = false;
             this.NameBox.Text = "";
             this.NameBox.UseTallSize = false;
             // 
@@ -251,7 +250,6 @@
             this.SurnameBox.Name = "SurnameBox";
             this.SurnameBox.Size = new System.Drawing.Size(139, 25);
             this.SurnameBox.TabIndex = 5;
-            this.SurnameBox.TabStop = false;
             this.SurnameBox.Text = "";
             this.SurnameBox.UseTallSize = false;
             // 
@@ -268,7 +266,6 @@
             this.EmailBox.Name = "EmailBox";
             this.EmailBox.Size = new System.Drawing.Size(133, 25);
             this.EmailBox.TabIndex = 6;
-            this.EmailBox.TabStop = false;
             this.EmailBox.Text = "";
             this.EmailBox.UseTallSize = false;
             // 
@@ -285,7 +282,6 @@
             this.EmailUcmBox.Name = "EmailUcmBox";
             this.EmailUcmBox.Size = new System.Drawing.Size(133, 25);
             this.EmailUcmBox.TabIndex = 7;
-            this.EmailUcmBox.TabStop = false;
             this.EmailUcmBox.Text = "";
             this.EmailUcmBox.UseTallSize = false;
             // 
@@ -302,7 +298,6 @@
             this.IsicBox.Name = "IsicBox";
             this.IsicBox.Size = new System.Drawing.Size(133, 25);
             this.IsicBox.TabIndex = 8;
-            this.IsicBox.TabStop = false;
             this.IsicBox.Text = "";
             this.IsicBox.UseTallSize = false;
             // 
@@ -319,13 +314,11 @@
             this.GradeBox.Name = "GradeBox";
             this.GradeBox.Size = new System.Drawing.Size(133, 25);
             this.GradeBox.TabIndex = 9;
-            this.GradeBox.TabStop = false;
             this.GradeBox.Text = "";
             this.GradeBox.UseTallSize = false;
             // 
             // GroupCombo
             // 
-            this.GroupCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GroupCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.GroupCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupCombo.FormattingEnabled = true;

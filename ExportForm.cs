@@ -334,13 +334,13 @@ namespace CSAS
                     var students = globalStudents;
                     var attendances = globalAttendances;
 
-                    if (students == null)
+                    if (students.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent");
                         e.Cancel = true;
                         return;
                     }
-                    if (attendances == null)
+                    if (attendances.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden záznam o dochádzke");
                         e.Cancel = true;
@@ -595,7 +595,7 @@ namespace CSAS
             };
 
 
-
+            
             return attendances;
             
         }
@@ -651,13 +651,13 @@ namespace CSAS
                     var students = globalStudents;
                     var finalGrades = globalFinalGrades;
 
-                    if(students==null)
+                    if (students.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent");
                         e.Cancel = true;
                         return;
                     }
-                    if (finalGrades == null)
+                    if (finalGrades.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden záznam hodnotení");
                         e.Cancel = true;
@@ -698,6 +698,8 @@ namespace CSAS
                         {
                             e.Cancel = true;
                             m_oWorker.ReportProgress(0);
+                            doc.Flush();
+                            doc.Close();
                             return;
                         }
 
@@ -740,6 +742,7 @@ namespace CSAS
             catch (Exception ex)
             {
                 doc.Close();
+                doc.Flush();
                 e.Cancel = true;
                 MessageBox.Show(ex.ToString());
             }
@@ -875,13 +878,13 @@ namespace CSAS
                     var activities = globalActivities;
                     var tasks = con.GetTable<Task>();
 
-                    if (students == null)
+                    if (students.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent");
                         e.Cancel = true;
                         return;
                     }
-                    if (activities == null)
+                    if (activities.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden záznam o aktivitách");
                         e.Cancel = true;
@@ -1147,13 +1150,13 @@ namespace CSAS
                     var activities = globalActivities;
                     var tasks = con.GetTable<Task>();
 
-                    if (students == null)
+                    if (students.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent");
                         e.Cancel = true;
                         return;
                     }
-                    if (activities == null)
+                    if (activities.Count() <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden záznam o aktivitách");
                         e.Cancel = true;
@@ -1386,22 +1389,42 @@ namespace CSAS
                 m_oWorker.WorkerReportsProgress = true;
                 m_oWorker.WorkerSupportsCancellation = true;
                 globalStudents = GetStudents();
+                if(globalStudents == null || globalStudents.Count() <= 0)
+                {
+                    MessageBox.Show("Nenašiel sa žiaden študent");
+                    return;
+                }
 
                 switch (ExportCombo.SelectedIndex)
                 {
                     case 0:
                         globalActivities = null;
                         globalActivities = GetActivities();
+                        if (globalActivities == null || globalActivities.Count() <=0)
+                        {
+                            MessageBox.Show("Nenašla sa žiadna aktivita");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
                         break;
                     case 1:
                         globalAttendances = null;
                         globalAttendances = GetAttendances();
+                        if (globalAttendances == null || globalAttendances.Count() <= 0)
+                        {
+                            MessageBox.Show("Nenašla sa žiadna dochádzka");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendanceExcelExport);
                         break;
                     case 2:
                         globalFinalGrades = null;
                         globalFinalGrades = GetFinalGrades();
+                        if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
+                        {
+                            MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(FinalGradeExcelExport);
                         break;
                 }
@@ -1479,6 +1502,12 @@ namespace CSAS
         {
             try
             {
+                globalStudents = GetStudents();
+                if (globalStudents == null || globalStudents.Count() <=0)
+                {
+                    MessageBox.Show("Nenašiel sa žiaden študent");
+                    return;
+                }
 
                 SaveFileDialog file = new SaveFileDialog();
                 file.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -1495,8 +1524,7 @@ namespace CSAS
                     globalPath = string.Empty;
                     globalPath = file.FileName;
                 }
-                globalStudents = GetStudents();
-
+              
                 m_oWorker = new BackgroundWorker();
                 m_oWorker.ProgressChanged += new ProgressChangedEventHandler(m_oWorker_ProgressChanged);
                 m_oWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkPdfCompleted);
@@ -1508,16 +1536,32 @@ namespace CSAS
                     case 0:
                         globalActivities = null;
                         globalActivities = GetActivities();
+                        if (globalActivities == null || globalActivities.Count() <= 0)
+                        {
+                            MessageBox.Show("Nenašla sa žiadna aktivita");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(GetStudentActivityPdf);
+
                         break;
                     case 1:
                         globalAttendances = null;
                         globalAttendances = GetAttendances();
+                        if (globalAttendances == null || globalAttendances.Count() <= 0)
+                        {
+                            MessageBox.Show("Nenašla sa žiadna dochádzka");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendancePdfExport);
                         break;
                     case 2:
                         globalFinalGrades = null;
                         globalFinalGrades = GetFinalGrades();
+                        if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
+                        {
+                            MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
+                            return;
+                        }
                         m_oWorker.DoWork += new DoWorkEventHandler(FinalGradePdfExport);
                         break;
                 }

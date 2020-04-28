@@ -9,6 +9,8 @@ using System.Timers;
 using System.IO;
 using System.Drawing;
 using MaterialSkin.Controls;
+using System.ComponentModel;
+
 namespace CSAS
 {
     public partial class Main_Window : MaterialForm
@@ -21,6 +23,7 @@ namespace CSAS
         protected bool isCollapsed = true;
         public StudentSkupina studentSkupina = new StudentSkupina();
         protected static User currentUser = new User();
+        private int currentRow = 0;
 
 
         public Main_Window(StudentSkupina skupina, User user)
@@ -283,9 +286,9 @@ namespace CSAS
        
         private void Ext_Btn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Naozaj chcete skončiť?", "Ukončiť", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                Application.Exit();
+                  Environment.Exit(1);          
             }
         }
         private void Attendance_Button_Click(object sender, EventArgs e)
@@ -414,12 +417,29 @@ namespace CSAS
 
         private void IsClosed(object sender, EventArgs e)
         {
-            GetTable();
-            GetActivities();
-            using (var con = new StudentDBDataContext(conn_str))
+            try
             {
-                currentUser = con.Users.Where(x => x.Id == currentUser.Id).FirstOrDefault();
+                using (var con = new StudentDBDataContext(conn_str))
+                {
+                    currentUser = con.Users.Where(x => x.Id == currentUser.Id).FirstOrDefault();
+                }
+                GetTable();
+                currentRow = Student_Grid.CurrentRow.Index;
+
+
+                Student_Grid.ClearSelection();
+                //Student_Grid.CurrentRow.Selected = false;
+                Student_Grid.Rows[currentRow].Selected = true;
+                Student_Grid.CurrentCell = Student_Grid[1, currentRow];
+
+                Student_Grid.Focus();
+                GetActivities();
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
         private void Main_Window_Shown(object sender, EventArgs e)
         {         
@@ -541,7 +561,7 @@ namespace CSAS
 
         private void Open_Btn_Click(object sender, EventArgs e)
         {
-            var choose = new Choose_Group();
+            var choose = new Choose_Group(currentUser);
            DialogResult result = choose.ShowDialog();
             if(result == DialogResult.Yes)
             {
@@ -558,5 +578,13 @@ namespace CSAS
             var export = new ExportForm(studentSkupina, currentUser);
             export.Show();
         }
+
+        private void LogOutBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.OpenForms["LoginForm"].Show();
+
+        }
+
     }
 }

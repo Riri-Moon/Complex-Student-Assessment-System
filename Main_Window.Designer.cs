@@ -39,6 +39,7 @@
             this.Student_Grid = new System.Windows.Forms.DataGridView();
             this.Study_Panel = new System.Windows.Forms.Panel();
             this.FinalGradeBtn = new System.Windows.Forms.Button();
+            this.Stud_G_Button = new System.Windows.Forms.Button();
             this.Import_Btn = new System.Windows.Forms.Button();
             this.Stat_Btn = new System.Windows.Forms.Button();
             this.Open_Btn = new System.Windows.Forms.Button();
@@ -49,10 +50,12 @@
             this.button2 = new System.Windows.Forms.Button();
             this.Create_Templ = new System.Windows.Forms.Button();
             this.Create_Act_Btn = new System.Windows.Forms.Button();
+            this.Activity_Button = new System.Windows.Forms.Button();
             this.Student_Panel = new System.Windows.Forms.Panel();
             this.Add_Stud_Button = new System.Windows.Forms.Button();
             this.Settings_Panel = new System.Windows.Forms.Panel();
             this.Email_client_btn = new System.Windows.Forms.Button();
+            this.Gear_Button = new System.Windows.Forms.Button();
             this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Ext_Btn = new System.Windows.Forms.Button();
@@ -63,9 +66,7 @@
             this.bodyZaAktivituCvičenieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bodyZaAktivituPrednáškaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odstrániťToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Stud_G_Button = new System.Windows.Forms.Button();
-            this.Activity_Button = new System.Windows.Forms.Button();
-            this.Gear_Button = new System.Windows.Forms.Button();
+            this.LogOutBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).BeginInit();
             this.Study_Panel.SuspendLayout();
@@ -202,6 +203,17 @@
             this.FinalGradeBtn.UseVisualStyleBackColor = false;
             this.FinalGradeBtn.Click += new System.EventHandler(this.FinalGradeBtn_Click);
             // 
+            // Stud_G_Button
+            // 
+            this.Stud_G_Button.AutoEllipsis = true;
+            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Stud_G_Button, "Stud_G_Button");
+            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
+            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Stud_G_Button.Name = "Stud_G_Button";
+            this.Stud_G_Button.UseVisualStyleBackColor = false;
+            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
+            // 
             // Import_Btn
             // 
             this.Import_Btn.AutoEllipsis = true;
@@ -301,6 +313,16 @@
             this.Create_Act_Btn.UseVisualStyleBackColor = false;
             this.Create_Act_Btn.Click += new System.EventHandler(this.Create_Act_Btn_Click);
             // 
+            // Activity_Button
+            // 
+            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Activity_Button, "Activity_Button");
+            this.Activity_Button.FlatAppearance.BorderSize = 0;
+            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Activity_Button.Name = "Activity_Button";
+            this.Activity_Button.UseVisualStyleBackColor = false;
+            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
+            // 
             // Student_Panel
             // 
             this.Student_Panel.AllowDrop = true;
@@ -334,6 +356,16 @@
             this.Email_client_btn.Name = "Email_client_btn";
             this.Email_client_btn.UseVisualStyleBackColor = false;
             this.Email_client_btn.Click += new System.EventHandler(this.Email_client_btn_Click_1);
+            // 
+            // Gear_Button
+            // 
+            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Gear_Button, "Gear_Button");
+            this.Gear_Button.FlatAppearance.BorderSize = 0;
+            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
+            this.Gear_Button.Name = "Gear_Button";
+            this.Gear_Button.UseVisualStyleBackColor = false;
+            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
             // 
             // OdoslatEmailBtnMainMenu
             // 
@@ -413,42 +445,21 @@
             this.odstrániťToolStripMenuItem1.Name = "odstrániťToolStripMenuItem1";
             resources.ApplyResources(this.odstrániťToolStripMenuItem1, "odstrániťToolStripMenuItem1");
             // 
-            // Stud_G_Button
+            // LogOutBtn
             // 
-            this.Stud_G_Button.AutoEllipsis = true;
-            this.Stud_G_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Stud_G_Button, "Stud_G_Button");
-            this.Stud_G_Button.FlatAppearance.BorderSize = 0;
-            this.Stud_G_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Stud_G_Button.Name = "Stud_G_Button";
-            this.Stud_G_Button.UseVisualStyleBackColor = false;
-            this.Stud_G_Button.Click += new System.EventHandler(this.Stud_G_Button_Click);
-            // 
-            // Activity_Button
-            // 
-            this.Activity_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Activity_Button, "Activity_Button");
-            this.Activity_Button.FlatAppearance.BorderSize = 0;
-            this.Activity_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Activity_Button.Name = "Activity_Button";
-            this.Activity_Button.UseVisualStyleBackColor = false;
-            this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
-            // 
-            // Gear_Button
-            // 
-            this.Gear_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Gear_Button, "Gear_Button");
-            this.Gear_Button.FlatAppearance.BorderSize = 0;
-            this.Gear_Button.Image = global::CSAS.Properties.Resources.icons8_expand_arrow_32;
-            this.Gear_Button.Name = "Gear_Button";
-            this.Gear_Button.UseVisualStyleBackColor = false;
-            this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
+            this.LogOutBtn.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.LogOutBtn, "LogOutBtn");
+            this.LogOutBtn.FlatAppearance.BorderSize = 0;
+            this.LogOutBtn.Name = "LogOutBtn";
+            this.LogOutBtn.UseVisualStyleBackColor = false;
+            this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
             // 
             // Main_Window
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.LogOutBtn);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.Student_Grid);
             this.Controls.Add(this.Activity_Grid);
@@ -503,5 +514,6 @@
         private System.Windows.Forms.ToolStripMenuItem bodyZaAktivituPrednáškaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem odstrániťToolStripMenuItem1;
         private System.Windows.Forms.Button FinalGradeBtn;
+        private System.Windows.Forms.Button LogOutBtn;
     }
 }
