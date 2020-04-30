@@ -43,6 +43,8 @@
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.CreateActBtn = new MaterialSkin.Controls.MaterialButton();
+            this.SendMeBox = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.TaskGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActivityGridView)).BeginInit();
             this.SuspendLayout();
@@ -123,7 +125,7 @@
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.materialLabel5.Location = new System.Drawing.Point(631, 192);
+            this.materialLabel5.Location = new System.Drawing.Point(625, 234);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(146, 19);
@@ -174,7 +176,7 @@
             this.studentCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.studentCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.studentCombo.FormattingEnabled = true;
-            this.studentCombo.Location = new System.Drawing.Point(791, 189);
+            this.studentCombo.Location = new System.Drawing.Point(785, 231);
             this.studentCombo.Name = "studentCombo";
             this.studentCombo.Size = new System.Drawing.Size(163, 25);
             this.studentCombo.TabIndex = 19;
@@ -242,7 +244,7 @@
             this.CreateActBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateActBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateActBtn.Name = "CreateActBtn";
-            this.CreateActBtn.Size = new System.Drawing.Size(152, 36);
+            this.CreateActBtn.Size = new System.Drawing.Size(158, 36);
             this.CreateActBtn.TabIndex = 24;
             this.CreateActBtn.Text = "Vytvoriť aktivitu";
             this.CreateActBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -250,11 +252,44 @@
             this.CreateActBtn.UseVisualStyleBackColor = true;
             this.CreateActBtn.Click += new System.EventHandler(this.CreateActBtn_Click);
             // 
+            // SendMeBox
+            // 
+            this.SendMeBox.AutoSize = true;
+            this.SendMeBox.Depth = 0;
+            this.SendMeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.SendMeBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SendMeBox.Location = new System.Drawing.Point(901, 181);
+            this.SendMeBox.Margin = new System.Windows.Forms.Padding(0);
+            this.SendMeBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.SendMeBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SendMeBox.Name = "SendMeBox";
+            this.SendMeBox.Ripple = true;
+            this.SendMeBox.Size = new System.Drawing.Size(35, 37);
+            this.SendMeBox.TabIndex = 26;
+            this.SendMeBox.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.materialLabel6.Location = new System.Drawing.Point(706, 190);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(192, 19);
+            this.materialLabel6.TabIndex = 25;
+            this.materialLabel6.Text = "Posielanie upozornení mne";
+            this.materialLabel6.UseCompatibleTextRendering = true;
+            // 
             // IndividualActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1045, 450);
+            this.Controls.Add(this.SendMeBox);
+            this.Controls.Add(this.materialLabel6);
             this.Controls.Add(this.CreateActBtn);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.ActCreatedCheckBox);
@@ -290,5 +325,7 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private MaterialSkin.Controls.MaterialButton CreateActBtn;
+        private MaterialSkin.Controls.MaterialCheckbox SendMeBox;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
     }
 }

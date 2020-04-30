@@ -251,7 +251,7 @@ namespace CSAS
                     using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                     {
                         var act = con.GetTable<Task>().Where(x => x.IdActivity == currActivity.Id && x.IdStudent == currStud.Id);
-                        double? gradeTotal = 0;
+                        double gradeTotal = 0;
                         foreach (var tsk in act)
                         {
 
@@ -259,7 +259,7 @@ namespace CSAS
                         }
                         var insert = con.Activities.Where(x => x.IdSkupina == currGroup.Id && x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault();
 
-                        if (gradeTotal.Value <= insert.MaxPoints)
+                        if (gradeTotal <= insert.MaxPoints)
                         {
                             ///ERROR 280 Line
                             insert.Hodnotene = true;
@@ -275,6 +275,7 @@ namespace CSAS
                             insert.EmailSendingActive = false;
                             insert.SendFirst = false;
                             insert.SendSecond = false;
+                            insert.SendMe = false;
                         }
 
                         con.SubmitChanges();

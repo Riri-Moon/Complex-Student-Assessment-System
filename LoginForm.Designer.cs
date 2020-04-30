@@ -120,7 +120,7 @@
             this.LoginBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoginBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoginBtn.Name = "LoginBtn";
-            this.LoginBtn.Size = new System.Drawing.Size(115, 36);
+            this.LoginBtn.Size = new System.Drawing.Size(118, 36);
             this.LoginBtn.TabIndex = 3;
             this.LoginBtn.Text = "Registrovať";
             this.LoginBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -139,7 +139,7 @@
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
-            this.materialButton1.Size = new System.Drawing.Size(91, 36);
+            this.materialButton1.Size = new System.Drawing.Size(93, 36);
             this.materialButton1.TabIndex = 2;
             this.materialButton1.Text = "Prihlásiť";
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -170,7 +170,7 @@
             this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton2.Name = "materialButton2";
-            this.materialButton2.Size = new System.Drawing.Size(82, 36);
+            this.materialButton2.Size = new System.Drawing.Size(83, 36);
             this.materialButton2.TabIndex = 5;
             this.materialButton2.Text = "Ukončiť";
             this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -192,6 +192,7 @@
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.NameBox);
             this.Controls.Add(this.FirstPssBox);
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Prihlásenie";

@@ -94,6 +94,8 @@ namespace CSAS
                 }
                 catch (Exception ex)
                 {
+                    Logger logger = new Logger();
+                    logger.LogError(ex);
                     return;
                 }
             }
@@ -254,7 +256,7 @@ namespace CSAS
                             Email = EmailBox.Text,
                             Email_UCM = EmailUcmBox.Text,
                             ISIC = IsicBox.Text,
-                            ID_stud_skupina = skup.Id,/// change studprogram
+                            ID_stud_skupina = skup.Id,
                             Stud_program = skup.Nazov,
 
                             Forma = skup.Forma,

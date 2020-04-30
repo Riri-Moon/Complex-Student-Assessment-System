@@ -19,12 +19,17 @@ namespace CSAS
         List<EmailAddress> firstReminderAddresses = new List<EmailAddress>();
         List<EmailAddress> secondReminderAddresses = new List<EmailAddress>();
 
+        bool SendToMe = false;
         public async void AutomatedEmailSending(User user)
         {
             try
             {
-                EmailClient eClient = new EmailClient();       
-                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar());
+                EmailClient eClient = new EmailClient();
+                if (string.IsNullOrEmpty(user.ApiKey))
+                {
+                    return;
+                }
+                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar(user));
 
 
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
@@ -55,7 +60,7 @@ namespace CSAS
                             switch (act.EmailSendingActive)
                             {
                                 /// Odosielanie prvych upozorneni ak do odovzdania zostavaju 3 alebo 2 dni
-                                case true when days <= 3 && days > 1 && act.SendFirst==true && act.Hodnotene==false:
+                                case true when days <= 3 && days > 1 && act.SendFirst == true && act.Hodnotene == false:
                                     {
                                         firstReminderAddresses.Add(MailHelper.StringToEmailAddress(act.Student.Email));
                                         Activity currAct = con.GetTable<Activity>().Where(x => x.Id == act.Id).FirstOrDefault();
@@ -65,7 +70,7 @@ namespace CSAS
                                     }
                                 /// Zbieranie emailovych adries na odoslanie druhych upozorneni ak do odovzdania zostavaju 1 alebo 0 dni
 
-                                case true when days >= 0 && days < 1 && act.SendSecond==true && act.Hodnotene==false:
+                                case true when days >= 0 && days < 1 && act.SendSecond == true && act.Hodnotene == false:
                                     {
                                         secondReminderAddresses.Add(MailHelper.StringToEmailAddress(act.Student.Email));
                                         Activity currAct = con.GetTable<Activity>().Where(x => x.Id == act.Id).FirstOrDefault();
@@ -77,6 +82,14 @@ namespace CSAS
 
                                 default:
                                     continue;
+                            }
+
+
+                            if(act.SendMe ==true && act.Hodnotene==false && days <=0)
+                            {
+                                Activity currAct = con.GetTable<Activity>().Where(x => x.Id == act.Id).FirstOrDefault();
+                                currAct.SendMe = false;
+                                SendToMe = true;
                             }
                         }
 
@@ -94,6 +107,16 @@ namespace CSAS
                             await SendEmails(template, 1, secondReminderAddresses, user, group.Key.Deadline);
                         }                      
                     }
+
+
+                    if(SendToMe==true)
+                    {
+                        var msg = MailHelper.CreateSingleEmail(MailHelper.StringToEmailAddress(user.Email), MailHelper.StringToEmailAddress(user.Email)
+                            , "Aktivita pripravená na hodnotenie", "Uplynul dátum odovzdania niektorej z aktivít.<br/>", "Uplynul dátum odovzdania niektorej z aktivít.<br/>");
+                        var result = await client.SendEmailAsync(msg);
+
+                    }
+
                 }
             }            
             catch(Exception ex)
@@ -111,7 +134,7 @@ namespace CSAS
             try
             { 
                 EmailClient eClient = new EmailClient();
-                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar());
+                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar(user));
                 List<SendGrid.Helpers.Mail.Attachment> attachmentList = new List<SendGrid.Helpers.Mail.Attachment>();
                 EmailAttachments emailAttachments = new EmailAttachments();
                 EmailBody body = new EmailBody()
@@ -119,7 +142,6 @@ namespace CSAS
                     /// HtmlContent je celkovo obsah emailu, <br/> je nutne pridat kvoli tomu, aby email obsahoval nove riadky. Na konci je priadnie 
                     /// emailoveho podpisu.
                     HtmlContent = emailTemplate.EmailContent.Replace("\u00A0", "<br/>") +"<br/> <br/> " + user.Signature.Replace("\u00A0", "<br/>"),
-                   // PlainTextContent = emailTemplate.EmailContent,
                     Subject = emailTemplate.EmailSubject,
                     To = emailAddresses
                 };
@@ -148,8 +170,6 @@ namespace CSAS
                             attachmentList.Add(attachment);
                         } else
                         {
-
-                            // Tu pridat log ak nebude file existovat
                             continue;
                         }
                     }

@@ -34,16 +34,7 @@ namespace CSAS
             DataContext con = new DataContext(conn_str);
             con.Connection.Open();
             loggedUser = user;
-
-            Skupiny_Grid.RowHeadersVisible = false;
-            Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Skupiny_Grid.MultiSelect = false;
-            Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
-            Skupiny_Grid.Columns["ID"].Visible = false;
-            Skupiny_Grid.Columns["Id_User"].Visible = false;
-            Skupiny_Grid.Columns["User"].Visible = false;
+            UserGroups();
             skinManager.AddFormToManage(this);
 
         }
@@ -56,6 +47,22 @@ namespace CSAS
                 return cp;
             }
         }
+
+        private void UserGroups()
+        {
+            StudentDBDataContext con = new StudentDBDataContext(conn_str);
+
+            Skupiny_Grid.RowHeadersVisible = false;
+            Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Skupiny_Grid.MultiSelect = false;
+            Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
+            Skupiny_Grid.Columns["ID"].Visible = false;
+            Skupiny_Grid.Columns["Id_User"].Visible = false;
+            Skupiny_Grid.Columns["User"].Visible = false;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -64,7 +71,7 @@ namespace CSAS
 
         private void Exit_Button_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Naozaj chcete ukončiť aplikáciu ?", "Ukončiť", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Application.Exit();
             }
@@ -75,10 +82,7 @@ namespace CSAS
         private void Remove_button_Click(object sender, EventArgs e)
 
         {
-            if (MessageBox.Show("Are you sure you want to remove study group ?", "Remove", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-
-            }
+        
         }
 
 
@@ -154,6 +158,7 @@ namespace CSAS
 
         private void Remove_Button_Click_1(object sender, EventArgs e)
         {
+           
 
         }
 
@@ -171,21 +176,82 @@ namespace CSAS
             DialogResult result = newgrp.ShowDialog();
             if(result== DialogResult.OK)
             {
-                DataContext con = new DataContext(conn_str);
-                con.Connection.Open();
-
-                Skupiny_Grid.RowHeadersVisible = false;
-                Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                Skupiny_Grid.MultiSelect = false;
-                Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-                //// CHANGE TO GET ACTUAL USER
-                Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
-                Skupiny_Grid.Columns["ID"].Visible = false;
-                Skupiny_Grid.Columns["Id_User"].Visible = false;
-                Skupiny_Grid.Columns["User"].Visible = false;
+                UserGroups();
             }
             
+        }
+
+        private void Remove_Button_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Naozaj chcete odstrániť skupinu, so všetkými údajmi, ktoré obsahuje ?", "Odstrániť skupinu", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+
+                    if(Skupiny_Grid.Rows.Count<=0)
+                    {
+                        MessageBox.Show("Nie je vytvorená žiadna skupina");
+                        return;
+                    }
+                    Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
+                    StudentDBDataContext con = new StudentDBDataContext(conn_str);
+
+                    var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == Selected.Id);
+
+                    if (students.Count() > 0)
+                    {
+
+                        var totalAttendance = con.GetTable<TotalAttendance>().Where(x => x.Student.ID_stud_skupina == Selected.Id);
+                        if (totalAttendance.Count() > 0)
+                        {
+                            con.TotalAttendances.DeleteAllOnSubmit(totalAttendance);
+                            con.SubmitChanges();
+                        }
+
+                        var attendance = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == Selected.Id);
+
+                        if (attendance.Count() > 0)
+                        {
+                            con.AttendanceStuds.DeleteAllOnSubmit(attendance);
+                            con.SubmitChanges();
+                        }
+
+                        var tasks = con.GetTable<Task>().Where(x => x.Student.ID_stud_skupina == Selected.Id);
+
+                        if (tasks.Count() > 0)
+                        {
+                            con.Tasks.DeleteAllOnSubmit(tasks);
+                            con.SubmitChanges();
+                        }
+
+                        var activity = con.GetTable<Activity>().Where(x => x.IdSkupina == Selected.Id);
+                        if (activity.Count() > 0)
+                        {
+                            con.Activities.DeleteAllOnSubmit(activity);
+                            con.SubmitChanges();
+                        }
+
+                        var finalGrade = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == Selected.Id);
+                        if (finalGrade.Count() > 0)
+                        {
+                            con.FinalGrades.DeleteAllOnSubmit(finalGrade);
+                            con.SubmitChanges();
+                        }
+
+                        con.Students.DeleteAllOnSubmit(students);
+                        con.SubmitChanges();
+                    }
+                    var group = con.GetTable<StudentSkupina>().First(x => x.Id == Selected.Id);
+                    con.StudentSkupinas.DeleteOnSubmit(group);
+                    con.SubmitChanges();
+
+                    UserGroups();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
         }
     }
 }

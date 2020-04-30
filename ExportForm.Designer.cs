@@ -77,7 +77,7 @@
             this.materialCheckedListBox1.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox1.Depth = 0;
             this.materialCheckedListBox1.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox1.Location = new System.Drawing.Point(324, 123);
+            this.materialCheckedListBox1.Location = new System.Drawing.Point(43, 125);
             this.materialCheckedListBox1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox1.Name = "materialCheckedListBox1";
             this.materialCheckedListBox1.Size = new System.Drawing.Size(224, 242);
@@ -222,7 +222,7 @@
             this.ExportBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ExportBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ExportBtn.Name = "ExportBtn";
-            this.ExportBtn.Size = new System.Drawing.Size(120, 36);
+            this.ExportBtn.Size = new System.Drawing.Size(124, 36);
             this.ExportBtn.TabIndex = 3;
             this.ExportBtn.Text = "Export Excel";
             this.ExportBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -380,7 +380,7 @@
             this.materialCheckedListBox2.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox2.Depth = 0;
             this.materialCheckedListBox2.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox2.Location = new System.Drawing.Point(324, 415);
+            this.materialCheckedListBox2.Location = new System.Drawing.Point(41, 417);
             this.materialCheckedListBox2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox2.Name = "materialCheckedListBox2";
             this.materialCheckedListBox2.Size = new System.Drawing.Size(224, 288);
@@ -394,7 +394,7 @@
             this.materialCheckedListBox3.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox3.Depth = 0;
             this.materialCheckedListBox3.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox3.Location = new System.Drawing.Point(29, 417);
+            this.materialCheckedListBox3.Location = new System.Drawing.Point(533, 419);
             this.materialCheckedListBox3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox3.Name = "materialCheckedListBox3";
             this.materialCheckedListBox3.Size = new System.Drawing.Size(232, 288);
@@ -422,7 +422,7 @@
             this.cancelExport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cancelExport.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancelExport.Name = "cancelExport";
-            this.cancelExport.Size = new System.Drawing.Size(126, 36);
+            this.cancelExport.Size = new System.Drawing.Size(130, 36);
             this.cancelExport.TabIndex = 5;
             this.cancelExport.Text = "Zrušiť export";
             this.cancelExport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -453,7 +453,7 @@
             this.ExportToPdfBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ExportToPdfBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ExportToPdfBtn.Name = "ExportToPdfBtn";
-            this.ExportToPdfBtn.Size = new System.Drawing.Size(105, 36);
+            this.ExportToPdfBtn.Size = new System.Drawing.Size(108, 36);
             this.ExportToPdfBtn.TabIndex = 7;
             this.ExportToPdfBtn.Text = "Export PDF";
             this.ExportToPdfBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -466,7 +466,7 @@
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label1.Location = new System.Drawing.Point(322, 393);
+            this.label1.Location = new System.Drawing.Point(39, 395);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 19);
             this.label1.TabIndex = 8;
@@ -477,7 +477,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label2.Location = new System.Drawing.Point(25, 395);
+            this.label2.Location = new System.Drawing.Point(529, 397);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 19);
             this.label2.TabIndex = 9;
@@ -488,7 +488,7 @@
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label3.Location = new System.Drawing.Point(320, 101);
+            this.label3.Location = new System.Drawing.Point(39, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 19);
             this.label3.TabIndex = 10;
@@ -500,10 +500,10 @@
             this.materialCheckedListBox4.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox4.Depth = 0;
             this.materialCheckedListBox4.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox4.Location = new System.Drawing.Point(29, 111);
+            this.materialCheckedListBox4.Location = new System.Drawing.Point(533, 125);
             this.materialCheckedListBox4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox4.Name = "materialCheckedListBox4";
-            this.materialCheckedListBox4.Size = new System.Drawing.Size(232, 254);
+            this.materialCheckedListBox4.Size = new System.Drawing.Size(232, 242);
             this.materialCheckedListBox4.Striped = false;
             this.materialCheckedListBox4.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox4.TabIndex = 2;
@@ -514,7 +514,7 @@
             this.materialCheckedListBox5.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox5.Depth = 0;
             this.materialCheckedListBox5.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox5.Location = new System.Drawing.Point(773, 123);
+            this.materialCheckedListBox5.Location = new System.Drawing.Point(773, 125);
             this.materialCheckedListBox5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox5.Name = "materialCheckedListBox5";
             this.materialCheckedListBox5.Size = new System.Drawing.Size(226, 242);
@@ -527,7 +527,7 @@
             this.label4.AutoSize = true;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label4.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label4.Location = new System.Drawing.Point(25, 89);
+            this.label4.Location = new System.Drawing.Point(529, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(144, 19);
             this.label4.TabIndex = 11;
@@ -550,7 +550,7 @@
             this.FilterStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FilterStudent.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FilterStudent.FormattingEnabled = true;
-            this.FilterStudent.Location = new System.Drawing.Point(571, 163);
+            this.FilterStudent.Location = new System.Drawing.Point(288, 165);
             this.FilterStudent.Name = "FilterStudent";
             this.FilterStudent.Size = new System.Drawing.Size(174, 25);
             this.FilterStudent.TabIndex = 13;
@@ -562,7 +562,7 @@
             this.StudentFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StudentFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.StudentFilter.FormattingEnabled = true;
-            this.StudentFilter.Location = new System.Drawing.Point(571, 123);
+            this.StudentFilter.Location = new System.Drawing.Point(288, 125);
             this.StudentFilter.Name = "StudentFilter";
             this.StudentFilter.Size = new System.Drawing.Size(160, 25);
             this.StudentFilter.TabIndex = 14;
@@ -574,7 +574,7 @@
             this.SubActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SubActivityFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SubActivityFilter.FormattingEnabled = true;
-            this.SubActivityFilter.Location = new System.Drawing.Point(571, 457);
+            this.SubActivityFilter.Location = new System.Drawing.Point(288, 459);
             this.SubActivityFilter.Name = "SubActivityFilter";
             this.SubActivityFilter.Size = new System.Drawing.Size(160, 25);
             this.SubActivityFilter.TabIndex = 16;
@@ -586,7 +586,7 @@
             this.ActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ActivityFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ActivityFilter.FormattingEnabled = true;
-            this.ActivityFilter.Location = new System.Drawing.Point(571, 417);
+            this.ActivityFilter.Location = new System.Drawing.Point(288, 419);
             this.ActivityFilter.Name = "ActivityFilter";
             this.ActivityFilter.Size = new System.Drawing.Size(174, 25);
             this.ActivityFilter.TabIndex = 15;
@@ -621,7 +621,7 @@
             this.DeadlineBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DeadlineBox.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.DeadlineBox.FormattingEnabled = true;
-            this.DeadlineBox.Location = new System.Drawing.Point(571, 498);
+            this.DeadlineBox.Location = new System.Drawing.Point(288, 500);
             this.DeadlineBox.Name = "DeadlineBox";
             this.DeadlineBox.Size = new System.Drawing.Size(143, 25);
             this.DeadlineBox.TabIndex = 19;

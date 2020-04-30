@@ -56,7 +56,6 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.DeleteAllGroupDataBtn = new MaterialSkin.Controls.MaterialButton();
-            this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -91,9 +90,9 @@
             this.cancel_email.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cancel_email.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancel_email.Name = "cancel_email";
-            this.cancel_email.Size = new System.Drawing.Size(77, 36);
+            this.cancel_email.Size = new System.Drawing.Size(76, 36);
             this.cancel_email.TabIndex = 9;
-            this.cancel_email.Text = "Cancel";
+            this.cancel_email.Text = "Zrušiť";
             this.cancel_email.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.cancel_email.UseAccentColor = false;
             this.cancel_email.UseVisualStyleBackColor = true;
@@ -432,31 +431,13 @@
             this.DeleteAllGroupDataBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.DeleteAllGroupDataBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.DeleteAllGroupDataBtn.Name = "DeleteAllGroupDataBtn";
-            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(196, 36);
+            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(191, 36);
             this.DeleteAllGroupDataBtn.TabIndex = 25;
             this.DeleteAllGroupDataBtn.Text = "Vymazať dáta skupiny";
             this.DeleteAllGroupDataBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.DeleteAllGroupDataBtn.UseAccentColor = false;
             this.DeleteAllGroupDataBtn.UseVisualStyleBackColor = true;
             this.DeleteAllGroupDataBtn.Click += new System.EventHandler(this.DeleteAllGroupDataBtn_Click);
-            // 
-            // materialButton2
-            // 
-            this.materialButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialButton2.Depth = 0;
-            this.materialButton2.DrawShadows = true;
-            this.materialButton2.HighEmphasis = true;
-            this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(720, 140);
-            this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialButton2.Name = "materialButton2";
-            this.materialButton2.Size = new System.Drawing.Size(218, 36);
-            this.materialButton2.TabIndex = 26;
-            this.materialButton2.Text = "Archivovať dáta skupiny";
-            this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialButton2.UseAccentColor = false;
-            this.materialButton2.UseVisualStyleBackColor = true;
             // 
             // materialDivider1
             // 
@@ -475,7 +456,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 610);
             this.Controls.Add(this.materialDivider1);
-            this.Controls.Add(this.materialButton2);
             this.Controls.Add(this.DeleteAllGroupDataBtn);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
@@ -541,7 +521,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private MaterialSkin.Controls.MaterialButton DeleteAllGroupDataBtn;
-        private MaterialSkin.Controls.MaterialButton materialButton2;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
     }
 }

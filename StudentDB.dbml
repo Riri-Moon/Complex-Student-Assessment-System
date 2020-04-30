@@ -85,9 +85,9 @@
       <Column Name="IdGroupForAttendance" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
       <Association Name="Student_TotalAttendance" Member="TotalAttendances" ThisKey="Id" OtherKey="IdStudent" Type="TotalAttendance" />
       <Association Name="Student_AttendanceStud" Member="AttendanceStuds" ThisKey="Id" OtherKey="IDStudent" Type="AttendanceStud" />
-      <Association Name="Student_FinalGrade" Member="FinalGrades" ThisKey="Id" OtherKey="IdStudent" Type="FinalGrade" />
-      <Association Name="Student_Activity" Member="Activities" ThisKey="Id" OtherKey="IdStudent" Type="Activity" />
       <Association Name="Student_Task" Member="Tasks" ThisKey="Id" OtherKey="IdStudent" Type="Task" />
+      <Association Name="Student_Activity" Member="Activities" ThisKey="Id" OtherKey="IdStudent" Type="Activity" />
+      <Association Name="Student_FinalGrade" Member="FinalGrades" ThisKey="Id" OtherKey="IdStudent" Type="FinalGrade" />
     </Type>
   </Table>
   <Table Name="dbo.AttendanceStud" Member="AttendanceStuds">
@@ -105,44 +105,6 @@
       <Association Name="Student_AttendanceStud" Member="Student" ThisKey="IDStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.FinalGrade" Member="FinalGrades">
-    <Type Name="FinalGrade">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MaxPts" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="GotPoints" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="MissedLectures" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MissedSeminars" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Grade" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="IdSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ActivityLectPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="ActivitySemPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Student_FinalGrade" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Activity" Member="Activities">
-    <Type Name="Activity">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ActivityName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Deadline" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="MaxPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="EmailSendingActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="Hodnotenie" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Hodnotene" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IdFirstRem" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdSecRem" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SendFirst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="SendSecond" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
-      <Association Name="Activity_Task" Member="Tasks" ThisKey="Id" OtherKey="IdActivity" Type="Task" />
-      <Association Name="StudentSkupina_Activity" Member="StudentSkupina" ThisKey="IdSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
-      <Association Name="Student_Activity" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
-      <Association Name="User_Activity" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Task" Member="Tasks">
     <Type Name="Task">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -152,8 +114,8 @@
       <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Hodnotenie" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Activity_Task" Member="Activity" ThisKey="IdActivity" OtherKey="Id" Type="Activity" IsForeignKey="true" />
       <Association Name="Student_Task" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+      <Association Name="Activity_Task" Member="Activity" ThisKey="IdActivity" OtherKey="Id" Type="Activity" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
@@ -177,6 +139,45 @@
       <Association Name="User_EmailTemplate" Member="EmailTemplates" ThisKey="Id" OtherKey="IdUser" Type="EmailTemplate" />
       <Association Name="User_StudentSkupina" Member="StudentSkupinas" ThisKey="Id" OtherKey="Id_User" Type="StudentSkupina" />
       <Association Name="User_Activity" Member="Activities" ThisKey="Id" OtherKey="IdUser" Type="Activity" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Activity" Member="Activities">
+    <Type Name="Activity">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Deadline" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MaxPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="EmailSendingActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Hodnotenie" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Hodnotene" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdFirstRem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdSecRem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SendFirst" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SendSecond" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
+      <Column Name="SendMe" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Activity_Task" Member="Tasks" ThisKey="Id" OtherKey="IdActivity" Type="Task" />
+      <Association Name="User_Activity" Member="User" ThisKey="IdUser" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="StudentSkupina_Activity" Member="StudentSkupina" ThisKey="IdSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
+      <Association Name="Student_Activity" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FinalGrade" Member="FinalGrades">
+    <Type Name="FinalGrade">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaxPts" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GotPoints" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MissedLectures" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MissedSeminars" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="IdSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityLectPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ActivitySemPoints" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Student_FinalGrade" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

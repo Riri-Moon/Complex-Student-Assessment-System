@@ -52,15 +52,19 @@ namespace CSAS
         }
      
         // Change user to get from login
-        public string SetEnvironmentVar()
+        public string SetEnvironmentVar(User currentUser)
         {
             try
             {
                 StudentDBDataContext con = new StudentDBDataContext(conn_str);
                 var users = con.GetTable<User>();
-                var apikey = from user in users where user.Id == 1 select (string)user.ApiKey;
+                var apikey = from user in users where user.Id == currentUser.Id select (string)user.ApiKey;
 
+                if(apikey.Count() <= 0) {
 
+                    System.Windows.Forms.MessageBox.Show("Je nutné pridať ApiKey v nastaveniach používateľa");
+                    return null;
+                }
                 var key = apikey.FirstOrDefault();
 
                 if (Environment.GetEnvironmentVariable("SENDGRID_API_KEY") == null ||
@@ -79,6 +83,30 @@ namespace CSAS
 
         }
 
-        
+        public void SetEnvironmentVar(string Apikey)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(Apikey))
+                {
+                    System.Windows.Forms.MessageBox.Show("Nastala chyba, prosím kontaktujte poverenú osobu");
+                    return;
+                }
+
+                if (Environment.GetEnvironmentVariable("SENDGRID_API_KEY") == null ||
+                    Environment.GetEnvironmentVariable("SENDGRID_API_KEY") != Apikey)
+                {
+                    Environment.SetEnvironmentVariable("SENDGRID_API_KEY", Apikey);
+                }
+            }
+            catch (InvalidDataException)
+            {
+                System.Windows.Forms.MessageBox.Show("Nastala chyba, prosím kontaktujte poverenú osobu");
+                return;
+            }
+
+        }
+
+
     }
 }

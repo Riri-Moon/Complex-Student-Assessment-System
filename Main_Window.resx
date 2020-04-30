@@ -161,6 +161,105 @@
   <data name="&gt;&gt;Student_Grid.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="&gt;&gt;FinalGradeBtn.Name" xml:space="preserve">
+    <value>FinalGradeBtn</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;FinalGradeBtn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Stud_G_Button.Name" xml:space="preserve">
+    <value>Stud_G_Button</value>
+  </data>
+  <data name="&gt;&gt;Stud_G_Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Stud_G_Button.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Stud_G_Button.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Import_Btn.Name" xml:space="preserve">
+    <value>Import_Btn</value>
+  </data>
+  <data name="&gt;&gt;Import_Btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Import_Btn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Import_Btn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Stat_Btn.Name" xml:space="preserve">
+    <value>Stat_Btn</value>
+  </data>
+  <data name="&gt;&gt;Stat_Btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Stat_Btn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Stat_Btn.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Open_Btn.Name" xml:space="preserve">
+    <value>Open_Btn</value>
+  </data>
+  <data name="&gt;&gt;Open_Btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Open_Btn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Open_Btn.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Export_Btn.Name" xml:space="preserve">
+    <value>Export_Btn</value>
+  </data>
+  <data name="&gt;&gt;Export_Btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Export_Btn.Parent" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Export_Btn.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Study_Panel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="Study_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>175, 198</value>
+  </data>
+  <data name="Study_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>175, 48</value>
+  </data>
+  <data name="Study_Panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 48</value>
+  </data>
+  <data name="Study_Panel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Study_Panel.Name" xml:space="preserve">
+    <value>Study_Panel</value>
+  </data>
+  <data name="&gt;&gt;Study_Panel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Study_Panel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Study_Panel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FinalGradeBtn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -297,6 +396,9 @@
   <data name="Stat_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="Stat_Btn.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="Stat_Btn.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -323,6 +425,9 @@
   </data>
   <data name="Stat_Btn.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
     <value>ImageBeforeText</value>
+  </data>
+  <data name="Stat_Btn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;Stat_Btn.Name" xml:space="preserve">
     <value>Stat_Btn</value>
@@ -420,32 +525,98 @@
   <data name="&gt;&gt;Export_Btn.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="Study_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+  <data name="&gt;&gt;Attendance_Button.Name" xml:space="preserve">
+    <value>Attendance_Button</value>
   </data>
-  <data name="Study_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>175, 198</value>
+  <data name="&gt;&gt;Attendance_Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Study_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>175, 48</value>
-  </data>
-  <data name="Study_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 130</value>
-  </data>
-  <data name="Study_Panel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;Study_Panel.Name" xml:space="preserve">
-    <value>Study_Panel</value>
-  </data>
-  <data name="&gt;&gt;Study_Panel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Study_Panel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Attendance_Button.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;Study_Panel.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Attendance_Button.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Name" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.Name" xml:space="preserve">
+    <value>Student_Panel</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.Name" xml:space="preserve">
+    <value>Settings_Panel</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;OdoslatEmailBtnMainMenu.Name" xml:space="preserve">
+    <value>OdoslatEmailBtnMainMenu</value>
+  </data>
+  <data name="&gt;&gt;OdoslatEmailBtnMainMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OdoslatEmailBtnMainMenu.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;OdoslatEmailBtnMainMenu.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-1, 64</value>
+  </data>
+  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 703</value>
+  </data>
+  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Attendance_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -463,7 +634,7 @@
     <value>NoControl</value>
   </data>
   <data name="Attendance_Button.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 139</value>
+    <value>3, 57</value>
   </data>
   <data name="Attendance_Button.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -497,6 +668,84 @@
   </data>
   <data name="&gt;&gt;Attendance_Button.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <metadata name="Create_Templ.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Create_Templ.Name" xml:space="preserve">
+    <value>Create_Templ</value>
+  </data>
+  <data name="&gt;&gt;Create_Templ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Create_Templ.Parent" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;Create_Templ.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Create_Act_Btn.Name" xml:space="preserve">
+    <value>Create_Act_Btn</value>
+  </data>
+  <data name="&gt;&gt;Create_Act_Btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Create_Act_Btn.Parent" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;Create_Act_Btn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;Activity_Button.Name" xml:space="preserve">
+    <value>Activity_Button</value>
+  </data>
+  <data name="&gt;&gt;Activity_Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Activity_Button.Parent" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;Activity_Button.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Activity_panel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 111</value>
+  </data>
+  <data name="Activity_panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>177, 150</value>
+  </data>
+  <data name="Activity_panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>177, 48</value>
+  </data>
+  <data name="Activity_panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 48</value>
+  </data>
+  <data name="Activity_panel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Name" xml:space="preserve">
+    <value>Activity_panel</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.Parent" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;Activity_panel.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="button2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -675,32 +924,44 @@
   <data name="&gt;&gt;Activity_Button.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Activity_panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 193</value>
+  <data name="&gt;&gt;Add_Stud_Button.Name" xml:space="preserve">
+    <value>Add_Stud_Button</value>
   </data>
-  <data name="Activity_panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>177, 150</value>
+  <data name="&gt;&gt;Add_Stud_Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Activity_panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>177, 48</value>
+  <data name="&gt;&gt;Add_Stud_Button.Parent" xml:space="preserve">
+    <value>Student_Panel</value>
   </data>
-  <data name="Activity_panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 48</value>
+  <data name="&gt;&gt;Add_Stud_Button.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="Activity_panel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="Student_Panel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 165</value>
   </data>
-  <data name="&gt;&gt;Activity_panel.Name" xml:space="preserve">
-    <value>Activity_panel</value>
+  <data name="Student_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>176, 78</value>
   </data>
-  <data name="&gt;&gt;Activity_panel.Type" xml:space="preserve">
+  <data name="Student_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>176, 48</value>
+  </data>
+  <data name="Student_Panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 48</value>
+  </data>
+  <data name="Student_Panel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.Name" xml:space="preserve">
+    <value>Student_Panel</value>
+  </data>
+  <data name="&gt;&gt;Student_Panel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Activity_panel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Student_Panel.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;Activity_panel.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;Student_Panel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Add_Stud_Button.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -741,32 +1002,56 @@
   <data name="&gt;&gt;Add_Stud_Button.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Student_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 247</value>
+  <data name="&gt;&gt;Email_client_btn.Name" xml:space="preserve">
+    <value>Email_client_btn</value>
   </data>
-  <data name="Student_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>176, 78</value>
+  <data name="&gt;&gt;Email_client_btn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Student_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
+  <data name="&gt;&gt;Email_client_btn.Parent" xml:space="preserve">
+    <value>Settings_Panel</value>
   </data>
-  <data name="Student_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 48</value>
+  <data name="&gt;&gt;Email_client_btn.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="Student_Panel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="&gt;&gt;Gear_Button.Name" xml:space="preserve">
+    <value>Gear_Button</value>
   </data>
-  <data name="&gt;&gt;Student_Panel.Name" xml:space="preserve">
-    <value>Student_Panel</value>
+  <data name="&gt;&gt;Gear_Button.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Student_Panel.Type" xml:space="preserve">
+  <data name="&gt;&gt;Gear_Button.Parent" xml:space="preserve">
+    <value>Settings_Panel</value>
+  </data>
+  <data name="&gt;&gt;Gear_Button.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Settings_Panel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 219</value>
+  </data>
+  <data name="Settings_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>179, 78</value>
+  </data>
+  <data name="Settings_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>179, 48</value>
+  </data>
+  <data name="Settings_Panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 48</value>
+  </data>
+  <data name="Settings_Panel.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.Name" xml:space="preserve">
+    <value>Settings_Panel</value>
+  </data>
+  <data name="&gt;&gt;Settings_Panel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Student_Panel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Settings_Panel.Parent" xml:space="preserve">
     <value>flowLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;Student_Panel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;Settings_Panel.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="Email_client_btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -858,33 +1143,6 @@
   <data name="&gt;&gt;Gear_Button.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Settings_Panel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 301</value>
-  </data>
-  <data name="Settings_Panel.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>179, 78</value>
-  </data>
-  <data name="Settings_Panel.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>179, 48</value>
-  </data>
-  <data name="Settings_Panel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 48</value>
-  </data>
-  <data name="Settings_Panel.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;Settings_Panel.Name" xml:space="preserve">
-    <value>Settings_Panel</value>
-  </data>
-  <data name="&gt;&gt;Settings_Panel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Settings_Panel.Parent" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;Settings_Panel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="OdoslatEmailBtnMainMenu.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -901,7 +1159,7 @@
     <value>NoControl</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 355</value>
+    <value>3, 273</value>
   </data>
   <data name="OdoslatEmailBtnMainMenu.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -952,7 +1210,7 @@
     <value>NoControl</value>
   </data>
   <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 409</value>
+    <value>3, 327</value>
   </data>
   <data name="button1.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>179, 48</value>
@@ -986,27 +1244,6 @@
   </data>
   <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="flowLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-1, 64</value>
-  </data>
-  <data name="flowLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 703</value>
-  </data>
-  <data name="flowLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
-    <value>flowLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="Ext_Btn.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
@@ -1054,13 +1291,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="hodnotiťToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="hodnotiťToolStripMenuItem.Text" xml:space="preserve">
     <value>Hodnotiť</value>
   </data>
   <data name="odstrániťToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="odstrániťToolStripMenuItem.Text" xml:space="preserve">
     <value>Odstrániť</value>
@@ -1096,7 +1333,7 @@
     <value>Odstrániť</value>
   </data>
   <data name="materialContextMenuStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 70</value>
+    <value>223, 92</value>
   </data>
   <data name="&gt;&gt;materialContextMenuStrip2.Name" xml:space="preserve">
     <value>materialContextMenuStrip2</value>
@@ -1144,7 +1381,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LogOutBtn.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

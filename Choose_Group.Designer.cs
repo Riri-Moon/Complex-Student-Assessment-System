@@ -130,7 +130,7 @@
             this.Remove_Button.TabIndex = 8;
             this.Remove_Button.Text = "Odstrániť";
             this.Remove_Button.UseVisualStyleBackColor = false;
-            this.Remove_Button.Click += new System.EventHandler(this.Remove_Button_Click_1);
+            this.Remove_Button.Click += new System.EventHandler(this.Remove_Button_Click);
             // 
             // Select_Button
             // 

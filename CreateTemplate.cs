@@ -216,7 +216,7 @@ namespace CSAS
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
 
-                    var checkExisting = con.ActivityTemplates.Where(x => x.ActivityName == ActNameTxtBox.Text).Count();
+                    var checkExisting = con.ActivityTemplates.Where(x => x.ActivityName == ActNameTxtBox.Text && x.IdUser==currUser.Id).Count();
 
                     if (checkExisting != 0)
                     {
@@ -345,11 +345,8 @@ namespace CSAS
                     else
                     {
                         return null;
-                    }
-
-                
+                    }                
             }
-
             catch (Exception ex)
             {
                 Logger newLog = new Logger();
@@ -365,13 +362,11 @@ namespace CSAS
         /// </summary>
 
         private void RemoveActTempBtn_Click(object sender, EventArgs e)
-        {
-
+        {  
             try
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
                     var selectedTaskTemp = con.TaskTemplates.Where(a => a.IdActivityTemplate == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
                     var selectedAct = con.ActivityTemplates.Where(a => a.Id == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
 
@@ -379,12 +374,9 @@ namespace CSAS
                     {
                         con.TaskTemplates.DeleteOnSubmit(x);
                     }
-
                     con.ActivityTemplates.DeleteOnSubmit(selectedAct.FirstOrDefault());
                     con.SubmitChanges();
                 }
-
-
                 GetTableTemp();
             }
             catch (Exception ex)
@@ -421,11 +413,9 @@ namespace CSAS
                     var selectedTaskTemp = con.TaskTemplates.Where(a => a.IdActivityTemplate == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
                     var selectedAct = con.ActivityTemplates.Where(a => a.Id == (int)AllActTempGrid.CurrentRow.Cells[2].Value);
 
-
                     var emailTemps = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currUser.Id);
                     comboBox1.Text= (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().FirstRem select email.EmailTemplateName).FirstOrDefault();
                     comboBox2.Text = (from email in emailTemps where email.Id == selectedAct.FirstOrDefault().SecondRem select email.EmailTemplateName).FirstOrDefault();
-
 
                     foreach (var x in selectedAct)
                     {
@@ -433,7 +423,6 @@ namespace CSAS
                         MaxPtsLabel.Text = x.MaxPoints.ToString();
 
                     }
-
                     foreach (var x in selectedTaskTemp)
                     {
                         if (count >= 20)
@@ -526,8 +515,7 @@ namespace CSAS
         private void DeleteTaskBtn_Click(object sender, EventArgs e)
         {
             try
-            {
-               
+            {               
                 var index = controlNamesForEdit.Count - 1;
 
                 lastName = controlNamesForEdit.ElementAt(index);
@@ -597,7 +585,6 @@ namespace CSAS
 
         }
 
-
         private void ClearTasks()
         {
             try
@@ -630,7 +617,6 @@ namespace CSAS
                 MessageBox.Show(ex.ToString()) ;
             }
         }
-
     }
 }
 

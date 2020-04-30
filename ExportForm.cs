@@ -964,10 +964,23 @@ namespace CSAS
                         //Activity rows
                         if (activityColumnsCount > 0)
                         {
+                           Activity act= activities.Where(x => x.IdStudent == stud.Id).DefaultIfEmpty().FirstOrDefault();
 
-                            activityId = activities.Where(x => x.IdStudent == stud.Id).FirstOrDefault().Id;
+                            if (act == null)
+                            {
+                                activityId = null;
+                            }
+                            else
+                            {
+                                activityId = act.Id;
+                            }
                             foreach (var activity in activities.Where(x => x.IdStudent == stud.Id))
                             {
+                                if(activityId==null)
+                                {
+                                    table.Rows.Add(row);
+                                    continue;
+                                }
                                 if (activityId != activity.Id)
                                 {
                                     row = table.NewRow();
@@ -1006,7 +1019,8 @@ namespace CSAS
 
                                 if (taskColumnsCount > 0)
                                 {
-                                    foreach (var task in tasks.Where(x => x.IdActivity == activity.Id))
+                                    var tsk = tasks.Where(x => x.IdActivity == activityId);
+                                    foreach (var task in  tsk)//tasks.Where(x => x.IdActivity == activity.Id))
                                     {
 
                                         generalCount = 0;
@@ -1405,6 +1419,7 @@ namespace CSAS
                             MessageBox.Show("Nenašla sa žiadna aktivita");
                             return;
                         }
+
                         m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
                         break;
                     case 1:
@@ -1607,7 +1622,7 @@ namespace CSAS
                         using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                         {
                             SubActivityFilter.Items.Clear();
-                            var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.ID_Kruzok == (string)FilterStudent.SelectedItem)
+                            var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
                                 .Select(x => new { x.ActivityName }).Distinct();
                             foreach (var activity in activities)
                             {
@@ -1654,7 +1669,7 @@ namespace CSAS
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     FilterStudent.Items.Clear();
-                    var studentGroups = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id).Select(y => y.ID_Kruzok);
+                    var studentGroups = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id).Select(y => y.IdGroupForAttendance);
                     foreach (var kr in studentGroups.Distinct())
                     {
                         FilterStudent.Items.Add(kr);
@@ -1702,7 +1717,7 @@ namespace CSAS
                         {
                             DeadlineBox.Items.Clear();
                             foreach (var activity in con.GetTable<Activity>()
-                                .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.Student.ID_Kruzok == (string)FilterStudent.SelectedItem)
+                                .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
                                 .Select(x => new { x.Deadline }).Distinct())
                             {
                                 DeadlineBox.Items.Add(activity.Deadline);
@@ -1743,7 +1758,7 @@ namespace CSAS
                 {
                     globalGroupId = string.Empty;
                     globalGroupId = (string)FilterStudent.SelectedItem;
-                    students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.ID_Kruzok == globalGroupId);
+                    students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.IdGroupForAttendance == globalGroupId);
                 }
                 else
                 {
@@ -1783,7 +1798,7 @@ namespace CSAS
                 {
                     globalGroupId = string.Empty;
                     globalGroupId = (string)FilterStudent.SelectedItem;
-                    FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.Student.ID_Kruzok == globalGroupId);
+                    FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == globalGroupId);
                 }
             }
             else if (StudentFilter.SelectedIndex == 2)
@@ -1814,7 +1829,7 @@ namespace CSAS
                     globalFilter = string.Empty;
                     globalFilter = (string)FilterStudent.SelectedItem;
 
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.ID_Kruzok== globalFilter );
+                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance== globalFilter );
                 }
             }
             else if (StudentFilter.SelectedIndex == 0 && ActivityFilter.SelectedIndex == 1)
@@ -1841,7 +1856,7 @@ namespace CSAS
 
                     globalDate = (DateTime)DeadlineBox.SelectedItem;
 
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.ID_Kruzok==globalFilter && x.ActivityName == globalActivityName
+                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance==globalFilter && x.ActivityName == globalActivityName
                     && x.Deadline == globalDate);
                 }
             }

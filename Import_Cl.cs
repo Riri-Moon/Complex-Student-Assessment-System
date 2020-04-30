@@ -22,11 +22,12 @@ namespace CSAS
         bool warnUser = false;
         List<int> notAddedStuds = new List<int>();
         bool didntHappened = false;
-
+        StudentSkupina group;
         public void Querys(StudentSkupina skupina)
         {
             try
             {
+                group = skupina;
                 var path = SelectPath();
                 if (path != "Cancel")
                 {
@@ -178,9 +179,9 @@ namespace CSAS
 
                 var ifExists = con.GetTable<Student>();
 
-                var existingIsic = ifExists.Where(x => x.ISIC == student.ISIC);
+                var existingIsic = ifExists.Where(x => x.ID_stud_skupina==group.Id && x.ISIC == student.ISIC);
 
-                if (existingIsic.FirstOrDefault() == null)
+                if (existingIsic.Count() ==0)
                 {
                     return false;
                 }

@@ -143,7 +143,7 @@ namespace CSAS
                     var students = GetStudents().Where(x => x.ID_Kruzok == activity.Key).Count();                    
                     int multiplier = 1000;
 
-                    double? success = (double?)Math.Round(acquiredPoints.Value / (maxPoints * students) * multiplier, 2);
+                    double? success = (double?)Math.Round(acquiredPoints / (maxPoints * students) * multiplier, 2);
 
                     pieChart1.Series.Add(
 
@@ -161,8 +161,8 @@ namespace CSAS
 
                 label4.Text = "Maximum dosiahnutých:";
                 label2.Text = "Minimum dosiahnutých: ";
-                var max = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderByDescending(c => c.Value).FirstOrDefault();
-                var min = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderBy(c => c.Value).FirstOrDefault();
+                var max = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderByDescending(c => c).FirstOrDefault();
+                var min = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderBy(c => c).FirstOrDefault();
                 AvgActivity.Text = max.ToString();
                 ActCountLabel.Text =min.ToString();
                 AvgActivity.Visible = true;
@@ -191,7 +191,7 @@ namespace CSAS
                 var students = GetStudents().Where(x => x.ID_Kruzok == activity.Key).Count();
                 int multiplier = 1000;                
 
-                double? success = (double?)Math.Round(acquiredPoints.Value / (maxPoints * students) * multiplier,2);
+                double? success = (double?)Math.Round(acquiredPoints / (maxPoints * students) * multiplier,2);
 
                 pieChart1.Series.Add(
 

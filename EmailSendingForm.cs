@@ -76,7 +76,12 @@ namespace CSAS
             {
                 Logger logger = new Logger();
                 EmailClient eClient = new EmailClient();
-                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar());
+                if(string.IsNullOrEmpty(currentUser.ApiKey))
+                {
+                    MessageBox.Show("ApiKey nemôže byť prázdny.");
+                    return;
+                }
+                SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar(currentUser));
                 EmailBody body = new EmailBody()
                 {
                     HtmlContent = richTextBox1.Text.Replace("\u00A0","<br/>") +"<br/> <br/> " + currentUser.Signature.Replace("\u00A0", "<br/>"),

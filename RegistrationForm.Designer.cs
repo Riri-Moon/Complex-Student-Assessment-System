@@ -161,7 +161,7 @@
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
-            this.materialButton1.Size = new System.Drawing.Size(115, 36);
+            this.materialButton1.Size = new System.Drawing.Size(118, 36);
             this.materialButton1.TabIndex = 8;
             this.materialButton1.Text = "Registrovať";
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -180,7 +180,7 @@
             this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton2.Name = "materialButton2";
-            this.materialButton2.Size = new System.Drawing.Size(69, 36);
+            this.materialButton2.Size = new System.Drawing.Size(71, 36);
             this.materialButton2.TabIndex = 9;
             this.materialButton2.Text = "Zrušiť";
             this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -203,6 +203,7 @@
             this.Controls.Add(this.SecondPssBox);
             this.Controls.Add(this.FirstPssBox);
             this.Controls.Add(this.EmailBox);
+            this.MaximizeBox = false;
             this.Name = "RegistrationForm";
             this.Text = "RegistrationForm";
             this.Load += new System.EventHandler(this.RegistrationForm_Load);

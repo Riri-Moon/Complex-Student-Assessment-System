@@ -15,7 +15,7 @@ namespace CSAS
         private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         User currentUser;
         StudentSkupina group;
-
+        bool start = true;
         public FinalGradeForm(User user, StudentSkupina skup)
         {
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
@@ -28,7 +28,6 @@ namespace CSAS
 
             currentUser = user;
             group = skup;
-
             CreateFinalGradeOnStart();
             LoadGrid(skup);
         }
@@ -139,6 +138,13 @@ namespace CSAS
                         {
                             IdSkupina = group.Id,
                             IdStudent = student.Id,
+                            ActivityLectPoints = 0,
+                            ActivitySemPoints = 0,
+                            GotPoints = 0,
+                            Grade="Fx",
+                            MaxPts=0,
+                            MissedLectures=0,
+                            MissedSeminars=0,                            
                         };
                         con.FinalGrades.InsertOnSubmit(finalGrade);
                         isAdded = true;
@@ -176,7 +182,7 @@ namespace CSAS
                     if(StudentGrid.Rows.Count <=0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent.");
-                        return;
+                        this.Close();
                     }
 
                     var selectedStudentId = (int)StudentGrid.CurrentRow.Cells[0].Value;
@@ -184,17 +190,48 @@ namespace CSAS
                     if (materialRadioButton1.Checked)
                     {
 
-                        var bonusPtsSeminarTemp = con.GetTable<ActivityTemplate>().Where(x => x.Id == currentUser.PointsForActSem).FirstOrDefault();
-                        var bonusPtsLectureTemp = con.GetTable<ActivityTemplate>().Where(x => x.Id == currentUser.PointsForActLec).FirstOrDefault();
+                        IQueryable<Activity> allActivities = null;
+                        ActivityTemplate bonusPtsLectureTemp = null;
+                        ActivityTemplate bonusPtsSeminarTemp = null; ;
+                        IQueryable<Activity> bonusPtsSeminar = null;
+                        IQueryable<Activity> bonusPtsLecture = null;
 
-                        var bonusPtsSeminar = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsSeminarTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId);
-                        var bonusPtsLecture = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsLectureTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId);
+                        if (currentUser.PointsForActSem.HasValue)
+                        {
+                            bonusPtsSeminarTemp = con.GetTable<ActivityTemplate>().FirstOrDefault(x => x.Id == currentUser.PointsForActSem);
+                            bonusPtsSeminar = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsSeminarTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId).DefaultIfEmpty();
+
+                        }
+                        if (currentUser.PointsForActLec.HasValue) {
+                            bonusPtsLectureTemp = con.GetTable<ActivityTemplate>().FirstOrDefault(x => x.Id == currentUser.PointsForActLec);
+                            bonusPtsLecture = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsLectureTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId).DefaultIfEmpty();
+                        }
 
                         var totalAttendance = con.GetTable<TotalAttendance>().Where(x => x.IdStudent == selectedStudentId).FirstOrDefault();
 
+                        if (bonusPtsSeminarTemp == null)
+                        {
+                            allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsLectureTemp.ActivityName && x.IdStudent == selectedStudentId);
+                        }
 
-                        var allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsSeminarTemp.ActivityName && x.ActivityName != bonusPtsLectureTemp.ActivityName
-                        && x.IdStudent == selectedStudentId);
+                        if (bonusPtsLectureTemp == null)
+                        {
+                            allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsSeminarTemp.ActivityName && x.IdStudent == selectedStudentId);
+                        }
+                        if(bonusPtsSeminarTemp==null && bonusPtsLectureTemp == null)
+                        {
+                            allActivities = con.GetTable<Activity>().Where(x => x.IdStudent == selectedStudentId);
+                        }
+                        if (bonusPtsSeminarTemp != null && bonusPtsLectureTemp != null)
+                        {
+                            allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsSeminarTemp.ActivityName && x.ActivityName != bonusPtsLectureTemp.ActivityName
+                           && x.IdStudent == selectedStudentId);
+                        }
+                        
+                        if (allActivities.Count() <=0 || allActivities==null)
+                        {
+                            return;
+                        }
 
                         foreach (var activity in allActivities)
                         {
@@ -202,28 +239,28 @@ namespace CSAS
                             acquiredPoints += activity.Hodnotenie;
                         }
 
-                        foreach (var seminar in bonusPtsSeminar)
+                        if (bonusPtsSeminar != null)
                         {
-                            if (seminar.Hodnotenie == null)
-                            {
-                                bonusSem += 0;
-                            }
-                            else
+                            foreach (var seminar in bonusPtsSeminar)
                             {
                                 bonusSem += seminar.Hodnotenie;
                             }
                         }
-
-                        foreach (var lecture in bonusPtsLecture)
+                        else
                         {
-                            if (lecture.Hodnotenie == null)
-                            {
-                                bonusLec += 0;
-                            }
-                            else
+                            bonusSem += 0;
+                        }
+
+                        if (bonusPtsLecture != null && bonusPtsLecture.Count()>0)
+                        {
+                            foreach (var lecture in bonusPtsLecture)
                             {
                                 bonusLec += lecture.Hodnotenie;
                             }
+                        }
+                        else
+                        {
+                            bonusLec += 0;
                         }
 
                         double? totalPoints = acquiredPoints + bonusSem + bonusLec;
@@ -280,7 +317,7 @@ namespace CSAS
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+               // MessageBox.Show(ex.ToString());
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
             }
@@ -299,6 +336,10 @@ namespace CSAS
                         StudentGrid.DataSource = students;
                         StudentGrid.Columns["Id"].Visible = false;
                     }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -311,18 +352,20 @@ namespace CSAS
 
         private void StudentGrid_SelectionChanged(object sender, EventArgs e)
         {
-            if (StudentGrid.SelectedRows.Count > 0)
+            if (StudentGrid.SelectedRows.Count > 0 && start == false)
             {
                 LoadTextBoxes();
             }
+            start = false;
         }
 
         private void materialRadioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (StudentGrid.SelectedRows.Count > 0)
+            if (StudentGrid.SelectedRows.Count > 0 && start == false)
             {
                 LoadTextBoxes();
             }
+            start = false;
         }
 
 

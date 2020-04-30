@@ -28,18 +28,21 @@ namespace CSAS
                 MaterialSkin.TextShade.WHITE);
         }
 
+        // ZObrazenie okna ak používateľ zabudol heslo alebo si ho chce zmeniť
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var forgottenPass = new ForgetPasswordForm();
             forgottenPass.ShowDialog();
         }
 
+        // Zobrazenie okna pre registráciu nového používateľa
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             var registerForm = new RegistrationForm();
             registerForm.ShowDialog();
         }
 
+        //Ukončenie aplikácie
         private void materialButton2_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Naozaj chcete ukončiť aplikáciu ?","Ukončiť aplikáciu",MessageBoxButtons.YesNo);
@@ -50,7 +53,9 @@ namespace CSAS
             }
         }
 
-        public User LoggedUser { get; set; }
+       // public User LoggedUser { get; set; }
+
+        // Prihlásenie používateľa a validácia ním zadaných údajov
         private User Login()
         {
             var userDict = new Dictionary<string, int?>();
@@ -65,6 +70,7 @@ namespace CSAS
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     IQueryable<User> user = con.GetTable<User>().Where(x => x.Meno == NameBox.Text);
+                    // SQL nie je CaseSensitive tak musíme iným spôsobom validovať správnosť údajov
                     foreach(var us in user)
                     {
                         userDict.Add(us.Meno, us.Id);
@@ -73,6 +79,7 @@ namespace CSAS
                     if (userId == null)
                     {
                         MessageBox.Show("Nesprávne meno alebo heslo");
+                        FirstPssBox.Text = string.Empty;
                         return null;
                     }
                     else
@@ -81,6 +88,7 @@ namespace CSAS
 
                         var pss = SHA512(FirstPssBox.Text);
 
+                        //Porovnávanie hashu z databázy s hashom od používateľa
                         if (currUser.Heslo.Length == pss.Length)
                         {
 
@@ -100,11 +108,13 @@ namespace CSAS
                             FirstPssBox.Text = string.Empty;
                             return null;
                         }
+                        // Ak sa program dostal až sem, tak používateľ zadal správne prihlasovacie údaje
                         return currUser;
                     }
                 }
             }
         }
+        //Prihlasenie ak užívateľ zadal správne údaje
         private void materialButton1_Click(object sender, EventArgs e)
         {
               var user = Login();
@@ -118,13 +128,14 @@ namespace CSAS
                 this.Hide();
 
                 var group = new Choose_Group(user);
-               // group.FormClosed += (s, args) =>Environment.Exit(1);
+                group.FormClosed += (s, args) => this.Show();
                 group.Show();
                 user = null;
                 FirstPssBox.Text = string.Empty;
-                LoggedUser = null;
+               // LoggedUser = null;
             }
         }
+        //Hashovanie hesla
         public static string SHA512(string inputString)
         {
             SHA512 sha512 = SHA512Managed.Create();
@@ -139,6 +150,7 @@ namespace CSAS
 
             for (int i = 0; i < hash.Length; i++)
             {
+                //Do Hexadecimal sustavy
                 result.Append(hash[i].ToString("X2"));
             }
             return result.ToString();

@@ -110,7 +110,13 @@ namespace CSAS
         {
             if (SendingEmailCheck.Checked == true)
             {
-                return true;
+                if (string.IsNullOrEmpty(currUser.ApiKey))
+                {
+                    MessageBox.Show("ApiKey nemôže byť prázdny");
+                    return false;
+                }
+
+                    return true;
             }
             else return false;
         }
@@ -120,16 +126,17 @@ namespace CSAS
         {
             EmailClient client = new EmailClient();
             string content = string.Empty;
+
             SendGrid.SendGridClient gridClient;
             if (!string.IsNullOrEmpty(link))
             {
-                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
                 content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline} <br/> {link}";
             }
             else
             {
-                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
                  content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
                     $" <br/> ktorú je potrebné odovzdať do {activity.Deadline}";
             }
@@ -206,11 +213,13 @@ namespace CSAS
                         EmailSendingActive = IsSendingChecked(),
                         IdSkupina = skupina.Id,
                         IdUser = this.currUser.Id,
+                        Hodnotenie = 0,
                         Hodnotene = false,
                         SendFirst = first,
                         SendSecond = second,
                         IdStudent = student.Id,
-                        Comment = string.Empty
+                        Comment = string.Empty,
+                        SendMe = SendMe(),
 
                     };
 
@@ -230,6 +239,7 @@ namespace CSAS
                             IdActivity = activity.Id,
                             TaskName = tsk.TaskName,
                             Points = tsk.MaxPts,
+                            Hodnotenie=0,
                             IdStudent = student.Id,
                             Comment=string.Empty
                             
@@ -256,6 +266,15 @@ namespace CSAS
                 return;
             }
 
+        }
+
+        private bool SendMe()
+        {
+            if (SendMeBox.Checked == true)
+            {
+                return true;
+            }
+            else return false;
         }
 
         private void TaskGrid_SelectionChanged(object sender, EventArgs e)

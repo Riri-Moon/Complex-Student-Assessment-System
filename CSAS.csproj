@@ -244,6 +244,7 @@
     <Compile Include="ForgetPasswordForm.Designer.cs">
       <DependentUpon>ForgetPasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GeneratePassword.cs" />
     <Compile Include="GradeActivityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +333,9 @@
     <EmbeddedResource Include="FinalGradeForm.resx">
       <DependentUpon>FinalGradeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ForgetPasswordForm.resx">
+      <DependentUpon>ForgetPasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GradeActivityForm.resx">
       <DependentUpon>GradeActivityForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -419,7 +423,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\icons8-expand-arrow-32.png" />

@@ -109,7 +109,7 @@
             this.LoadStudentBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadStudentBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadStudentBtn.Name = "LoadStudentBtn";
-            this.LoadStudentBtn.Size = new System.Drawing.Size(80, 36);
+            this.LoadStudentBtn.Size = new System.Drawing.Size(83, 36);
             this.LoadStudentBtn.TabIndex = 3;
             this.LoadStudentBtn.Text = "Načítať";
             this.LoadStudentBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -214,12 +214,12 @@
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(251, 361);
+            this.materialLabel8.Location = new System.Drawing.Point(280, 361);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(158, 19);
+            this.materialLabel8.Size = new System.Drawing.Size(124, 19);
             this.materialLabel8.TabIndex = 11;
-            this.materialLabel8.Text = "Krúžok pre dochádzku";
+            this.materialLabel8.Text = "Krúžok pre export";
             // 
             // NameBox
             // 
@@ -350,7 +350,7 @@
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SaveBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(88, 36);
+            this.SaveBtn.Size = new System.Drawing.Size(90, 36);
             this.SaveBtn.TabIndex = 12;
             this.SaveBtn.Text = "Vytvoriť";
             this.SaveBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -369,7 +369,7 @@
             this.BackBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.BackBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(56, 36);
+            this.BackBtn.Size = new System.Drawing.Size(58, 36);
             this.BackBtn.TabIndex = 13;
             this.BackBtn.Text = "Späť";
             this.BackBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;

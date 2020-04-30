@@ -34,11 +34,24 @@ namespace CSAS
         {
             if (SendingEmailCheck.Checked == true)
             {
+                if (!string.IsNullOrEmpty(currUser.ApiKey))
+                {
+                    MessageBox.Show("ApiKey nemôže byť prázdny");
+                    return false;
+                }
                 return true;
             }
             else return false;
         }
 
+        private bool SendMe()
+        {
+            if (SendMeBox.Checked == true)
+            {
+                return true;
+            }
+            else return false;
+        }
         private void CreateActBtn_Click(object sender, EventArgs e)
         {
             try
@@ -67,7 +80,6 @@ namespace CSAS
                     if (groupCmbo.Text == "Všetky")
                     {
                         studs = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkup.Id);
-
                     }
 
                     else
@@ -104,6 +116,7 @@ namespace CSAS
                             SendFirst = first,
                             SendSecond = second,
                             IdStudent = student.Id,
+                            SendMe = SendMe(),
 
                         };
 
@@ -132,9 +145,10 @@ namespace CSAS
                         }
 
                         con.SubmitChanges();
-                        MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
 
                     }
+                    MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
+
 
                     if (ActCreatedCheckBox.Checked == true)
                     {
@@ -164,13 +178,13 @@ namespace CSAS
             SendGrid.SendGridClient gridClient;
             if (!string.IsNullOrEmpty(link))
             {
-                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
                  content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
                     $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()} <br/> {link}";
             }
             else
             {
-                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar());
+                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
                  content = $"Milí študenti, <br/> dňa {DateTime.Now.Date.ToLocalTime()} Vám bola vytvorená aktivita {activity.ActivityName}," +
                     $" <br/> ktorú je potrebné odovzdať do {activity.Deadline.ToLocalTime()}";
             }

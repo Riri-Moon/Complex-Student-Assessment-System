@@ -48,11 +48,11 @@ namespace CSAS
                 materialMultiLineTextBox1.Text = user.Signature;
                 LoadComboBoxes(activeUser);
 
-                if (actTempLec != null && comboBox1.Items.Count > 0)
+                if (actTempSem != null && comboBox1.Items.Count > 0)
                 {
                     comboBox1.SelectedItem = actTempSem.ActivityName;
                 }
-                if (actTempSem != null && comboBox1.Items.Count > 0)
+                if (actTempLec != null && comboBox1.Items.Count > 0)
                 {
                     comboBox2.SelectedItem = actTempLec.ActivityName;
                 }

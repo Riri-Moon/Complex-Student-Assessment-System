@@ -47,6 +47,8 @@
             this.ActCreatedCheckBox = new MaterialSkin.Controls.MaterialCheckbox();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.SendMeBox = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ActivityGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TaskGrid)).BeginInit();
             this.SuspendLayout();
@@ -230,10 +232,31 @@
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             // 
+            // SendMeBox
+            // 
+            resources.ApplyResources(this.SendMeBox, "SendMeBox");
+            this.SendMeBox.Depth = 0;
+            this.SendMeBox.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.SendMeBox.MouseState = MaterialSkin.MouseState.HOVER;
+            this.SendMeBox.Name = "SendMeBox";
+            this.SendMeBox.Ripple = true;
+            this.SendMeBox.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel6
+            // 
+            resources.ApplyResources(this.materialLabel6, "materialLabel6");
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.UseCompatibleTextRendering = true;
+            // 
             // CreateActivity
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.SendMeBox);
+            this.Controls.Add(this.materialLabel6);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.ActCreatedCheckBox);
             this.Controls.Add(this.materialLabel4);
@@ -272,5 +295,7 @@
         private MaterialSkin.Controls.MaterialCheckbox ActCreatedCheckBox;
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialCheckbox SendMeBox;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
     }
 }
