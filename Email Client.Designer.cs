@@ -90,7 +90,7 @@
             this.cancel_email.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cancel_email.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancel_email.Name = "cancel_email";
-            this.cancel_email.Size = new System.Drawing.Size(76, 36);
+            this.cancel_email.Size = new System.Drawing.Size(71, 36);
             this.cancel_email.TabIndex = 9;
             this.cancel_email.Text = "Zrušiť";
             this.cancel_email.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -431,7 +431,7 @@
             this.DeleteAllGroupDataBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.DeleteAllGroupDataBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.DeleteAllGroupDataBtn.Name = "DeleteAllGroupDataBtn";
-            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(191, 36);
+            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(196, 36);
             this.DeleteAllGroupDataBtn.TabIndex = 25;
             this.DeleteAllGroupDataBtn.Text = "Vymazať dáta skupiny";
             this.DeleteAllGroupDataBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -482,7 +482,9 @@
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.cancel_email);
             this.Controls.Add(this.save_email);
+            this.MaximizeBox = false;
             this.Name = "Email_Client";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.Load += new System.EventHandler(this.Email_Client_Load);
             this.materialContextMenuStrip1.ResumeLayout(false);

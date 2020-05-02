@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using AutocompleteMenuNS;
 using System.Collections.Generic;
 using Microsoft.VisualBasic;
-
+using System.Configuration;
 
 namespace CSAS
 {
@@ -15,7 +15,8 @@ namespace CSAS
     {
         StudentSkupina StudentSkup { get; set; }
         public Student DeleteStud { get; set; }
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> studentsManual = new Dictionary<string, int>();
         public Dochádzka(StudentSkupina studentSkupina)
         {

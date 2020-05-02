@@ -7,12 +7,15 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
+using System.Configuration;
 
 namespace CSAS
 {
     public class Import_Cl
     {
-        public const string conn = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //public const string conn = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        private string conn = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         private readonly string query = string.Format("Select [Meno],[Priezvisko],[Študijný program],[Krúžok],[Prerušené štúdium],[Číslo karty],[Ročník],[E-mail pridelený],[E-mail osobný] FROM[{0}] ", "Export table$A6:AK");
         public Import_Cl()
         {
@@ -130,8 +133,10 @@ namespace CSAS
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString()) ;
-                // MessageBox.Show("Vybrali ste nesprávny súbor alebo štruktúra súboru je chybná","Chyba pri načítaní súboru",MessageBoxButtons.OK);
+                // MessageBox.Show(ex.ToString()) ;
+                Logger logger = new Logger();
+                logger.LogError(ex);
+                MessageBox.Show("Vybrali ste nesprávny súbor alebo štruktúra súboru je chybná","Chyba pri načítaní súboru",MessageBoxButtons.OK);
             }
         }
 
@@ -163,9 +168,11 @@ namespace CSAS
                     return DialogResult.Cancel.ToString();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("You have selected incorrect file");
+                Logger logger = new Logger();
+                logger.LogError(ex);
+                MessageBox.Show("Vybrali ste nesprávny súbor");
                 return null;
             }
         }
@@ -190,8 +197,10 @@ namespace CSAS
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger logger = new Logger();
+                logger.LogError(ex);
                 throw new DataException();
             }
         }

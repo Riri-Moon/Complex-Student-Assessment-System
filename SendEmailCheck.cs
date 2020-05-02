@@ -7,6 +7,7 @@ using SendGrid.Helpers.Mail;
 using System.Data.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Configuration;
 
 namespace CSAS
 {
@@ -14,7 +15,7 @@ namespace CSAS
     public class SendEmailCheck
     {
 
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         List<EmailAddress> firstReminderAddresses = new List<EmailAddress>();
         List<EmailAddress> secondReminderAddresses = new List<EmailAddress>();

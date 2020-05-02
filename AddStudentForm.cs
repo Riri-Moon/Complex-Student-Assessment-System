@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
@@ -15,7 +11,7 @@ namespace CSAS
     {
         User currUser;
         StudentSkupina skup;
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> students = new Dictionary<string, int>();
 
         public AddStudentForm(User user, StudentSkupina skupina)
@@ -35,20 +31,22 @@ namespace CSAS
             using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
             {
                 var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == skup.Id);
-                var kruzok = from stud in students where stud.ID_stud_skupina == skup.Id select (string)stud.IdGroupForAttendance;
-
-
-                kruzok.ToList<string>();
-                foreach (var kruz in kruzok.Distinct())
+                if (students.Count() > 0)
                 {
-                    if (!GroupAttCombo.Items.Contains(kruz))
+                    var kruzok = from stud in students where stud.ID_stud_skupina == skup.Id select (string)stud.IdGroupForAttendance;
+
+                    kruzok.ToList<string>();
+                    foreach (var kruz in kruzok.Distinct())
                     {
-                        GroupAttCombo.Items.Add(kruz);
-                        GroupCombo.Items.Add(kruz);
+                        if (!GroupAttCombo.Items.Contains(kruz))
+                        {
+                            GroupAttCombo.Items.Add(kruz);
+                            GroupCombo.Items.Add(kruz);
+                        }
                     }
                 }
+                RadioCheck();
             }
-            RadioCheck();
 
         }
 

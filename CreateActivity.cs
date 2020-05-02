@@ -2,6 +2,7 @@
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,7 +12,7 @@ namespace CSAS
     public partial class CreateActivity : MaterialSkin.Controls.MaterialForm
     {
         User currUser;
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         StudentSkupina studentSkup;
         public CreateActivity(User currentUser, StudentSkupina skup)
         {
@@ -116,6 +117,7 @@ namespace CSAS
                             SendFirst = first,
                             SendSecond = second,
                             IdStudent = student.Id,
+                            Comment=string.Empty,
                             SendMe = SendMe(),
 
                         };

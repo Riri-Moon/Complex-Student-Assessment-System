@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace CSAS
 {
     public partial class CreateTemplate : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         User currUser;
 
         int count = 0;
@@ -91,12 +92,6 @@ namespace CSAS
                 }
             }
         
-
-
-
-
-
-
         /// <summary>
         /// Vytvaranie novych taskov dynamicky
         /// </summary>
@@ -168,9 +163,6 @@ namespace CSAS
             float xy = 0;
             try
             {
-
-
-                //Changed from controlsPoints
                 foreach (var contr in controlPointsForEdit)
                 {
                     if (contr.Text != string.Empty )
@@ -181,13 +173,9 @@ namespace CSAS
                            contr.Text= contr.Text.Insert(2, ".");
                         }
                         xy += (float)Math.Round(float.Parse(contr.Text.Replace(",", ".")), 2);
-
-                   //     MaxPtsLabel.Text = xy.ToString();
                     }
-
                 }
                 MaxPtsLabel.Text = xy.ToString();
-
             }
             catch (FormatException)
             {
@@ -215,7 +203,6 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
                     var checkExisting = con.ActivityTemplates.Where(x => x.ActivityName == ActNameTxtBox.Text && x.IdUser==currUser.Id).Count();
 
                     if (checkExisting != 0)
@@ -223,9 +210,6 @@ namespace CSAS
                         MessageBox.Show("Aktivita s týmto menom už existuje", "Chyba");
                         return;
                     }
-
-
-
 
                     var ActTemp = new ActivityTemplate()
                     {
@@ -249,8 +233,6 @@ namespace CSAS
                     /// Wrong numbers // Change ctrlpoints to ctrlptsfedit and anmes too
                     foreach (var x in controlNamesForEdit.Zip(controlPointsForEdit, (names, points) => new { controlNamesForEdit = names, controlPointsForEdit = points }))
                     {
-
-
                         float isParsable;
                         var toParse = x.controlPointsForEdit.Text;
                         bool success = Single.TryParse(toParse, out isParsable);
@@ -272,8 +254,6 @@ namespace CSAS
                             return;
                         }
 
-
-
                         var TaskTemp = new TaskTemplate()
                         {
 
@@ -293,12 +273,9 @@ namespace CSAS
                             con.SubmitChanges();
                             return;
                         }
-
                     }
-
                     con.SubmitChanges();
                     MessageBox.Show("Šablóna bola úspešne vytvorená", "Dáta úspešne zapísané", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
 
                     try
                     {
@@ -307,7 +284,6 @@ namespace CSAS
                         controlsPoints[0].Text = 0.ToString();
                         foreach (var x in controlsNames.Zip(controlsPoints, (names, points) => new { controlsNames = names, controlsPoints = points }))
                         {
-
                             x.controlsNames.Text = null;
                             x.controlsPoints.Text = null;
                         }
@@ -328,7 +304,6 @@ namespace CSAS
                 MessageBox.Show(ex.ToString());
             }
         }
-
 
         private Nullable<int> GetEmailTemps(ComboBox x)
         {
@@ -444,7 +419,6 @@ namespace CSAS
                         };
                         countAdd++;
 
-
                         Labels.Add(label);
                         this.panel1.Controls.Add(label);
 
@@ -505,7 +479,6 @@ namespace CSAS
             }
 
         }
-
 
         private void EditAddTemp(object sender, EventArgs e)
         {

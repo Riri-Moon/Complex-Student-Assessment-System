@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CSAS
         StudentSkupina currGroup;
         Student currStud;
         Activity currActivity;
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> tasksDictionary = new Dictionary<string, int>();
 
         public GradeActivityForm(StudentSkupina grp, Student stud, Activity activ)

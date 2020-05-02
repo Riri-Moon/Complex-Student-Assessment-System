@@ -48,8 +48,8 @@
             this.CreateBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateBtn.Name = "CreateBtn";
-            this.CreateBtn.Size = new System.Drawing.Size(88, 36);
-            this.CreateBtn.TabIndex = 0;
+            this.CreateBtn.Size = new System.Drawing.Size(90, 36);
+            this.CreateBtn.TabIndex = 2;
             this.CreateBtn.Text = "Vytvoriť";
             this.CreateBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.CreateBtn.UseAccentColor = false;
@@ -67,8 +67,8 @@
             this.CancelBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CancelBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(69, 36);
-            this.CancelBtn.TabIndex = 1;
+            this.CancelBtn.Size = new System.Drawing.Size(71, 36);
+            this.CancelBtn.TabIndex = 3;
             this.CancelBtn.Text = "Zrušiť";
             this.CancelBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.CancelBtn.UseAccentColor = false;
@@ -86,7 +86,7 @@
             this.GroupNameBox.Multiline = false;
             this.GroupNameBox.Name = "GroupNameBox";
             this.GroupNameBox.Size = new System.Drawing.Size(219, 25);
-            this.GroupNameBox.TabIndex = 2;
+            this.GroupNameBox.TabIndex = 0;
             this.GroupNameBox.Text = "";
             this.GroupNameBox.UseTallSize = false;
             // 
@@ -118,7 +118,7 @@
             this.FormCombo.Location = new System.Drawing.Point(111, 122);
             this.FormCombo.Name = "FormCombo";
             this.FormCombo.Size = new System.Drawing.Size(121, 23);
-            this.FormCombo.TabIndex = 5;
+            this.FormCombo.TabIndex = 1;
             // 
             // CreateNewGroupForm
             // 
@@ -131,7 +131,9 @@
             this.Controls.Add(this.GroupNameBox);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.CreateBtn);
+            this.MaximizeBox = false;
             this.Name = "CreateNewGroupForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vytvoriť novú skupinu";
             this.ResumeLayout(false);
             this.PerformLayout();

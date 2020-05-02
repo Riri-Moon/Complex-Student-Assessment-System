@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using AutocompleteMenuNS;
 using System.IO;
+using System.Configuration;
 
 namespace CSAS
 {
@@ -17,7 +18,7 @@ namespace CSAS
         StudentSkupina currentGroup = new StudentSkupina();
         AutoCompleteStringCollection suggestionList = new AutoCompleteStringCollection();
         List<EmailAddress> emailAddList = new List<EmailAddress>();
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         List<SendGrid.Helpers.Mail.Attachment> attachmentList = new List<SendGrid.Helpers.Mail.Attachment>();
 
         public EmailSendingForm(User user, StudentSkupina skupina)

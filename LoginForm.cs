@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,10 +16,14 @@ namespace CSAS
 {
     public partial class LoginForm : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        //        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        //        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        //private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
+        private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
+      
         public LoginForm()
         {
+           // conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.CSASDBConnectionString"].ConnectionString;
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
             skinManager.EnforceBackcolorOnAllComponents = false;
@@ -26,20 +32,32 @@ namespace CSAS
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
                 MaterialSkin.TextShade.WHITE);
+
+            if (ConfigurationManager.AppSettings["RememberPassword"] == "true")
+            {
+                materialCheckbox1.Checked = true;
+                NameBox.Text = ConfigurationManager.AppSettings.Get("NameToRemember");
+            }
+            else
+            {
+                materialCheckbox1.Checked = false;
+                NameBox.Text = string.Empty;
+            }
         }
 
         // ZObrazenie okna ak používateľ zabudol heslo alebo si ho chce zmeniť
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var forgottenPass = new ForgetPasswordForm();
-            forgottenPass.ShowDialog();
+            var forgottenPass = new ForgetPasswordForm();   
+            forgottenPass.Show();
         }
 
         // Zobrazenie okna pre registráciu nového používateľa
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             var registerForm = new RegistrationForm();
-            registerForm.ShowDialog();
+            registerForm.Show();
+
         }
 
         //Ukončenie aplikácie
@@ -49,10 +67,12 @@ namespace CSAS
 
             if (result == DialogResult.Yes)
             {
+                Environment.Exit(1);
                 Application.Exit();
             }
         }
 
+        
        // public User LoggedUser { get; set; }
 
         // Prihlásenie používateľa a validácia ním zadaných údajov
@@ -125,6 +145,30 @@ namespace CSAS
             }
             else
             {
+
+                if (materialCheckbox1.Checked == true && ConfigurationManager.AppSettings["NameToRemember"] != NameBox.Text)
+                {
+                    var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.AppSettings.Settings.Remove("NameToRemember");
+                    config.AppSettings.Settings.Remove("RememberPassword");
+
+                    config.AppSettings.Settings.Add("NameToRemember", NameBox.Text);
+                    config.AppSettings.Settings.Add("RememberPassword", "true");
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    ConfigurationManager.RefreshSection("AppSettings");
+                
+                }
+                else if (materialCheckbox1.Checked == false)
+                {
+                    var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.AppSettings.Settings.Remove("NameToRemember");
+                    config.AppSettings.Settings.Remove("RememberPassword");
+                    config.AppSettings.Settings.Add("NameToRemember",string.Empty);
+                    config.AppSettings.Settings.Add("RememberPassword", "false");
+                    config.Save(ConfigurationSaveMode.Minimal);
+                    ConfigurationManager.RefreshSection("AppSettings");
+                }
+
                 this.Hide();
 
                 var group = new Choose_Group(user);
@@ -132,7 +176,6 @@ namespace CSAS
                 group.Show();
                 user = null;
                 FirstPssBox.Text = string.Empty;
-               // LoggedUser = null;
             }
         }
         //Hashovanie hesla

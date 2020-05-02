@@ -404,6 +404,7 @@
             this.Controls.Add(this.StudentsCombo);
             this.Controls.Add(this.EditStudRadio);
             this.Controls.Add(this.AddStudRadio);
+            this.MaximizeBox = false;
             this.Name = "AddStudentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddStudentForm";

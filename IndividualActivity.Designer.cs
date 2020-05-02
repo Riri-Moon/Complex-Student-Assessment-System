@@ -302,7 +302,9 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.TaskGrid);
             this.Controls.Add(this.ActivityGridView);
+            this.MaximizeBox = false;
             this.Name = "IndividualActivity";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IndividualActivity";
             ((System.ComponentModel.ISupportInitialize)(this.TaskGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ActivityGridView)).EndInit();

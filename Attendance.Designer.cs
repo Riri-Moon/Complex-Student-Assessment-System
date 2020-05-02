@@ -491,6 +491,7 @@
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.attGrid);
+            this.MaximizeBox = false;
             this.Name = "Dochádzka";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dochádzka";

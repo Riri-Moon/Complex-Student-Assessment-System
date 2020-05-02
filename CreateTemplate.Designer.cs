@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ActNameTxtBox = new MaterialSkin.Controls.MaterialTextBox();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -164,7 +165,7 @@
             this.CreateTemplateBtn.DrawShadows = true;
             this.CreateTemplateBtn.HighEmphasis = true;
             this.CreateTemplateBtn.Icon = null;
-            this.CreateTemplateBtn.Location = new System.Drawing.Point(1194, 794);
+            this.CreateTemplateBtn.Location = new System.Drawing.Point(1194, 769);
             this.CreateTemplateBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateTemplateBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateTemplateBtn.Name = "CreateTemplateBtn";
@@ -180,6 +181,15 @@
             // 
             this.AllActTempGrid.BackgroundColor = System.Drawing.Color.White;
             this.AllActTempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AllActTempGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.AllActTempGrid.Location = new System.Drawing.Point(1074, 144);
             this.AllActTempGrid.Name = "AllActTempGrid";
             this.AllActTempGrid.Size = new System.Drawing.Size(311, 306);
@@ -242,6 +252,7 @@
             this.SaveChangesBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.SaveChangesBtn.Depth = 0;
             this.SaveChangesBtn.DrawShadows = true;
+            this.SaveChangesBtn.Enabled = false;
             this.SaveChangesBtn.HighEmphasis = true;
             this.SaveChangesBtn.Icon = null;
             this.SaveChangesBtn.Location = new System.Drawing.Point(1268, 507);
@@ -263,7 +274,7 @@
             this.materialFlatButton2.DrawShadows = true;
             this.materialFlatButton2.HighEmphasis = true;
             this.materialFlatButton2.Icon = null;
-            this.materialFlatButton2.Location = new System.Drawing.Point(795, 794);
+            this.materialFlatButton2.Location = new System.Drawing.Point(788, 769);
             this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton2.Name = "materialFlatButton2";
@@ -344,7 +355,9 @@
             this.Controls.Add(this.materialLabel4);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
             this.Name = "CreateTemplate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tvorba šablóny";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

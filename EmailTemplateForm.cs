@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -14,7 +15,7 @@ namespace CSAS
     public partial class EmailTemplateForm : MaterialSkin.Controls.MaterialForm
     {
         User currentUser;
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         List<Attachment> attachmentList = new List<Attachment>();
 
         public EmailTemplateForm(User user)
@@ -460,7 +461,7 @@ namespace CSAS
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
-                MessageBox.Show("Je nutné označiť prílohu, ktorú chcete otvoriť");
+                MessageBox.Show("Uistite sa,že súbor nie je používaný žiadnou aplikáciou");
             }
         }
 

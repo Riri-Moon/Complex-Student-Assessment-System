@@ -8,6 +8,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using RestSharp;
+using System.Configuration;
 
 namespace CSAS
 {
@@ -35,7 +36,7 @@ namespace CSAS
 
     public class EmailClient
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         User currUser;
         public void ToJsonEmail(EmailSettings settings)
         {

@@ -37,7 +37,18 @@ namespace CSAS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"D:\\BC- PRACA\\CSAS\\CSASDB.MDF\"" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=Tru" +
+            "e")]
+        public string masterConnectionString {
+            get {
+                return ((string)(this["masterConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"D:\\BC- PRACA\\CSAS\\CSASDB.mdf\"" +
             ";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificat" +
             "e=False")]
         public string D__BC__PRACA_CSAS_CSASDB_MDFConnectionString {
@@ -49,11 +60,11 @@ namespace CSAS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=Tru" +
-            "e")]
-        public string masterConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\StudentDataba" +
+            "se.mdf;Initial Catalog=StudentDatabase;Integrated Security=True")]
+        public string StudentDatabaseConnectionString {
             get {
-                return ((string)(this["masterConnectionString"]));
+                return ((string)(this["StudentDatabaseConnectionString"]));
             }
         }
     }

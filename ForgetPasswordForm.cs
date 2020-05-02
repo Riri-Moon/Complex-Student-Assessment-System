@@ -17,7 +17,7 @@ namespace CSAS
 {
     public partial class ForgetPasswordForm : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         public ForgetPasswordForm()
         {

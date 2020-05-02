@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using System.Configuration;
 
 namespace CSAS
 {
     public partial class RegistrationForm : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
 
         public RegistrationForm()
         {
@@ -26,7 +27,6 @@ namespace CSAS
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
                 MaterialSkin.TextShade.WHITE);
         }
-
         
         private bool BoxValidation()
         {
@@ -100,7 +100,6 @@ namespace CSAS
             return true;
         }
 
-
         private bool Validation()
         {
             try
@@ -112,6 +111,7 @@ namespace CSAS
 
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
+                    
                     var exists = con.GetTable<User>().Where(x => x.Email == EmailBox.Text || x.Meno == NameBox.Text).Count();
 
                     if(exists>0)
@@ -134,7 +134,7 @@ namespace CSAS
             }
         }
 
-        private void CreateUser()
+        private bool CreateUser()
         {
             try
             {
@@ -151,15 +151,15 @@ namespace CSAS
                         con.SubmitChanges();
 
                         MessageBox.Show("Registrácia bola úspešná");
-                        this.Close();
+                        return true;
                     }
                 }
-                else return;
+                else return false;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                return;
+                return false;
             }
 
         }
@@ -191,7 +191,16 @@ namespace CSAS
         {
             try
             {
-                CreateUser();
+                if (CreateUser())
+                {
+
+                    this.Hide();
+                    return;
+                }
+                else
+                {
+                    return;
+                }
             }
             catch(Exception ex)
             {

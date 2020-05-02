@@ -6,13 +6,14 @@ using System.Timers;
 using System.IO;
 using System.Drawing;
 using MaterialSkin.Controls;
+using System.Configuration;
 
 namespace CSAS
 {
     public partial class Main_Window : MaterialForm
     {
 
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         protected bool isCollapsed_4 = true;
         protected bool isCollapsed_3 = true;
         protected bool isCollapsed_2 = true;
@@ -39,16 +40,13 @@ namespace CSAS
                 SendEmailCheck emailCheck = new SendEmailCheck();
                 emailCheck.AutomatedEmailSending(currentUser);
 
-                //var aTimer = new System.Timers.Timer(60 * 60 * 1000); 
-                // aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-                //aTimer.Start();
+                var aTimer = new System.Timers.Timer(60 * 60 * 1000); 
+                aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+                aTimer.Start();
 
                 GetTable();
                 OnLoadStudent();
                 CreateBlockedExtensionFile();
-
-
-
             }
             catch (Exception ex)
             {

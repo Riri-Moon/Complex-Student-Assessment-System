@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,10 +13,11 @@ namespace CSAS
 {
     public partial class FinalGradeForm : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         User currentUser;
         StudentSkupina group;
         bool start = true;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+
         public FinalGradeForm(User user, StudentSkupina skup)
         {
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
@@ -28,8 +30,23 @@ namespace CSAS
 
             currentUser = user;
             group = skup;
-            CreateFinalGradeOnStart();
-            LoadGrid(skup);
+            
+            try
+            {
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                {
+                    if (con.GetTable<Student>().Where(x => x.ID_stud_skupina == skup.Id).Count() > 0)
+                    {
+                        CreateFinalGradeOnStart();
+
+                        LoadGrid(skup);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Uistite sa, že existujú študenti");
+            }
         }
 
         private bool OnlyAllowedValues(string text)

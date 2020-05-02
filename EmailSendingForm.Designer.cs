@@ -306,6 +306,7 @@
             this.Controls.Add(this.subjectTextBox);
             this.Controls.Add(this.ToTextBox);
             this.Controls.Add(this.richTextBox1);
+            this.MaximizeBox = false;
             this.Name = "EmailSendingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EmailSendingForm";

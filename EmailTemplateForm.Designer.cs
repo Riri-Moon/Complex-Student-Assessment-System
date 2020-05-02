@@ -130,7 +130,7 @@
             this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Size = new System.Drawing.Size(58, 36);
+            this.materialFlatButton1.Size = new System.Drawing.Size(30, 36);
             this.materialFlatButton1.TabIndex = 5;
             this.materialFlatButton1.Text = "s";
             this.materialFlatButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -330,7 +330,9 @@
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.SubjectTextbox);
             this.Controls.Add(this.ContentTextBox);
+            this.MaximizeBox = false;
             this.Name = "EmailTemplateForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vytvorenie emailovej šablóny";
             this.Load += new System.EventHandler(this.EmailTemplateForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TempGridView)).EndInit();

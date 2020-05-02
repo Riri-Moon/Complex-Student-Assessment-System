@@ -13,12 +13,13 @@ using System.Drawing.Imaging;
 using Image = iText.Layout.Element.Image;
 using iText.IO.Image;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace CSAS
 {
     public partial class Statistics : MaterialSkin.Controls.MaterialForm
     {
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         User currentUser;
         StudentSkupina currentGroup;
 

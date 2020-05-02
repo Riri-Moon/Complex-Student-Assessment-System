@@ -5,6 +5,7 @@ using System.Collections;
 using System.Linq;
 using System.Threading;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace CSAS
 {
@@ -12,7 +13,10 @@ namespace CSAS
     {
 
         public StudentSkupina Selected { get; set; }
-        private const string conn_str = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+       // private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
+
         public User loggedUser = new User();
 
         BackgroundWorker _worker = new BackgroundWorker();
