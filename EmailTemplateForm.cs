@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
@@ -15,9 +11,9 @@ namespace CSAS
     public partial class EmailTemplateForm : MaterialSkin.Controls.MaterialForm
     {
         User currentUser;
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         List<Attachment> attachmentList = new List<Attachment>();
-
+        bool editMode = false;
         public EmailTemplateForm(User user)
         {
 
@@ -30,9 +26,6 @@ namespace CSAS
             InitializeComponent();
             currentUser = user;
             GetEmailTemps(user);
-
-
-
         }
 
         private void GetEmailTemps(User user)
@@ -49,6 +42,7 @@ namespace CSAS
                     TempGridView.Columns["Id"].Visible = false;
                     TempGridView.Columns["EmailSubject"].Visible = false;
                     TempGridView.Columns["EmailTemplateName"].HeaderText = "Názov emailovej šablóny";
+                    TempGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
                     TempGridView.MultiSelect = false;
                     TempGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -56,66 +50,65 @@ namespace CSAS
                     TempGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
-        private void EmailTemplateForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void CreateEmailTempBtn_Click(object sender, EventArgs e)
         {
-
-            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+            try
             {
-                var exists = con.GetTable<EmailTemplate>().Where(x => x.EmailTemplateName == NameOfTempTextBox.Text && x.IdUser == currentUser.Id);
-
-                if (exists.Count().Equals(0))
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    if (!string.IsNullOrEmpty(SubjectTextbox.Text) && !string.IsNullOrEmpty(ContentTextBox.Text) && !string.IsNullOrEmpty(NameOfTempTextBox.Text))
-                    {
-                        var newTemp = new EmailTemplate()
-                        {
-                            EmailTemplateName = NameOfTempTextBox.Text,
-                            EmailSubject = SubjectTextbox.Text,
-                            EmailContent = ContentTextBox.Text,
-                            IdUser = currentUser.Id
-                        };
+                    var exists = con.GetTable<EmailTemplate>().Where(x => x.EmailTemplateName == NameOfTempTextBox.Text && x.IdUser == currentUser.Id);
 
-                        con.EmailTemplates.InsertOnSubmit(newTemp);
-                        con.SubmitChanges();
-                        SaveAttachmentsToDB(newTemp);
+                    if (exists.Count().Equals(0))
+                    {
+                        if (!string.IsNullOrEmpty(SubjectTextbox.Text) && !string.IsNullOrEmpty(ContentTextBox.Text) && !string.IsNullOrEmpty(NameOfTempTextBox.Text))
+                        {
+                            var newTemp = new EmailTemplate()
+                            {
+                                EmailTemplateName = NameOfTempTextBox.Text,
+                                EmailSubject = SubjectTextbox.Text,
+                                EmailContent = ContentTextBox.Text,
+                                IdUser = currentUser.Id
+                            };
+
+                            con.EmailTemplates.InsertOnSubmit(newTemp);
+                            con.SubmitChanges();
+                            SaveAttachmentsToDB(newTemp);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Subjekt alebo správa nie sú vyplnené, pred uložením je potrebné vyplniť tieto polia", "Prázdne polia");
+                            return;
+                        }
+
                     }
                     else
                     {
-                        MessageBox.Show("Subjekt alebo správa nie sú vyplnené, pred uložením je potrebné vyplniť tieto polia", "Prázdne polia");
-                        return;
+                        var exisEmail = con.EmailTemplates.Where(x => x.IdUser == currentUser.Id && x.Id == (int)TempGridView.CurrentRow.Cells[2].Value);
+                        exisEmail.FirstOrDefault().EmailSubject = SubjectTextbox.Text;
+                        exisEmail.FirstOrDefault().EmailContent = ContentTextBox.Text;
+                        SaveAttachmentsToDB(exisEmail.FirstOrDefault());
+
+                        con.SubmitChanges();
                     }
-
+                    GetEmailTemps(currentUser);
+                    AttachmentsGrid.ClearSelection();
                 }
-                else
-                {
-                    var exisEmail = con.EmailTemplates.Where(x => x.IdUser == currentUser.Id && x.Id == (int)TempGridView.CurrentRow.Cells[2].Value);
-                    exisEmail.FirstOrDefault().EmailSubject = SubjectTextbox.Text;
-                    exisEmail.FirstOrDefault().EmailContent = ContentTextBox.Text;
-                    SaveAttachmentsToDB(exisEmail.FirstOrDefault());
-
-                    con.SubmitChanges();
-
-                }                
-                GetEmailTemps(currentUser);
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
-        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-           
-        }
         /// <summary>
         /// Load email template       
         /// </summary>
@@ -123,33 +116,45 @@ namespace CSAS
         /// <param name="e"></param>
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
-            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+            try
             {
-
-                var loadTemplate = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currentUser.Id && x.Id == (int)TempGridView.CurrentRow.Cells[2].Value);
-
-                foreach (var mail in loadTemplate)
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    AttachmentsGrid.DataSource = null;
+                    if (TempGridView.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Nie je vytvorená žiadna emailová šablóna");
+                        return;
+                    }
+                    var loadTemplate = con.GetTable<EmailTemplate>().Where(x => x.IdUser == currentUser.Id && x.Id == (int)TempGridView.CurrentRow.Cells[2].Value);
 
-                    ContentTextBox.Text = string.Empty;
-                    SubjectTextbox.Text = string.Empty;
-                    NameOfTempTextBox.Text = string.Empty;
+                    foreach (var mail in loadTemplate)
+                    {
+                        AttachmentsGrid.DataSource = null;
 
-                    NameOfTempTextBox.Text = mail.EmailTemplateName;
-                    ContentTextBox.Text = mail.EmailContent;
-                    SubjectTextbox.Text = mail.EmailSubject;
-                    AttachmentsGrid.DataSource = mail.Attachments;
+                        ContentTextBox.Text = string.Empty;
+                        SubjectTextbox.Text = string.Empty;
+                        NameOfTempTextBox.Text = string.Empty;
+                        NameOfTempTextBox.Text = mail.EmailTemplateName;
+                        ContentTextBox.Text = mail.EmailContent;
+                        SubjectTextbox.Text = mail.EmailSubject;
+                        AttachmentsGrid.DataSource = mail.Attachments;
+                    }
+
+                    AttachmentsGrid.Columns["FilePath"].Visible = false;
+                    AttachmentsGrid.Columns["IdUSer"].Visible = false;
+                    AttachmentsGrid.Columns["IdEmailTemplate"].Visible = false;
+                    AttachmentsGrid.Columns["Id"].Visible = false;
+                    AttachmentsGrid.Columns["EmailTemplate"].Visible = false;
+                    AttachmentsGrid.Columns["User"].Visible = false;
+
+                    AttachmentsGrid.ClearSelection();
+                    editMode = true;
                 }
-
-                AttachmentsGrid.Columns["FilePath"].Visible = false;
-                AttachmentsGrid.Columns["IdUSer"].Visible = false;
-                AttachmentsGrid.Columns["IdEmailTemplate"].Visible = false;
-                AttachmentsGrid.Columns["Id"].Visible = false;
-                AttachmentsGrid.Columns["EmailTemplate"].Visible = false;
-                AttachmentsGrid.Columns["User"].Visible = false;
-
-
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
         /// <summary>
@@ -166,14 +171,11 @@ namespace CSAS
                     DialogResult response = MessageBox.Show("Naozaj chcete odstrániť šablónu ?", "Upozornenie", MessageBoxButtons.YesNo);
                     if (response == DialogResult.Yes)
                     {
-
-                        
                         con.Attachments.DeleteAllOnSubmit(con.GetTable<Attachment>().Where(x => x.IdEmailTemplate == (int)TempGridView.CurrentRow.Cells[2].Value));
-                      
+
                         con.EmailTemplates.DeleteOnSubmit(con.GetTable<EmailTemplate>().
                             Where(x => x.IdUser == currentUser.Id && x.Id == (int)TempGridView.CurrentRow.Cells[2].Value).FirstOrDefault());
                         con.SubmitChanges();
-
                     }
                     else
                     {
@@ -182,7 +184,7 @@ namespace CSAS
                 }
                 GetEmailTemps(currentUser);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -201,28 +203,46 @@ namespace CSAS
                 {
                     using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                     {
-                        foreach (var path in attachmentList)
-                        {                           
-                            Attachment attachment = new Attachment()
+                        if (editMode)
+                        {
+                            foreach (DataGridViewRow x in AttachmentsGrid.Rows)
                             {
-                                IdEmailTemplate = template.Id,
-                                IdUser = currentUser.Id,
-                                FileName = path.FileName,
-                                FilePath = path.FilePath,
-                            };
-
-                            if (!AttachmentExists(attachment, template))
-                            {
-                                con.Attachments.InsertOnSubmit(attachment);
+                                var attachment = con.GetTable<Attachment>().Where(id => id.Id == (int)x.Cells[0].Value).FirstOrDefault();
+                                Attachment atta = new Attachment()
+                                {
+                                    FileName = attachment.FileName,
+                                    FilePath = attachment.FilePath,
+                                    IdEmailTemplate = template.Id,
+                                    IdUser = currentUser.Id
+                                };
+                                if (!AttachmentExists(atta, template))
+                                    con.Attachments.InsertOnSubmit(atta);
                             }
-                            else
+                        }
+                        else
+                        {
+                            foreach (var path in attachmentList)
                             {
-                                continue;
+                                Attachment attachment = new Attachment()
+                                {
+                                    IdEmailTemplate = template.Id,
+                                    IdUser = currentUser.Id,
+                                    FileName = path.FileName,
+                                    FilePath = path.FilePath,
+                                };
+
+                                if (!AttachmentExists(attachment, template))
+                                {
+                                    con.Attachments.InsertOnSubmit(attachment);
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                         }
                         con.SubmitChanges();
 
-                       // var currentTemplateId = (int)TempGridView.CurrentRow.Cells[2].Value;
                         AttachmentsGrid.DataSource = con.GetTable<Attachment>().Where(x => x.IdEmailTemplate == template.Id && x.IdUser == currentUser.Id);
                     }
                 }
@@ -230,9 +250,8 @@ namespace CSAS
                 {
                     return;
                 }
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -247,13 +266,13 @@ namespace CSAS
             ContentTextBox.Text = null;
             AttachmentsGrid.DataSource = null;
             attachmentList.Clear();
-
+            editMode = false;
         }
 
-        private void materialFlatButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        //private void materialFlatButton1_Click(object sender, EventArgs e)
+        //{
+        //    this.Close();
+        //}
 
         private void AddEmailTemplateAttachmentsBtn_Click(object sender, EventArgs e)
         {
@@ -277,11 +296,50 @@ namespace CSAS
                         {
                             FilePath = files.paths,
                             FileName = files.names,
-                            IdUser = currentUser.Id, 
+                            IdUser = currentUser.Id,
                         };
 
+                        if (editMode)
+                        {
+                            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                            {
+                                var att = attachment;
+                                att.IdEmailTemplate = (int)TempGridView.CurrentRow.Cells[2].Value;
+                                var emailTemp = con.GetTable<EmailTemplate>().First(x => x.Id == (int)TempGridView.CurrentRow.Cells[2].Value);
+                                if (!AttachmentExists(att, emailTemp))
+                                {
+                                    con.Attachments.InsertOnSubmit(att);
+                                    con.SubmitChanges();
 
-                        attachmentList.Add(attachment);
+                                    AttachmentsGrid.DataSource = null;
+                                    AttachmentsGrid.DataSource = con.GetTable<Attachment>().Where(x => x.IdEmailTemplate == (int)TempGridView.CurrentRow.Cells[2].Value);
+                                    AttachmentsGrid.Columns["FilePath"].Visible = false;
+                                    AttachmentsGrid.Columns["IdUSer"].Visible = false;
+                                    AttachmentsGrid.Columns["IdEmailTemplate"].Visible = false;
+                                    AttachmentsGrid.Columns["Id"].Visible = false;
+                                    AttachmentsGrid.Columns["EmailTemplate"].Visible = false;
+                                    AttachmentsGrid.Columns["User"].Visible = false;
+
+                                    if (notAddedList.Count >= 1)
+                                    {
+                                        string list = null;
+
+                                        foreach (var x in notAddedList)
+                                        {
+                                            list += x + " ";
+                                        }
+                                        var msg = $"Súbor/y {list} nebol pridaný, lebo tento typ súboru nie je možné odoslať emailom. Pre informácie o tom, ktoré " +
+                                        "súbory nie je možné odoslať otvorte BlockedExtensions.txt";
+                                        MessageBox.Show(msg);
+                                    }
+                                }
+                                return;
+                            }
+                        }
+                        else if (!attachmentList.Contains(attachment))
+                        {
+                            attachmentList.Add(attachment);
+                        }
                     }
                     if (attachmentList.Count >= 1)
                     {
@@ -312,6 +370,7 @@ namespace CSAS
                 {
                     return;
                 }
+                AttachmentsGrid.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -329,7 +388,7 @@ namespace CSAS
                 {
                     var exists = con.GetTable<Attachment>().Where(x => x.IdEmailTemplate == template.Id && x.FileName == attachment.FileName);
 
-                    if(exists.Count() <=0)
+                    if (exists.Count() <= 0)
                     {
                         return false;
                     }
@@ -339,14 +398,14 @@ namespace CSAS
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
                 return true;
             }
-        }    
+        }
 
         private void AttachmentsGrid_KeyUp(object sender, KeyEventArgs e)
         {
@@ -354,7 +413,7 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    if (e.KeyCode == Keys.Delete )
+                    if (e.KeyCode == Keys.Delete)
                     {
                         var currentAttachment = (int)AttachmentsGrid.CurrentRow.Cells[0].Value;
                         var allAttachments = con.GetTable<Attachment>().Where(x => x.IdUser == currentUser.Id && x.Id == currentAttachment);
@@ -386,24 +445,22 @@ namespace CSAS
                                 return;
                             }
                         }
-                        
                     }
                     else
                     {
                         return;
                     }
+                    AttachmentsGrid.ClearSelection();
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Pre odstránenie prílohy musíte kliknúť na prílohu, ktorá má byť odstránená","Nie je vybratá príloha");
+                MessageBox.Show("Pre odstránenie prílohy musíte kliknúť na prílohu, ktorá má byť odstránená", "Nie je vybratá príloha");
             }
         }
 
-
         private void RefreshAtt()
         {
-
             try
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
@@ -412,7 +469,7 @@ namespace CSAS
 
                     foreach (var mail in loadTemplate)
                     {
-                        AttachmentsGrid.DataSource = null;                    
+                        AttachmentsGrid.DataSource = null;
                         AttachmentsGrid.DataSource = mail.Attachments;
                     }
 
@@ -424,7 +481,7 @@ namespace CSAS
                     AttachmentsGrid.Columns["User"].Visible = false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -438,43 +495,45 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    if (AttachmentsGrid.SelectedRows != null)
+                    if (AttachmentsGrid.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Nie je pridaná žiadna príloha");
+                        return;
+                    }
+                    if (AttachmentsGrid.SelectedRows.Count == 1)
                     {
                         var currentAttachment = (int)AttachmentsGrid.CurrentRow.Cells[0].Value;
 
-                        var attachment = con.GetTable<Attachment>().Where(x => x.Id == currentAttachment).FirstOrDefault();
-
-                        if (File.Exists(attachment.FilePath))
+                        var attachment = con.GetTable<Attachment>().Where(x => x.Id == currentAttachment);
+                        if (attachment.Count() <= 0)
                         {
-                            System.Diagnostics.Process.Start(attachment.FilePath);
-
+                            if (File.Exists((string)AttachmentsGrid.CurrentRow.Cells[1].Value))
+                            {
+                                System.Diagnostics.Process.Start((string)AttachmentsGrid.CurrentRow.Cells[1].Value);
+                            }
+                            return;
+                        }
+                        if (File.Exists(attachment.First().FilePath))
+                        {
+                            System.Diagnostics.Process.Start(attachment.First().FilePath);
                         }
                         else
                         {
-                            MessageBox.Show($"Nie je možné nájsť súbor. Prosím skontrolujte, či súbor {attachment.FilePath} existuje.");
+                            MessageBox.Show($"Nie je možné nájsť súbor. Prosím skontrolujte, či súbor {attachment.First().FilePath} existuje.");
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Je nutné najprv vybrať prílohu");
+                        return;
+                    }
                 }
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
                 MessageBox.Show("Uistite sa,že súbor nie je používaný žiadnou aplikáciou");
-            }
-        }
-
-        private void ContentTextBox_TextChanged(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void ContentTextBox_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                ContentTextBox.AppendText("\u00A0");
             }
         }
     }

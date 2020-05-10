@@ -1,13 +1,13 @@
-﻿using SendGrid;
+﻿using AutocompleteMenuNS;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using AutocompleteMenuNS;
-using System.IO;
-using System.Configuration;
 
 namespace CSAS
 {
@@ -18,14 +18,14 @@ namespace CSAS
         StudentSkupina currentGroup = new StudentSkupina();
         AutoCompleteStringCollection suggestionList = new AutoCompleteStringCollection();
         List<EmailAddress> emailAddList = new List<EmailAddress>();
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         List<SendGrid.Helpers.Mail.Attachment> attachmentList = new List<SendGrid.Helpers.Mail.Attachment>();
 
         public EmailSendingForm(User user, StudentSkupina skupina)
         {
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
-            skinManager.EnforceBackcolorOnAllComponents = false;    
+            skinManager.EnforceBackcolorOnAllComponents = false;
             skinManager.AddFormToManage(this);
             skinManager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
@@ -77,7 +77,7 @@ namespace CSAS
             {
                 Logger logger = new Logger();
                 EmailClient eClient = new EmailClient();
-                if(string.IsNullOrEmpty(currentUser.ApiKey))
+                if (string.IsNullOrEmpty(currentUser.ApiKey))
                 {
                     MessageBox.Show("ApiKey nemôže byť prázdny.");
                     return;
@@ -85,7 +85,7 @@ namespace CSAS
                 SendGridClient client = new SendGridClient(eClient.SetEnvironmentVar(currentUser));
                 EmailBody body = new EmailBody()
                 {
-                    HtmlContent = richTextBox1.Text.Replace("\u00A0","<br/>") +"<br/> <br/> " + currentUser.Signature.Replace("\u00A0", "<br/>"),
+                    HtmlContent = richTextBox1.Text.Replace("\u00A0", "<br/>") + "<br/> <br/> " + currentUser.Signature.Replace("\u00A0", "<br/>"),
                     PlainTextContent = richTextBox1.Text,
                     Subject = subjectTextBox.Text,
                     To = emailAddList
@@ -156,7 +156,7 @@ namespace CSAS
                     MessageBox.Show("Niektorá časť nie je vyplnená. Prosím skontrolujte správu, ktorú chcete odoslať a uistite sa subjekt alebo správa nie sú prázdne", "Prázdne polia");
                     return;
                 }
-                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject,body.HtmlContent, body.HtmlContent);
+                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currentUser.Email), body.To, body.Subject, body.HtmlContent, body.HtmlContent);
                 if (attachmentList.Count >= 1)
                 {
                     msg.AddAttachments(attachmentList);
@@ -269,6 +269,7 @@ namespace CSAS
                         "súbory nie je možné odoslať otvorte BlockedExtensions.txt";
                         MessageBox.Show(msg);
                     }
+                    AttachmentsGrid.ClearSelection();
                 }
                 else
                 {
@@ -289,12 +290,12 @@ namespace CSAS
         {
             try
             {
-                if (e.KeyCode == Keys.Delete && attachmentList.Count>=1)
+                if (e.KeyCode == Keys.Delete && attachmentList.Count >= 1)
                 {
                     var currentAttachment = (string)AttachmentsGrid.CurrentCell.Value;
                     var attachment = attachmentList.Where(x => x.Filename == currentAttachment).FirstOrDefault();
                     attachmentList.Remove(attachment);
-                    
+
                     if (attachmentList.Count >= 1)
                     {
                         AttachmentsGrid.DataSource = attachmentList;
@@ -317,17 +318,18 @@ namespace CSAS
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {            
+        {
         }
 
         //Insert non printable character in order to replace it later with <br/>
         private void richTextBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode== Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 richTextBox1.AppendText("\u00A0");
             }
         }
+
     }
 }
 

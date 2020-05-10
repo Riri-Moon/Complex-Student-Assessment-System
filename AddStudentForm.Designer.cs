@@ -49,7 +49,6 @@
             this.GroupCombo = new System.Windows.Forms.ComboBox();
             this.GroupAttCombo = new System.Windows.Forms.ComboBox();
             this.SaveBtn = new MaterialSkin.Controls.MaterialButton();
-            this.BackBtn = new MaterialSkin.Controls.MaterialButton();
             this.SuspendLayout();
             // 
             // AddStudRadio
@@ -90,7 +89,7 @@
             // StudentsCombo
             // 
             this.StudentsCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.StudentsCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.StudentsCombo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.StudentsCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.StudentsCombo.FormattingEnabled = true;
             this.StudentsCombo.Location = new System.Drawing.Point(180, 123);
@@ -109,7 +108,7 @@
             this.LoadStudentBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.LoadStudentBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.LoadStudentBtn.Name = "LoadStudentBtn";
-            this.LoadStudentBtn.Size = new System.Drawing.Size(83, 36);
+            this.LoadStudentBtn.Size = new System.Drawing.Size(80, 36);
             this.LoadStudentBtn.TabIndex = 3;
             this.LoadStudentBtn.Text = "Načítať";
             this.LoadStudentBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -191,9 +190,9 @@
             this.materialLabel6.Location = new System.Drawing.Point(26, 322);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
-            this.materialLabel6.Size = new System.Drawing.Size(49, 19);
+            this.materialLabel6.Size = new System.Drawing.Size(76, 19);
             this.materialLabel6.TabIndex = 42;
-            this.materialLabel6.Text = "Ročník";
+            this.materialLabel6.Text = "Rok štúdia";
             // 
             // materialLabel7
             // 
@@ -214,7 +213,7 @@
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(280, 361);
+            this.materialLabel8.Location = new System.Drawing.Point(251, 358);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(124, 19);
@@ -227,7 +226,7 @@
             this.NameBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NameBox.Depth = 0;
             this.NameBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.NameBox.Location = new System.Drawing.Point(90, 175);
+            this.NameBox.Location = new System.Drawing.Point(108, 175);
             this.NameBox.MaxLength = 32767;
             this.NameBox.MouseState = MaterialSkin.MouseState.OUT;
             this.NameBox.Multiline = false;
@@ -259,7 +258,7 @@
             this.EmailBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EmailBox.Depth = 0;
             this.EmailBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.EmailBox.Location = new System.Drawing.Point(90, 231);
+            this.EmailBox.Location = new System.Drawing.Point(108, 231);
             this.EmailBox.MaxLength = 32767;
             this.EmailBox.MouseState = MaterialSkin.MouseState.OUT;
             this.EmailBox.Multiline = false;
@@ -291,7 +290,7 @@
             this.IsicBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.IsicBox.Depth = 0;
             this.IsicBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.IsicBox.Location = new System.Drawing.Point(90, 280);
+            this.IsicBox.Location = new System.Drawing.Point(108, 280);
             this.IsicBox.MaxLength = 32767;
             this.IsicBox.MouseState = MaterialSkin.MouseState.OUT;
             this.IsicBox.Multiline = false;
@@ -307,7 +306,7 @@
             this.GradeBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GradeBox.Depth = 0;
             this.GradeBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.GradeBox.Location = new System.Drawing.Point(90, 316);
+            this.GradeBox.Location = new System.Drawing.Point(108, 316);
             this.GradeBox.MaxLength = 32767;
             this.GradeBox.MouseState = MaterialSkin.MouseState.OUT;
             this.GradeBox.Multiline = false;
@@ -319,22 +318,21 @@
             // 
             // GroupCombo
             // 
-            this.GroupCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupCombo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.GroupCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupCombo.FormattingEnabled = true;
-            this.GroupCombo.Location = new System.Drawing.Point(90, 359);
+            this.GroupCombo.Location = new System.Drawing.Point(108, 355);
             this.GroupCombo.Name = "GroupCombo";
             this.GroupCombo.Size = new System.Drawing.Size(68, 25);
             this.GroupCombo.TabIndex = 10;
-            this.GroupCombo.SelectedIndexChanged += new System.EventHandler(this.GroupCombo_SelectedIndexChanged);
             // 
             // GroupAttCombo
             // 
             this.GroupAttCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GroupAttCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupAttCombo.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.GroupAttCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupAttCombo.FormattingEnabled = true;
-            this.GroupAttCombo.Location = new System.Drawing.Point(424, 359);
+            this.GroupAttCombo.Location = new System.Drawing.Point(381, 352);
             this.GroupAttCombo.Name = "GroupAttCombo";
             this.GroupAttCombo.Size = new System.Drawing.Size(68, 25);
             this.GroupAttCombo.TabIndex = 11;
@@ -350,7 +348,7 @@
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SaveBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(90, 36);
+            this.SaveBtn.Size = new System.Drawing.Size(88, 36);
             this.SaveBtn.TabIndex = 12;
             this.SaveBtn.Text = "Vytvoriť";
             this.SaveBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -358,31 +356,12 @@
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
-            // BackBtn
-            // 
-            this.BackBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackBtn.Depth = 0;
-            this.BackBtn.DrawShadows = true;
-            this.BackBtn.HighEmphasis = true;
-            this.BackBtn.Icon = null;
-            this.BackBtn.Location = new System.Drawing.Point(18, 439);
-            this.BackBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BackBtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(58, 36);
-            this.BackBtn.TabIndex = 13;
-            this.BackBtn.Text = "Späť";
-            this.BackBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BackBtn.UseAccentColor = false;
-            this.BackBtn.UseVisualStyleBackColor = true;
-            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(552, 508);
-            this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.GroupAttCombo);
             this.Controls.Add(this.GroupCombo);
@@ -407,7 +386,6 @@
             this.MaximizeBox = false;
             this.Name = "AddStudentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddStudentForm";
             this.Load += new System.EventHandler(this.AddStudentForm_Load);
             this.Leave += new System.EventHandler(this.AddStudentForm_Leave);
             this.ResumeLayout(false);
@@ -438,6 +416,5 @@
         private System.Windows.Forms.ComboBox GroupCombo;
         private System.Windows.Forms.ComboBox GroupAttCombo;
         private MaterialSkin.Controls.MaterialButton SaveBtn;
-        private MaterialSkin.Controls.MaterialButton BackBtn;
     }
 }

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ActivityGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 106</value>
+    <value>547, 117</value>
   </data>
   <data name="ActivityGridView.Size" type="System.Drawing.Size, System.Drawing">
     <value>322, 409</value>
@@ -145,7 +145,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="CreateActBtn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>845, 545</value>
+    <value>945, 590</value>
   </data>
   <data name="CreateActBtn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 6, 4, 6</value>
@@ -171,36 +171,6 @@
   <data name="&gt;&gt;CreateActBtn.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="materialFlatButton2.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="materialFlatButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 545</value>
-  </data>
-  <data name="materialFlatButton2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 6, 4, 6</value>
-  </data>
-  <data name="materialFlatButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 36</value>
-  </data>
-  <data name="materialFlatButton2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="materialFlatButton2.Text" xml:space="preserve">
-    <value>Späť</value>
-  </data>
-  <data name="&gt;&gt;materialFlatButton2.Name" xml:space="preserve">
-    <value>materialFlatButton2</value>
-  </data>
-  <data name="&gt;&gt;materialFlatButton2.Type" xml:space="preserve">
-    <value>MaterialSkin.Controls.MaterialButton, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;materialFlatButton2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;materialFlatButton2.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="materialLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -208,7 +178,7 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="materialLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 75</value>
+    <value>865, 86</value>
   </data>
   <data name="materialLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 19</value>
@@ -229,10 +199,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="dateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>783, 75</value>
+    <value>184, 82</value>
   </data>
   <data name="dateTimePicker1.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 20</value>
@@ -250,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateTimePicker1.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="materialLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +229,7 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="materialLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>642, 75</value>
+    <value>31, 82</value>
   </data>
   <data name="materialLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 19</value>
@@ -280,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="materialLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,16 +259,16 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="materialLabel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>642, 106</value>
+    <value>31, 117</value>
   </data>
   <data name="materialLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 19</value>
+    <value>292, 19</value>
   </data>
   <data name="materialLabel3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="materialLabel3.Text" xml:space="preserve">
-    <value>Odosielanie upozornení emailom</value>
+    <value>Odosielanie prednastavených upozornení</value>
   </data>
   <data name="&gt;&gt;materialLabel3.Name" xml:space="preserve">
     <value>materialLabel3</value>
@@ -310,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel3.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="SendingEmailCheck.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +289,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="SendingEmailCheck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 98</value>
+    <value>334, 117</value>
   </data>
   <data name="SendingEmailCheck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -340,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SendingEmailCheck.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="groupCmbo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -349,7 +319,7 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="groupCmbo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>831, 217</value>
+    <value>246, 235</value>
   </data>
   <data name="groupCmbo.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 25</value>
@@ -367,10 +337,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;groupCmbo.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="dateTimePicker2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>973, 75</value>
+    <value>374, 82</value>
   </data>
   <data name="dateTimePicker2.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -388,13 +358,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dateTimePicker2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="TaskGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 106</value>
+    <value>868, 117</value>
   </data>
   <data name="TaskGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 409</value>
+    <value>279, 409</value>
   </data>
   <data name="TaskGrid.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -409,7 +379,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TaskGrid.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ActCreatedCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -418,7 +388,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="ActCreatedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 133</value>
+    <value>334, 154</value>
   </data>
   <data name="ActCreatedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -439,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ActCreatedCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="materialLabel4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -448,16 +418,16 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="materialLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>642, 142</value>
+    <value>31, 163</value>
   </data>
   <data name="materialLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 19</value>
+    <value>262, 19</value>
   </data>
   <data name="materialLabel4.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="materialLabel4.Text" xml:space="preserve">
-    <value>Posielanie emailov o vytvorení aktivity</value>
+    <value>Posielanie emailu o vytvorení aktivity</value>
   </data>
   <data name="&gt;&gt;materialLabel4.Name" xml:space="preserve">
     <value>materialLabel4</value>
@@ -469,7 +439,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="materialLabel5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -478,7 +448,7 @@
     <value>Roboto, 14px</value>
   </data>
   <data name="materialLabel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>647, 220</value>
+    <value>31, 243</value>
   </data>
   <data name="materialLabel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 19</value>
@@ -499,7 +469,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel5.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="SendMeBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -511,7 +481,7 @@
     <value>NoControl</value>
   </data>
   <data name="SendMeBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>915, 168</value>
+    <value>334, 187</value>
   </data>
   <data name="SendMeBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -532,7 +502,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SendMeBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="materialLabel6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -544,16 +514,16 @@
     <value>NoControl</value>
   </data>
   <data name="materialLabel6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 177</value>
+    <value>34, 201</value>
   </data>
   <data name="materialLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 19</value>
+    <value>259, 19</value>
   </data>
   <data name="materialLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="materialLabel6.Text" xml:space="preserve">
-    <value>Posielanie upozornení mne</value>
+    <value>Poslanie upozornenia na hodnotenie</value>
   </data>
   <data name="&gt;&gt;materialLabel6.Name" xml:space="preserve">
     <value>materialLabel6</value>
@@ -565,7 +535,40 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;materialLabel6.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="materialLabel7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="materialLabel7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Roboto, 14px</value>
+  </data>
+  <data name="materialLabel7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="materialLabel7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>544, 86</value>
+  </data>
+  <data name="materialLabel7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 19</value>
+  </data>
+  <data name="materialLabel7.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="materialLabel7.Text" xml:space="preserve">
+    <value>Aktivity</value>
+  </data>
+  <data name="&gt;&gt;materialLabel7.Name" xml:space="preserve">
+    <value>materialLabel7</value>
+  </data>
+  <data name="&gt;&gt;materialLabel7.Type" xml:space="preserve">
+    <value>MaterialSkin.Controls.MaterialLabel, MaterialSkin, Version=2.1.2.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;materialLabel7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;materialLabel7.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -574,7 +577,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1049, 618</value>
+    <value>1159, 671</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

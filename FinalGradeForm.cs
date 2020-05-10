@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
@@ -16,7 +12,7 @@ namespace CSAS
         User currentUser;
         StudentSkupina group;
         bool start = true;
-        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         public FinalGradeForm(User user, StudentSkupina skup)
         {
@@ -30,7 +26,7 @@ namespace CSAS
 
             currentUser = user;
             group = skup;
-            
+
             try
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
@@ -38,26 +34,30 @@ namespace CSAS
                     if (con.GetTable<Student>().Where(x => x.ID_stud_skupina == skup.Id).Count() > 0)
                     {
                         CreateFinalGradeOnStart();
-
                         LoadGrid(skup);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Uistite sa, že existujú študenti");
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
+        //Povolene hodnoty pre finalnu znamku
         private bool OnlyAllowedValues(string text)
         {
-            List<string> allowedValues = new List<string>();
-            allowedValues.Add("A");
-            allowedValues.Add("B");
-            allowedValues.Add("C");
-            allowedValues.Add("D");
-            allowedValues.Add("E");
-            allowedValues.Add("Fx");
+            List<string> allowedValues = new List<string>
+            {
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+                "Fx"
+            };
 
             int count = 0;
             foreach (var value in allowedValues)
@@ -80,17 +80,16 @@ namespace CSAS
             {
                 return false;
             }
-
         }
-
+        //Finalne hodnotenie
         private void GradeBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
-                    if(!Validator())
+                    // Ak udaje niew su v pozadovanych formatoch tak sa nic nestane
+                    if (!Validator())
                     {
                         return;
                     }
@@ -98,7 +97,7 @@ namespace CSAS
                     FinalGrade grade = con.FinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent == (int)StudentGrid.CurrentRow.Cells[0].Value).FirstOrDefault();
                     float.TryParse(MaxPtsBox.Text, out float maxPoints);
                     float.TryParse(SemPtsBox.Text, out float semPts);
-                    float.TryParse(LecPtsBox.Text, out float lecPts);     
+                    float.TryParse(LecPtsBox.Text, out float lecPts);
 
                     int.TryParse(MissedLecBox.Text, out int missedLec);
                     int.TryParse(MissedSemBox.Text, out int missedSem);
@@ -127,7 +126,8 @@ namespace CSAS
             }
         }
 
-
+        // Pri prvom zapnuti okna sa vytvori finalne hodnotenie pre kazdeho studenta
+        // Aby bol mozny export finalneho hodnotenia
         private void CreateFinalGradeOnStart()
         {
             try
@@ -138,13 +138,13 @@ namespace CSAS
                     var allFinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id);
                     bool isAdded = false;
 
-                    if (allStudents.Count() <=0 || allStudents==null)
+                    if (allStudents.Count() <= 0 || allStudents == null)
                     {
                         return;
                     }
                     foreach (var student in allStudents)
                     {
-                        var exists = allFinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent==student.Id);
+                        var exists = allFinalGrades.Where(x => x.IdSkupina == group.Id && x.IdStudent == student.Id);
 
                         if (exists.Count() > 0)
                         {
@@ -158,10 +158,10 @@ namespace CSAS
                             ActivityLectPoints = 0,
                             ActivitySemPoints = 0,
                             GotPoints = 0,
-                            Grade="Fx",
-                            MaxPts=0,
-                            MissedLectures=0,
-                            MissedSeminars=0,                            
+                            Grade = "Fx",
+                            MaxPts = 0,
+                            MissedLectures = 0,
+                            MissedSeminars = 0,
                         };
                         con.FinalGrades.InsertOnSubmit(finalGrade);
                         isAdded = true;
@@ -183,9 +183,8 @@ namespace CSAS
                 newLog.LogError(ex);
             }
         }
-
-
-
+        //Navrhovane hodnotenie/ Zapisane hodnotenie v databaze
+        // nakolko, to co navrhuje system sa moze/nemusi lisit od reality
         private void LoadTextBoxes()
         {
             try
@@ -196,7 +195,7 @@ namespace CSAS
                     double? acquiredPoints = 0;
                     double? bonusSem = 0;
                     double? bonusLec = 0;
-                    if(StudentGrid.Rows.Count <=0)
+                    if (StudentGrid.Rows.Count <= 0)
                     {
                         MessageBox.Show("Nenašiel sa žiaden študent.");
                         this.Close();
@@ -219,7 +218,8 @@ namespace CSAS
                             bonusPtsSeminar = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsSeminarTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId).DefaultIfEmpty();
 
                         }
-                        if (currentUser.PointsForActLec.HasValue) {
+                        if (currentUser.PointsForActLec.HasValue)
+                        {
                             bonusPtsLectureTemp = con.GetTable<ActivityTemplate>().FirstOrDefault(x => x.Id == currentUser.PointsForActLec);
                             bonusPtsLecture = con.GetTable<Activity>().Where(x => x.ActivityName == bonusPtsLectureTemp.ActivityName && x.IdSkupina == group.Id && x.IdStudent == selectedStudentId).DefaultIfEmpty();
                         }
@@ -235,7 +235,7 @@ namespace CSAS
                         {
                             allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsSeminarTemp.ActivityName && x.IdStudent == selectedStudentId);
                         }
-                        if(bonusPtsSeminarTemp==null && bonusPtsLectureTemp == null)
+                        if (bonusPtsSeminarTemp == null && bonusPtsLectureTemp == null)
                         {
                             allActivities = con.GetTable<Activity>().Where(x => x.IdStudent == selectedStudentId);
                         }
@@ -244,8 +244,8 @@ namespace CSAS
                             allActivities = con.GetTable<Activity>().Where(x => x.ActivityName != bonusPtsSeminarTemp.ActivityName && x.ActivityName != bonusPtsLectureTemp.ActivityName
                            && x.IdStudent == selectedStudentId);
                         }
-                        
-                        if (allActivities.Count() <=0 || allActivities==null)
+
+                        if (allActivities.Count() <= 0 || allActivities == null)
                         {
                             return;
                         }
@@ -268,7 +268,7 @@ namespace CSAS
                             bonusSem += 0;
                         }
 
-                        if (bonusPtsLecture != null && bonusPtsLecture.Count()>0)
+                        if (bonusPtsLecture != null && bonusPtsLecture.Count() > 0)
                         {
                             foreach (var lecture in bonusPtsLecture)
                             {
@@ -328,19 +328,17 @@ namespace CSAS
                         TotalPtsBox.Text = finalGrade.GotPoints.ToString();
                         FinalGradeBox.Text = finalGrade.Grade;
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
-               // MessageBox.Show(ex.ToString());
+                // MessageBox.Show(ex.ToString());
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
             }
         }
 
-
+        //Nacitavanie studentov do datagridu 
         private void LoadGrid(StudentSkupina skupina)
         {
             try
@@ -352,6 +350,7 @@ namespace CSAS
                     {
                         StudentGrid.DataSource = students;
                         StudentGrid.Columns["Id"].Visible = false;
+                        StudentGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     }
                     else
                     {
@@ -385,8 +384,7 @@ namespace CSAS
             start = false;
         }
 
-
-
+        //Validacia poli vo finalnom hodnoteni.
         private bool Validator()
         {
             try
@@ -472,10 +470,9 @@ namespace CSAS
             }
         }
 
-        private void BackBtn_Click(object sender, EventArgs e)
+        private void FinalGradeForm_Load(object sender, EventArgs e)
         {
-            this.Close();
         }
     }
-            
+
 }

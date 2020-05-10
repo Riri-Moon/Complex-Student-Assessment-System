@@ -2,22 +2,19 @@
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
 {
     public partial class ForgetPasswordForm : MaterialSkin.Controls.MaterialForm
     {
-        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         public ForgetPasswordForm()
         {
@@ -52,7 +49,7 @@ namespace CSAS
 
         private User ValidateEmail()
         {
-            if(!ValidateName())
+            if (!ValidateName())
             {
                 return null;
             }
@@ -67,7 +64,7 @@ namespace CSAS
                 {
                     var userDict = new Dictionary<string, int?>();
 
-                    IQueryable<User> user = con.GetTable<User>().Where(x => x.Meno == NameBox.Text && x.Email==EmailBox.Text);
+                    IQueryable<User> user = con.GetTable<User>().Where(x => x.Meno == NameBox.Text && x.Email == EmailBox.Text);
                     // SQL nie je CaseSensitive tak musíme iným spôsobom validovať správnosť údajov
                     foreach (var us in user)
                     {
@@ -166,8 +163,8 @@ namespace CSAS
                 }
             }
         }
-      
-        private void ChangePassword(User user,string NewPassword)
+
+        private void ChangePassword(User user, string NewPassword)
         {
             using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
             {
@@ -182,28 +179,26 @@ namespace CSAS
                 EmailBox.Text = string.Empty;
             }
         }
-        
+
         private void ChangePssBtn_Click(object sender, EventArgs e)
         {
             var user = UserValidation();
 
-            if(user==null)
+            if (user == null)
             {
                 return;
             }
-             else if (FirstPssBox.Text != SecondPssBox.Text)
+            else if (FirstPssBox.Text != SecondPssBox.Text)
             {
                 MessageBox.Show("Heslá sa nezhodujú");
                 OldPssBox.Text = string.Empty;
             }
             else
             {
-                ChangePassword(user,FirstPssBox.Text);
+                ChangePassword(user, FirstPssBox.Text);
                 MessageBox.Show("Heslo úspešne zmenené");
             }
-
         }
-
 
         string EncryptString(string key, string plainInput)
         {
@@ -227,7 +222,6 @@ namespace CSAS
                     }
                 }
             }
-
             return Convert.ToBase64String(array);
         }
 
@@ -265,22 +259,19 @@ namespace CSAS
 
                 GeneratePassword generatePassword = new GeneratePassword();
                 var newPassword = generatePassword.GeneratedPassword;
-                ChangePassword(user,newPassword);
+                ChangePassword(user, newPassword);
 
                 string From = "HelperCSAS@ucm.sk";
                 string Message = $"Bola vyžiadaná zmena hesla. <br/> Vaše nové heslo je {newPassword} <br/> Odporúčame toto heslo zmeniť hneď ako to bude možné";
                 string To = user.Email;
                 string Subject = "Zmena hesla";
 
-
                 var msg = MailHelper.CreateSingleEmail(MailHelper.StringToEmailAddress(From), MailHelper.StringToEmailAddress(To), Subject, Message, Message);
                 var result = await client.SendEmailAsync(msg);
 
-                MessageBox.Show("Nové heslo Vám bolo odoslané na email, ak Vám heslo neprišlo, prosím skontrolujte si SPAM alebo AUTOMATICKÉ","Nové heslo",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Nové heslo Vám bolo odoslané na email, ak Vám heslo neprišlo, prosím skontrolujte si SPAM alebo AUTOMATICKÉ", "Nové heslo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else return;
         }
     }
-
-
 }

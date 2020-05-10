@@ -68,7 +68,17 @@
             this.SubFilterAttendance = new System.Windows.Forms.ComboBox();
             this.FilterAttendance = new System.Windows.Forms.ComboBox();
             this.DeadlineBox = new System.Windows.Forms.ComboBox();
-            this.ExportCombo = new System.Windows.Forms.ComboBox();
+            this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton3 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
             this.SuspendLayout();
             // 
             // materialCheckedListBox1
@@ -77,10 +87,10 @@
             this.materialCheckedListBox1.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox1.Depth = 0;
             this.materialCheckedListBox1.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox1.Location = new System.Drawing.Point(43, 125);
+            this.materialCheckedListBox1.Location = new System.Drawing.Point(72, 163);
             this.materialCheckedListBox1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox1.Name = "materialCheckedListBox1";
-            this.materialCheckedListBox1.Size = new System.Drawing.Size(224, 242);
+            this.materialCheckedListBox1.Size = new System.Drawing.Size(231, 333);
             this.materialCheckedListBox1.Striped = false;
             this.materialCheckedListBox1.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox1.TabIndex = 1;
@@ -218,11 +228,11 @@
             this.ExportBtn.DrawShadows = true;
             this.ExportBtn.HighEmphasis = true;
             this.ExportBtn.Icon = null;
-            this.ExportBtn.Location = new System.Drawing.Point(1051, 643);
+            this.ExportBtn.Location = new System.Drawing.Point(282, 663);
             this.ExportBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ExportBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ExportBtn.Name = "ExportBtn";
-            this.ExportBtn.Size = new System.Drawing.Size(124, 36);
+            this.ExportBtn.Size = new System.Drawing.Size(120, 36);
             this.ExportBtn.TabIndex = 3;
             this.ExportBtn.Text = "Export Excel";
             this.ExportBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -380,10 +390,10 @@
             this.materialCheckedListBox2.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox2.Depth = 0;
             this.materialCheckedListBox2.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox2.Location = new System.Drawing.Point(41, 417);
+            this.materialCheckedListBox2.Location = new System.Drawing.Point(533, 428);
             this.materialCheckedListBox2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox2.Name = "materialCheckedListBox2";
-            this.materialCheckedListBox2.Size = new System.Drawing.Size(224, 288);
+            this.materialCheckedListBox2.Size = new System.Drawing.Size(224, 235);
             this.materialCheckedListBox2.Striped = false;
             this.materialCheckedListBox2.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox2.TabIndex = 2;
@@ -394,10 +404,10 @@
             this.materialCheckedListBox3.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox3.Depth = 0;
             this.materialCheckedListBox3.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox3.Location = new System.Drawing.Point(533, 419);
+            this.materialCheckedListBox3.Location = new System.Drawing.Point(797, 428);
             this.materialCheckedListBox3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox3.Name = "materialCheckedListBox3";
-            this.materialCheckedListBox3.Size = new System.Drawing.Size(232, 288);
+            this.materialCheckedListBox3.Size = new System.Drawing.Size(232, 235);
             this.materialCheckedListBox3.Striped = false;
             this.materialCheckedListBox3.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox3.TabIndex = 3;
@@ -405,10 +415,10 @@
             // progressBar1
             // 
             this.progressBar1.Depth = 0;
-            this.progressBar1.Location = new System.Drawing.Point(2, 757);
+            this.progressBar1.Location = new System.Drawing.Point(-3, 842);
             this.progressBar1.MouseState = MaterialSkin.MouseState.HOVER;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1225, 5);
+            this.progressBar1.Size = new System.Drawing.Size(1308, 5);
             this.progressBar1.TabIndex = 4;
             // 
             // cancelExport
@@ -418,11 +428,11 @@
             this.cancelExport.DrawShadows = true;
             this.cancelExport.HighEmphasis = true;
             this.cancelExport.Icon = null;
-            this.cancelExport.Location = new System.Drawing.Point(505, 712);
+            this.cancelExport.Location = new System.Drawing.Point(276, 797);
             this.cancelExport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.cancelExport.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancelExport.Name = "cancelExport";
-            this.cancelExport.Size = new System.Drawing.Size(130, 36);
+            this.cancelExport.Size = new System.Drawing.Size(126, 36);
             this.cancelExport.TabIndex = 5;
             this.cancelExport.Text = "Zrušiť export";
             this.cancelExport.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -436,7 +446,7 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Depth = 0;
             this.lblStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblStatus.Location = new System.Drawing.Point(12, 727);
+            this.lblStatus.Location = new System.Drawing.Point(21, 809);
             this.lblStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(1, 0);
@@ -449,11 +459,11 @@
             this.ExportToPdfBtn.DrawShadows = true;
             this.ExportToPdfBtn.HighEmphasis = true;
             this.ExportToPdfBtn.Icon = null;
-            this.ExportToPdfBtn.Location = new System.Drawing.Point(1051, 691);
+            this.ExportToPdfBtn.Location = new System.Drawing.Point(282, 711);
             this.ExportToPdfBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ExportToPdfBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ExportToPdfBtn.Name = "ExportToPdfBtn";
-            this.ExportToPdfBtn.Size = new System.Drawing.Size(108, 36);
+            this.ExportToPdfBtn.Size = new System.Drawing.Size(105, 36);
             this.ExportToPdfBtn.TabIndex = 7;
             this.ExportToPdfBtn.Text = "Export PDF";
             this.ExportToPdfBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -466,7 +476,7 @@
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label1.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label1.Location = new System.Drawing.Point(39, 395);
+            this.label1.Location = new System.Drawing.Point(531, 406);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 19);
             this.label1.TabIndex = 8;
@@ -477,7 +487,7 @@
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label2.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label2.Location = new System.Drawing.Point(529, 397);
+            this.label2.Location = new System.Drawing.Point(793, 406);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 19);
             this.label2.TabIndex = 9;
@@ -488,7 +498,7 @@
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label3.Location = new System.Drawing.Point(39, 103);
+            this.label3.Location = new System.Drawing.Point(68, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 19);
             this.label3.TabIndex = 10;
@@ -503,7 +513,7 @@
             this.materialCheckedListBox4.Location = new System.Drawing.Point(533, 125);
             this.materialCheckedListBox4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox4.Name = "materialCheckedListBox4";
-            this.materialCheckedListBox4.Size = new System.Drawing.Size(232, 242);
+            this.materialCheckedListBox4.Size = new System.Drawing.Size(259, 267);
             this.materialCheckedListBox4.Striped = false;
             this.materialCheckedListBox4.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox4.TabIndex = 2;
@@ -514,10 +524,10 @@
             this.materialCheckedListBox5.BackColor = System.Drawing.SystemColors.Control;
             this.materialCheckedListBox5.Depth = 0;
             this.materialCheckedListBox5.DisableIfOtherEmpty = false;
-            this.materialCheckedListBox5.Location = new System.Drawing.Point(773, 125);
+            this.materialCheckedListBox5.Location = new System.Drawing.Point(1070, 430);
             this.materialCheckedListBox5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCheckedListBox5.Name = "materialCheckedListBox5";
-            this.materialCheckedListBox5.Size = new System.Drawing.Size(226, 242);
+            this.materialCheckedListBox5.Size = new System.Drawing.Size(226, 233);
             this.materialCheckedListBox5.Striped = false;
             this.materialCheckedListBox5.StripeDarkColor = System.Drawing.Color.Empty;
             this.materialCheckedListBox5.TabIndex = 2;
@@ -538,7 +548,7 @@
             this.label5.AutoSize = true;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("Roboto", 12F);
-            this.label5.Location = new System.Drawing.Point(769, 101);
+            this.label5.Location = new System.Drawing.Point(1066, 406);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 19);
             this.label5.TabIndex = 12;
@@ -547,10 +557,10 @@
             // FilterStudent
             // 
             this.FilterStudent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FilterStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FilterStudent.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.FilterStudent.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FilterStudent.FormattingEnabled = true;
-            this.FilterStudent.Location = new System.Drawing.Point(288, 165);
+            this.FilterStudent.Location = new System.Drawing.Point(72, 571);
             this.FilterStudent.Name = "FilterStudent";
             this.FilterStudent.Size = new System.Drawing.Size(174, 25);
             this.FilterStudent.TabIndex = 13;
@@ -559,10 +569,10 @@
             // StudentFilter
             // 
             this.StudentFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.StudentFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.StudentFilter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.StudentFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.StudentFilter.FormattingEnabled = true;
-            this.StudentFilter.Location = new System.Drawing.Point(288, 125);
+            this.StudentFilter.Location = new System.Drawing.Point(72, 531);
             this.StudentFilter.Name = "StudentFilter";
             this.StudentFilter.Size = new System.Drawing.Size(160, 25);
             this.StudentFilter.TabIndex = 14;
@@ -571,10 +581,10 @@
             // SubActivityFilter
             // 
             this.SubActivityFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SubActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.SubActivityFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SubActivityFilter.FormattingEnabled = true;
-            this.SubActivityFilter.Location = new System.Drawing.Point(288, 459);
+            this.SubActivityFilter.Location = new System.Drawing.Point(535, 735);
             this.SubActivityFilter.Name = "SubActivityFilter";
             this.SubActivityFilter.Size = new System.Drawing.Size(160, 25);
             this.SubActivityFilter.TabIndex = 16;
@@ -583,10 +593,10 @@
             // ActivityFilter
             // 
             this.ActivityFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ActivityFilter.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.ActivityFilter.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.ActivityFilter.FormattingEnabled = true;
-            this.ActivityFilter.Location = new System.Drawing.Point(288, 419);
+            this.ActivityFilter.Location = new System.Drawing.Point(535, 695);
             this.ActivityFilter.Name = "ActivityFilter";
             this.ActivityFilter.Size = new System.Drawing.Size(174, 25);
             this.ActivityFilter.TabIndex = 15;
@@ -595,10 +605,10 @@
             // SubFilterAttendance
             // 
             this.SubFilterAttendance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SubFilterAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubFilterAttendance.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.SubFilterAttendance.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.SubFilterAttendance.FormattingEnabled = true;
-            this.SubFilterAttendance.Location = new System.Drawing.Point(1017, 163);
+            this.SubFilterAttendance.Location = new System.Drawing.Point(1070, 738);
             this.SubFilterAttendance.Name = "SubFilterAttendance";
             this.SubFilterAttendance.Size = new System.Drawing.Size(114, 25);
             this.SubFilterAttendance.TabIndex = 18;
@@ -606,10 +616,10 @@
             // FilterAttendance
             // 
             this.FilterAttendance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FilterAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FilterAttendance.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.FilterAttendance.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FilterAttendance.FormattingEnabled = true;
-            this.FilterAttendance.Location = new System.Drawing.Point(1017, 123);
+            this.FilterAttendance.Location = new System.Drawing.Point(1070, 695);
             this.FilterAttendance.Name = "FilterAttendance";
             this.FilterAttendance.Size = new System.Drawing.Size(128, 25);
             this.FilterAttendance.TabIndex = 17;
@@ -618,31 +628,170 @@
             // DeadlineBox
             // 
             this.DeadlineBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.DeadlineBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeadlineBox.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.DeadlineBox.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.DeadlineBox.FormattingEnabled = true;
-            this.DeadlineBox.Location = new System.Drawing.Point(288, 500);
+            this.DeadlineBox.Location = new System.Drawing.Point(535, 776);
             this.DeadlineBox.Name = "DeadlineBox";
             this.DeadlineBox.Size = new System.Drawing.Size(143, 25);
             this.DeadlineBox.TabIndex = 19;
             // 
-            // ExportCombo
+            // materialDivider2
             // 
-            this.ExportCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ExportCombo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExportCombo.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.ExportCombo.FormattingEnabled = true;
-            this.ExportCombo.Location = new System.Drawing.Point(853, 650);
-            this.ExportCombo.Name = "ExportCombo";
-            this.ExportCombo.Size = new System.Drawing.Size(174, 25);
-            this.ExportCombo.TabIndex = 20;
+            this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.materialDivider2.Depth = 0;
+            this.materialDivider2.Location = new System.Drawing.Point(523, 398);
+            this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider2.Name = "materialDivider2";
+            this.materialDivider2.Size = new System.Drawing.Size(531, 2);
+            this.materialDivider2.TabIndex = 38;
+            this.materialDivider2.Text = "materialDivider2";
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(1052, 398);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(2, 305);
+            this.materialDivider1.TabIndex = 39;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(69, 509);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(36, 19);
+            this.materialLabel1.TabIndex = 40;
+            this.materialLabel1.Text = "Filter";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.Location = new System.Drawing.Point(532, 673);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(36, 19);
+            this.materialLabel2.TabIndex = 41;
+            this.materialLabel2.Text = "Filter";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(1067, 673);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(36, 19);
+            this.materialLabel4.TabIndex = 43;
+            this.materialLabel4.Text = "Filter";
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(69, 621);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(133, 19);
+            this.materialLabel5.TabIndex = 44;
+            this.materialLabel5.Text = "Výber typu exportu";
+            // 
+            // materialRadioButton1
+            // 
+            this.materialRadioButton1.AutoSize = true;
+            this.materialRadioButton1.Checked = true;
+            this.materialRadioButton1.Depth = 0;
+            this.materialRadioButton1.Location = new System.Drawing.Point(72, 650);
+            this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton1.Name = "materialRadioButton1";
+            this.materialRadioButton1.Ripple = true;
+            this.materialRadioButton1.Size = new System.Drawing.Size(88, 37);
+            this.materialRadioButton1.TabIndex = 45;
+            this.materialRadioButton1.TabStop = true;
+            this.materialRadioButton1.Text = "Aktivita";
+            this.materialRadioButton1.UseVisualStyleBackColor = true;
+            // 
+            // materialRadioButton2
+            // 
+            this.materialRadioButton2.AutoSize = true;
+            this.materialRadioButton2.Depth = 0;
+            this.materialRadioButton2.Location = new System.Drawing.Point(72, 687);
+            this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton2.Name = "materialRadioButton2";
+            this.materialRadioButton2.Ripple = true;
+            this.materialRadioButton2.Size = new System.Drawing.Size(115, 37);
+            this.materialRadioButton2.TabIndex = 46;
+            this.materialRadioButton2.TabStop = true;
+            this.materialRadioButton2.Text = "Dochádzka";
+            this.materialRadioButton2.UseVisualStyleBackColor = true;
+            // 
+            // materialRadioButton3
+            // 
+            this.materialRadioButton3.AutoSize = true;
+            this.materialRadioButton3.Depth = 0;
+            this.materialRadioButton3.Location = new System.Drawing.Point(72, 724);
+            this.materialRadioButton3.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton3.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton3.Name = "materialRadioButton3";
+            this.materialRadioButton3.Ripple = true;
+            this.materialRadioButton3.Size = new System.Drawing.Size(170, 37);
+            this.materialRadioButton3.TabIndex = 47;
+            this.materialRadioButton3.TabStop = true;
+            this.materialRadioButton3.Text = "Finálne hodnotenie";
+            this.materialRadioButton3.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Roboto", 14.25F);
+            this.label6.Location = new System.Drawing.Point(20, 100);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(180, 23);
+            this.label6.TabIndex = 48;
+            this.label6.Text = "Výber dát pre export";
+            // 
+            // materialDivider3
+            // 
+            this.materialDivider3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.materialDivider3.Depth = 0;
+            this.materialDivider3.Location = new System.Drawing.Point(521, 95);
+            this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider3.Name = "materialDivider3";
+            this.materialDivider3.Size = new System.Drawing.Size(2, 305);
+            this.materialDivider3.TabIndex = 49;
+            this.materialDivider3.Text = "materialDivider3";
             // 
             // ExportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1229, 763);
-            this.Controls.Add(this.ExportCombo);
+            this.ClientSize = new System.Drawing.Size(1306, 850);
+            this.Controls.Add(this.materialDivider3);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.materialRadioButton3);
+            this.Controls.Add(this.materialRadioButton2);
+            this.Controls.Add(this.materialRadioButton1);
+            this.Controls.Add(this.materialLabel5);
+            this.Controls.Add(this.materialLabel4);
+            this.Controls.Add(this.materialLabel2);
+            this.Controls.Add(this.materialLabel1);
+            this.Controls.Add(this.materialDivider1);
+            this.Controls.Add(this.materialDivider2);
             this.Controls.Add(this.DeadlineBox);
             this.Controls.Add(this.SubFilterAttendance);
             this.Controls.Add(this.FilterAttendance);
@@ -665,12 +814,12 @@
             this.Controls.Add(this.materialCheckedListBox2);
             this.Controls.Add(this.ExportBtn);
             this.Controls.Add(this.materialCheckedListBox1);
+            this.HelpButton = true;
             this.MaximizeBox = false;
             this.Name = "ExportForm";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ExportForm";
-            this.Load += new System.EventHandler(this.ExportForm_Load);
+            this.Text = "Exportovanie údajov";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -717,6 +866,16 @@
         private System.Windows.Forms.ComboBox SubFilterAttendance;
         private System.Windows.Forms.ComboBox FilterAttendance;
         private System.Windows.Forms.ComboBox DeadlineBox;
-        private System.Windows.Forms.ComboBox ExportCombo;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton3;
+        private System.Windows.Forms.Label label6;
+        private MaterialSkin.Controls.MaterialDivider materialDivider3;
     }
 }

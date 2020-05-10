@@ -40,7 +40,6 @@
             this.ChangePssBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.OldPssBox = new MaterialSkin.Controls.MaterialTextBox();
-            this.BackBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
@@ -162,13 +161,13 @@
             this.SendNewPassBtn.DrawShadows = true;
             this.SendNewPassBtn.HighEmphasis = true;
             this.SendNewPassBtn.Icon = null;
-            this.SendNewPassBtn.Location = new System.Drawing.Point(665, 105);
+            this.SendNewPassBtn.Location = new System.Drawing.Point(657, 103);
             this.SendNewPassBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.SendNewPassBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.SendNewPassBtn.Name = "SendNewPassBtn";
-            this.SendNewPassBtn.Size = new System.Drawing.Size(249, 36);
+            this.SendNewPassBtn.Size = new System.Drawing.Size(179, 36);
             this.SendNewPassBtn.TabIndex = 5;
-            this.SendNewPassBtn.Text = "Odoslať nové heslo na email";
+            this.SendNewPassBtn.Text = "Odoslať nové heslo";
             this.SendNewPassBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.SendNewPassBtn.UseAccentColor = false;
             this.SendNewPassBtn.UseVisualStyleBackColor = true;
@@ -221,25 +220,6 @@
             this.OldPssBox.Text = "";
             this.OldPssBox.UseTallSize = false;
             // 
-            // BackBtn
-            // 
-            this.BackBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackBtn.Depth = 0;
-            this.BackBtn.DrawShadows = true;
-            this.BackBtn.HighEmphasis = true;
-            this.BackBtn.Icon = null;
-            this.BackBtn.Location = new System.Drawing.Point(54, 375);
-            this.BackBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BackBtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BackBtn.Name = "BackBtn";
-            this.BackBtn.Size = new System.Drawing.Size(58, 36);
-            this.BackBtn.TabIndex = 7;
-            this.BackBtn.Text = "Späť";
-            this.BackBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BackBtn.UseAccentColor = false;
-            this.BackBtn.UseVisualStyleBackColor = true;
-            this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
-            // 
             // materialLabel6
             // 
             this.materialLabel6.AutoSize = true;
@@ -268,10 +248,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 428);
+            this.ClientSize = new System.Drawing.Size(857, 332);
             this.Controls.Add(this.materialLabel7);
             this.Controls.Add(this.materialLabel6);
-            this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.OldPssBox);
             this.Controls.Add(this.ChangePssBtn);
@@ -307,7 +286,6 @@
         private MaterialSkin.Controls.MaterialButton ChangePssBtn;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialTextBox OldPssBox;
-        private MaterialSkin.Controls.MaterialButton BackBtn;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
         private MaterialSkin.Controls.MaterialLabel materialLabel7;
     }

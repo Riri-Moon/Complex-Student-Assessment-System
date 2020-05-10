@@ -42,9 +42,6 @@ namespace CSAS
     partial void InsertAttachment(Attachment instance);
     partial void UpdateAttachment(Attachment instance);
     partial void DeleteAttachment(Attachment instance);
-    partial void InsertAttendanceStud(AttendanceStud instance);
-    partial void UpdateAttendanceStud(AttendanceStud instance);
-    partial void DeleteAttendanceStud(AttendanceStud instance);
     partial void InsertEmailTemplate(EmailTemplate instance);
     partial void UpdateEmailTemplate(EmailTemplate instance);
     partial void DeleteEmailTemplate(EmailTemplate instance);
@@ -66,6 +63,9 @@ namespace CSAS
     partial void InsertTotalAttendance(TotalAttendance instance);
     partial void UpdateTotalAttendance(TotalAttendance instance);
     partial void DeleteTotalAttendance(TotalAttendance instance);
+    partial void InsertAttendanceStud(AttendanceStud instance);
+    partial void UpdateAttendanceStud(AttendanceStud instance);
+    partial void DeleteAttendanceStud(AttendanceStud instance);
     #endregion
 		
 		public StudentDBDataContext() : 
@@ -130,14 +130,6 @@ namespace CSAS
 			}
 		}
 		
-		public System.Data.Linq.Table<AttendanceStud> AttendanceStuds
-		{
-			get
-			{
-				return this.GetTable<AttendanceStud>();
-			}
-		}
-		
 		public System.Data.Linq.Table<EmailTemplate> EmailTemplates
 		{
 			get
@@ -191,6 +183,14 @@ namespace CSAS
 			get
 			{
 				return this.GetTable<TotalAttendance>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AttendanceStud> AttendanceStuds
+		{
+			get
+			{
+				return this.GetTable<AttendanceStud>();
 			}
 		}
 	}
@@ -1773,342 +1773,6 @@ namespace CSAS
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AttendanceStud")]
-	public partial class AttendanceStud : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.DateTime _Date;
-		
-		private string _Status;
-		
-		private int _IDSkupina;
-		
-		private string _Type;
-		
-		private int _IDStudent;
-		
-		private int _IdAttendance;
-		
-		private bool _IsReplacable;
-		
-		private string _IdGroup;
-		
-		private string _Comment;
-		
-		private EntityRef<Student> _Student;
-		
-		private EntityRef<StudentSkupina> _StudentSkupina;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    partial void OnIDSkupinaChanging(int value);
-    partial void OnIDSkupinaChanged();
-    partial void OnTypeChanging(string value);
-    partial void OnTypeChanged();
-    partial void OnIDStudentChanging(int value);
-    partial void OnIDStudentChanged();
-    partial void OnIdAttendanceChanging(int value);
-    partial void OnIdAttendanceChanged();
-    partial void OnIsReplacableChanging(bool value);
-    partial void OnIsReplacableChanged();
-    partial void OnIdGroupChanging(string value);
-    partial void OnIdGroupChanged();
-    partial void OnCommentChanging(string value);
-    partial void OnCommentChanged();
-    #endregion
-		
-		public AttendanceStud()
-		{
-			this._Student = default(EntityRef<Student>);
-			this._StudentSkupina = default(EntityRef<StudentSkupina>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(15)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDSkupina", DbType="Int NOT NULL")]
-		public int IDSkupina
-		{
-			get
-			{
-				return this._IDSkupina;
-			}
-			set
-			{
-				if ((this._IDSkupina != value))
-				{
-					if (this._StudentSkupina.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDSkupinaChanging(value);
-					this.SendPropertyChanging();
-					this._IDSkupina = value;
-					this.SendPropertyChanged("IDSkupina");
-					this.OnIDSkupinaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
-		public string Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStudent", DbType="Int NOT NULL")]
-		public int IDStudent
-		{
-			get
-			{
-				return this._IDStudent;
-			}
-			set
-			{
-				if ((this._IDStudent != value))
-				{
-					if (this._Student.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDStudentChanging(value);
-					this.SendPropertyChanging();
-					this._IDStudent = value;
-					this.SendPropertyChanged("IDStudent");
-					this.OnIDStudentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAttendance", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IdAttendance
-		{
-			get
-			{
-				return this._IdAttendance;
-			}
-			set
-			{
-				if ((this._IdAttendance != value))
-				{
-					this.OnIdAttendanceChanging(value);
-					this.SendPropertyChanging();
-					this._IdAttendance = value;
-					this.SendPropertyChanged("IdAttendance");
-					this.OnIdAttendanceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReplacable", DbType="Bit NOT NULL")]
-		public bool IsReplacable
-		{
-			get
-			{
-				return this._IsReplacable;
-			}
-			set
-			{
-				if ((this._IsReplacable != value))
-				{
-					this.OnIsReplacableChanging(value);
-					this.SendPropertyChanging();
-					this._IsReplacable = value;
-					this.SendPropertyChanged("IsReplacable");
-					this.OnIsReplacableChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdGroup", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
-		public string IdGroup
-		{
-			get
-			{
-				return this._IdGroup;
-			}
-			set
-			{
-				if ((this._IdGroup != value))
-				{
-					this.OnIdGroupChanging(value);
-					this.SendPropertyChanging();
-					this._IdGroup = value;
-					this.SendPropertyChanged("IdGroup");
-					this.OnIdGroupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NVarChar(150)")]
-		public string Comment
-		{
-			get
-			{
-				return this._Comment;
-			}
-			set
-			{
-				if ((this._Comment != value))
-				{
-					this.OnCommentChanging(value);
-					this.SendPropertyChanging();
-					this._Comment = value;
-					this.SendPropertyChanged("Comment");
-					this.OnCommentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_AttendanceStud", Storage="_Student", ThisKey="IDStudent", OtherKey="Id", IsForeignKey=true)]
-		public Student Student
-		{
-			get
-			{
-				return this._Student.Entity;
-			}
-			set
-			{
-				Student previousValue = this._Student.Entity;
-				if (((previousValue != value) 
-							|| (this._Student.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Student.Entity = null;
-						previousValue.AttendanceStuds.Remove(this);
-					}
-					this._Student.Entity = value;
-					if ((value != null))
-					{
-						value.AttendanceStuds.Add(this);
-						this._IDStudent = value.Id;
-					}
-					else
-					{
-						this._IDStudent = default(int);
-					}
-					this.SendPropertyChanged("Student");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StudentSkupina_AttendanceStud", Storage="_StudentSkupina", ThisKey="IDSkupina", OtherKey="Id", IsForeignKey=true)]
-		public StudentSkupina StudentSkupina
-		{
-			get
-			{
-				return this._StudentSkupina.Entity;
-			}
-			set
-			{
-				StudentSkupina previousValue = this._StudentSkupina.Entity;
-				if (((previousValue != value) 
-							|| (this._StudentSkupina.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._StudentSkupina.Entity = null;
-						previousValue.AttendanceStuds.Remove(this);
-					}
-					this._StudentSkupina.Entity = value;
-					if ((value != null))
-					{
-						value.AttendanceStuds.Add(this);
-						this._IDSkupina = value.Id;
-					}
-					else
-					{
-						this._IDSkupina = default(int);
-					}
-					this.SendPropertyChanged("StudentSkupina");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmailTemplate")]
 	public partial class EmailTemplate : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2687,13 +2351,13 @@ namespace CSAS
 		
 		private EntitySet<Activity> _Activities;
 		
-		private EntitySet<AttendanceStud> _AttendanceStuds;
-		
 		private EntitySet<FinalGrade> _FinalGrades;
 		
 		private EntitySet<Task> _Tasks;
 		
 		private EntitySet<TotalAttendance> _TotalAttendances;
+		
+		private EntitySet<AttendanceStud> _AttendanceStuds;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2728,10 +2392,10 @@ namespace CSAS
 		public Student()
 		{
 			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
-			this._AttendanceStuds = new EntitySet<AttendanceStud>(new Action<AttendanceStud>(this.attach_AttendanceStuds), new Action<AttendanceStud>(this.detach_AttendanceStuds));
 			this._FinalGrades = new EntitySet<FinalGrade>(new Action<FinalGrade>(this.attach_FinalGrades), new Action<FinalGrade>(this.detach_FinalGrades));
 			this._Tasks = new EntitySet<Task>(new Action<Task>(this.attach_Tasks), new Action<Task>(this.detach_Tasks));
 			this._TotalAttendances = new EntitySet<TotalAttendance>(new Action<TotalAttendance>(this.attach_TotalAttendances), new Action<TotalAttendance>(this.detach_TotalAttendances));
+			this._AttendanceStuds = new EntitySet<AttendanceStud>(new Action<AttendanceStud>(this.attach_AttendanceStuds), new Action<AttendanceStud>(this.detach_AttendanceStuds));
 			OnCreated();
 		}
 		
@@ -2988,19 +2652,6 @@ namespace CSAS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_AttendanceStud", Storage="_AttendanceStuds", ThisKey="Id", OtherKey="IDStudent")]
-		public EntitySet<AttendanceStud> AttendanceStuds
-		{
-			get
-			{
-				return this._AttendanceStuds;
-			}
-			set
-			{
-				this._AttendanceStuds.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FinalGrade", Storage="_FinalGrades", ThisKey="Id", OtherKey="IdStudent")]
 		public EntitySet<FinalGrade> FinalGrades
 		{
@@ -3040,6 +2691,19 @@ namespace CSAS
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_AttendanceStud", Storage="_AttendanceStuds", ThisKey="Id", OtherKey="IDStudent")]
+		public EntitySet<AttendanceStud> AttendanceStuds
+		{
+			get
+			{
+				return this._AttendanceStuds;
+			}
+			set
+			{
+				this._AttendanceStuds.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3067,18 +2731,6 @@ namespace CSAS
 		}
 		
 		private void detach_Activities(Activity entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = null;
-		}
-		
-		private void attach_AttendanceStuds(AttendanceStud entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = this;
-		}
-		
-		private void detach_AttendanceStuds(AttendanceStud entity)
 		{
 			this.SendPropertyChanging();
 			entity.Student = null;
@@ -3115,6 +2767,18 @@ namespace CSAS
 		}
 		
 		private void detach_TotalAttendances(TotalAttendance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_AttendanceStuds(AttendanceStud entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_AttendanceStuds(AttendanceStud entity)
 		{
 			this.SendPropertyChanging();
 			entity.Student = null;
@@ -4107,6 +3771,342 @@ namespace CSAS
 					else
 					{
 						this._IdStudent = default(int);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AttendanceStud")]
+	public partial class AttendanceStud : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.DateTime _Date;
+		
+		private string _Status;
+		
+		private int _IDSkupina;
+		
+		private string _Type;
+		
+		private int _IDStudent;
+		
+		private int _IdAttendance;
+		
+		private bool _IsReplacable;
+		
+		private string _IdGroup;
+		
+		private string _Comment;
+		
+		private EntityRef<StudentSkupina> _StudentSkupina;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnIDSkupinaChanging(int value);
+    partial void OnIDSkupinaChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
+    partial void OnIDStudentChanging(int value);
+    partial void OnIDStudentChanged();
+    partial void OnIdAttendanceChanging(int value);
+    partial void OnIdAttendanceChanged();
+    partial void OnIsReplacableChanging(bool value);
+    partial void OnIsReplacableChanged();
+    partial void OnIdGroupChanging(string value);
+    partial void OnIdGroupChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public AttendanceStud()
+		{
+			this._StudentSkupina = default(EntityRef<StudentSkupina>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(15)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDSkupina", DbType="Int NOT NULL")]
+		public int IDSkupina
+		{
+			get
+			{
+				return this._IDSkupina;
+			}
+			set
+			{
+				if ((this._IDSkupina != value))
+				{
+					if (this._StudentSkupina.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDSkupinaChanging(value);
+					this.SendPropertyChanging();
+					this._IDSkupina = value;
+					this.SendPropertyChanged("IDSkupina");
+					this.OnIDSkupinaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDStudent", DbType="Int NOT NULL")]
+		public int IDStudent
+		{
+			get
+			{
+				return this._IDStudent;
+			}
+			set
+			{
+				if ((this._IDStudent != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDStudentChanging(value);
+					this.SendPropertyChanging();
+					this._IDStudent = value;
+					this.SendPropertyChanged("IDStudent");
+					this.OnIDStudentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAttendance", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdAttendance
+		{
+			get
+			{
+				return this._IdAttendance;
+			}
+			set
+			{
+				if ((this._IdAttendance != value))
+				{
+					this.OnIdAttendanceChanging(value);
+					this.SendPropertyChanging();
+					this._IdAttendance = value;
+					this.SendPropertyChanged("IdAttendance");
+					this.OnIdAttendanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReplacable", DbType="Bit NOT NULL")]
+		public bool IsReplacable
+		{
+			get
+			{
+				return this._IsReplacable;
+			}
+			set
+			{
+				if ((this._IsReplacable != value))
+				{
+					this.OnIsReplacableChanging(value);
+					this.SendPropertyChanging();
+					this._IsReplacable = value;
+					this.SendPropertyChanged("IsReplacable");
+					this.OnIsReplacableChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdGroup", DbType="NVarChar(3) NOT NULL", CanBeNull=false)]
+		public string IdGroup
+		{
+			get
+			{
+				return this._IdGroup;
+			}
+			set
+			{
+				if ((this._IdGroup != value))
+				{
+					this.OnIdGroupChanging(value);
+					this.SendPropertyChanging();
+					this._IdGroup = value;
+					this.SendPropertyChanged("IdGroup");
+					this.OnIdGroupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NVarChar(150)")]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StudentSkupina_AttendanceStud", Storage="_StudentSkupina", ThisKey="IDSkupina", OtherKey="Id", IsForeignKey=true)]
+		public StudentSkupina StudentSkupina
+		{
+			get
+			{
+				return this._StudentSkupina.Entity;
+			}
+			set
+			{
+				StudentSkupina previousValue = this._StudentSkupina.Entity;
+				if (((previousValue != value) 
+							|| (this._StudentSkupina.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StudentSkupina.Entity = null;
+						previousValue.AttendanceStuds.Remove(this);
+					}
+					this._StudentSkupina.Entity = value;
+					if ((value != null))
+					{
+						value.AttendanceStuds.Add(this);
+						this._IDSkupina = value.Id;
+					}
+					else
+					{
+						this._IDSkupina = default(int);
+					}
+					this.SendPropertyChanged("StudentSkupina");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_AttendanceStud", Storage="_Student", ThisKey="IDStudent", OtherKey="Id", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.AttendanceStuds.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.AttendanceStuds.Add(this);
+						this._IDStudent = value.Id;
+					}
+					else
+					{
+						this._IDStudent = default(int);
 					}
 					this.SendPropertyChanged("Student");
 				}

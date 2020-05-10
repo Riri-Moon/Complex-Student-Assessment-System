@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CSAS
@@ -14,7 +9,7 @@ namespace CSAS
     public partial class CreateNewGroupForm : MaterialSkin.Controls.MaterialForm
     {
         User currentUser;
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         public CreateNewGroupForm(User user)
         {
@@ -42,10 +37,10 @@ namespace CSAS
                 {
                     using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                     {
-                        var existingGroups = con.GetTable<StudentSkupina>().Where(x => x.Nazov == GroupNameBox.Text && x.Id_User==currentUser.Id);
-                        if(existingGroups.Count()>0)
+                        var existingGroups = con.GetTable<StudentSkupina>().Where(x => x.Nazov == GroupNameBox.Text && x.Id_User == currentUser.Id);
+                        if (existingGroups.Count() > 0)
                         {
-                            MessageBox.Show("Skupina s týmto názvom už existuje, prosím zvoľte iný názov skupiny","Upozornenie",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                            MessageBox.Show("Skupina s týmto názvom už existuje, prosím zvoľte iný názov skupiny", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                         var newGroup = new StudentSkupina()
@@ -54,7 +49,6 @@ namespace CSAS
                             Nazov = GroupNameBox.Text,
                             Forma = (string)FormCombo.SelectedItem
                         };
-
                         con.StudentSkupinas.InsertOnSubmit(newGroup);
                         con.SubmitChanges();
                     }
@@ -65,7 +59,7 @@ namespace CSAS
                     return;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }

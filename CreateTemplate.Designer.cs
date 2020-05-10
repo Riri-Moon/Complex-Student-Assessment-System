@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.ActNameTxtBox = new MaterialSkin.Controls.MaterialTextBox();
             this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
@@ -41,12 +42,11 @@
             this.EditActTempBtn = new MaterialSkin.Controls.MaterialButton();
             this.RemoveActTempBtn = new MaterialSkin.Controls.MaterialButton();
             this.actLbl = new MaterialSkin.Controls.MaterialLabel();
-            this.SaveChangesBtn = new MaterialSkin.Controls.MaterialButton();
-            this.materialFlatButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AllActTempGrid)).BeginInit();
             this.SuspendLayout();
@@ -132,6 +132,7 @@
             this.panel1.AutoScrollMargin = new System.Drawing.Size(5, 5);
             this.panel1.AutoScrollMinSize = new System.Drawing.Size(1, 1);
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.DeleteTaskBtn);
             this.panel1.Controls.Add(this.AddTaskBtn);
             this.panel1.Location = new System.Drawing.Point(43, 134);
@@ -165,13 +166,13 @@
             this.CreateTemplateBtn.DrawShadows = true;
             this.CreateTemplateBtn.HighEmphasis = true;
             this.CreateTemplateBtn.Icon = null;
-            this.CreateTemplateBtn.Location = new System.Drawing.Point(1194, 769);
+            this.CreateTemplateBtn.Location = new System.Drawing.Point(731, 223);
             this.CreateTemplateBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateTemplateBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateTemplateBtn.Name = "CreateTemplateBtn";
-            this.CreateTemplateBtn.Size = new System.Drawing.Size(203, 36);
+            this.CreateTemplateBtn.Size = new System.Drawing.Size(141, 36);
             this.CreateTemplateBtn.TabIndex = 12;
-            this.CreateTemplateBtn.Text = "Vytvoriť novú šablónu\r\n";
+            this.CreateTemplateBtn.Text = "Uložiť šablónu";
             this.CreateTemplateBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.CreateTemplateBtn.UseAccentColor = false;
             this.CreateTemplateBtn.UseVisualStyleBackColor = true;
@@ -181,18 +182,27 @@
             // 
             this.AllActTempGrid.BackgroundColor = System.Drawing.Color.White;
             this.AllActTempGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.AllActTempGrid.DefaultCellStyle = dataGridViewCellStyle3;
-            this.AllActTempGrid.Location = new System.Drawing.Point(1074, 144);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.AllActTempGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            this.AllActTempGrid.Location = new System.Drawing.Point(942, 105);
             this.AllActTempGrid.Name = "AllActTempGrid";
-            this.AllActTempGrid.Size = new System.Drawing.Size(311, 306);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.AllActTempGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.AllActTempGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.AllActTempGrid.Size = new System.Drawing.Size(311, 490);
             this.AllActTempGrid.TabIndex = 13;
             // 
             // EditActTempBtn
@@ -203,7 +213,7 @@
             this.EditActTempBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditActTempBtn.HighEmphasis = true;
             this.EditActTempBtn.Icon = null;
-            this.EditActTempBtn.Location = new System.Drawing.Point(1074, 459);
+            this.EditActTempBtn.Location = new System.Drawing.Point(942, 617);
             this.EditActTempBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.EditActTempBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.EditActTempBtn.Name = "EditActTempBtn";
@@ -222,7 +232,7 @@
             this.RemoveActTempBtn.DrawShadows = true;
             this.RemoveActTempBtn.HighEmphasis = true;
             this.RemoveActTempBtn.Icon = null;
-            this.RemoveActTempBtn.Location = new System.Drawing.Point(1289, 459);
+            this.RemoveActTempBtn.Location = new System.Drawing.Point(1152, 617);
             this.RemoveActTempBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.RemoveActTempBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.RemoveActTempBtn.Name = "RemoveActTempBtn";
@@ -240,50 +250,12 @@
             this.actLbl.Depth = 0;
             this.actLbl.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.actLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.actLbl.Location = new System.Drawing.Point(1070, 112);
+            this.actLbl.Location = new System.Drawing.Point(939, 80);
             this.actLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.actLbl.Name = "actLbl";
             this.actLbl.Size = new System.Drawing.Size(247, 19);
             this.actLbl.TabIndex = 16;
             this.actLbl.Text = "Zoznam existujúcich šablón aktivít";
-            // 
-            // SaveChangesBtn
-            // 
-            this.SaveChangesBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.SaveChangesBtn.Depth = 0;
-            this.SaveChangesBtn.DrawShadows = true;
-            this.SaveChangesBtn.Enabled = false;
-            this.SaveChangesBtn.HighEmphasis = true;
-            this.SaveChangesBtn.Icon = null;
-            this.SaveChangesBtn.Location = new System.Drawing.Point(1268, 507);
-            this.SaveChangesBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.SaveChangesBtn.MouseState = MaterialSkin.MouseState.HOVER;
-            this.SaveChangesBtn.Name = "SaveChangesBtn";
-            this.SaveChangesBtn.Size = new System.Drawing.Size(124, 36);
-            this.SaveChangesBtn.TabIndex = 17;
-            this.SaveChangesBtn.Text = "Uložiť zmeny";
-            this.SaveChangesBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.SaveChangesBtn.UseAccentColor = false;
-            this.SaveChangesBtn.UseVisualStyleBackColor = true;
-            this.SaveChangesBtn.Click += new System.EventHandler(this.SaveChangesBtn_Click);
-            // 
-            // materialFlatButton2
-            // 
-            this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton2.Depth = 0;
-            this.materialFlatButton2.DrawShadows = true;
-            this.materialFlatButton2.HighEmphasis = true;
-            this.materialFlatButton2.Icon = null;
-            this.materialFlatButton2.Location = new System.Drawing.Point(788, 769);
-            this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton2.Name = "materialFlatButton2";
-            this.materialFlatButton2.Size = new System.Drawing.Size(58, 36);
-            this.materialFlatButton2.TabIndex = 18;
-            this.materialFlatButton2.Text = "Späť";
-            this.materialFlatButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.materialFlatButton2.UseAccentColor = false;
-            this.materialFlatButton2.UseVisualStyleBackColor = true;
             // 
             // materialLabel2
             // 
@@ -291,7 +263,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(741, 169);
+            this.materialLabel2.Location = new System.Drawing.Point(450, 77);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(123, 19);
@@ -304,7 +276,7 @@
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel5.Location = new System.Drawing.Point(730, 210);
+            this.materialLabel5.Location = new System.Drawing.Point(439, 105);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(134, 19);
@@ -314,10 +286,10 @@
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(878, 166);
+            this.comboBox1.Location = new System.Drawing.Point(587, 74);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(173, 25);
             this.comboBox1.TabIndex = 22;
@@ -326,25 +298,43 @@
             // 
             this.comboBox2.BackColor = System.Drawing.Color.White;
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(878, 211);
+            this.comboBox2.Location = new System.Drawing.Point(587, 106);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(173, 25);
             this.comboBox2.TabIndex = 23;
+            // 
+            // materialButton1
+            // 
+            this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton1.Depth = 0;
+            this.materialButton1.DrawShadows = true;
+            this.materialButton1.HighEmphasis = true;
+            this.materialButton1.Icon = null;
+            this.materialButton1.Location = new System.Drawing.Point(731, 175);
+            this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton1.Name = "materialButton1";
+            this.materialButton1.Size = new System.Drawing.Size(81, 36);
+            this.materialButton1.TabIndex = 24;
+            this.materialButton1.Text = "Vyčistiť";
+            this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton1.UseAccentColor = false;
+            this.materialButton1.UseVisualStyleBackColor = true;
+            this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
             // CreateTemplate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 861);
+            this.ClientSize = new System.Drawing.Size(1285, 897);
+            this.Controls.Add(this.materialButton1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.materialLabel5);
             this.Controls.Add(this.materialLabel2);
-            this.Controls.Add(this.materialFlatButton2);
-            this.Controls.Add(this.SaveChangesBtn);
             this.Controls.Add(this.actLbl);
             this.Controls.Add(this.RemoveActTempBtn);
             this.Controls.Add(this.EditActTempBtn);
@@ -381,11 +371,10 @@
         private MaterialSkin.Controls.MaterialButton RemoveActTempBtn;
         private MaterialSkin.Controls.MaterialButton DeleteTaskBtn;
         private MaterialSkin.Controls.MaterialLabel actLbl;
-        private MaterialSkin.Controls.MaterialButton SaveChangesBtn;
-        private MaterialSkin.Controls.MaterialButton materialFlatButton2;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private MaterialSkin.Controls.MaterialButton materialButton1;
     }
 }

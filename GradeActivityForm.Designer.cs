@@ -45,8 +45,6 @@
             this.MaterialTabCOntrol.Name = "MaterialTabCOntrol";
             this.MaterialTabCOntrol.SelectedIndex = 0;
             this.MaterialTabCOntrol.SelectedIndexChanged += new System.EventHandler(this.MaterialTabCOntrol_SelectedIndexChanged);
-            this.MaterialTabCOntrol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MaterialTabCOntrol_KeyPress);
-            this.MaterialTabCOntrol.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MaterialTabCOntrol_KeyUp);
             // 
             // Drawer
             // 
@@ -84,7 +82,6 @@
             this.Name = "GradeActivityForm";
             this.Sizable = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GradeActivityForm_FormClosing);
-            this.Load += new System.EventHandler(this.GradeActivityForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

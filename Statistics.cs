@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using LiveCharts;
-using LiveCharts.Wpf;
-using System.IO;
+﻿using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
-using System.Drawing.Imaging;
-using Image = iText.Layout.Element.Image;
-using iText.IO.Image;
-using System.Windows.Forms;
+using LiveCharts;
+using LiveCharts.Wpf;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using Image = iText.Layout.Element.Image;
 
 namespace CSAS
 {
     public partial class Statistics : MaterialSkin.Controls.MaterialForm
     {
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         User currentUser;
         StudentSkupina currentGroup;
 
@@ -125,13 +124,13 @@ namespace CSAS
 
         }
 
-        protected void ActivitySuccessfullnessByActivity(string name , DateTime deadline)
+        protected void ActivitySuccessfullnessByActivity(string name, DateTime deadline)
         {
             try
             {
                 var activities = GetActivities().GroupBy(x => x.Student.ID_Kruzok).Where(p => p.Select(o => o.ActivityName == name).FirstOrDefault() && p.Select(m => m.Deadline == deadline).FirstOrDefault());
 
-                var n = GetActivities().Where(l => l.ActivityName == name && l.Deadline == deadline).GroupBy(u=>u.Student.ID_Kruzok);
+                var n = GetActivities().Where(l => l.ActivityName == name && l.Deadline == deadline).GroupBy(u => u.Student.ID_Kruzok);
 
                 pieChart1.Series = new SeriesCollection();
                 pieChart1.InnerRadius = 40;
@@ -141,7 +140,7 @@ namespace CSAS
                 {
                     var maxPoints = activity.Sum(x => x.MaxPoints);
                     var acquiredPoints = activity.Sum(x => x.Hodnotenie);
-                    var students = GetStudents().Where(x => x.ID_Kruzok == activity.Key).Count();                    
+                    var students = GetStudents().Where(x => x.ID_Kruzok == activity.Key).Count();
                     int multiplier = 1000;
 
                     double? success = (double?)Math.Round(acquiredPoints / (maxPoints * students) * multiplier, 2);
@@ -158,14 +157,14 @@ namespace CSAS
                 }
 
                 var r = n.Sum(p => p.Select(o => o.Hodnotenie).FirstOrDefault()) / (n.Select(t => t.Select(q => q.IdStudent)).Count());
-                AvgLabel.Text =r.ToString();
+                AvgLabel.Text = r.ToString();
 
                 label4.Text = "Maximum dosiahnutých:";
                 label2.Text = "Minimum dosiahnutých: ";
                 var max = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderByDescending(c => c).FirstOrDefault();
                 var min = n.SelectMany(x => x.Select(y => y.Hodnotenie)).OrderBy(c => c).FirstOrDefault();
                 AvgActivity.Text = max.ToString();
-                ActCountLabel.Text =min.ToString();
+                ActCountLabel.Text = min.ToString();
                 AvgActivity.Visible = true;
                 label4.Visible = true;
 
@@ -190,9 +189,9 @@ namespace CSAS
                 var maxPoints = activity.Sum(x => x.MaxPoints);
                 var acquiredPoints = activity.Sum(x => x.Hodnotenie);
                 var students = GetStudents().Where(x => x.ID_Kruzok == activity.Key).Count();
-                int multiplier = 1000;                
+                int multiplier = 1000;
 
-                double? success = (double?)Math.Round(acquiredPoints / (maxPoints * students) * multiplier,2);
+                double? success = (double?)Math.Round(acquiredPoints / (maxPoints * students) * multiplier, 2);
 
                 pieChart1.Series.Add(
 
@@ -212,7 +211,7 @@ namespace CSAS
             var Max = ActivitiesCount.Sum(x => x.MaxPoints);
             var Graded = ActivitiesCount.Sum(x => x.Hodnotenie);
 
-            ActCountLabel.Text = ActivitiesCount.Select(x=>new  {x.ActivityName,x.Deadline}).Distinct().Count().ToString();
+            ActCountLabel.Text = ActivitiesCount.Select(x => new { x.ActivityName, x.Deadline }).Distinct().Count().ToString();
             AvgActivity.Visible = false;//.Text = (Graded / ActivitiesCount.Distinct().Count()).ToString();
             AvgLabel.Text = (Graded / countStudents).ToString();
 
@@ -234,7 +233,7 @@ namespace CSAS
 
             var finalGrade = GetFinalGrades();
 
-            valuesA.Add(finalGrade.Where(x=>x.Grade =="A").Sum(y => y.Grade.Count()));
+            valuesA.Add(finalGrade.Where(x => x.Grade == "A").Sum(y => y.Grade.Count()));
             valuesB.Add(finalGrade.Where(x => x.Grade == "B").Sum(y => y.Grade.Count()));
             valuesC.Add(finalGrade.Where(x => x.Grade == "C").Sum(y => y.Grade.Count()));
             valuesD.Add(finalGrade.Where(x => x.Grade == "D").Sum(y => y.Grade.Count()));
@@ -243,7 +242,7 @@ namespace CSAS
 
 
 
-            
+
 
             pieChart1.InnerRadius = 40;
             pieChart1.LegendLocation = LegendLocation.Right;
@@ -340,9 +339,9 @@ namespace CSAS
                 Labels = lables,
                 LabelsRotation = 45,
                 Unit = 0.7,
-               Separator = sep,
+                Separator = sep,
                 ShowLabels = true
-            }) ;
+            });
             //y axis label
             cartesianChart1.AxisY.Add(new Axis
             {
@@ -371,7 +370,7 @@ namespace CSAS
 
             cartesianChart1.Series = new SeriesCollection
             {
-               
+
                 new ColumnSeries
                 {
                     Title = "Prítomný",
@@ -398,9 +397,9 @@ namespace CSAS
                 Title = "Študent",
                 Labels = lables,
                 LabelsRotation = 45,
-                 Separator = sep,
+                Separator = sep,
                 Unit = 1,
-            }) ;
+            });
             //y axis label
             cartesianChart1.AxisY.Add(new Axis
             {
@@ -468,7 +467,7 @@ namespace CSAS
                 Labels = lables,
                 ShowLabels = true,
                 Unit = 0.05
-            }) ;
+            });
             //y axis label
             cartesianChart1.AxisY.Add(new Axis
             {
@@ -538,7 +537,7 @@ namespace CSAS
                 Labels = lables,
                 ShowLabels = true,
                 Unit = 0.1
-            }) ;
+            });
             //y axis label
             cartesianChart1.AxisY.Add(new Axis
             {
@@ -581,9 +580,9 @@ namespace CSAS
         {
             StudentDBDataContext con = new StudentDBDataContext(conn_str);
             var activity = con.GetTable<Activity>().Where(x => x.IdSkupina == currentGroup.Id).ToList();
-            
+
             return activity;
-            
+
         }
         private void materialLabel1_Click_1(object sender, EventArgs e)
         {
@@ -617,20 +616,20 @@ namespace CSAS
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadBarCharts();            
-        }            
+            LoadBarCharts();
+        }
 
 
         private void PrintToPdf(List<MemoryStream> memoryStreams)
         {
             try
             {
-               var file = File.Create(AppDomain.CurrentDomain.BaseDirectory + @"\ChartExport.pdf");
+                var file = File.Create(AppDomain.CurrentDomain.BaseDirectory + @"\ChartExport.pdf");
                 PdfWriter writer = new PdfWriter(file);
                 PdfDocument pdf = new PdfDocument(writer);
                 pdf.AddNewPage();
                 Document document = new Document(pdf);
-                
+
                 foreach (var str in memoryStreams)
                 {
                     ImageData data = ImageDataFactory.Create(str.ToArray());
@@ -641,7 +640,7 @@ namespace CSAS
 
                 document.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 return;
@@ -662,7 +661,7 @@ namespace CSAS
 
         List<MemoryStream> memoryStreams = new List<MemoryStream>();
 
-        
+
 
         private void materialFlatButton3_Click(object sender, EventArgs e)
         {
@@ -671,7 +670,7 @@ namespace CSAS
             {
                 PrintToPdf(memoryStreams);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -715,7 +714,7 @@ namespace CSAS
             bool pieEx = false;
             bool cartEx = false;
             newList.AddRange(memoryStreams);
-            if (newList.Count>0)
+            if (newList.Count > 0)
             {
                 foreach (var stream in newList)
                 {
@@ -723,7 +722,7 @@ namespace CSAS
                     {
                         cartEx = true;
                     }
-                    if (StreamEquals(piestr,stream))
+                    if (StreamEquals(piestr, stream))
                     {
                         pieEx = true;
                     }

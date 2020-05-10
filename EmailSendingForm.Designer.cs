@@ -30,13 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmailSendingForm));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.ToTextBox = new System.Windows.Forms.TextBox();
-            this.subjectTextBox = new System.Windows.Forms.TextBox();
+            this.ToTextBox = new MaterialSkin.Controls.MaterialTextBox();
+            this.subjectTextBox = new MaterialSkin.Controls.MaterialTextBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.OdoslatBtnSendForm = new MaterialSkin.Controls.MaterialButton();
-            this.BackBtnSendForm = new MaterialSkin.Controls.MaterialButton();
             this.autocompleteMenu1 = new AutocompleteMenuNS.AutocompleteMenu();
             this.SelectAllBtnPrimaryEmail = new MaterialSkin.Controls.MaterialRadioButton();
             this.SelectAllSecondaryEmail = new MaterialSkin.Controls.MaterialRadioButton();
@@ -62,18 +61,34 @@
             // ToTextBox
             // 
             this.autocompleteMenu1.SetAutocompleteMenu(this.ToTextBox, this.autocompleteMenu1);
+            this.ToTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ToTextBox.Depth = 0;
+            this.ToTextBox.Font = new System.Drawing.Font("Roboto", 12F);
             this.ToTextBox.Location = new System.Drawing.Point(106, 72);
+            this.ToTextBox.MaxLength = 50;
+            this.ToTextBox.MouseState = MaterialSkin.MouseState.OUT;
+            this.ToTextBox.Multiline = false;
             this.ToTextBox.Name = "ToTextBox";
-            this.ToTextBox.Size = new System.Drawing.Size(548, 20);
+            this.ToTextBox.Size = new System.Drawing.Size(548, 25);
             this.ToTextBox.TabIndex = 1;
+            this.ToTextBox.Text = "";
+            this.ToTextBox.UseTallSize = false;
             // 
             // subjectTextBox
             // 
             this.autocompleteMenu1.SetAutocompleteMenu(this.subjectTextBox, null);
+            this.subjectTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.subjectTextBox.Depth = 0;
+            this.subjectTextBox.Font = new System.Drawing.Font("Roboto", 12F);
             this.subjectTextBox.Location = new System.Drawing.Point(106, 105);
+            this.subjectTextBox.MaxLength = 50;
+            this.subjectTextBox.MouseState = MaterialSkin.MouseState.OUT;
+            this.subjectTextBox.Multiline = false;
             this.subjectTextBox.Name = "subjectTextBox";
-            this.subjectTextBox.Size = new System.Drawing.Size(548, 20);
+            this.subjectTextBox.Size = new System.Drawing.Size(548, 25);
             this.subjectTextBox.TabIndex = 2;
+            this.subjectTextBox.Text = "";
+            this.subjectTextBox.UseTallSize = false;
             // 
             // materialLabel1
             // 
@@ -97,9 +112,9 @@
             this.materialLabel2.Location = new System.Drawing.Point(29, 104);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(54, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(60, 19);
             this.materialLabel2.TabIndex = 4;
-            this.materialLabel2.Text = "Subjekt";
+            this.materialLabel2.Text = "Predmet";
             // 
             // materialLabel3
             // 
@@ -125,31 +140,13 @@
             this.OdoslatBtnSendForm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.OdoslatBtnSendForm.MouseState = MaterialSkin.MouseState.HOVER;
             this.OdoslatBtnSendForm.Name = "OdoslatBtnSendForm";
-            this.OdoslatBtnSendForm.Size = new System.Drawing.Size(87, 36);
+            this.OdoslatBtnSendForm.Size = new System.Drawing.Size(84, 36);
             this.OdoslatBtnSendForm.TabIndex = 4;
             this.OdoslatBtnSendForm.Text = "Odoslať";
             this.OdoslatBtnSendForm.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.OdoslatBtnSendForm.UseAccentColor = false;
             this.OdoslatBtnSendForm.UseVisualStyleBackColor = true;
             this.OdoslatBtnSendForm.Click += new System.EventHandler(this.OdoslatBtnSendForm_Click);
-            // 
-            // BackBtnSendForm
-            // 
-            this.BackBtnSendForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackBtnSendForm.Depth = 0;
-            this.BackBtnSendForm.DrawShadows = true;
-            this.BackBtnSendForm.HighEmphasis = true;
-            this.BackBtnSendForm.Icon = null;
-            this.BackBtnSendForm.Location = new System.Drawing.Point(33, 571);
-            this.BackBtnSendForm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.BackBtnSendForm.MouseState = MaterialSkin.MouseState.HOVER;
-            this.BackBtnSendForm.Name = "BackBtnSendForm";
-            this.BackBtnSendForm.Size = new System.Drawing.Size(58, 36);
-            this.BackBtnSendForm.TabIndex = 5;
-            this.BackBtnSendForm.Text = "Späť";
-            this.BackBtnSendForm.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.BackBtnSendForm.UseAccentColor = false;
-            this.BackBtnSendForm.UseVisualStyleBackColor = true;
             // 
             // autocompleteMenu1
             // 
@@ -219,7 +216,7 @@
             // 
             this.GroupComboEmail.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GroupComboEmail.Enabled = false;
-            this.GroupComboEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupComboEmail.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.GroupComboEmail.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupComboEmail.FormattingEnabled = true;
             this.GroupComboEmail.Location = new System.Drawing.Point(954, 222);
@@ -255,7 +252,7 @@
             this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Size = new System.Drawing.Size(136, 36);
+            this.materialFlatButton1.Size = new System.Drawing.Size(132, 36);
             this.materialFlatButton1.TabIndex = 12;
             this.materialFlatButton1.Text = "Pridať prílohy";
             this.materialFlatButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -282,7 +279,7 @@
             this.AttachmentsGrid.RowHeadersVisible = false;
             this.AttachmentsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.AttachmentsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AttachmentsGrid.Size = new System.Drawing.Size(254, 36);
+            this.AttachmentsGrid.Size = new System.Drawing.Size(254, 117);
             this.AttachmentsGrid.TabIndex = 13;
             this.AttachmentsGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AttachmentsGrid_KeyUp);
             // 
@@ -298,7 +295,6 @@
             this.Controls.Add(this.SelectManually);
             this.Controls.Add(this.SelectAllSecondaryEmail);
             this.Controls.Add(this.SelectAllBtnPrimaryEmail);
-            this.Controls.Add(this.BackBtnSendForm);
             this.Controls.Add(this.OdoslatBtnSendForm);
             this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.materialLabel2);
@@ -309,7 +305,6 @@
             this.MaximizeBox = false;
             this.Name = "EmailSendingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EmailSendingForm";
             ((System.ComponentModel.ISupportInitialize)(this.AttachmentsGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -319,13 +314,12 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox ToTextBox;
-        private System.Windows.Forms.TextBox subjectTextBox;
+        private MaterialSkin.Controls.MaterialTextBox ToTextBox;
+        private MaterialSkin.Controls.MaterialTextBox subjectTextBox;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialButton OdoslatBtnSendForm;
-        private MaterialSkin.Controls.MaterialButton BackBtnSendForm;
         private AutocompleteMenuNS.AutocompleteMenu autocompleteMenu1;
         private MaterialSkin.Controls.MaterialRadioButton SelectAllBtnPrimaryEmail;
         private MaterialSkin.Controls.MaterialRadioButton SelectAllSecondaryEmail;

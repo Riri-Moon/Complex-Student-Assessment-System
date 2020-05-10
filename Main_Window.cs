@@ -1,19 +1,18 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using System.Windows.Forms;
-using System.Timers;
-using System.IO;
-using System.Drawing;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Timers;
+using System.Windows.Forms;
 
 namespace CSAS
 {
     public partial class Main_Window : MaterialForm
     {
-
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         protected bool isCollapsed_4 = true;
         protected bool isCollapsed_3 = true;
         protected bool isCollapsed_2 = true;
@@ -21,7 +20,6 @@ namespace CSAS
         public StudentSkupina studentSkupina = new StudentSkupina();
         protected static User currentUser = new User();
         private int currentRow = 0;
-
 
         public Main_Window(StudentSkupina skupina, User user)
         {
@@ -40,7 +38,7 @@ namespace CSAS
                 SendEmailCheck emailCheck = new SendEmailCheck();
                 emailCheck.AutomatedEmailSending(currentUser);
 
-                var aTimer = new System.Timers.Timer(60 * 60 * 1000); 
+                var aTimer = new System.Timers.Timer(60 * 60 * 1000);
                 aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
                 aTimer.Start();
 
@@ -50,7 +48,6 @@ namespace CSAS
             }
             catch (Exception ex)
             {
-
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
                 MessageBox.Show(ex.Message);
@@ -105,7 +102,6 @@ namespace CSAS
         {
             try
             {
-
                 using (var con = new StudentDBDataContext(conn_str))
                 {
                     var students = con.GetTable<Student>()?.Where(studs => studs.ID_stud_skupina == studentSkupina.Id && studs.Forma == studentSkupina.Forma).
@@ -126,28 +122,32 @@ namespace CSAS
 
                   });
 
-                    if(Student_Grid.SelectedRows.Count>0)
-                    currentRow = Student_Grid.CurrentRow.Index;
-                    
+                    if (Student_Grid.SelectedRows.Count > 0)
+                    {
+                        if (Student_Grid.CurrentRow != null)
+                        {
+                            currentRow = Student_Grid.CurrentRow.Index;
+                        }
+                    }
                     Student_Grid.RowHeadersVisible = false;
                     Student_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     Student_Grid.MultiSelect = false;
                     Student_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                     Student_Grid.DataSource = students.OrderBy(x => x.Priezvisko);
-                    Student_Grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
 
-                    Student_Grid.Columns["Id"].Visible = false;               
+                    Student_Grid.Columns["Id"].Visible = false;
                     Student_Grid.Columns["ID_Kruzok"].Visible = false;
+                    Student_Grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
                     // Vytvorenie celkovej dochádzky pre študentov, v prípade ak ešte nebola vytvorená
                     foreach (var stud in students)
                     {
                         var exists = con.GetTable<TotalAttendance>().Where(x => x.IdStudent == stud.Id).FirstOrDefault();
-                        
+
                         if (exists == null)
                         {
                             TotalAttendance totalAttendance = new TotalAttendance() { IdStudent = stud.Id };
-                            con.TotalAttendances.InsertOnSubmit(totalAttendance);                           
+                            con.TotalAttendances.InsertOnSubmit(totalAttendance);
                         }
                         else
                         {
@@ -165,7 +165,7 @@ namespace CSAS
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
 
 
         // Zvýrazňovanie údajov, ktoré chýbajú
@@ -173,7 +173,7 @@ namespace CSAS
         {
             try
             {
-                
+
                 if (Student_Grid != null)
                 {
                     foreach (DataGridViewRow row in Student_Grid.Rows)
@@ -197,9 +197,9 @@ namespace CSAS
                         }
                     }
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -215,35 +215,39 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-                    
-                    if (Student_Grid.SelectedRows.Count > 0 )
+
+                    if (Student_Grid.SelectedRows.Count > 0)
                     {
                         var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
                         var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id);
 
-                        var dataSource = from studAct in acts
-                                         where studAct.IdStudent == selectedStudent
-                                         select new
-                                         {
-                                             Názov = studAct.ActivityName,
-                                             Maximum = studAct.MaxPoints,
-                                             studAct.Hodnotenie,
-                                             studAct.Id,
-                                             Odovzdanie = studAct.Deadline
-                                         };
-                        Activity_Grid.RowHeadersVisible = false;
-                        Activity_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                        Activity_Grid.DataSource = dataSource;
-                        Activity_Grid.Columns["Id"].Visible = false;
+                        if (acts.Count() > 0)
+                        {
+                            var dataSource = from studAct in acts
+                                             where studAct.IdStudent == selectedStudent
+                                             select new
+                                             {
+                                                 Názov = studAct.ActivityName,
+                                                 Maximum = studAct.MaxPoints,
+                                                 studAct.Hodnotenie,
+                                                 studAct.Id,
+                                                 Odovzdanie = studAct.Deadline
+                                             };
+                            Activity_Grid.RowHeadersVisible = false;
+                            Activity_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                            Activity_Grid.DataSource = dataSource;
+                            Activity_Grid.Columns["Id"].Visible = false;
+                            Activity_Grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                        }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
             }
-        }    
+        }
 
 
         // Otvorenie okna pre import študentov z excelu
@@ -253,7 +257,13 @@ namespace CSAS
             try
             {
                 import.Querys(studentSkupina);
-                GetTable();
+                using (var con = new StudentDBDataContext(conn_str))
+                {
+                    if (con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkupina.Id).Count() > 0)
+                    {
+                        GetTable();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -282,26 +292,42 @@ namespace CSAS
         // Otvorenie okna, kde používateľ môže odosielať emaily.
         private void OdoslatEmailBtnMainMenu_Click(object sender, EventArgs e)
         {
-            var openSendMail = new EmailSendingForm(currentUser,studentSkupina);
-            openSendMail.ShowDialog();
+            try
+            {
+                var openSendMail = new EmailSendingForm(currentUser, studentSkupina);
+                openSendMail.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
-       
+
         private void Ext_Btn_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Naozaj chcete skončiť?", "Ukončiť", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                  Environment.Exit(1);          
+                Environment.Exit(1);
             }
         }
 
         // Otvorenie okna s dochádzkou
         private void Attendance_Button_Click(object sender, EventArgs e)
         {
-            var att = new Dochádzka(studentSkupina);
-            att.FormClosed += IsClosed;
-            att.ShowDialog();
+            try
+            {
+                var att = new Dochádzka(studentSkupina);
+                att.FormClosed += IsClosed;
+                att.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
-        
+
         private void Activity_Button_Click(object sender, EventArgs e)
         {
             if (isCollapsed_3)
@@ -337,15 +363,31 @@ namespace CSAS
         // Nastavenia používateľa
         private void Email_client_btn_Click_1(object sender, EventArgs e)
         {
-            var emailClient = new Email_Client(currentUser,studentSkupina);
-            emailClient.FormClosed += IsClosed;
-            emailClient.ShowDialog();
+            try
+            {
+                var emailClient = new Email_Client(currentUser, studentSkupina);
+                emailClient.FormClosed += IsClosed;
+                emailClient.Show();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
         private void Stat_Btn_Click(object sender, EventArgs e)
         {
-            var stat = new Statistics(currentUser,studentSkupina);
-            stat.FormClosed += IsClosed;
-            stat.ShowDialog();
+            try
+            {
+                var stat = new Statistics(currentUser, studentSkupina);
+                stat.FormClosed += IsClosed;
+                stat.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
 
@@ -353,49 +395,89 @@ namespace CSAS
         private void Main_Window_Load(object sender, EventArgs e)
         {
             OnLoadStudent();
-
         }
 
         private void Create_Templ_Click(object sender, EventArgs e)
         {
-            var template = new CreateTemplate(currentUser);
-            template.ShowDialog();
+            try
+            {
+                var template = new CreateTemplate(currentUser);
+                template.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void Create_Act_Btn_Click(object sender, EventArgs e)
         {
-            var createActivity = new CreateActivity(currentUser,studentSkupina);
-            createActivity.FormClosed += IsClosed;
-            createActivity.ShowDialog();
+            try
+            {
+                var createActivity = new CreateActivity(currentUser, studentSkupina);
+                createActivity.FormClosed += IsClosed;
+                createActivity.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var createEmailTemplate = new EmailTemplateForm(currentUser);
-            createEmailTemplate.ShowDialog();
+            try
+            {
+                var createEmailTemplate = new EmailTemplateForm(currentUser);
+                createEmailTemplate.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void Student_Grid_SelectionChanged(object sender, EventArgs e)
         {
-            if (Student_Grid.SelectedRows.Count >= 1)
+            try
             {
-                GetActivities();
+                if (Student_Grid.SelectedRows.Count >= 1)
+                {
+                    GetActivities();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
+
         // Manuálne pridanie študenta
         private void Add_Stud_Button_Click(object sender, EventArgs e)
         {
-            AddStudentForm addStudentForm = new AddStudentForm(currentUser, studentSkupina);
-            addStudentForm.FormClosed += IsClosed;
-            addStudentForm.ShowDialog();
+            try
+            {
+                AddStudentForm addStudentForm = new AddStudentForm(currentUser, studentSkupina);
+                addStudentForm.FormClosed += IsClosed;
+                addStudentForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         //Kontextové menu, na hodnotenie/odstránenie aktivity
         private void Activity_Grid_RowContextMenuStripNeeded(object sender, DataGridViewRowContextMenuStripNeededEventArgs e)
         {
             DataGridViewRow dataGridViewRow1 = Activity_Grid.Rows[e.RowIndex];
-            e.ContextMenuStrip = materialContextMenuStrip1;            
+            e.ContextMenuStrip = materialContextMenuStrip1;
         }
 
         // Otvorenie okna, v ktorom je možné pridávať hodnotenie ku konkrétnej aktivite
@@ -416,7 +498,7 @@ namespace CSAS
                 }
                 this.UseWaitCursor = false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -448,38 +530,51 @@ namespace CSAS
 
                 GetActivities();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
-
         }
         private void Main_Window_Shown(object sender, EventArgs e)
-        {         
+        {
         }
 
         // Otvorenie okna na pridanie aktivity pre jednotlivca nie skupinu.
         private void button2_Click(object sender, EventArgs e)
         {
-            var singleActivity = new IndividualActivity(currentUser, studentSkupina);
-            singleActivity.FormClosed += IsClosed;
-            singleActivity.ShowDialog();
+            try
+            {
+                var singleActivity = new IndividualActivity(currentUser, studentSkupina);
+                singleActivity.FormClosed += IsClosed;
+                singleActivity.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
 
         // Zmazanie vsetkych dat skupiny / Tyka sa to len studentov
-    
 
-            // Kontextové menu pre študenta, pridanie bodov za aktivitu na cvičení.
+
+        // Kontextové menu pre študenta, pridanie bodov za aktivitu na cvičení.
         private void bodyZaAktivituCvičenieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
-            {                
-                PointsForActivity(currentUser.PointsForActSem);              
-            }
-            catch(Exception ex)
             {
-                MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (currentUser.PointsForActSem.HasValue)
+                    PointsForActivity(currentUser.PointsForActSem);
+                else
+                {
+                    MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
                 Logger logger = new Logger();
                 logger.LogError(ex);
             }
@@ -490,19 +585,23 @@ namespace CSAS
         {
             try
             {
-                PointsForActivity(currentUser.PointsForActLec);
+                if (currentUser.PointsForActLec.HasValue)
+                    PointsForActivity(currentUser.PointsForActLec);
+                else
+                {
+                    MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Uistite sa, že v nastaveniach je priradená šablóna pre body za aktivitu.","Upozornenie",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 Logger logger = new Logger();
                 logger.LogError(ex);
             }
         }
-       /// <summary>
-       /// Vytvorenie aktivity, body za aktivitu
-       /// </summary>
-       /// <param name="id"></param>
+        /// <summary>
+        /// Vytvorenie aktivity, body za aktivitu
+        /// </summary>
         private void PointsForActivity(int? id)
         {
             try
@@ -527,7 +626,6 @@ namespace CSAS
                         Hodnotenie = actTempl.MaxPoints,
                         Comment = string.Empty,
                         SendMe = false,
-
                     };
                     con.Activities.InsertOnSubmit(activity);
                     con.SubmitChanges();
@@ -542,13 +640,10 @@ namespace CSAS
                             Points = tsk.MaxPts,
                             IdStudent = activity.IdStudent,
                             Hodnotenie = tsk.MaxPts,
-                            Comment = string.Empty,                            
-
-
+                            Comment = string.Empty,
                         };
                         con.Tasks.InsertOnSubmit(task);
                     }
-
                     con.SubmitChanges();
                 }
                 GetActivities();
@@ -569,33 +664,57 @@ namespace CSAS
 
         private void FinalGradeBtn_Click(object sender, EventArgs e)
         {
-            var final = new FinalGradeForm(currentUser, studentSkupina);
-            final.FormClosed += IsClosed;
-            final.ShowDialog();
+            try
+            {
+                var final = new FinalGradeForm(currentUser, studentSkupina);
+                final.FormClosed += IsClosed;
+                final.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
 
         // Otvorenie inej skupiny v rámci skupín používateľa
         private void Open_Btn_Click(object sender, EventArgs e)
         {
-            var choose = new Choose_Group(currentUser);
-           DialogResult result = choose.ShowDialog();
-            if(result == DialogResult.Yes)
+            try
             {
-                studentSkupina = choose.GetGroup();
+                var choose = new Choose_Group(currentUser);
+                DialogResult result = choose.ShowDialog();
+                if (result == DialogResult.Yes)
+                {
+                    studentSkupina = choose.GetGroup();
+                }
+                Student_Grid.DataSource = null;
+                Activity_Grid.DataSource = null;
+                GetTable();
+                GetActivities();
             }
-            Student_Grid.DataSource = null;
-            Activity_Grid.DataSource = null;
-            GetTable();
-            GetActivities();
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
 
         //Otvorenie okna na export údajov do PDF a Excelu
         private void Export_Btn_Click(object sender, EventArgs e)
         {
-            var export = new ExportForm(studentSkupina, currentUser);
-            export.Show();
+            try
+            {
+                var export = new ExportForm(studentSkupina, currentUser);
+                export.Show();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
 
@@ -610,11 +729,9 @@ namespace CSAS
         {
             try
             {
-                var result = MessageBox.Show("Naozaj chcete odstrániť aktivitu ?", "Odstrániť aktivitu",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                var result = MessageBox.Show("Naozaj chcete odstrániť aktivitu ?", "Odstrániť aktivitu", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    this.UseWaitCursor = true;
-
                     using (var con = new StudentDBDataContext(conn_str))
                     {
                         var stud = con.GetTable<Student>().Where(x => x.ID_stud_skupina == studentSkupina.Id && x.Id == (int)Student_Grid.CurrentRow.Cells[0].Value).FirstOrDefault();
@@ -627,8 +744,8 @@ namespace CSAS
                         con.Activities.DeleteOnSubmit(act);
                         con.SubmitChanges();
                     }
-                    this.UseWaitCursor = false;
                 }
+                Activity_Grid.DataSource = null;
                 GetActivities();
             }
             catch (Exception ex)

@@ -105,6 +105,7 @@
             // 
             // Exit_Button
             // 
+            this.Exit_Button.Enabled = false;
             this.Exit_Button.FlatAppearance.BorderSize = 0;
             this.Exit_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Exit_Button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
@@ -115,6 +116,7 @@
             this.Exit_Button.TabIndex = 9;
             this.Exit_Button.Text = "Ukončiť";
             this.Exit_Button.UseVisualStyleBackColor = true;
+            this.Exit_Button.Visible = false;
             this.Exit_Button.Click += new System.EventHandler(this.Exit_Button_Click_1);
             // 
             // Remove_Button

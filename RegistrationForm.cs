@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Security.Cryptography;
-using System.Configuration;
+using System.Text;
+using System.Windows.Forms;
 
 namespace CSAS
 {
     public partial class RegistrationForm : MaterialSkin.Controls.MaterialForm
     {
-        private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
+        private readonly string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
 
         public RegistrationForm()
         {
@@ -27,24 +22,24 @@ namespace CSAS
             skinManager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Primary.BlueGrey500, MaterialSkin.Accent.Blue400,
                 MaterialSkin.TextShade.WHITE);
         }
-        
+
         private bool BoxValidation()
         {
             int upperCount = 0;
-            if(NameBox.Text.Length<8 || NameBox.Text.Length >15)
+            if (NameBox.Text.Length < 8 || NameBox.Text.Length > 15)
             {
                 MessageBox.Show("Meno nemôže mať menej než 8 znakov a viac ako 15");
                 return false;
             }
             string name = NameBox.Text;
-            foreach(var c in name)
+            foreach (var c in name)
             {
-                if(char.IsUpper(c))
+                if (char.IsUpper(c))
                 {
                     upperCount++;
                 }
-            }            
-            if(upperCount<=0)
+            }
+            if (upperCount <= 0)
             {
                 MessageBox.Show("Meno musí obsahovať aspoň jedno veľké písmeno");
                 return false;
@@ -58,7 +53,7 @@ namespace CSAS
                 return false;
             }
 
-            if(FirstPssBox.Text.Length<8 || FirstPssBox.Text.Length >30)
+            if (FirstPssBox.Text.Length < 8 || FirstPssBox.Text.Length > 30)
             {
                 MessageBox.Show("Heslo musí obsahovať minimálne 8 znakov a maximálne 30 znakov");
                 return false;
@@ -67,25 +62,25 @@ namespace CSAS
             string pss = FirstPssBox.Text;
             int numCount = 0;
             int uppCount = 0;
-            foreach(var x in pss)
+            foreach (var x in pss)
             {
-                if(char.IsUpper(x))
+                if (char.IsUpper(x))
                 {
                     uppCount++;
                 }
-                if(char.IsNumber(x))
+                if (char.IsNumber(x))
                 {
                     numCount++;
                 }
             }
 
-            if(numCount <=0 || uppCount <=0)
+            if (numCount <= 0 || uppCount <= 0)
             {
                 MessageBox.Show("Heslo musí obsahovať aspoň jedno veľké písmeno a jedno číslo");
                 return false;
             }
             string secPss = SecondPssBox.Text;
-            if(pss != secPss)
+            if (pss != secPss)
             {
                 MessageBox.Show("Heslá sa nezhodujú");
                 return false;
@@ -104,17 +99,16 @@ namespace CSAS
         {
             try
             {
-                if(!BoxValidation())
+                if (!BoxValidation())
                 {
                     return false;
                 }
 
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    
                     var exists = con.GetTable<User>().Where(x => x.Email == EmailBox.Text || x.Meno == NameBox.Text).Count();
 
-                    if(exists>0)
+                    if (exists > 0)
                     {
                         MessageBox.Show("Používateľ s týmto menom alebo emailom už existuje");
                         return false;
@@ -129,7 +123,7 @@ namespace CSAS
             {
                 Logger logger = new Logger();
                 logger.LogError(ex);
-                MessageBox.Show("Počas registrácie nastala chyba","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Počas registrácie nastala chyba", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -142,10 +136,12 @@ namespace CSAS
                 {
                     using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                     {
-                        User user = new User();
-                        user.Meno = NameBox.Text;
-                        user.Email = EmailBox.Text;
-                        user.Heslo = SHA512(FirstPssBox.Text);
+                        User user = new User
+                        {
+                            Meno = NameBox.Text,
+                            Email = EmailBox.Text,
+                            Heslo = SHA512(FirstPssBox.Text)
+                        };
 
                         con.Users.InsertOnSubmit(user);
                         con.SubmitChanges();
@@ -156,7 +152,7 @@ namespace CSAS
                 }
                 else return false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 return false;
@@ -193,7 +189,6 @@ namespace CSAS
             {
                 if (CreateUser())
                 {
-
                     this.Hide();
                     return;
                 }
@@ -202,7 +197,7 @@ namespace CSAS
                     return;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }

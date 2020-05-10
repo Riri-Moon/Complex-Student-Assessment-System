@@ -13,7 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>publish/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,6 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>http://localhost/</UpdateUrl>
     <ProductName>Complex Student Assesment</ProductName>
     <PublisherName>Richard</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
@@ -241,8 +240,8 @@
     <Compile Include="Email Client.Designer.cs">
       <DependentUpon>Email Client.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmailAttachments.cs" />
-    <Compile Include="EmailClient.cs" />
+    <Compile Include="Classes\EmailAttachments.cs" />
+    <Compile Include="Classes\EmailClient.cs" />
     <Compile Include="EmailSendingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,7 +254,6 @@
     <Compile Include="EmailTemplateForm.Designer.cs">
       <DependentUpon>EmailTemplateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Export.cs" />
     <Compile Include="ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,21 +272,21 @@
     <Compile Include="ForgetPasswordForm.Designer.cs">
       <DependentUpon>ForgetPasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GeneratePassword.cs" />
+    <Compile Include="Classes\GeneratePassword.cs" />
     <Compile Include="GradeActivityForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GradeActivityForm.Designer.cs">
       <DependentUpon>GradeActivityForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Import_Cl.cs" />
+    <Compile Include="Classes\Import_Cl.cs" />
     <Compile Include="IndividualActivity.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IndividualActivity.Designer.cs">
       <DependentUpon>IndividualActivity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Logger.cs" />
+    <Compile Include="Classes\Logger.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -309,7 +307,7 @@
     <Compile Include="RegistrationForm.Designer.cs">
       <DependentUpon>RegistrationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SendEmailCheck.cs" />
+    <Compile Include="Classes\SendEmailCheck.cs" />
     <Compile Include="Statistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,7 +320,8 @@
       <DependentUpon>StudentDB.dbml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Content Include="CreateQuery.sql" />
+    <Content Include="Classes\Query\CreateQuery.sql" />
+    <None Include="Resources\baseline_done_black_18dp.png" />
     <Content Include="StudentDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

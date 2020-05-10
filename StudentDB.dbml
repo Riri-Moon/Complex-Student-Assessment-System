@@ -70,21 +70,6 @@
       <Association Name="EmailTemplate_Attachment" Member="EmailTemplate" ThisKey="IdEmailTemplate" OtherKey="Id" Type="EmailTemplate" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.AttendanceStud" Member="AttendanceStuds">
-    <Type Name="AttendanceStud">
-      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
-      <Column Name="IDSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Type" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="IDStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IdAttendance" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IsReplacable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="IdGroup" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Association Name="Student_AttendanceStud" Member="Student" ThisKey="IDStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
-      <Association Name="StudentSkupina_AttendanceStud" Member="StudentSkupina" ThisKey="IDSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.EmailTemplate" Member="EmailTemplates">
     <Type Name="EmailTemplate">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -126,10 +111,10 @@
       <Column Name="ID_stud_skupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IdGroupForAttendance" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
       <Association Name="Student_Activity" Member="Activities" ThisKey="Id" OtherKey="IdStudent" Type="Activity" />
-      <Association Name="Student_AttendanceStud" Member="AttendanceStuds" ThisKey="Id" OtherKey="IDStudent" Type="AttendanceStud" />
       <Association Name="Student_FinalGrade" Member="FinalGrades" ThisKey="Id" OtherKey="IdStudent" Type="FinalGrade" />
       <Association Name="Student_Task" Member="Tasks" ThisKey="Id" OtherKey="IdStudent" Type="Task" />
       <Association Name="Student_TotalAttendance" Member="TotalAttendances" ThisKey="Id" OtherKey="IdStudent" Type="TotalAttendance" />
+      <Association Name="Student_AttendanceStud" Member="AttendanceStuds" ThisKey="Id" OtherKey="IDStudent" Type="AttendanceStud" />
     </Type>
   </Table>
   <Table Name="dbo.StudentSkupina" Member="StudentSkupinas">
@@ -178,6 +163,21 @@
       <Column Name="TotalPresentSeminar" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TotalExcusedSeminar" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Student_TotalAttendance" Member="Student" ThisKey="IdStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AttendanceStud" Member="AttendanceStuds">
+    <Type Name="AttendanceStud">
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="IDSkupina" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IDStudent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdAttendance" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IsReplacable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IdGroup" Type="System.String" DbType="NVarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="StudentSkupina_AttendanceStud" Member="StudentSkupina" ThisKey="IDSkupina" OtherKey="Id" Type="StudentSkupina" IsForeignKey="true" />
+      <Association Name="Student_AttendanceStud" Member="Student" ThisKey="IDStudent" OtherKey="Id" Type="Student" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

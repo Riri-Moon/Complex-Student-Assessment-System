@@ -11,7 +11,7 @@ namespace CSAS
     {
         User currUser;
         StudentSkupina skup;
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> students = new Dictionary<string, int>();
 
         public AddStudentForm(User user, StudentSkupina skupina)
@@ -28,24 +28,33 @@ namespace CSAS
             currUser = user;
             skup = skupina;
 
-            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+            try
             {
-                var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == skup.Id);
-                if (students.Count() > 0)
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    var kruzok = from stud in students where stud.ID_stud_skupina == skup.Id select (string)stud.IdGroupForAttendance;
-
-                    kruzok.ToList<string>();
-                    foreach (var kruz in kruzok.Distinct())
+                    var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == skup.Id);
+                    if (students.Count() > 0)
                     {
-                        if (!GroupAttCombo.Items.Contains(kruz))
+                        var kruzok = from stud in students where stud.ID_stud_skupina == skup.Id select (string)stud.IdGroupForAttendance;
+
+                        kruzok.ToList<string>();
+                        /// Nacitanie existujucich kruzkov do comboboxov
+                        foreach (var kruz in kruzok.Distinct())
                         {
-                            GroupAttCombo.Items.Add(kruz);
-                            GroupCombo.Items.Add(kruz);
+                            if (!GroupAttCombo.Items.Contains(kruz))
+                            {
+                                GroupAttCombo.Items.Add(kruz);
+                                GroupCombo.Items.Add(kruz);
+                            }
                         }
                     }
+                    RadioCheck();
                 }
-                RadioCheck();
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
 
         }
@@ -59,7 +68,7 @@ namespace CSAS
         {
             RadioCheck();
         }
-
+        
         private void RadioCheck()
         {
             if (AddStudRadio.Checked)
@@ -87,7 +96,6 @@ namespace CSAS
                                 students.Add(stud.Meno + " " + stud.Priezvisko, stud.Id);
                             }
                         }
-
                     }
                 }
                 catch (Exception ex)
@@ -98,8 +106,7 @@ namespace CSAS
                 }
             }
         }
-
-
+        // Kontrola spravnosti ISICu v pripade, ze bol zadany
         private bool IsicValidator()
         {
             try
@@ -111,7 +118,7 @@ namespace CSAS
                     {
                         foreach (var stud in studs)
                         {
-                            if ( !string.IsNullOrEmpty(IsicBox.Text) && !string.IsNullOrWhiteSpace(IsicBox.Text) && IsicBox.Text == stud.ISIC)
+                            if (!string.IsNullOrEmpty(IsicBox.Text) && !string.IsNullOrWhiteSpace(IsicBox.Text) && IsicBox.Text == stud.ISIC)
                             {
                                 MessageBox.Show("Študent s týmto Isic-om už existuje");
                                 return false;
@@ -136,6 +143,7 @@ namespace CSAS
             }
         }
 
+        // Validacia udajov v textovych poliach
         private bool StudentBoxesValidator()
         {
             if (!OnlyLetters(this.NameBox.Text, 2, 30))
@@ -169,7 +177,8 @@ namespace CSAS
                     return false;
                 }
             }
-            else if (!string.IsNullOrWhiteSpace(this.IsicBox.Text) || !string.IsNullOrEmpty(this.IsicBox.Text)) {
+            else if (!string.IsNullOrWhiteSpace(this.IsicBox.Text) || !string.IsNullOrEmpty(this.IsicBox.Text))
+            {
                 if (!OnlyNumericCharacters(this.IsicBox.Text, 17, 17))
                 {
                     MessageBox.Show("Uistite sa, že ISIC obsahuje iba čísla a dĺžka nepresiahla 17 znakov.", "Chyba");
@@ -177,7 +186,7 @@ namespace CSAS
                     return false;
                 }
             }
-            if(!OnlyNumericCharacters(this.GradeBox.Text,1,3))
+            if (!OnlyNumericCharacters(this.GradeBox.Text, 1, 3))
             {
                 MessageBox.Show("Uistite sa, že ročník obsahuje čísla a dĺžka nepresiahla 3 znaky.", "Chyba");
                 return false;
@@ -186,12 +195,12 @@ namespace CSAS
             return true;
         }
 
-        public bool OnlyLetters( string inputString, int minLen, int maxLen)
+        public bool OnlyLetters(string inputString, int minLen, int maxLen)
         {
             if (inputString.Length < minLen || inputString.Length > maxLen) return false;
-            foreach(var x in inputString)
+            foreach (var x in inputString)
             {
-                if(!char.IsLetter(x))
+                if (!char.IsLetter(x))
                 {
                     return false;
                 }
@@ -214,7 +223,7 @@ namespace CSAS
 
         }
 
-        public  bool OnlyAlphaNumericCharacters(string inputString, int minLen, int maxLen)
+        public bool OnlyAlphaNumericCharacters(string inputString, int minLen, int maxLen)
         {
 
             if (inputString.Length < minLen || inputString.Length > maxLen) return false;
@@ -236,15 +245,14 @@ namespace CSAS
             return true;
         }
 
-
+        //Ulozenie alebo vytvorenie studenta
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-
             try
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    if (AddStudRadio.Checked )
+                    if (AddStudRadio.Checked)
                     {
                         int.TryParse(GradeBox.Text, out int rocnik);
                         Student newStudent = new Student()
@@ -265,7 +273,7 @@ namespace CSAS
                             newStudent.IdGroupForAttendance = (string)GroupAttCombo.SelectedItem;
                             newStudent.ID_Kruzok = (string)GroupCombo.SelectedItem;
                         }
-                        else if(!string.IsNullOrEmpty(GroupCombo.Text))
+                        else if (!string.IsNullOrEmpty(GroupCombo.Text))
                         {
                             newStudent.IdGroupForAttendance = GroupCombo.Text;
                             newStudent.ID_Kruzok = GroupCombo.Text;
@@ -280,16 +288,16 @@ namespace CSAS
                             con.Students.InsertOnSubmit(newStudent);
                             con.SubmitChanges();
                             MessageBox.Show("Študent bol úspešne pridaný/upravený");
+                            this.Close();
                         }
                         else
                         {
                             return;
                         }
-                        
                     }
                     else
                     {
-                        if ((string)StudentsCombo.SelectedValue != string.Empty  && StudentBoxesValidator())
+                        if ((string)StudentsCombo.SelectedValue != string.Empty && StudentBoxesValidator())
                         {
 
                             var student = students.TryGetValue(StudentsCombo.Text, out int value);
@@ -315,8 +323,6 @@ namespace CSAS
                         {
                             return;
                         }
-                        
-
                     }
                 }
             }
@@ -330,19 +336,17 @@ namespace CSAS
 
         public event Action GetTable;
 
-        
 
+        // Nacitanie vybraneho studenta z comboboxu
         private void LoadStudentBtn_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
-                    if ((string)StudentsCombo.SelectedValue != string.Empty)
+                    if (StudentsCombo.Items.Count > 0 && (string)StudentsCombo.SelectedItem != null)
                     {
-
-                       students.TryGetValue(StudentsCombo.Text, out int value);
+                        students.TryGetValue(StudentsCombo.Text, out int value);
                         var currentStudent = con.GetTable<Student>().Where(x => x.Id == value && x.ID_stud_skupina == skup.Id).FirstOrDefault();
 
                         NameBox.Text = currentStudent.Meno;
@@ -350,15 +354,21 @@ namespace CSAS
                         EmailBox.Text = currentStudent.Email;
                         EmailUcmBox.Text = currentStudent.Email_UCM;
                         IsicBox.Text = currentStudent.ISIC;
-                        GroupCombo.Items.Add(currentStudent.ID_Kruzok);
-                        GroupAttCombo.Items.Add(currentStudent.IdGroupForAttendance);
+                        if (!GroupCombo.Items.Contains(currentStudent.ID_Kruzok))
+                        {
+                            GroupCombo.Items.Add(currentStudent.ID_Kruzok);
+                        }
+                        if (!GroupAttCombo.Items.Contains(currentStudent.ID_Kruzok))
+                        {
+                            GroupAttCombo.Items.Add(currentStudent.IdGroupForAttendance);
+                        }
                         GradeBox.Text = currentStudent.Rocnik.ToString();
                         GroupCombo.SelectedItem = currentStudent.ID_Kruzok;
                         GroupAttCombo.SelectedItem = currentStudent.IdGroupForAttendance;
                     }
                     else
                     {
-                        MessageBox.Show("Je nutné vybrať študenta, ktorého chcete upraviť","Chyba");
+                        MessageBox.Show("Je nutné vybrať študenta, ktorého chcete upraviť", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
                 }
@@ -367,18 +377,13 @@ namespace CSAS
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
-                MessageBox.Show(ex.ToString()); 
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void AddStudentForm_Leave(object sender, EventArgs e)
         {
             GetTable();
-        }
-
-        private void GroupCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

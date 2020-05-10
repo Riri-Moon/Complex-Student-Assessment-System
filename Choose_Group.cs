@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Data.Linq;
-using System.Collections;
-using System.Linq;
-using System.Threading;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.Linq;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace CSAS
 {
@@ -14,8 +13,7 @@ namespace CSAS
 
         public StudentSkupina Selected { get; set; }
 
-        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
-       // private string conn_str = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\StudentDatabase.mdf;Integrated Security=True";
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
 
         public User loggedUser = new User();
 
@@ -54,17 +52,25 @@ namespace CSAS
 
         private void UserGroups()
         {
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
+            try
+            {
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
 
-            Skupiny_Grid.RowHeadersVisible = false;
-            Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Skupiny_Grid.MultiSelect = false;
-            Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                Skupiny_Grid.RowHeadersVisible = false;
+                Skupiny_Grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                Skupiny_Grid.MultiSelect = false;
+                Skupiny_Grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
-            Skupiny_Grid.Columns["ID"].Visible = false;
-            Skupiny_Grid.Columns["Id_User"].Visible = false;
-            Skupiny_Grid.Columns["User"].Visible = false;
+                Skupiny_Grid.DataSource = con.GetTable<StudentSkupina>()?.Where(x => x.Id_User == loggedUser.Id);
+                Skupiny_Grid.Columns["ID"].Visible = false;
+                Skupiny_Grid.Columns["Id_User"].Visible = false;
+                Skupiny_Grid.Columns["User"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -82,11 +88,11 @@ namespace CSAS
 
 
         }
-    
+
         private void Remove_button_Click(object sender, EventArgs e)
 
         {
-        
+
         }
 
 
@@ -98,26 +104,34 @@ namespace CSAS
             _worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(HandleWorkerCompleted);
             _worker.ProgressChanged += new ProgressChangedEventHandler(HandleProgressChanged);
             _worker.RunWorkerAsync();
-            
+
         }
 
         public void HandleDoWork(object sender, DoWorkEventArgs e)
         {
 
-            BeginInvoke(new Action(() => {
-            if (_worker.CancellationPending)
+            BeginInvoke(new Action(() =>
             {
-                e.Cancel = true;
-            }
-            else
-            {
-                Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
-                Main_Window main_ = new Main_Window(Selected, loggedUser);
-                    main_.FormClosed += (s, args) => this.Close();
-                    main_.Show();
-            }
+                if (_worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    if (Skupiny_Grid.Rows.Count > 0)
+                    {
+                        Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
+                        Main_Window main_ = new Main_Window(Selected, loggedUser);
+                        main_.FormClosed += (s, args) => this.Close();
+                        main_.Show();
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
             }));
-            
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -155,20 +169,16 @@ namespace CSAS
 
         public void Select_Button_Click_1(object sender, EventArgs e)
         {
-           // this.Hide();
-            Started();
-        }
-
-
-        private void Remove_Button_Click_1(object sender, EventArgs e)
-        {
-           
-
+            // this.Hide();
+            if (Skupiny_Grid.Rows.Count > 0 && Skupiny_Grid.SelectedRows.Count > 0)
+            {
+                Started();
+            }
         }
 
         private void Exit_Button_Click_1(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Naozaj chcete skončiť?","Ukončiť",MessageBoxButtons.YesNo,MessageBoxIcon.Question) ==DialogResult.Yes)
+            if (MessageBox.Show("Naozaj chcete skončiť?", "Ukončiť", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Environment.Exit(1);
             }
@@ -176,27 +186,34 @@ namespace CSAS
 
         private void Create_Button_Click(object sender, EventArgs e)
         {
-            var newgrp = new CreateNewGroupForm(loggedUser);
-            DialogResult result = newgrp.ShowDialog();
-            if(result== DialogResult.OK)
+            try
             {
-                UserGroups();
+                var newgrp = new CreateNewGroupForm(loggedUser);
+                DialogResult result = newgrp.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    UserGroups();
+                }
             }
-            
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void Remove_Button_Click(object sender, EventArgs e)
         {
+            if (Skupiny_Grid.Rows.Count <= 0)
+            {
+                MessageBox.Show("Nie je vytvorená žiadna skupina");
+                return;
+            }
+
             if (MessageBox.Show("Naozaj chcete odstrániť skupinu, so všetkými údajmi, ktoré obsahuje ?", "Odstrániť skupinu", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 try
                 {
-
-                    if(Skupiny_Grid.Rows.Count<=0)
-                    {
-                        MessageBox.Show("Nie je vytvorená žiadna skupina");
-                        return;
-                    }
                     Selected = (StudentSkupina)Skupiny_Grid.CurrentRow.DataBoundItem;
                     StudentDBDataContext con = new StudentDBDataContext(conn_str);
 

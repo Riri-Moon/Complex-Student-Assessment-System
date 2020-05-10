@@ -38,12 +38,13 @@
             this.Activity_Grid = new System.Windows.Forms.DataGridView();
             this.Student_Grid = new System.Windows.Forms.DataGridView();
             this.Study_Panel = new System.Windows.Forms.Panel();
-            this.FinalGradeBtn = new System.Windows.Forms.Button();
+            this.Add_Stud_Button = new System.Windows.Forms.Button();
             this.Stud_G_Button = new System.Windows.Forms.Button();
             this.Import_Btn = new System.Windows.Forms.Button();
             this.Stat_Btn = new System.Windows.Forms.Button();
             this.Open_Btn = new System.Windows.Forms.Button();
             this.Export_Btn = new System.Windows.Forms.Button();
+            this.FinalGradeBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Attendance_Button = new System.Windows.Forms.Button();
             this.Activity_panel = new System.Windows.Forms.Panel();
@@ -51,13 +52,11 @@
             this.Create_Templ = new System.Windows.Forms.Button();
             this.Create_Act_Btn = new System.Windows.Forms.Button();
             this.Activity_Button = new System.Windows.Forms.Button();
-            this.Student_Panel = new System.Windows.Forms.Panel();
-            this.Add_Stud_Button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
             this.Settings_Panel = new System.Windows.Forms.Panel();
             this.Email_client_btn = new System.Windows.Forms.Button();
             this.Gear_Button = new System.Windows.Forms.Button();
-            this.OdoslatEmailBtnMainMenu = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.Ext_Btn = new System.Windows.Forms.Button();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.hodnotiťToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,12 +66,13 @@
             this.bodyZaAktivituPrednáškaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odstrániťToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.LogOutBtn = new System.Windows.Forms.Button();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.Activity_Grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Student_Grid)).BeginInit();
             this.Study_Panel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.Activity_panel.SuspendLayout();
-            this.Student_Panel.SuspendLayout();
             this.Settings_Panel.SuspendLayout();
             this.materialContextMenuStrip1.SuspendLayout();
             this.materialContextMenuStrip2.SuspendLayout();
@@ -184,7 +184,7 @@
             // 
             this.Study_Panel.AllowDrop = true;
             this.Study_Panel.BackColor = System.Drawing.Color.Transparent;
-            this.Study_Panel.Controls.Add(this.FinalGradeBtn);
+            this.Study_Panel.Controls.Add(this.Add_Stud_Button);
             this.Study_Panel.Controls.Add(this.Stud_G_Button);
             this.Study_Panel.Controls.Add(this.Import_Btn);
             this.Study_Panel.Controls.Add(this.Stat_Btn);
@@ -193,15 +193,14 @@
             resources.ApplyResources(this.Study_Panel, "Study_Panel");
             this.Study_Panel.Name = "Study_Panel";
             // 
-            // FinalGradeBtn
+            // Add_Stud_Button
             // 
-            this.FinalGradeBtn.AutoEllipsis = true;
-            this.FinalGradeBtn.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.FinalGradeBtn, "FinalGradeBtn");
-            this.FinalGradeBtn.FlatAppearance.BorderSize = 0;
-            this.FinalGradeBtn.Name = "FinalGradeBtn";
-            this.FinalGradeBtn.UseVisualStyleBackColor = false;
-            this.FinalGradeBtn.Click += new System.EventHandler(this.FinalGradeBtn_Click);
+            this.Add_Stud_Button.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.Add_Stud_Button, "Add_Stud_Button");
+            this.Add_Stud_Button.FlatAppearance.BorderSize = 0;
+            this.Add_Stud_Button.Name = "Add_Stud_Button";
+            this.Add_Stud_Button.UseVisualStyleBackColor = false;
+            this.Add_Stud_Button.Click += new System.EventHandler(this.Add_Stud_Button_Click);
             // 
             // Stud_G_Button
             // 
@@ -254,16 +253,25 @@
             this.Export_Btn.UseVisualStyleBackColor = false;
             this.Export_Btn.Click += new System.EventHandler(this.Export_Btn_Click);
             // 
+            // FinalGradeBtn
+            // 
+            this.FinalGradeBtn.AutoEllipsis = true;
+            this.FinalGradeBtn.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.FinalGradeBtn, "FinalGradeBtn");
+            this.FinalGradeBtn.FlatAppearance.BorderSize = 0;
+            this.FinalGradeBtn.Name = "FinalGradeBtn";
+            this.FinalGradeBtn.UseVisualStyleBackColor = false;
+            this.FinalGradeBtn.Click += new System.EventHandler(this.FinalGradeBtn_Click);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel1.Controls.Add(this.Study_Panel);
             this.flowLayoutPanel1.Controls.Add(this.Attendance_Button);
             this.flowLayoutPanel1.Controls.Add(this.Activity_panel);
-            this.flowLayoutPanel1.Controls.Add(this.Student_Panel);
-            this.flowLayoutPanel1.Controls.Add(this.Settings_Panel);
+            this.flowLayoutPanel1.Controls.Add(this.FinalGradeBtn);
             this.flowLayoutPanel1.Controls.Add(this.OdoslatEmailBtnMainMenu);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.Settings_Panel);
             resources.ApplyResources(this.flowLayoutPanel1, "flowLayoutPanel1");
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             // 
@@ -283,6 +291,7 @@
             this.Activity_panel.Controls.Add(this.Create_Templ);
             this.Activity_panel.Controls.Add(this.Create_Act_Btn);
             this.Activity_panel.Controls.Add(this.Activity_Button);
+            this.Activity_panel.Controls.Add(this.button1);
             resources.ApplyResources(this.Activity_panel, "Activity_panel");
             this.Activity_panel.Name = "Activity_panel";
             // 
@@ -323,22 +332,23 @@
             this.Activity_Button.UseVisualStyleBackColor = false;
             this.Activity_Button.Click += new System.EventHandler(this.Activity_Button_Click);
             // 
-            // Student_Panel
+            // button1
             // 
-            this.Student_Panel.AllowDrop = true;
-            this.Student_Panel.BackColor = System.Drawing.Color.Transparent;
-            this.Student_Panel.Controls.Add(this.Add_Stud_Button);
-            resources.ApplyResources(this.Student_Panel, "Student_Panel");
-            this.Student_Panel.Name = "Student_Panel";
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Add_Stud_Button
+            // OdoslatEmailBtnMainMenu
             // 
-            this.Add_Stud_Button.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.Add_Stud_Button, "Add_Stud_Button");
-            this.Add_Stud_Button.FlatAppearance.BorderSize = 0;
-            this.Add_Stud_Button.Name = "Add_Stud_Button";
-            this.Add_Stud_Button.UseVisualStyleBackColor = false;
-            this.Add_Stud_Button.Click += new System.EventHandler(this.Add_Stud_Button_Click);
+            this.OdoslatEmailBtnMainMenu.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.OdoslatEmailBtnMainMenu, "OdoslatEmailBtnMainMenu");
+            this.OdoslatEmailBtnMainMenu.FlatAppearance.BorderSize = 0;
+            this.OdoslatEmailBtnMainMenu.Name = "OdoslatEmailBtnMainMenu";
+            this.OdoslatEmailBtnMainMenu.UseVisualStyleBackColor = false;
+            this.OdoslatEmailBtnMainMenu.Click += new System.EventHandler(this.OdoslatEmailBtnMainMenu_Click);
             // 
             // Settings_Panel
             // 
@@ -366,24 +376,6 @@
             this.Gear_Button.Name = "Gear_Button";
             this.Gear_Button.UseVisualStyleBackColor = false;
             this.Gear_Button.Click += new System.EventHandler(this.Gear_Button_Click);
-            // 
-            // OdoslatEmailBtnMainMenu
-            // 
-            this.OdoslatEmailBtnMainMenu.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.OdoslatEmailBtnMainMenu, "OdoslatEmailBtnMainMenu");
-            this.OdoslatEmailBtnMainMenu.FlatAppearance.BorderSize = 0;
-            this.OdoslatEmailBtnMainMenu.Name = "OdoslatEmailBtnMainMenu";
-            this.OdoslatEmailBtnMainMenu.UseVisualStyleBackColor = false;
-            this.OdoslatEmailBtnMainMenu.Click += new System.EventHandler(this.OdoslatEmailBtnMainMenu_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Ext_Btn
             // 
@@ -456,11 +448,27 @@
             this.LogOutBtn.UseVisualStyleBackColor = false;
             this.LogOutBtn.Click += new System.EventHandler(this.LogOutBtn_Click);
             // 
+            // materialLabel1
+            // 
+            resources.ApplyResources(this.materialLabel1, "materialLabel1");
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            // 
+            // materialLabel2
+            // 
+            resources.ApplyResources(this.materialLabel2, "materialLabel2");
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            // 
             // Main_Window
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.materialLabel2);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.LogOutBtn);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.Student_Grid);
@@ -475,11 +483,11 @@
             this.Study_Panel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.Activity_panel.ResumeLayout(false);
-            this.Student_Panel.ResumeLayout(false);
             this.Settings_Panel.ResumeLayout(false);
             this.materialContextMenuStrip1.ResumeLayout(false);
             this.materialContextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -495,7 +503,6 @@
         private System.Windows.Forms.Button Export_Btn;
         private System.Windows.Forms.Button Gear_Button;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel Student_Panel;
         private System.Windows.Forms.Button Add_Stud_Button;
         private System.Windows.Forms.Button Attendance_Button;
         private System.Windows.Forms.Button Ext_Btn;
@@ -517,5 +524,7 @@
         private System.Windows.Forms.ToolStripMenuItem odstrániťToolStripMenuItem1;
         private System.Windows.Forms.Button FinalGradeBtn;
         private System.Windows.Forms.Button LogOutBtn;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
     }
 }

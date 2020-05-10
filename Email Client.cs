@@ -1,26 +1,22 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MaterialSkin.Controls;
 
 namespace CSAS
 {
     public partial class Email_Client : MaterialForm
     {
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         User currentUser = new User();
         StudentSkupina group;
         Dictionary<string, int> activityId = new Dictionary<string, int>();
 
 
-        public Email_Client(User activeUser,StudentSkupina skup)
+        public Email_Client(User activeUser, StudentSkupina skup)
         {
             InitializeComponent();
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
@@ -34,33 +30,39 @@ namespace CSAS
             currentUser = activeUser;
             group = skup;
 
-            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+            try
             {
-                var user = con.GetTable<User>().Where(x => x.Id == currentUser.Id).FirstOrDefault();
-                var actTempLec = con.GetTable<ActivityTemplate>().Where(x => x.Id == user.PointsForActLec).FirstOrDefault();
-                var actTempSem = con.GetTable<ActivityTemplate>().Where(x => x.Id == user.PointsForActSem).FirstOrDefault();
-
-                ABox.Text = user.AGrade.ToString();
-                BBox.Text = user.BGrade.ToString();
-                CBox.Text = user.CGrade.ToString();
-                DBox.Text = user.DGrade.ToString();
-                EBox.Text = user.EGrade.ToString();
-                textBox2.Text = user.Email;
-                materialMultiLineTextBox1.Text = user.Signature;
-                LoadComboBoxes(activeUser);
-
-                if (actTempSem != null && comboBox1.Items.Count > 0)
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    comboBox1.SelectedItem = actTempSem.ActivityName;
-                }
-                if (actTempLec != null && comboBox1.Items.Count > 0)
-                {
-                    comboBox2.SelectedItem = actTempLec.ActivityName;
-                }
+                    var user = con.GetTable<User>().Where(x => x.Id == currentUser.Id).FirstOrDefault();
+                    var actTempLec = con.GetTable<ActivityTemplate>().Where(x => x.Id == user.PointsForActLec).FirstOrDefault();
+                    var actTempSem = con.GetTable<ActivityTemplate>().Where(x => x.Id == user.PointsForActSem).FirstOrDefault();
 
+                    ABox.Text = user.AGrade.ToString();
+                    BBox.Text = user.BGrade.ToString();
+                    CBox.Text = user.CGrade.ToString();
+                    DBox.Text = user.DGrade.ToString();
+                    EBox.Text = user.EGrade.ToString();
+                    textBox1.Text = user.ApiKey;
+                    textBox2.Text = user.Email;
+                    materialMultiLineTextBox1.Text = user.Signature;
+                    LoadComboBoxes(activeUser);
+
+                    if (actTempSem != null && comboBox1.Items.Count > 0)
+                    {
+                        comboBox1.SelectedItem = actTempSem.ActivityName;
+                    }
+                    if (actTempLec != null && comboBox1.Items.Count > 0)
+                    {
+                        comboBox2.SelectedItem = actTempLec.ActivityName;
+                    }
+                }
             }
-
-
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void LoadComboBoxes(User user)
@@ -69,7 +71,7 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    
+
                     var activities = con.GetTable<ActivityTemplate>().Where(x => x.IdUser == currentUser.Id);
 
                     if (activities.Count() > 0)
@@ -93,90 +95,101 @@ namespace CSAS
         }
 
 
-        private void cancel_email_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void save_email_Click(object sender, EventArgs e)
         {
-            EmailSettings emailSettings = new EmailSettings()
+            try
             {
-                ApiKey = textBox1.Text,
-                EmailAddress = textBox2.Text             
-            };
+                EmailSettings emailSettings = new EmailSettings()
+                {
+                    ApiKey = textBox1.Text,
+                    EmailAddress = textBox2.Text
+                };
 
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
 
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
+                User user = con.Users.FirstOrDefault(x => x.Id == currentUser.Id);
+                if (user.ApiKey != textBox1.Text)
+                {
+                    user.ApiKey = textBox1.Text;
+                }
 
-            User user = con.Users.FirstOrDefault(x => x.Id == currentUser.Id);
-            if(string.IsNullOrEmpty(textBox1.Text))
-            {
-                user.ApiKey = user.ApiKey;
+                if (user.Email != textBox2.Text)
+                {
+                    user.Email = textBox2.Text;
+                }
+                if (comboBox1.SelectedItem != null)
+                {
+                    activityId.TryGetValue((string)comboBox1.SelectedItem, out int id);
+                    user.PointsForActSem = id;
+                }
+
+                if (comboBox2.SelectedItem != null)
+                {
+                    activityId.TryGetValue((string)comboBox2.SelectedItem, out int id);
+                    user.PointsForActLec = id;
+                }
+
+                float.TryParse(ABox.Text, out float aGrade);
+                float.TryParse(BBox.Text, out float bGrade);
+                float.TryParse(CBox.Text, out float cGrade);
+                float.TryParse(DBox.Text, out float dGrade);
+                float.TryParse(EBox.Text, out float eGrade);
+
+                bool isProblem = false;
+
+                if (aGrade < bGrade || aGrade < cGrade || aGrade < dGrade || aGrade < eGrade)
+                {
+                    isProblem = true;
+                }
+                else if (bGrade > aGrade || bGrade < cGrade || bGrade < dGrade || bGrade < eGrade)
+                {
+                    isProblem = true;
+                }
+                else if (cGrade > aGrade || cGrade > bGrade || cGrade < dGrade || cGrade < eGrade)
+                {
+                    isProblem = true;
+                }
+                else if (dGrade > aGrade || dGrade > bGrade || dGrade > cGrade || dGrade < eGrade)
+                {
+                    isProblem = true;
+                }
+                else if (eGrade > aGrade || eGrade > bGrade || eGrade > cGrade || eGrade > dGrade)
+                {
+                    isProblem = true;
+                }
+
+                if (isProblem)
+                {
+                    MessageBox.Show("Opravte chybu v stupnici", "Chyba v stupnici", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                user.AGrade = aGrade;
+                user.BGrade = bGrade;
+                user.CGrade = cGrade;
+                user.DGrade = dGrade;
+                user.EGrade = eGrade;
+
+                user.Signature = materialMultiLineTextBox1.Text;
+
+                con.SubmitChanges();
+
+                ABox.Text = user.AGrade.ToString();
+                BBox.Text = user.BGrade.ToString();
+                CBox.Text = user.CGrade.ToString();
+                DBox.Text = user.DGrade.ToString();
+                EBox.Text = user.EGrade.ToString();
+
+                materialMultiLineTextBox1.Text = user.Signature;
+
+                textBox1.Text = "";
+
+                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                user.ApiKey = textBox1.Text;
-            }
-            if (string.IsNullOrEmpty(textBox2.Text))
-            {
-                user.Email = user.Email;
-            }
-            else
-            {
-                user.Email = textBox2.Text;
-            }
-
-            if (comboBox1.SelectedItem != null)
-            {
-                activityId.TryGetValue((string)comboBox1.SelectedItem, out int id);
-                user.PointsForActSem = id;
-            }
-
-            if (comboBox2.SelectedItem != null)
-            {
-                activityId.TryGetValue((string)comboBox2.SelectedItem, out int id);
-                user.PointsForActLec = id;
-            }
-
-
-
-            float.TryParse(ABox.Text, out float aGrade);
-            float.TryParse(BBox.Text, out float bGrade);
-            float.TryParse(CBox.Text, out float cGrade);
-            float.TryParse(DBox.Text, out float dGrade);
-            float.TryParse(EBox.Text, out float eGrade);
-
-            user.AGrade = aGrade;
-            user.BGrade = bGrade;
-            user.CGrade = cGrade;
-            user.DGrade = dGrade;
-            user.EGrade = eGrade;
-
-            user.Signature = materialMultiLineTextBox1.Text;
-
-
-            con.SubmitChanges();
-
-            ABox.Text = user.AGrade.ToString();
-            BBox.Text = user.BGrade.ToString();
-            CBox.Text = user.CGrade.ToString();
-            DBox.Text = user.DGrade.ToString();
-            EBox.Text = user.EGrade.ToString();
-
-            materialMultiLineTextBox1.Text = user.Signature;
-
-
-            textBox1.Text = "";
-            textBox2.Text = "";
-        }
-
-        private void Exit_email_Click(object sender, EventArgs e)
-        {
-
-            if (MessageBox.Show("Are you sure you want to close?", "Exit", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                Application.Exit();
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
@@ -196,7 +209,7 @@ namespace CSAS
         {
             MaterialTextBox TB = (MaterialTextBox)sender;
             {
-                int VisibleTime = 1000; 
+                int VisibleTime = 1000;
 
                 ToolTip tt = new ToolTip();
                 tt.Show("Spodná hranica hodnotenia, vrátane.", TB, 25, -20, VisibleTime);
@@ -207,7 +220,7 @@ namespace CSAS
         {
             MaterialTextBox TB = (MaterialTextBox)sender;
             {
-                int VisibleTime = 1000;  
+                int VisibleTime = 1000;
 
                 ToolTip tt = new ToolTip();
                 tt.Show("Spodná hranica hodnotenia, vrátane.", TB, 25, -20, VisibleTime);
@@ -218,7 +231,7 @@ namespace CSAS
         {
             MaterialTextBox TB = (MaterialTextBox)sender;
             {
-                int VisibleTime = 1000; 
+                int VisibleTime = 1000;
 
                 ToolTip tt = new ToolTip();
                 tt.Show("Spodná hranica hodnotenia, vrátane.", TB, 25, -20, VisibleTime);
@@ -229,7 +242,7 @@ namespace CSAS
         {
             MaterialTextBox TB = (MaterialTextBox)sender;
             {
-                int VisibleTime = 1000; 
+                int VisibleTime = 1000;
 
                 ToolTip tt = new ToolTip();
                 tt.Show("Spodná hranica hodnotenia, vrátane.", TB, 25, -20, VisibleTime);
@@ -237,10 +250,10 @@ namespace CSAS
         }
 
         private void EBox_Enter(object sender, EventArgs e)
-        {            
+        {
             MaterialTextBox TB = (MaterialTextBox)sender;
             {
-                int VisibleTime = 1000; 
+                int VisibleTime = 1000;
 
                 ToolTip tt = new ToolTip();
                 tt.Show("Spodná hranica hodnotenia, vrátane.", TB, 25, -20, VisibleTime);

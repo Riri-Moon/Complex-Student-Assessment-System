@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using iText.IO.Font;
-using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace CSAS
 {
     public partial class ExportForm : MaterialSkin.Controls.MaterialForm
     {
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         StudentSkupina group;
         BackgroundWorker m_oWorker;
         User currentUser;
         Dictionary<string, int> studDict = new Dictionary<string, int>();
-        Dictionary<string, DateTime> actDict = new Dictionary<string, DateTime>();
+        //Dictionary<string, DateTime> actDict = new Dictionary<string, DateTime>();
         /// <summary>
         /// Global variables for backgroundworker export
         /// </summary>
@@ -68,6 +63,7 @@ namespace CSAS
             StudentFilter.Items.Add("Študent");
             StudentFilter.SelectedIndex = 0;
 
+            // Checkboxy reprezentuju stlpce, ktore sa budu mat exportovat
             materialCheckedListBox1.Items.Add("Isic", true);
             materialCheckedListBox1.Items.Add("Meno", true);
             materialCheckedListBox1.Items.Add("Priezvisko", true);
@@ -76,7 +72,7 @@ namespace CSAS
             materialCheckedListBox1.Items.Add("Ročník", true);
             materialCheckedListBox1.Items.Add("Forma", false);
             materialCheckedListBox1.Items.Add("Krúžok", true);
-            materialCheckedListBox1.Items.Add("Študíjny program", false);
+            materialCheckedListBox1.Items.Add("Študijný program", false);
 
             materialCheckedListBox2.Items.Add("Názov aktivity", true);
             materialCheckedListBox2.Items.Add("Id aktivity", false);
@@ -111,16 +107,9 @@ namespace CSAS
             FilterAttendance.Items.Add("Dátum");
             FilterAttendance.SelectedIndex = 0;
 
-
             OnCheckedChanged(materialCheckedListBox1, Event);
             OnCheckedChanged(materialCheckedListBox2, Event);
             OnCheckedChanged(materialCheckedListBox3, Event);
-
-            ExportCombo.Items.Add("Aktivita");
-            ExportCombo.Items.Add("Dochádzka");
-            ExportCombo.Items.Add("Finálne hodnotenie");
-            ExportCombo.SelectedIndex = 0;
-
         }
 
 
@@ -138,17 +127,21 @@ namespace CSAS
             }
             else
             {
-                var file = new SaveFileDialog();
-                file.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                file.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
-                file.AddExtension = true;
-                file.DefaultExt = ".xlsx";
+                var file = new SaveFileDialog
+                {
+                    InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Filter = "Excel Files|*.xls;*.xlsx;*.xlsm",
+                    AddExtension = true,
+                    DefaultExt = ".xlsx"
+                };
                 DialogResult result = file.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     var table = (DataTable)e.Result;
                     XLWorkbook workbook = new XLWorkbook();
-                    var sheet = workbook.AddWorksheet(table, "Export");
+                    var sheetName = DateTime.Now.ToString().Replace('/', '_');
+                    sheetName = sheetName.Replace(':', '_');
+                    var sheet = workbook.AddWorksheet(table, sheetName);
                     sheet.Columns().AdjustToContents();
                     workbook.SaveAs(file.FileName);
                     MessageBox.Show(file.FileName);
@@ -157,7 +150,7 @@ namespace CSAS
             ExportVisible(false);
         }
 
-
+        // Export dochadzky
         private void TotalAttendanceExcelExport(object sender, DoWorkEventArgs e)
         {
             DataTable table = new DataTable();
@@ -185,7 +178,7 @@ namespace CSAS
                     return;
                 }
 
-                //Adding  Student columns
+                //Pridavanie stlpcov studenta a ich ratanie
                 foreach (var item in materialCheckedListBox1.Items)
                 {
                     if (item.Checked)
@@ -195,7 +188,7 @@ namespace CSAS
                     }
                 }
 
-                /// Adding activity columns
+                // Pridavanie stlpcov dochadky a ich ratanie
                 foreach (var item in materialCheckedListBox5.Items)
                 {
                     if (item.Checked)
@@ -212,7 +205,6 @@ namespace CSAS
 
                 foreach (var stud in students)
                 {
-
                     if (m_oWorker.CancellationPending)
                     {
                         e.Cancel = true;
@@ -226,6 +218,8 @@ namespace CSAS
                     var row = table.NewRow();
                     ///Student rows
                     generalCount = 0;
+
+                    //Prechadzame cez stlpce v tabulke a pridavame studentov 
                     foreach (DataColumn column in table.Columns)
                     {
                         if (generalCount < studentColumnsCount)
@@ -243,12 +237,12 @@ namespace CSAS
                     }
                     table.Rows.Add(row);
 
-                    //Activity rows
+                    //Pridavanie  hodnot do stlpcov dochadzky
                     if (attendanceColumnsCount > 0)
                     {
                         foreach (var attendance in attendances.Where(x => x.IDStudent == stud.Id))
                         {
-                           row= table.NewRow();
+                            row = table.NewRow();
 
                             generalCount = 0;
                             foreach (DataColumn col in table.Columns)
@@ -276,7 +270,6 @@ namespace CSAS
                                 }
                             }
                             table.Rows.Add(row);
-
                         }
                     }
                 }
@@ -286,6 +279,7 @@ namespace CSAS
 
         private void TotalAttendancePdfExport(object sender, DoWorkEventArgs e)
         {
+            //Vytvorenie pdf dokumentu
             var stream = new FileStream(globalPath, FileMode.Create);
             PdfWriter writer = new PdfWriter(stream);
             PdfDocument pdf = new PdfDocument(writer);
@@ -295,9 +289,11 @@ namespace CSAS
 
             Document doc = null;
             var ct = 0;
+            // Ratanie poctu stlpcov, ktore budu v PDF dokumente
             ct += materialCheckedListBox1.Items.Where(x => x.Checked == true).Count();
             ct += materialCheckedListBox5.Items.Where(x => x.Checked == true).Count();
 
+            //Nastavenie velkosti jednej strany na zaklade poctu stlpcov
             if (ct <= 9 && ct > 0)
             {
                 pdf.AddNewPage(iText.Kernel.Geom.PageSize.A4.Rotate());
@@ -319,6 +315,9 @@ namespace CSAS
                 return;
             }
 
+            string para = "Dátum vytvorenia: " + DateTime.Now.ToString();
+            Paragraph paragraph = new Paragraph(para);
+            doc.Add(paragraph);
             try
             {
                 int studentColumnsCount = 0;
@@ -348,7 +347,7 @@ namespace CSAS
                         return;
                     }
 
-                    //Adding  Student columns
+                    //Student stlpce
                     foreach (var item in materialCheckedListBox1.Items)
                     {
                         if (item.Checked)
@@ -359,25 +358,28 @@ namespace CSAS
                             studentColumnsCount++;
                         }
                     }
-                    /// Adding activity columns
-                        foreach (var item in materialCheckedListBox5.Items)
+                    // Dochadzka stlpce
+                    foreach (var item in materialCheckedListBox5.Items)
+                    {
+                        if (item.Checked)
                         {
-                            if (item.Checked)
-                            {
-                                Cell cell = new Cell().Add((new Paragraph(item.Text.ToString()).SetFont(robotoHeader)));
-                                table.AddHeaderCell(cell);
-                                attDict.Add(attendancesColumnsCount, item.Text);
-                                attendancesColumnsCount++;
-                            }
+                            Cell cell = new Cell().Add((new Paragraph(item.Text.ToString()).SetFont(robotoHeader)));
+                            table.AddHeaderCell(cell);
+                            attDict.Add(attendancesColumnsCount, item.Text);
+                            attendancesColumnsCount++;
                         }
-
+                    }
+                    //Novy riadok
                     table.StartNewRow();
+
+                    //Report progresu
                     int studCount = 0;
                     int progress = 0;
                     int progressPerPerson = 100 / students.Count();
+
+                    //Pridavanie hodnot do studenta do stlpcov
                     foreach (var stud in students)
                     {
-
                         if (m_oWorker.CancellationPending)
                         {
                             e.Cancel = true;
@@ -412,9 +414,9 @@ namespace CSAS
                         }
                         if (attendancesColumnsCount > 0)
                         {
+                            //Pridavanie hodnot do dochadzky pre studenta do stlpcov
                             foreach (var attendance in attendances.Where(x => x.IDStudent == stud.Id))
                             {
-
                                 generalCount = 0;
                                 table.StartNewRow();
                                 for (int i = 0; i <= (studentColumnsCount + attendancesColumnsCount) - 1; i++)
@@ -445,7 +447,6 @@ namespace CSAS
                                         generalCount++;
                                     }
                                 }
-
                             }
                         }
                         else
@@ -466,11 +467,13 @@ namespace CSAS
             }
         }
 
+        //Vyber studentov na zaklade filtra
         private IQueryable<AttendanceStud> GetAttendances()
         {
             IQueryable<AttendanceStud> attendances = null;
             StudentDBDataContext con = new StudentDBDataContext(conn_str);
-                switch (FilterAttendance.SelectedIndex) {
+            switch (FilterAttendance.SelectedIndex)
+            {
                 case 0:
                     if (StudentFilter.SelectedIndex == 0)
                     {
@@ -482,7 +485,7 @@ namespace CSAS
                         {
                             globalGroupId = string.Empty;
                             globalGroupId = (string)FilterStudent.SelectedItem;
-                             attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId);
+                            attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId);
                         }
                     }
                     else if (StudentFilter.SelectedIndex == 2)
@@ -502,7 +505,6 @@ namespace CSAS
                             globalType = string.Empty;
                             globalType = (string)SubFilterAttendance.SelectedItem;
                             attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.Type == globalType);
-
                         }
                     }
                     else if (StudentFilter.SelectedIndex == 1)
@@ -513,7 +515,7 @@ namespace CSAS
                             globalGroupId = (string)FilterStudent.SelectedItem;
                             globalType = string.Empty;
                             globalType = (string)SubFilterAttendance.SelectedItem;
-                            attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId && x.Type==globalType);
+                            attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId && x.Type == globalType);
                         }
                     }
                     else if (StudentFilter.SelectedIndex == 2)
@@ -523,7 +525,7 @@ namespace CSAS
                             studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
                             globalType = string.Empty;
                             globalType = (string)SubFilterAttendance.SelectedItem;
-                            attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IDStudent == studId && x.Type==globalType);
+                            attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IDStudent == studId && x.Type == globalType);
                         }
                     }
                     break;
@@ -535,7 +537,6 @@ namespace CSAS
                             globalStatus = string.Empty;
                             globalStatus = (string)SubFilterAttendance.SelectedItem;
                             attendances = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.Status == globalStatus);
-
                         }
                     }
                     else if (StudentFilter.SelectedIndex == 1)
@@ -592,15 +593,12 @@ namespace CSAS
                     break;
                 default:
                     break;
-                    
             };
 
-
-            
             return attendances;
-            
         }
 
+        //Export konecneho hodnotenia do PDF
         private void FinalGradePdfExport(object sender, DoWorkEventArgs e)
         {
             var stream = new FileStream(globalPath, FileMode.Create);
@@ -635,6 +633,10 @@ namespace CSAS
                 return;
             }
 
+            string para = "Dátum vytvorenia: " + DateTime.Now.ToString();
+            Paragraph paragraph = new Paragraph(para);
+            doc.Add(paragraph);
+
             try
             {
                 int studentColumnsCount = 0;
@@ -642,8 +644,6 @@ namespace CSAS
                 int generalCount = 0;
                 var studDict = new Dictionary<int, string>();
                 var gradeDict = new Dictionary<int, string>();
-
-
 
                 Table table = new Table(ct);
 
@@ -664,7 +664,7 @@ namespace CSAS
                         e.Cancel = true;
                         return;
                     }
-                    //Adding  Student columns
+                    //Student stlpce
                     foreach (var item in materialCheckedListBox1.Items)
                     {
                         if (item.Checked)
@@ -675,7 +675,7 @@ namespace CSAS
                             studentColumnsCount++;
                         }
                     }
-                    /// Adding activity columns
+                    /// Finalne hodnotenie stlpce
                     foreach (var item in materialCheckedListBox4.Items)
                     {
                         if (item.Checked)
@@ -694,7 +694,6 @@ namespace CSAS
                     int progressPerPerson = 100 / students.Count();
                     foreach (var stud in students)
                     {
-
                         if (m_oWorker.CancellationPending)
                         {
                             e.Cancel = true;
@@ -703,7 +702,6 @@ namespace CSAS
                             doc.Close();
                             return;
                         }
-
 
                         studCount++;
                         progress += (int)progressPerPerson;
@@ -719,17 +717,16 @@ namespace CSAS
                             var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
                             Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
                             table.AddCell(cell);
-
                         }
 
-                        for (int i=0;i< finalGradeColumnsCount;i++)
+                        for (int i = 0; i < finalGradeColumnsCount; i++)
                         {
                             var name = gradeDict.TryGetValue(i, out string value);
                             dbNames.TryGetValue(value, out string val);
 
                             PropertyInfo item = typeof(FinalGrade).GetProperty(val);
                             var finalGrade = finalGrades.Where(x => x.IdStudent == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
-                           
+
                             Cell cell = new Cell().Add(new Paragraph(finalGrade));
                             table.AddCell(cell);
                         }
@@ -748,14 +745,14 @@ namespace CSAS
                 MessageBox.Show(ex.ToString());
             }
         }
-            
+
         private void FinalGradeExcelExport(object sender, DoWorkEventArgs e)
-        {                      
-                DataTable table = new DataTable();
-                //Counters for columns 
-                int studentColumnsCount = 0;
-                int FinalGradeColumnsCount = 0;
-                int generalCount = 0;
+        {
+            DataTable table = new DataTable();
+            //Counters for columns 
+            int studentColumnsCount = 0;
+            int FinalGradeColumnsCount = 0;
+            int generalCount = 0;
 
             using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
             {
@@ -782,7 +779,6 @@ namespace CSAS
                         table.Columns.Add(item.Text);
                         studentColumnsCount++;
                     }
-
                 }
                 // Adding final grade columns
                 foreach (var item in materialCheckedListBox4.Items)
@@ -841,12 +837,11 @@ namespace CSAS
                 }
                 // Send table back to the backgroundworker, so we can 
                 e.Result = table;
-            }            
+            }
         }
 
-            private void ExportVisible(bool visible)
+        private void ExportVisible(bool visible)
         {
-
             lblStatus.Enabled = visible;
             lblStatus.Visible = visible;
             progressBar1.Visible = visible;
@@ -875,7 +870,7 @@ namespace CSAS
 
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    var students = globalStudents; 
+                    var students = globalStudents;
                     var activities = globalActivities;
                     var tasks = con.GetTable<Task>();
 
@@ -932,7 +927,6 @@ namespace CSAS
 
                     foreach (var stud in students)
                     {
-
                         if (m_oWorker.CancellationPending)
                         {
                             e.Cancel = true;
@@ -965,7 +959,7 @@ namespace CSAS
                         //Activity rows
                         if (activityColumnsCount > 0)
                         {
-                           Activity act= activities.Where(x => x.IdStudent == stud.Id).DefaultIfEmpty().FirstOrDefault();
+                            Activity act = activities.Where(x => x.IdStudent == stud.Id).DefaultIfEmpty().FirstOrDefault();
 
                             if (act == null)
                             {
@@ -977,7 +971,7 @@ namespace CSAS
                             }
                             foreach (var activity in activities.Where(x => x.IdStudent == stud.Id))
                             {
-                                if(activityId==null)
+                                if (activityId == null)
                                 {
                                     table.Rows.Add(row);
                                     continue;
@@ -1021,9 +1015,8 @@ namespace CSAS
                                 if (taskColumnsCount > 0)
                                 {
                                     var tsk = tasks.Where(x => x.IdActivity == activityId);
-                                    foreach (var task in  tsk)//tasks.Where(x => x.IdActivity == activity.Id))
+                                    foreach (var task in tsk)//tasks.Where(x => x.IdActivity == activity.Id))
                                     {
-
                                         generalCount = 0;
                                         foreach (DataColumn col in table.Columns)
                                         {
@@ -1031,14 +1024,12 @@ namespace CSAS
                                             {
                                                 if (generalCount >= (activityColumnsCount + studentColumnsCount))
                                                 {
-
                                                     generalCount++;
                                                     dbNames.TryGetValue(col.ColumnName, out string val);
                                                     PropertyInfo item = typeof(Task).GetProperty(val);
                                                     string activityToExcel = tasks.Where(x => x.Id == task.Id).
                                                         Select(activ => activ != null ? item.GetValue(activ).ToString() : "").DefaultIfEmpty().FirstOrDefault();
                                                     row[col.ColumnName] = activityToExcel;
-
                                                 }
                                                 else
                                                 {
@@ -1071,7 +1062,6 @@ namespace CSAS
 
                 e.Result = table;
                 m_oWorker.ReportProgress(100);
-
             }
             catch (Exception ex)
             {
@@ -1146,6 +1136,9 @@ namespace CSAS
                 return;
             }
 
+            string para = "Dátum vytvorenia: " + DateTime.Now.ToString();
+            Paragraph paragraph = new Paragraph(para);
+            doc.Add(paragraph);
             try
             {
                 int studentColumnsCount = 0;
@@ -1220,7 +1213,6 @@ namespace CSAS
                     int progressPerPerson = 100 / students.Count();
                     foreach (var stud in students)
                     {
-
                         if (m_oWorker.CancellationPending)
                         {
                             e.Cancel = true;
@@ -1257,7 +1249,6 @@ namespace CSAS
                         {
                             foreach (var activity in activities.Where(x => x.IdStudent == stud.Id))
                             {
-
                                 generalCount = 0;
                                 table.StartNewRow();
                                 for (int i = 0; i <= (studentColumnsCount + activityColumnsCount + taskColumnsCount) - 1; i++)
@@ -1299,8 +1290,8 @@ namespace CSAS
                                             {
                                                 if (generalCount >= (activityColumnsCount + studentColumnsCount))
                                                 {
-
                                                     generalCount++;
+
                                                     var name = taskDict.TryGetValue(i - (studentColumnsCount + activityColumnsCount), out string value);
                                                     dbNames.TryGetValue(value, out string val);
                                                     PropertyInfo item = typeof(Task).GetProperty(val);
@@ -1360,7 +1351,7 @@ namespace CSAS
             {"Ročník","Rocnik"},
             {"Forma","Forma"},
             {"Krúžok","IdGroupForAttendance"},
-            {"Študíjny program","Stud_program"},
+            {"Študijný program","Stud_program"},
             /// Activity Translations
             {"Názov aktivity","ActivityName"},
             {"Dátum odovzdania","Deadline"},
@@ -1375,7 +1366,6 @@ namespace CSAS
             {"Id aktivita","IdActivity"},
             {"Získaných bodov","Hodnotenie"},
             {"Komentár - úloha","Comment"},
-
             //Attendance Translations
             {"Dátum","Date"},
             {"Typ","Type"},
@@ -1389,7 +1379,6 @@ namespace CSAS
             {"Aktivita prednáška","ActivityLectPoints"},
             {"Aktivita cvičenie","ActivitySemPoints"},
             {"Známka","Grade"},
-
         };
 
         private void ExportBtn_Click(object sender, EventArgs e)
@@ -1404,47 +1393,45 @@ namespace CSAS
                 m_oWorker.WorkerReportsProgress = true;
                 m_oWorker.WorkerSupportsCancellation = true;
                 globalStudents = GetStudents();
-                if(globalStudents == null || globalStudents.Count() <= 0)
+                if (globalStudents == null || globalStudents.Count() <= 0)
                 {
                     MessageBox.Show("Nenašiel sa žiaden študent");
                     return;
                 }
 
-                switch (ExportCombo.SelectedIndex)
+                if (materialRadioButton1.Checked == true)
                 {
-                    case 0:
-                        globalActivities = null;
-                        globalActivities = GetActivities();
-                        if (globalActivities == null || globalActivities.Count() <=0)
-                        {
-                            MessageBox.Show("Nenašla sa žiadna aktivita");
-                            return;
-                        }
-
-                        m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
-                        break;
-                    case 1:
-                        globalAttendances = null;
-                        globalAttendances = GetAttendances();
-                        if (globalAttendances == null || globalAttendances.Count() <= 0)
-                        {
-                            MessageBox.Show("Nenašla sa žiadna dochádzka");
-                            return;
-                        }
-                        m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendanceExcelExport);
-                        break;
-                    case 2:
-                        globalFinalGrades = null;
-                        globalFinalGrades = GetFinalGrades();
-                        if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
-                        {
-                            MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
-                            return;
-                        }
-                        m_oWorker.DoWork += new DoWorkEventHandler(FinalGradeExcelExport);
-                        break;
+                    globalActivities = null;
+                    globalActivities = GetActivities();
+                    if (globalActivities == null || globalActivities.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašla sa žiadna aktivita");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
                 }
-
+                else if (materialRadioButton2.Checked == true)
+                {
+                    globalAttendances = null;
+                    globalAttendances = GetAttendances();
+                    if (globalAttendances == null || globalAttendances.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašla sa žiadna dochádzka");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendanceExcelExport);
+                }
+                else if (materialRadioButton3.Checked == true)
+                {
+                    globalFinalGrades = null;
+                    globalFinalGrades = GetFinalGrades();
+                    if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(FinalGradeExcelExport);
+                }
                 ExportVisible(true);
                 m_oWorker.RunWorkerAsync();
             }
@@ -1463,11 +1450,10 @@ namespace CSAS
                 materialCheckedListBox3.Enabled = false;
                 materialCheckedListBox4.Enabled = false;
                 materialCheckedListBox5.Enabled = false;
-
             }
             else if (materialCheckedListBox1.Items.Where(x => x.Checked).Count() > 0)
             {
-                materialCheckedListBox2.Enabled = true;               
+                materialCheckedListBox2.Enabled = true;
             }
             if (materialCheckedListBox2.Items.Where(x => x.Checked).Count() <= 0 || !materialCheckedListBox2.Enabled)
             {
@@ -1477,7 +1463,6 @@ namespace CSAS
             {
                 materialCheckedListBox3.Enabled = true;
             }
-
         }
 
         private void OnCheckedChanged(MaterialSkin.Controls.MaterialCheckedListBox CheckedListBox, EventHandler Event)
@@ -1519,17 +1504,19 @@ namespace CSAS
             try
             {
                 globalStudents = GetStudents();
-                if (globalStudents == null || globalStudents.Count() <=0)
+                if (globalStudents == null || globalStudents.Count() <= 0)
                 {
                     MessageBox.Show("Nenašiel sa žiaden študent");
                     return;
                 }
 
-                SaveFileDialog file = new SaveFileDialog();
-                file.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                file.Filter = "Pdf Files|*.pdf;";
-                file.AddExtension = true;
-                file.DefaultExt = ".pdf";
+                SaveFileDialog file = new SaveFileDialog
+                {
+                    InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Filter = "Pdf Files|*.pdf;",
+                    AddExtension = true,
+                    DefaultExt = ".pdf"
+                };
                 DialogResult result = file.ShowDialog();
                 if (result != DialogResult.OK)
                 {
@@ -1540,46 +1527,48 @@ namespace CSAS
                     globalPath = string.Empty;
                     globalPath = file.FileName;
                 }
-              
+
                 m_oWorker = new BackgroundWorker();
                 m_oWorker.ProgressChanged += new ProgressChangedEventHandler(m_oWorker_ProgressChanged);
                 m_oWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkPdfCompleted);
                 m_oWorker.WorkerReportsProgress = true;
                 m_oWorker.WorkerSupportsCancellation = true;
 
-                switch (ExportCombo.SelectedIndex)
-                {
-                    case 0:
-                        globalActivities = null;
-                        globalActivities = GetActivities();
-                        if (globalActivities == null || globalActivities.Count() <= 0)
-                        {
-                            MessageBox.Show("Nenašla sa žiadna aktivita");
-                            return;
-                        }
-                        m_oWorker.DoWork += new DoWorkEventHandler(GetStudentActivityPdf);
 
-                        break;
-                    case 1:
-                        globalAttendances = null;
-                        globalAttendances = GetAttendances();
-                        if (globalAttendances == null || globalAttendances.Count() <= 0)
-                        {
-                            MessageBox.Show("Nenašla sa žiadna dochádzka");
-                            return;
-                        }
-                        m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendancePdfExport);
-                        break;
-                    case 2:
-                        globalFinalGrades = null;
-                        globalFinalGrades = GetFinalGrades();
-                        if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
-                        {
-                            MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
-                            return;
-                        }
-                        m_oWorker.DoWork += new DoWorkEventHandler(FinalGradePdfExport);
-                        break;
+                if (materialRadioButton1.Checked == true)
+                {
+                    globalActivities = null;
+                    globalActivities = GetActivities();
+                    if (globalActivities == null || globalActivities.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašla sa žiadna aktivita");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(GetStudentActivityPdf);
+                }
+
+                else if (materialRadioButton2.Checked == true)
+                {
+                    globalAttendances = null;
+                    globalAttendances = GetAttendances();
+                    if (globalAttendances == null || globalAttendances.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašla sa žiadna dochádzka");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(TotalAttendancePdfExport);
+                }
+
+                else if (materialRadioButton3.Checked == true)
+                {
+                    globalFinalGrades = null;
+                    globalFinalGrades = GetFinalGrades();
+                    if (globalFinalGrades == null || globalFinalGrades.Count() <= 0)
+                    {
+                        MessageBox.Show("Nenašlo sa žiadne finálne hodnotenie");
+                        return;
+                    }
+                    m_oWorker.DoWork += new DoWorkEventHandler(FinalGradePdfExport);
                 }
 
                 ExportVisible(true);
@@ -1595,298 +1584,342 @@ namespace CSAS
 
         private void LoadActivityBoxes()
         {
-            if (ActivityFilter.SelectedIndex == 0)
+            try
             {
-                SubActivityFilter.Enabled = false;
-                SubActivityFilter.Visible = false;
-                DeadlineBox.Enabled = false;
-                DeadlineBox.Visible = false;
+                if (ActivityFilter.SelectedIndex == 0)
+                {
+                    SubActivityFilter.Enabled = false;
+                    SubActivityFilter.Visible = false;
+                    DeadlineBox.Enabled = false;
+                    DeadlineBox.Visible = false;
+                }
+                else
+                {
+                    if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 0)
+                    {
+                        using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                        {
+                            SubActivityFilter.Items.Clear();
+                            var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id).Select(x => new { x.ActivityName }).Distinct();
+                            foreach (var activity in activities)
+                            {
+                                SubActivityFilter.Items.Add(activity.ActivityName);
+                            }
+                        }
+                    }
+                    else if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 1)
+                    {
+                        if (FilterStudent.SelectedItem != null)
+                        {
+                            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                            {
+                                SubActivityFilter.Items.Clear();
+                                var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
+                                    .Select(x => new { x.ActivityName }).Distinct();
+                                foreach (var activity in activities)
+                                {
+                                    SubActivityFilter.Items.Add(activity.ActivityName);
+                                }
+                            }
+                        }
+                    }
+                    else if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 2)
+                    {
+                        if (FilterStudent.SelectedItem != null)
+                        {
+                            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                            {
+                                SubActivityFilter.Items.Clear();
+                                studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                                var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId)
+                                    .Select(x => new { x.ActivityName }).Distinct();
+                                foreach (var activity in activities)
+                                {
+                                    SubActivityFilter.Items.Add(activity.ActivityName);
+                                }
+                            }
+                        }
+                    }
+                    SubActivityFilter.Enabled = true;
+                    SubActivityFilter.Visible = true;
+                    DeadlineBox.Enabled = true;
+                    DeadlineBox.Visible = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 0)
-                {
-                    using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
-                    {
-                        SubActivityFilter.Items.Clear();
-                        var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id).Select(x => new { x.ActivityName }).Distinct();
-                        foreach (var activity in activities)
-                        {
-                            SubActivityFilter.Items.Add(activity.ActivityName);
-                        }
-                    }
-                }
-                else if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 1)
-                {
-                    if (FilterStudent.SelectedItem != null)
-                    {
-                        using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
-                        {
-                            SubActivityFilter.Items.Clear();
-                            var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
-                                .Select(x => new { x.ActivityName }).Distinct();
-                            foreach (var activity in activities)
-                            {
-                                SubActivityFilter.Items.Add(activity.ActivityName);
-                            }
-                        }
-                    }
-                }
-                else if (ActivityFilter.SelectedIndex == 1 && StudentFilter.SelectedIndex == 2)
-                {
-                    if (FilterStudent.SelectedItem != null)
-                    {
-                        using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
-                        {
-                            SubActivityFilter.Items.Clear();
-                            studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                            var activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId)
-                                .Select(x => new { x.ActivityName }).Distinct();
-                            foreach (var activity in activities)
-                            {
-                                SubActivityFilter.Items.Add(activity.ActivityName);
-                            }
-                        }
-                    }
-                }
-
-
-                SubActivityFilter.Enabled = true;
-                SubActivityFilter.Visible = true;
-                DeadlineBox.Enabled = true;
-                DeadlineBox.Visible = true;
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
         private void LoadComboBoxesStudent()
         {
-            if (StudentFilter.SelectedIndex == 0)
+            try
             {
-                FilterStudent.Enabled = false;
-                FilterStudent.Visible = false;
-            }
-            else if (StudentFilter.SelectedIndex == 1)
-            {
-                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                if (StudentFilter.SelectedIndex == 0)
                 {
-                    FilterStudent.Items.Clear();
-                    var studentGroups = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id).Select(y => y.IdGroupForAttendance);
-                    foreach (var kr in studentGroups.Distinct())
-                    {
-                        FilterStudent.Items.Add(kr);
-                    }
-                    FilterStudent.Enabled = true;
-                    FilterStudent.Visible = true;
+                    FilterStudent.Enabled = false;
+                    FilterStudent.Visible = false;
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 2)
-            {
-                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                else if (StudentFilter.SelectedIndex == 1)
                 {
-                    FilterStudent.Items.Clear();
-                    studDict.Clear();
+                    using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                    {
+                        FilterStudent.Items.Clear();
+                        var studentGroups = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id).Select(y => y.IdGroupForAttendance);
+                        foreach (var kr in studentGroups.Distinct())
+                        {
+                            FilterStudent.Items.Add(kr);
+                        }
+                        FilterStudent.Enabled = true;
+                        FilterStudent.Visible = true;
+                    }
+                }
+                else if (StudentFilter.SelectedIndex == 2)
+                {
+                    using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+                    {
+                        FilterStudent.Items.Clear();
+                        studDict.Clear();
 
-                    var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id);
-                    foreach (var stud in students)
-                    {
-                        studDict.Add(stud.Meno + " " + stud.Priezvisko, stud.Id);
-                        FilterStudent.Items.Add(stud.Meno + " " + stud.Priezvisko);
+                        var students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id);
+                        foreach (var stud in students)
+                        {
+                            studDict.Add(stud.Meno + " " + stud.Priezvisko, stud.Id);
+                            FilterStudent.Items.Add(stud.Meno + " " + stud.Priezvisko);
+                        }
+                        FilterStudent.Enabled = true;
+                        FilterStudent.Visible = true;
                     }
-                    FilterStudent.Enabled = true;
-                    FilterStudent.Visible = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
         private void LoadDeadlineBox()
         {
-            using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
+            try
             {
-                if (ActivityFilter.SelectedIndex == 1 && SubActivityFilter.SelectedItem != null)
+                using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-                    if (StudentFilter.SelectedIndex == 0)
+                    if (ActivityFilter.SelectedIndex == 1 && SubActivityFilter.SelectedItem != null)
                     {
-                        DeadlineBox.Items.Clear();
-                        foreach (var activity in con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem).Select(x => new { x.Deadline }).Distinct())
-                        {
-                            DeadlineBox.Items.Add(activity.Deadline);
-                        }
-                    }
-                    else if (StudentFilter.SelectedIndex == 1)
-                    {
-                        if (FilterStudent.SelectedItem != null)
+                        if (StudentFilter.SelectedIndex == 0)
                         {
                             DeadlineBox.Items.Clear();
-                            foreach (var activity in con.GetTable<Activity>()
-                                .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
-                                .Select(x => new { x.Deadline }).Distinct())
+                            foreach (var activity in con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem).Select(x => new { x.Deadline }).Distinct())
                             {
                                 DeadlineBox.Items.Add(activity.Deadline);
                             }
                         }
-                    }
-                    else if (StudentFilter.SelectedIndex == 2)
-                    {
-                        DeadlineBox.Items.Clear();
-                        if (FilterStudent.SelectedItem != null)
+                        else if (StudentFilter.SelectedIndex == 1)
                         {
-                            studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                            foreach (var activity in con.GetTable<Activity>()
-                                .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.IdStudent == studId)
-                            .Select(x => new { x.Deadline }).Distinct())
+                            if (FilterStudent.SelectedItem != null)
                             {
-                                DeadlineBox.Items.Add(activity.Deadline);
+                                DeadlineBox.Items.Clear();
+                                foreach (var activity in con.GetTable<Activity>()
+                                    .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.Student.IdGroupForAttendance == (string)FilterStudent.SelectedItem)
+                                    .Select(x => new { x.Deadline }).Distinct())
+                                {
+                                    DeadlineBox.Items.Add(activity.Deadline);
+                                }
                             }
                         }
+                        else if (StudentFilter.SelectedIndex == 2)
+                        {
+                            DeadlineBox.Items.Clear();
+                            if (FilterStudent.SelectedItem != null)
+                            {
+                                studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                                foreach (var activity in con.GetTable<Activity>()
+                                    .Where(x => x.IdSkupina == group.Id && x.ActivityName == (string)SubActivityFilter.SelectedItem && x.IdStudent == studId)
+                                .Select(x => new { x.Deadline }).Distinct())
+                                {
+                                    DeadlineBox.Items.Add(activity.Deadline);
+                                }
+                            }
+                        }
+                        DeadlineBox.SelectedIndex = 0;
                     }
-
-                    DeadlineBox.SelectedIndex = 0;
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
 
         private IQueryable<Student> GetStudents()
         {
-            IQueryable<Student> students = null;
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
-            if (StudentFilter.SelectedIndex == 0)
+            try
             {
-                students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id);
+                IQueryable<Student> students = null;
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
+                if (StudentFilter.SelectedIndex == 0)
+                {
+                    students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id);
+                }
+                else if (StudentFilter.SelectedIndex == 1)
+                {
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        globalGroupId = string.Empty;
+                        globalGroupId = (string)FilterStudent.SelectedItem;
+                        students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.IdGroupForAttendance == globalGroupId);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie je vybratá žiadna skupina");
+                        return null;
+                    }
+                }
+                else if (StudentFilter.SelectedIndex == 2)
+                {
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                        students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.Id == studId);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nie je vybratý žiaden študent");
+                        return null;
+                    }
+                }
+                return students;
             }
-            else if (StudentFilter.SelectedIndex == 1)
+            catch (Exception ex)
             {
-                if (FilterStudent.SelectedItem != null)
-                {
-                    globalGroupId = string.Empty;
-                    globalGroupId = (string)FilterStudent.SelectedItem;
-                    students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.IdGroupForAttendance == globalGroupId);
-                }
-                else
-                {
-                    MessageBox.Show("Nie je vybratá žiadna skupina");
-                    return null;
-                }
+                Logger logger = new Logger();
+                logger.LogError(ex);
+                return null;
             }
-            else if (StudentFilter.SelectedIndex == 2)
-            {
-                if (FilterStudent.SelectedItem != null)
-                {
-                    studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                    students = con.GetTable<Student>().Where(x => x.ID_stud_skupina == group.Id && x.Id == studId);
-                }
-                else
-                {
-                    MessageBox.Show("Nie je vybratý žiaden študent");
-                    return null;
-                }
-            }
-            return students;
         }
 
 
         private IQueryable<FinalGrade> GetFinalGrades()
         {
-            IQueryable<FinalGrade> FinalGrades = null; ;
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
+            try
+            {
+                IQueryable<FinalGrade> FinalGrades = null; ;
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
 
-            if (StudentFilter.SelectedIndex == 0)
-            {
-                FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id);
-            }
-            else if (StudentFilter.SelectedIndex == 1)
-            {
-                if (FilterStudent.SelectedItem != null)
+                if (StudentFilter.SelectedIndex == 0)
                 {
-                    globalGroupId = string.Empty;
-                    globalGroupId = (string)FilterStudent.SelectedItem;
-                    FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == globalGroupId);
+                    FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id);
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 2)
-            {
-                if (FilterStudent.SelectedItem != null)
+                else if (StudentFilter.SelectedIndex == 1)
                 {
-                    studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                    FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId);
-                }                
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        globalGroupId = string.Empty;
+                        globalGroupId = (string)FilterStudent.SelectedItem;
+                        FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == globalGroupId);
+                    }
+                }
+                else if (StudentFilter.SelectedIndex == 2)
+                {
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                        FinalGrades = con.GetTable<FinalGrade>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId);
+                    }
+                }
+                return FinalGrades;
             }
-            return FinalGrades;
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+                return null;
+            }
         }
-
 
         private IQueryable<Activity> GetActivities()
         {
-            IQueryable<Activity> activities = null;
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
+            try
+            {
+                IQueryable<Activity> activities = null;
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
 
-            if(StudentFilter.SelectedIndex == 0 && ActivityFilter.SelectedIndex==0)
-            {
-                activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id);
-            }
-            else if (StudentFilter.SelectedIndex == 1 && ActivityFilter.SelectedIndex == 0)
-            {
-                if (FilterStudent.SelectedItem != null)
+                if (StudentFilter.SelectedIndex == 0 && ActivityFilter.SelectedIndex == 0)
                 {
-                    globalFilter = string.Empty;
-                    globalFilter = (string)FilterStudent.SelectedItem;
-
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance== globalFilter );
+                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id);
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 0 && ActivityFilter.SelectedIndex == 1)
-            {
-                if (SubActivityFilter.SelectedItem!=null && DeadlineBox.SelectedItem!=null)
+                else if (StudentFilter.SelectedIndex == 1 && ActivityFilter.SelectedIndex == 0)
                 {
-                    globalActivityName = string.Empty;
-                    globalActivityName = (string)SubActivityFilter.SelectedItem;
-                    globalDate = (DateTime)DeadlineBox.SelectedItem;
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        globalFilter = string.Empty;
+                        globalFilter = (string)FilterStudent.SelectedItem;
 
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.ActivityName== globalActivityName
-                    && x.Deadline==globalDate);
+                        activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == globalFilter);
+                    }
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 1  && ActivityFilter.SelectedIndex == 1)
-            {
-                if (SubActivityFilter.SelectedItem != null && DeadlineBox.SelectedItem != null && FilterStudent.SelectedItem!=null)
+                else if (StudentFilter.SelectedIndex == 0 && ActivityFilter.SelectedIndex == 1)
                 {
-                    globalFilter = string.Empty;
-                    globalFilter = (string)FilterStudent.SelectedItem;
+                    if (SubActivityFilter.SelectedItem != null && DeadlineBox.SelectedItem != null)
+                    {
+                        globalActivityName = string.Empty;
+                        globalActivityName = (string)SubActivityFilter.SelectedItem;
+                        globalDate = (DateTime)DeadlineBox.SelectedItem;
 
-                    globalActivityName = string.Empty;
-                    globalActivityName = (string)SubActivityFilter.SelectedItem;
-
-                    globalDate = (DateTime)DeadlineBox.SelectedItem;
-
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance==globalFilter && x.ActivityName == globalActivityName
-                    && x.Deadline == globalDate);
+                        activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.ActivityName == globalActivityName
+                        && x.Deadline == globalDate);
+                    }
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 2 && ActivityFilter.SelectedIndex == 0)
-            {
-                if ( FilterStudent.SelectedItem != null)
+                else if (StudentFilter.SelectedIndex == 1 && ActivityFilter.SelectedIndex == 1)
                 {
-                    studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId);
+                    if (SubActivityFilter.SelectedItem != null && DeadlineBox.SelectedItem != null && FilterStudent.SelectedItem != null)
+                    {
+                        globalFilter = string.Empty;
+                        globalFilter = (string)FilterStudent.SelectedItem;
+
+                        globalActivityName = string.Empty;
+                        globalActivityName = (string)SubActivityFilter.SelectedItem;
+
+                        globalDate = (DateTime)DeadlineBox.SelectedItem;
+
+                        activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.Student.IdGroupForAttendance == globalFilter && x.ActivityName == globalActivityName
+                        && x.Deadline == globalDate);
+                    }
                 }
-            }
-            else if (StudentFilter.SelectedIndex == 2 && ActivityFilter.SelectedIndex == 1)
-            {
-                if (SubActivityFilter.SelectedItem != null && DeadlineBox.SelectedItem != null && FilterStudent.SelectedItem != null)
+                else if (StudentFilter.SelectedIndex == 2 && ActivityFilter.SelectedIndex == 0)
                 {
-                    studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                    globalActivityName = string.Empty;
-                    globalActivityName = (string)SubActivityFilter.SelectedItem;
-
-                    globalDate = (DateTime)DeadlineBox.SelectedItem;
-
-                    activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId && x.ActivityName == globalActivityName
-                    && x.Deadline == globalDate);
+                    if (FilterStudent.SelectedItem != null)
+                    {
+                        studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                        activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId);
+                    }
                 }
+                else if (StudentFilter.SelectedIndex == 2 && ActivityFilter.SelectedIndex == 1)
+                {
+                    if (SubActivityFilter.SelectedItem != null && DeadlineBox.SelectedItem != null && FilterStudent.SelectedItem != null)
+                    {
+                        studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                        globalActivityName = string.Empty;
+                        globalActivityName = (string)SubActivityFilter.SelectedItem;
+
+                        globalDate = (DateTime)DeadlineBox.SelectedItem;
+
+                        activities = con.GetTable<Activity>().Where(x => x.IdSkupina == group.Id && x.IdStudent == studId && x.ActivityName == globalActivityName
+                        && x.Deadline == globalDate);
+                    }
+                }
+                return activities;
             }
-
-
-
-            return activities;
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+                return null;
+            }
         }
 
         private void StudentFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -1897,98 +1930,121 @@ namespace CSAS
         private void ActivityFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadActivityBoxes();
+            if (SubActivityFilter.SelectedItem == null)
+            {
+                DeadlineBox.Items.Clear();
+            }
         }
 
         private void FilterStudent_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadActivityBoxes();
-            LoadDeadlineBox();
+            try
+            {
+                LoadActivityBoxes();
+                if (SubActivityFilter.SelectedItem != null)
+                {
+                    LoadDeadlineBox();
+                }
+                else
+                {
+                    DeadlineBox.Items.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
+            }
         }
 
         private void SubActivityFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadDeadlineBox();
-        }
-
-        private void ExportForm_Load(object sender, EventArgs e)
-        {
-
+            if (SubActivityFilter.SelectedItem != null)
+            {
+                LoadDeadlineBox();
+            }
         }
 
         private void FilterAttendance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            StudentDBDataContext con = new StudentDBDataContext(conn_str);
-            SubFilterAttendance.Items.Clear();
-            switch (FilterAttendance.SelectedIndex)
+            try
             {
-                case 0:
-                    SubFilterAttendance.Enabled = false;
-                    SubFilterAttendance.Visible = false;
-                    break;
-                case 1:
-                    SubFilterAttendance.Enabled = true;
-                    SubFilterAttendance.Visible = true;
+                StudentDBDataContext con = new StudentDBDataContext(conn_str);
+                SubFilterAttendance.Items.Clear();
+                switch (FilterAttendance.SelectedIndex)
+                {
+                    case 0:
+                        SubFilterAttendance.Enabled = false;
+                        SubFilterAttendance.Visible = false;
+                        break;
+                    case 1:
+                        SubFilterAttendance.Enabled = true;
+                        SubFilterAttendance.Visible = true;
 
-                    SubFilterAttendance.Items.Add("Prednáška");
-                    SubFilterAttendance.Items.Add("Cvičenie");
-                    SubFilterAttendance.SelectedIndex = 0;
-                    break;
-                case 2:
-                    SubFilterAttendance.Enabled = true;
-                    SubFilterAttendance.Visible = true;
-
-                    SubFilterAttendance.Items.Add("Prítomný");
-                    SubFilterAttendance.Items.Add("Neprítomný");
-                    SubFilterAttendance.Items.Add("Ospravedlnené");
-                    SubFilterAttendance.Items.Add("Zrušené");
-                    SubFilterAttendance.SelectedIndex = 0;
-                    break;
-                case 3:
-                    SubFilterAttendance.Enabled = true;
-                    SubFilterAttendance.Visible = true;
-
-                    if (StudentFilter.SelectedIndex == 0)
-                    {
-                        var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id).Select(x => x.Date).Distinct();
-                        foreach(var x in att)
-                        {
-                            SubFilterAttendance.Items.Add(x);
-                        }
-                    }
-                    else if (StudentFilter.SelectedIndex == 1)
-                    {
-                        if (FilterStudent.SelectedItem != null)
-                        {
-                            globalGroupId = string.Empty;
-                            globalGroupId = (string)FilterStudent.SelectedItem;
-                            var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId).Select(x => x.Date).Distinct();
-                            foreach (var x in att)
-                            {
-                                SubFilterAttendance.Items.Add(x);
-                            }
-                        }
-                    }
-                    else if (StudentFilter.SelectedIndex == 2)
-                    {
-                        if (FilterStudent.SelectedItem != null)
-                        {
-                            studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
-                            var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IDStudent== studId).Select(x => x.Date).Distinct();
-                            foreach (var x in att)
-                            {
-                                SubFilterAttendance.Items.Add(x);
-                            }
-                        }
-                    }
-
-                    if (SubFilterAttendance.Items.Count > 0)
-                    {
+                        SubFilterAttendance.Items.Add("Prednáška");
+                        SubFilterAttendance.Items.Add("Cvičenie");
                         SubFilterAttendance.SelectedIndex = 0;
-                    }
-                    break;
+                        break;
+                    case 2:
+                        SubFilterAttendance.Enabled = true;
+                        SubFilterAttendance.Visible = true;
+
+                        SubFilterAttendance.Items.Add("Prítomný");
+                        SubFilterAttendance.Items.Add("Neprítomný");
+                        SubFilterAttendance.Items.Add("Ospravedlnené");
+                        SubFilterAttendance.Items.Add("Zrušené");
+                        SubFilterAttendance.SelectedIndex = 0;
+                        break;
+                    case 3:
+                        SubFilterAttendance.Enabled = true;
+                        SubFilterAttendance.Visible = true;
+
+                        if (StudentFilter.SelectedIndex == 0)
+                        {
+                            var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id).Select(x => x.Date).Distinct();
+                            foreach (var x in att)
+                            {
+                                SubFilterAttendance.Items.Add(x);
+                            }
+                        }
+                        else if (StudentFilter.SelectedIndex == 1)
+                        {
+                            if (FilterStudent.SelectedItem != null)
+                            {
+                                globalGroupId = string.Empty;
+                                globalGroupId = (string)FilterStudent.SelectedItem;
+                                var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IdGroup == globalGroupId).Select(x => x.Date).Distinct();
+                                foreach (var x in att)
+                                {
+                                    SubFilterAttendance.Items.Add(x);
+                                }
+                            }
+                        }
+                        else if (StudentFilter.SelectedIndex == 2)
+                        {
+                            if (FilterStudent.SelectedItem != null)
+                            {
+                                studDict.TryGetValue((string)FilterStudent.SelectedItem, out int studId);
+                                var att = con.GetTable<AttendanceStud>().Where(x => x.IDSkupina == group.Id && x.IDStudent == studId).Select(x => x.Date).Distinct();
+                                foreach (var x in att)
+                                {
+                                    SubFilterAttendance.Items.Add(x);
+                                }
+                            }
+                        }
+                        if (SubFilterAttendance.Items.Count > 0)
+                        {
+                            SubFilterAttendance.SelectedIndex = 0;
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger logger = new Logger();
+                logger.LogError(ex);
             }
         }
     }
-
 }
-    
+

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Windows.Forms;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using Microsoft.VisualBasic;
 using SendGrid.Helpers.Mail;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace CSAS
 {
@@ -20,7 +15,7 @@ namespace CSAS
 
         User currUser;
         StudentSkupina skupina;
-                private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> studentsId = new Dictionary<string, int>();
         public IndividualActivity(User user, StudentSkupina skup)
         {
@@ -46,26 +41,24 @@ namespace CSAS
                 {
                     var templ = con.GetTable<ActivityTemplate>();
 
-                    var dataTemp = from act in templ where act.IdUser == currUser.Id select new { act.ActivityName, act.MaxPoints, act.Id };
+                    var dataTemp = from act in templ where act.IdUser == currUser.Id select new { Názov = act.ActivityName, Bodov = act.MaxPoints, act.Id };
                     ActivityGridView.DataSource = dataTemp;
                     ActivityGridView.RowHeadersVisible = false;
                     ActivityGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     ActivityGridView.Columns["Id"].Visible = false;
+                    ActivityGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
                     dateTimePicker2.Format = DateTimePickerFormat.Custom;
                     dateTimePicker2.CustomFormat = "HH:mm";
                     dateTimePicker2.ShowUpDown = true;
 
                     var studs = con.GetTable<Student>().Where(x => x.ID_stud_skupina == skupina.Id);
-                   
+
                     foreach (var student in studs.Distinct())
                     {
-
-                        studentCombo.Items.Add(student.Meno +" "+ student.Priezvisko);
+                        studentCombo.Items.Add(student.Meno + " " + student.Priezvisko);
                         studentsId.Add(student.Meno + " " + student.Priezvisko, student.Id);
                     }
-
-
                     return dataTemp;
                 }
             }
@@ -88,13 +81,19 @@ namespace CSAS
                     {
                         var selectedActivity = (int)ActivityGridView.CurrentRow.Cells["Id"].Value;
                         var acts = con.GetTable<ActivityTemplate>().Where(x => x.IdUser == currUser.Id && x.Id == selectedActivity).FirstOrDefault();
-                        var tasks = con.GetTable<TaskTemplate>().Where(x => x.IdActivityTemplate == acts.Id);
+                        var tasks = con.GetTable<TaskTemplate>().Where(x => x.IdActivityTemplate == acts.Id).Select(x => new
+                        {
+                            x.ActivityTemplate,
+                            x.Id,
+                            x.IdActivityTemplate,
+                            Maximum = x.MaxPts,
+                            Názov = x.TaskName
+                        });
                         TaskGrid.DataSource = tasks;
 
                         TaskGrid.Columns["IdActivityTemplate"].Visible = false;
                         TaskGrid.Columns["Id"].Visible = false;
                         TaskGrid.Columns["ActivityTemplate"].Visible = false;
-
                     }
                 }
             }
@@ -113,17 +112,18 @@ namespace CSAS
             {
                 if (string.IsNullOrEmpty(currUser.ApiKey))
                 {
-                    MessageBox.Show("ApiKey nemôže byť prázdny");
                     return false;
                 }
-
-                    return true;
+                return true;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
+
         }
 
-
-        private async void SendActivityCreated(List<EmailAddress> mails, Activity activity,string link)
+        private async void SendActivityCreated(List<EmailAddress> mails, Activity activity, string link)
         {
             EmailClient client = new EmailClient();
             string content = string.Empty;
@@ -132,16 +132,15 @@ namespace CSAS
             if (!string.IsNullOrEmpty(link))
             {
                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
-                content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date + DateTime.Now.TimeOfDay} Vám bola vytvorená aktivita {activity.ActivityName}," +
                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline} <br/> {link}";
             }
             else
             {
                 gridClient = new SendGrid.SendGridClient(client.SetEnvironmentVar(currUser));
-                 content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date} Vám bola vytvorená aktivita {activity.ActivityName}," +
-                    $" <br/> ktorú je potrebné odovzdať do {activity.Deadline}";
+                content = $"Dobrý deň {activity.Student.Meno}, <br/> dňa {DateTime.Now.Date + DateTime.Now.TimeOfDay} Vám bola vytvorená aktivita {activity.ActivityName}," +
+                   $" <br/> ktorú je potrebné odovzdať do {activity.Deadline}";
             }
-   
 
             EmailBody body = new EmailBody()
             {
@@ -152,7 +151,8 @@ namespace CSAS
             };
 
             var msg = MailHelper.CreateSingleEmailToMultipleRecipients(MailHelper.StringToEmailAddress(currUser.Email), body.To, body.Subject, body.HtmlContent, body.HtmlContent);
-           var response = await gridClient.SendEmailAsync(msg);
+
+            var response = await gridClient.SendEmailAsync(msg);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
             {
@@ -163,7 +163,8 @@ namespace CSAS
 
         private DateTime GetDate()
         {
-            return TimeZone.CurrentTimeZone.ToLocalTime(dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay);
+            dateTimePicker2.Value = dateTimePicker2.Value.AddSeconds(dateTimePicker2.Value.Second * -1);
+            return dateTimePicker1.Value.Date + dateTimePicker2.Value.TimeOfDay;
         }
 
         private void ActivityGridView_SelectionChanged(object sender, EventArgs e)
@@ -191,9 +192,9 @@ namespace CSAS
                         second = true;
                     }
 
-                    if(studentCombo.SelectedItem ==null)
+                    if (studentCombo.SelectedItem == null)
                     {
-                        MessageBox.Show("Najprv musíte vybrať študenta","Upozornenie",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                        MessageBox.Show("Najprv musíte vybrať študenta", "Upozornenie", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
@@ -229,8 +230,6 @@ namespace CSAS
                     con.SubmitChanges();
 
                     activityForEmailSending = activity;
-
-
                     //GetTasks
                     var tasks = con.GetTable<TaskTemplate>().Where(x => x.IdActivityTemplate == actTempl.Id);
                     foreach (var tsk in tasks)
@@ -240,20 +239,23 @@ namespace CSAS
                             IdActivity = activity.Id,
                             TaskName = tsk.TaskName,
                             Points = tsk.MaxPts,
-                            Hodnotenie=0,
+                            Hodnotenie = 0,
                             IdStudent = student.Id,
-                            Comment=string.Empty
-                            
+                            Comment = string.Empty
+
                         };
                         con.Tasks.InsertOnSubmit(task);
                     }
                     con.SubmitChanges();
 
-                    if (ActCreatedCheckBox.Checked == true)
+                    if (ActCreatedCheckBox.Checked == true && currUser.ApiKey != string.Empty)
                     {
-                        var link = Interaction.InputBox("Dodatočná správa", "Ak si neželáte zaslať dodatočné informácie o úlohe, nechajte prázdne", "Viac informácií nájdete na: ", -1, -1);
-
-                        SendActivityCreated(studentAddress, activityForEmailSending,link);
+                        var link = Interaction.InputBox("Ak si neželáte zaslať dodatočné informácie o úlohe, nechajte prázdne", "Dodatočná správa", "Viac informácií nájdete na: ", -1, -1);
+                        SendActivityCreated(studentAddress, activityForEmailSending, link);
+                    }
+                    else if (currUser.ApiKey == string.Empty)
+                    {
+                        MessageBox.Show("ApiKey je prázdny, aktivita bude vytvorená ale žiaden email nebude odoslaný pokým nebude pridaný ApiKey");
                     }
 
                     MessageBox.Show($"Aktivita {actTempl.ActivityName} bola úspešne vytvorená");
@@ -266,7 +268,6 @@ namespace CSAS
                 MessageBox.Show(ex.ToString());
                 return;
             }
-
         }
 
         private bool SendMe()

@@ -1,24 +1,20 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace CSAS
 {
-    public partial class GradeActivityForm : MaterialSkin.Controls.MaterialForm
+    public partial class GradeActivityForm : MaterialForm
     {
         int count = 0;
-        StudentSkupina currGroup;
-        Student currStud;
+        readonly StudentSkupina currGroup;
+        readonly Student currStud;
         Activity currActivity;
-        private string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
+        private readonly string conn_str = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         Dictionary<string, int> tasksDictionary = new Dictionary<string, int>();
 
         public GradeActivityForm(StudentSkupina grp, Student stud, Activity activ)
@@ -50,13 +46,6 @@ namespace CSAS
             }
         }
 
-        private void GradeActivityForm_Load(object sender, EventArgs e)
-        {
-          
-
-        }
-
-
         private void NewActivityTab(Activity activity)
         {
             TabPage page = new TabPage
@@ -68,35 +57,35 @@ namespace CSAS
             List<Control> controls = new List<Control>();
             RichTextBox comment = new RichTextBox
             {
-                Name ="comment",
+                Name = "comment",
                 Size = new Size(300, 190),
                 Location = new Point(30, 125),
-                Text= activity.Comment
+                Text = activity.Comment
             };
             MaterialLabel label0 = new MaterialLabel
             {
-                Name = "TaskNameLabel" ,
+                Name = "TaskNameLabel",
                 Location = new Point(26, 15),
                 AutoSize = true,
-                Text = "Názov: "+ activity.ActivityName.ToString()
+                Text = "Názov: " + activity.ActivityName.ToString()
             };
             MaterialLabel label = new MaterialLabel
             {
-                Name = "TotalPtsLabel" ,
+                Name = "TotalPtsLabel",
                 Location = new Point(26, 40),
                 AutoSize = true,
                 Text = "Maximum bodov: " + activity.MaxPoints.ToString()
             };
             MaterialLabel label3 = new MaterialLabel
             {
-                Name = "StudentPtsLabel" ,
+                Name = "StudentPtsLabel",
                 Location = new Point(26, 70),
                 AutoSize = true,
                 Text = "Získané: " + activity.Hodnotenie.ToString(),
-            };          
+            };
             MaterialLabel label5 = new MaterialLabel
             {
-                Name = "CommentLabel" ,
+                Name = "CommentLabel",
                 AutoSize = true,
                 Location = new Point(26, 105),
                 Text = "Komentár ku aktivite: ",
@@ -105,35 +94,36 @@ namespace CSAS
             {
                 Location = new Point(230, 330),
                 Text = "Hodnotiť aktivitu",
-
-
             };
             button.Click += GradeActivityBtnClick;
-            MaterialButton button2 = new MaterialButton()
-            {
-                Location = new Point(10, 330),
-                Text = "Späť"
-            };
-            button2.Click += BackBtn;
 
             MaterialTabCOntrol.Controls.Add(page);
             controls.Add(label0);
             controls.Add(comment);
             controls.Add(button);
-            controls.Add(button2);
             controls.Add(label);
             controls.Add(label3);
             controls.Add(label5);
             page.Controls.AddRange(controls.ToArray());
+        }
 
-
+        private string Graded(Task task)
+        {
+            if (task.Comment.Contains("\u00A0"))
+            {
+                return " - " + task.Hodnotenie + "/" + task.Points;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
         private void NewTaskTab(Activity activity, Student stud)
         {
-            try {
+            try
+            {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
                     var tasks = con.GetTable<Task>().Where(x => x.IdActivity == activity.Id && x.IdStudent == stud.Id);
 
                     foreach (var task in tasks)
@@ -141,15 +131,14 @@ namespace CSAS
                         TabPage page1 = new TabPage
                         {
                             Name = task.TaskName,
-                            Text = task.TaskName,
+                            Text = task.TaskName + Graded(task),
                             BackColor = Color.White,
                             UseVisualStyleBackColor = true,
-
                         };
 
                         RichTextBox comment = new RichTextBox
                         {
-                            Name = "comment" ,
+                            Name = "comment",
                             Size = new Size(300, 190),
                             Location = new Point(30, 125),
                             Text = task.Comment
@@ -164,14 +153,12 @@ namespace CSAS
                         };
                         tasksDictionary.Add(task.TaskName.ToString(), task.Id);
 
-
                         MaterialLabel label = new MaterialLabel
                         {
                             Name = "TotalPtsLabel" + count,
                             Location = new Point(26, 40),
                             AutoSize = true,
                             Text = "Maximum bodov: " + task.Points.ToString()
-
                         };
 
                         MaterialLabel label2 = new MaterialLabel
@@ -189,14 +176,12 @@ namespace CSAS
                             Size = new Size(70, 23),
                             MaxLength = 4,
                             Text = task.Hodnotenie.ToString(),
-
                         };
 
                         MaterialLabel label3 = new MaterialLabel
                         {
                             Name = "CommentLabel" + count,
                             Location = new Point(26, 105),
-
                             AutoSize = true,
                             Text = "Komentár ku úlohe: "
                         };
@@ -206,20 +191,10 @@ namespace CSAS
                             Name = "GradeBtn",
                             Location = new Point(250, 330),
                             Text = "Hodnotiť úlohu",
-
-
                         };
                         button.Click += GradeTaskBtnClick;
-           
 
-                        MaterialButton button2 = new MaterialButton()
-                        {
-                            Name="BackBtn",
-                            Location = new Point(10, 330),
-                            Text = "Späť"
-                        };
-
-                        button2.Click += BackBtn;
+                        textField.Click += (s, e) => { textField.SelectAll(); };
                         MaterialTabCOntrol.Controls.Add(page1);
                         page1.Controls.Add(label0);
                         page1.Controls.Add(comment);
@@ -228,12 +203,11 @@ namespace CSAS
                         page1.Controls.Add(textField);
                         page1.Controls.Add(label3);
                         page1.Controls.Add(button);
-                        page1.Controls.Add(button2);
-
+                        page1.ImageIndex = 0;
                     }
-                }               
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
@@ -256,7 +230,7 @@ namespace CSAS
                         foreach (var tsk in act)
                         {
 
-                            gradeTotal += tsk.Hodnotenie;                      
+                            gradeTotal += tsk.Hodnotenie;
                         }
                         var insert = con.Activities.Where(x => x.IdSkupina == currGroup.Id && x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault();
 
@@ -264,11 +238,11 @@ namespace CSAS
                         {
                             ///ERROR 280 Line
                             insert.Hodnotene = true;
-                            insert.Hodnotenie =gradeTotal;
+                            insert.Hodnotenie = gradeTotal;
                             if (!string.IsNullOrEmpty(commentBox.Text))
                             {
                                 insert.Comment = commentBox.Text;
-                            }   
+                            }
                             else
                             {
                                 insert.Comment = string.Empty;
@@ -278,7 +252,6 @@ namespace CSAS
                             insert.SendSecond = false;
                             insert.SendMe = false;
                         }
-
                         con.SubmitChanges();
                         MessageBox.Show("Aktivita ohodnotená");
                     }
@@ -294,7 +267,6 @@ namespace CSAS
                 newLog.LogError(ex);
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void GradeTaskBtnClick(object sender, EventArgs e)
@@ -309,11 +281,10 @@ namespace CSAS
 
                     tasksDictionary.TryGetValue(taskTab, out int Id);
 
-                    Task task1 = con.Tasks.Where(x => x.IdActivity == currActivity.Id && x.Id == Id && x.IdStudent==currStud.Id).FirstOrDefault();
-
+                    Task task1 = con.Tasks.Where(x => x.IdActivity == currActivity.Id && x.Id == Id && x.IdStudent == currStud.Id).FirstOrDefault();
 
                     var textBox = MaterialTabCOntrol.SelectedTab.Controls.Find("GradeTextBox", false).FirstOrDefault();
-                    if (textBox!=null && !string.IsNullOrEmpty(textBox.Text))
+                    if (textBox != null && !string.IsNullOrEmpty(textBox.Text))
                     {
                         double.TryParse(textBox.Text, out double grade);
                         if (grade <= task1.Points)
@@ -324,23 +295,25 @@ namespace CSAS
                         {
                             MessageBox.Show("Hodnotenie nemôže byť väčšie ako maximum bodov. Pred pridaním hodnotenia opravte hodnotu");
                             return;
-                        }                       
+                        }
                     }
                     else
-                    {                       
+                    {
                         task1.Hodnotenie = 0;
                         return;
                     }
                     var commentBox = (RichTextBox)MaterialTabCOntrol.SelectedTab.Controls.Find("comment", false).FirstOrDefault();
                     if (!string.IsNullOrEmpty(commentBox.Text))
                     {
-                        task1.Comment = commentBox.Text;
+                        task1.Comment = commentBox.Text + "\u00A0";
                     }
                     else
                     {
-                        task1.Comment = string.Empty;
+                        task1.Comment = "\u00A0";
                     }
                     con.SubmitChanges();
+
+                    MaterialTabCOntrol.SelectedTab.Text = task1.TaskName + Graded(task1);
                 }
             }
             catch (Exception ex)
@@ -350,45 +323,19 @@ namespace CSAS
                 MessageBox.Show(ex.ToString());
             }
         }
-            
-
-        
-
-        private void BackBtn(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-      
-        private void MaterialTabCOntrol_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-
-        }
-
-        private void MaterialTabCOntrol_KeyUp(object sender, KeyEventArgs e)
-        {
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void MaterialTabCOntrol_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(this.MaterialTabCOntrol.SelectedTab.Name == currActivity.ActivityName)
+            if (this.MaterialTabCOntrol.SelectedTab.Name == currActivity.ActivityName)
             {
                 var labl = (Label)MaterialTabCOntrol.SelectedTab.Controls.Find("StudentPtsLabel", false).FirstOrDefault();
 
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
                     var act = con.GetTable<Task>().Where(x => x.IdActivity == currActivity.Id && x.IdStudent == currStud.Id);
                     double? gradeTotal = 0;
-                    foreach(var tsk in act)
+                    foreach (var tsk in act)
                     {
-
                         gradeTotal += tsk.Hodnotenie;
                     }
                     if (MaterialTabCOntrol.SelectedIndex == 0)
@@ -401,7 +348,6 @@ namespace CSAS
             {
                 return;
             }
-
         }
 
         private void GradeActivityForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -410,8 +356,6 @@ namespace CSAS
             {
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
-
-
                     if (con.GetTable<Activity>().Where(x => x.Id == currActivity.Id && x.IdStudent == currStud.Id).FirstOrDefault().Hodnotene == false)
                     {
                         DialogResult dialogResult = MessageBox.Show("Aktivita nebola ohodnotená, chcete naozaj skončiť ?", "Skončiť bez hodnotenia? ", MessageBoxButtons.YesNo);
@@ -438,12 +382,9 @@ namespace CSAS
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        
     }
-    
 }
 
 
 
-    
+
