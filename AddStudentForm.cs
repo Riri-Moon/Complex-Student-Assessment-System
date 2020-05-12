@@ -197,14 +197,20 @@ namespace CSAS
 
         public bool OnlyLetters(string inputString, int minLen, int maxLen)
         {
-            if (inputString.Length < minLen || inputString.Length > maxLen) return false;
+            if (inputString.Length <= minLen || inputString.Length > maxLen) return false;
             foreach (var x in inputString)
             {
                 if (!char.IsLetter(x))
                 {
-                    return false;
+                    if (char.IsWhiteSpace(x))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-
             }
             return true;
         }
@@ -217,7 +223,6 @@ namespace CSAS
                 {
                     return false;
                 }
-
             }
             return true;
 

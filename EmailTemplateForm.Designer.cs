@@ -104,11 +104,11 @@
             this.CreateEmailTempBtn.DrawShadows = true;
             this.CreateEmailTempBtn.HighEmphasis = true;
             this.CreateEmailTempBtn.Icon = null;
-            this.CreateEmailTempBtn.Location = new System.Drawing.Point(996, 577);
+            this.CreateEmailTempBtn.Location = new System.Drawing.Point(614, 502);
             this.CreateEmailTempBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.CreateEmailTempBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.CreateEmailTempBtn.Name = "CreateEmailTempBtn";
-            this.CreateEmailTempBtn.Size = new System.Drawing.Size(69, 36);
+            this.CreateEmailTempBtn.Size = new System.Drawing.Size(71, 36);
             this.CreateEmailTempBtn.TabIndex = 4;
             this.CreateEmailTempBtn.Text = "Uložiť";
             this.CreateEmailTempBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -123,7 +123,7 @@
             this.TempGridView.GridColor = System.Drawing.Color.White;
             this.TempGridView.Location = new System.Drawing.Point(746, 106);
             this.TempGridView.Name = "TempGridView";
-            this.TempGridView.Size = new System.Drawing.Size(321, 414);
+            this.TempGridView.Size = new System.Drawing.Size(321, 387);
             this.TempGridView.TabIndex = 6;
             // 
             // materialLabel3
@@ -146,11 +146,11 @@
             this.materialFlatButton2.DrawShadows = true;
             this.materialFlatButton2.HighEmphasis = true;
             this.materialFlatButton2.Icon = null;
-            this.materialFlatButton2.Location = new System.Drawing.Point(746, 529);
+            this.materialFlatButton2.Location = new System.Drawing.Point(746, 502);
             this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton2.Name = "materialFlatButton2";
-            this.materialFlatButton2.Size = new System.Drawing.Size(88, 36);
+            this.materialFlatButton2.Size = new System.Drawing.Size(90, 36);
             this.materialFlatButton2.TabIndex = 8;
             this.materialFlatButton2.Text = "Zobraziť";
             this.materialFlatButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -165,11 +165,11 @@
             this.materialFlatButton3.DrawShadows = true;
             this.materialFlatButton3.HighEmphasis = true;
             this.materialFlatButton3.Icon = null;
-            this.materialFlatButton3.Location = new System.Drawing.Point(966, 529);
+            this.materialFlatButton3.Location = new System.Drawing.Point(966, 502);
             this.materialFlatButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton3.Name = "materialFlatButton3";
-            this.materialFlatButton3.Size = new System.Drawing.Size(98, 36);
+            this.materialFlatButton3.Size = new System.Drawing.Size(101, 36);
             this.materialFlatButton3.TabIndex = 9;
             this.materialFlatButton3.Text = "Odstrániť";
             this.materialFlatButton3.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -213,11 +213,11 @@
             this.ClearBtn.DrawShadows = true;
             this.ClearBtn.HighEmphasis = true;
             this.ClearBtn.Icon = null;
-            this.ClearBtn.Location = new System.Drawing.Point(746, 577);
+            this.ClearBtn.Location = new System.Drawing.Point(497, 502);
             this.ClearBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ClearBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ClearBtn.Name = "ClearBtn";
-            this.ClearBtn.Size = new System.Drawing.Size(81, 36);
+            this.ClearBtn.Size = new System.Drawing.Size(84, 36);
             this.ClearBtn.TabIndex = 12;
             this.ClearBtn.Text = "Vyčistiť";
             this.ClearBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -236,7 +236,7 @@
             this.AddEmailTemplateAttachmentsBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.AddEmailTemplateAttachmentsBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.AddEmailTemplateAttachmentsBtn.Name = "AddEmailTemplateAttachmentsBtn";
-            this.AddEmailTemplateAttachmentsBtn.Size = new System.Drawing.Size(132, 36);
+            this.AddEmailTemplateAttachmentsBtn.Size = new System.Drawing.Size(136, 36);
             this.AddEmailTemplateAttachmentsBtn.TabIndex = 13;
             this.AddEmailTemplateAttachmentsBtn.Text = "Pridať prílohy";
             this.AddEmailTemplateAttachmentsBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -263,7 +263,7 @@
             this.AttachmentsGrid.RowHeadersVisible = false;
             this.AttachmentsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.AttachmentsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AttachmentsGrid.Size = new System.Drawing.Size(254, 159);
+            this.AttachmentsGrid.Size = new System.Drawing.Size(254, 132);
             this.AttachmentsGrid.TabIndex = 14;
             this.AttachmentsGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AttachmentsGrid_KeyUp);
             // 
@@ -278,7 +278,7 @@
             this.OpenAttachmentBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.OpenAttachmentBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.OpenAttachmentBtn.Name = "OpenAttachmentBtn";
-            this.OpenAttachmentBtn.Size = new System.Drawing.Size(182, 36);
+            this.OpenAttachmentBtn.Size = new System.Drawing.Size(188, 36);
             this.OpenAttachmentBtn.TabIndex = 15;
             this.OpenAttachmentBtn.Text = "Otvoriť túto prílohu";
             this.OpenAttachmentBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -290,7 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1096, 633);
+            this.ClientSize = new System.Drawing.Size(1096, 552);
             this.Controls.Add(this.OpenAttachmentBtn);
             this.Controls.Add(this.AttachmentsGrid);
             this.Controls.Add(this.AddEmailTemplateAttachmentsBtn);

@@ -11,8 +11,6 @@ namespace CSAS
 {
     public class Import_Cl
     {
-        //public const string conn = "Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
         private string conn = ConfigurationManager.ConnectionStrings["CSAS.Properties.Settings.masterConnectionString"].ConnectionString;
         private readonly string query = string.Format("Select [Meno],[Priezvisko],[Študijný program],[Krúžok],[Prerušené štúdium],[Číslo karty],[Ročník],[E-mail pridelený],[E-mail osobný] FROM[{0}] ", "Export table$A6:AK");
         public Import_Cl()
@@ -29,13 +27,15 @@ namespace CSAS
             {
                 group = skupina;
                 var path = SelectPath();
-                if ((File.GetAttributes(path) & FileAttributes.ReadOnly) > 0)
-                {
-                    MessageBox.Show("Excel súbor je iba na čítanie");
-                    return;
-                }
+                
                 if (path != "Cancel")
                 {
+                    if ((File.GetAttributes(path) & FileAttributes.ReadOnly) > 0)
+                    {
+                        MessageBox.Show("Excel súbor je iba na čítanie");
+                        return;
+                    }
+
                     string constr = ExcelConnection(path);
                     var excelCon = new OleDbConnection(constr);
 

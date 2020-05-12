@@ -62,11 +62,12 @@ namespace CSAS
                 Location = new Point(30, 125),
                 Text = activity.Comment
             };
-            MaterialLabel label0 = new MaterialLabel
+            Label label0 = new Label
             {
                 Name = "TaskNameLabel",
-                Location = new Point(26, 15),
+                Location = new Point(24, 15),
                 AutoSize = true,
+                Font = new Font("Roboto", 12),
                 Text = "Názov: " + activity.ActivityName.ToString()
             };
             MaterialLabel label = new MaterialLabel
@@ -144,11 +145,12 @@ namespace CSAS
                             Text = task.Comment
                         };
 
-                        MaterialLabel label0 = new MaterialLabel
+                        Label label0 = new Label
                         {
                             Name = "NameOfTaskLabel" + count,
-                            Location = new Point(26, 15),
+                            Location = new Point(24, 15),
                             AutoSize = true,
+                            Font = new Font("Roboto",12),
                             Text = "Názov: " + task.TaskName.ToString()
                         };
                         tasksDictionary.Add(task.TaskName.ToString(), task.Id);

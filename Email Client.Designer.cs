@@ -48,13 +48,14 @@
             this.CBox = new MaterialSkin.Controls.MaterialTextBox();
             this.DBox = new MaterialSkin.Controls.MaterialTextBox();
             this.EBox = new MaterialSkin.Controls.MaterialTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.DeleteAllGroupDataBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,11 +66,11 @@
             this.save_email.DrawShadows = true;
             this.save_email.HighEmphasis = true;
             this.save_email.Icon = null;
-            this.save_email.Location = new System.Drawing.Point(859, 411);
+            this.save_email.Location = new System.Drawing.Point(847, 388);
             this.save_email.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.save_email.MouseState = MaterialSkin.MouseState.HOVER;
             this.save_email.Name = "save_email";
-            this.save_email.Size = new System.Drawing.Size(69, 36);
+            this.save_email.Size = new System.Drawing.Size(71, 36);
             this.save_email.TabIndex = 0;
             this.save_email.Text = "Uložiť";
             this.save_email.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -83,7 +84,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(29, 112);
+            this.materialLabel1.Location = new System.Drawing.Point(28, 90);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(52, 19);
@@ -96,7 +97,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(29, 161);
+            this.materialLabel2.Location = new System.Drawing.Point(29, 134);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(119, 19);
@@ -108,7 +109,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Depth = 0;
             this.textBox1.Font = new System.Drawing.Font("Roboto", 12F);
-            this.textBox1.Location = new System.Drawing.Point(165, 112);
+            this.textBox1.Location = new System.Drawing.Point(165, 88);
             this.textBox1.MaxLength = 200;
             this.textBox1.MouseState = MaterialSkin.MouseState.OUT;
             this.textBox1.Multiline = false;
@@ -123,7 +124,7 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Depth = 0;
             this.textBox2.Font = new System.Drawing.Font("Roboto", 12F);
-            this.textBox2.Location = new System.Drawing.Point(165, 162);
+            this.textBox2.Location = new System.Drawing.Point(165, 132);
             this.textBox2.MaxLength = 55;
             this.textBox2.MouseState = MaterialSkin.MouseState.OUT;
             this.textBox2.Multiline = false;
@@ -159,7 +160,7 @@
             this.materialMultiLineTextBox1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialMultiLineTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialMultiLineTextBox1.Hint = "";
-            this.materialMultiLineTextBox1.Location = new System.Drawing.Point(31, 224);
+            this.materialMultiLineTextBox1.Location = new System.Drawing.Point(32, 201);
             this.materialMultiLineTextBox1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialMultiLineTextBox1.Name = "materialMultiLineTextBox1";
             this.materialMultiLineTextBox1.Size = new System.Drawing.Size(367, 165);
@@ -172,19 +173,19 @@
             this.materialLabel3.AutoSize = true;
             this.materialLabel3.Depth = 0;
             this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel3.Location = new System.Drawing.Point(29, 202);
+            this.materialLabel3.Location = new System.Drawing.Point(30, 179);
             this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel3.Name = "materialLabel3";
-            this.materialLabel3.Size = new System.Drawing.Size(50, 19);
+            this.materialLabel3.Size = new System.Drawing.Size(118, 19);
             this.materialLabel3.TabIndex = 10;
-            this.materialLabel3.Text = "Podpis";
+            this.materialLabel3.Text = "Emailový podpis";
             // 
             // materialLabel4
             // 
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(780, 82);
+            this.materialLabel4.Location = new System.Drawing.Point(782, 70);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(148, 19);
@@ -210,7 +211,7 @@
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(783, 161);
+            this.materialLabel6.Location = new System.Drawing.Point(783, 154);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(23, 19);
@@ -223,7 +224,7 @@
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel7.Location = new System.Drawing.Point(783, 202);
+            this.materialLabel7.Location = new System.Drawing.Point(783, 192);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(23, 19);
@@ -236,7 +237,7 @@
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel8.Location = new System.Drawing.Point(782, 244);
+            this.materialLabel8.Location = new System.Drawing.Point(782, 234);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(24, 19);
@@ -249,7 +250,7 @@
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel9.Location = new System.Drawing.Point(784, 284);
+            this.materialLabel9.Location = new System.Drawing.Point(782, 277);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(22, 19);
@@ -277,7 +278,7 @@
             this.BBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.BBox.Depth = 0;
             this.BBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.BBox.Location = new System.Drawing.Point(816, 159);
+            this.BBox.Location = new System.Drawing.Point(816, 152);
             this.BBox.MaxLength = 5;
             this.BBox.MouseState = MaterialSkin.MouseState.OUT;
             this.BBox.Multiline = false;
@@ -293,7 +294,7 @@
             this.CBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.CBox.Depth = 0;
             this.CBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.CBox.Location = new System.Drawing.Point(816, 200);
+            this.CBox.Location = new System.Drawing.Point(816, 190);
             this.CBox.MaxLength = 5;
             this.CBox.MouseState = MaterialSkin.MouseState.OUT;
             this.CBox.Multiline = false;
@@ -309,7 +310,7 @@
             this.DBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DBox.Depth = 0;
             this.DBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.DBox.Location = new System.Drawing.Point(816, 242);
+            this.DBox.Location = new System.Drawing.Point(816, 232);
             this.DBox.MaxLength = 5;
             this.DBox.MouseState = MaterialSkin.MouseState.OUT;
             this.DBox.Multiline = false;
@@ -325,7 +326,7 @@
             this.EBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EBox.Depth = 0;
             this.EBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.EBox.Location = new System.Drawing.Point(816, 282);
+            this.EBox.Location = new System.Drawing.Point(814, 275);
             this.EBox.MaxLength = 5;
             this.EBox.MouseState = MaterialSkin.MouseState.OUT;
             this.EBox.Multiline = false;
@@ -336,33 +337,23 @@
             this.EBox.UseTallSize = false;
             this.EBox.Enter += new System.EventHandler(this.EBox_Enter);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label1.Location = new System.Drawing.Point(557, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 17);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Body za aktivitu";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label2.Location = new System.Drawing.Point(473, 112);
+            this.label2.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label2.Location = new System.Drawing.Point(473, 152);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 17);
+            this.label2.Size = new System.Drawing.Size(121, 18);
             this.label2.TabIndex = 20;
             this.label2.Text = "Šablóna cvičenie";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label3.Location = new System.Drawing.Point(473, 164);
+            this.label3.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label3.Location = new System.Drawing.Point(473, 204);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 17);
+            this.label3.Size = new System.Drawing.Size(135, 18);
             this.label3.TabIndex = 21;
             this.label3.Text = "Šablóna prednáška";
             // 
@@ -372,9 +363,9 @@
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(606, 109);
+            this.comboBox1.Location = new System.Drawing.Point(614, 150);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(147, 25);
+            this.comboBox1.Size = new System.Drawing.Size(135, 25);
             this.comboBox1.TabIndex = 22;
             // 
             // comboBox2
@@ -383,9 +374,9 @@
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(607, 161);
+            this.comboBox2.Location = new System.Drawing.Point(614, 201);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(147, 25);
+            this.comboBox2.Size = new System.Drawing.Size(135, 25);
             this.comboBox2.TabIndex = 23;
             // 
             // DeleteAllGroupDataBtn
@@ -395,11 +386,11 @@
             this.DeleteAllGroupDataBtn.DrawShadows = true;
             this.DeleteAllGroupDataBtn.HighEmphasis = true;
             this.DeleteAllGroupDataBtn.Icon = null;
-            this.DeleteAllGroupDataBtn.Location = new System.Drawing.Point(620, 341);
+            this.DeleteAllGroupDataBtn.Location = new System.Drawing.Point(614, 341);
             this.DeleteAllGroupDataBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.DeleteAllGroupDataBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.DeleteAllGroupDataBtn.Name = "DeleteAllGroupDataBtn";
-            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(188, 36);
+            this.DeleteAllGroupDataBtn.Size = new System.Drawing.Size(196, 36);
             this.DeleteAllGroupDataBtn.TabIndex = 25;
             this.DeleteAllGroupDataBtn.Text = "Vymazať dáta skupiny";
             this.DeleteAllGroupDataBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -411,25 +402,49 @@
             // 
             this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
             this.materialDivider2.Depth = 0;
-            this.materialDivider2.Location = new System.Drawing.Point(476, 330);
+            this.materialDivider2.Location = new System.Drawing.Point(466, 330);
             this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider2.Name = "materialDivider2";
             this.materialDivider2.Size = new System.Drawing.Size(452, 2);
             this.materialDivider2.TabIndex = 38;
             this.materialDivider2.Text = "materialDivider2";
             // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(125)))), ((int)(((byte)(139)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(466, 72);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(2, 260);
+            this.materialDivider1.TabIndex = 39;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // materialLabel10
+            // 
+            this.materialLabel10.AutoSize = true;
+            this.materialLabel10.Depth = 0;
+            this.materialLabel10.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel10.Location = new System.Drawing.Point(474, 72);
+            this.materialLabel10.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel10.Name = "materialLabel10";
+            this.materialLabel10.Size = new System.Drawing.Size(114, 19);
+            this.materialLabel10.TabIndex = 40;
+            this.materialLabel10.Text = "Body za aktivitu";
+            // 
             // Email_Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(959, 462);
+            this.ClientSize = new System.Drawing.Size(945, 434);
+            this.Controls.Add(this.materialLabel10);
+            this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialDivider2);
             this.Controls.Add(this.DeleteAllGroupDataBtn);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.EBox);
             this.Controls.Add(this.DBox);
             this.Controls.Add(this.CBox);
@@ -481,12 +496,13 @@
         private MaterialSkin.Controls.MaterialTextBox CBox;
         private MaterialSkin.Controls.MaterialTextBox DBox;
         private MaterialSkin.Controls.MaterialTextBox EBox;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private MaterialSkin.Controls.MaterialButton DeleteAllGroupDataBtn;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialLabel materialLabel10;
     }
 }

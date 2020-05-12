@@ -16,7 +16,6 @@ namespace CSAS
         bool editMode = false;
         public EmailTemplateForm(User user)
         {
-
             MaterialSkin.MaterialSkinManager skinManager = MaterialSkin.MaterialSkinManager.Instance;
             skinManager.EnforceBackcolorOnAllComponents = false;
             skinManager.AddFormToManage(this);

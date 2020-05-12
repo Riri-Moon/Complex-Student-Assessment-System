@@ -118,7 +118,7 @@ namespace CSAS
         {
             if (e.Error != null)
             {
-                MessageBox.Show("V procese exportu nastala chyba", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("V procese exportu nastala chyba,uistite sa, že stĺpce neobsahujú prázdne hodnoty ", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (e.Cancelled)
             {
@@ -226,9 +226,16 @@ namespace CSAS
                         {
                             generalCount++;
                             dbNames.TryGetValue(column.ColumnName, out string val);
-                            PropertyInfo item = typeof(Student).GetProperty(val);
-                            var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
-                            row[column.ColumnName] = st;
+                            if (val == "ISIC")
+                            {
+                                row[column.ColumnName] = CheckIsic(stud);
+                            }
+                            else
+                            {
+                                PropertyInfo item = typeof(Student).GetProperty(val);
+                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+                                row[column.ColumnName] = st;
+                            }
                         }
                         else
                         {
@@ -253,10 +260,17 @@ namespace CSAS
                                     {
                                         generalCount++;
                                         dbNames.TryGetValue(col.ColumnName, out string val);
-                                        PropertyInfo item = typeof(AttendanceStud).GetProperty(val);
-                                        string attendanceToExcel = attendances.Where(x => x.IdAttendance == attendance.IdAttendance && x.IDStudent == stud.Id).
-                                            Select(activ => activ != null ? item.GetValue(activ).ToString() : "").DefaultIfEmpty().FirstOrDefault();
-                                        row[col.ColumnName] = attendanceToExcel;
+                                        if (val == "Status")
+                                        { 
+                                            row[col.ColumnName] = CheckAttendance(attendance);
+                                        }
+                                        else
+                                        {
+                                            PropertyInfo item = typeof(AttendanceStud).GetProperty(val);
+                                            string attendanceToExcel = attendances.Where(x => x.IdAttendance == attendance.IdAttendance && x.IDStudent == stud.Id).
+                                                Select(activ => activ != null ? item.GetValue(activ).ToString() : "").DefaultIfEmpty().FirstOrDefault();
+                                            row[col.ColumnName] = attendanceToExcel;
+                                        }
                                     }
                                     else
                                     {
@@ -274,6 +288,30 @@ namespace CSAS
                     }
                 }
                 e.Result = table;
+            }
+        }
+
+        private string CheckIsic(Student stud)
+        {
+            if (string.IsNullOrEmpty(stud.ISIC))
+            {
+                return "Nevyplnený ISIC";
+            }
+            else
+            {
+                return stud.ISIC;
+            }
+        }
+
+        private string CheckAttendance(AttendanceStud att)
+        {
+            if (string.IsNullOrEmpty(att.Status))
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return att.Status;
             }
         }
 
@@ -400,11 +438,20 @@ namespace CSAS
 
                                 var name = studDict.TryGetValue(i, out string value);
                                 dbNames.TryGetValue(value, out string val);
-                                PropertyInfo item = typeof(Student).GetProperty(val);
-                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+                                if (val == "ISIC")
+                                {
+                                    Cell cell = new Cell().Add(new Paragraph(CheckIsic(stud)));
+                                    table.AddCell(cell);
+                                }
+                                else
+                                {
+                                    PropertyInfo item = typeof(Student).GetProperty(val);
+                                    var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
 
-                                Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
-                                table.AddCell(cell);
+                                    Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
+                                    table.AddCell(cell);
+
+                                }
                             }
                             else
                             {
@@ -428,11 +475,19 @@ namespace CSAS
                                             generalCount++;
                                             var name = attDict.TryGetValue(i - studentColumnsCount, out string value);
                                             dbNames.TryGetValue(value, out string val);
-                                            PropertyInfo item = typeof(AttendanceStud).GetProperty(val);
-                                            string attToPdf = attendances.Where(x => x.IdAttendance == attendance.IdAttendance && x.IDStudent == stud.Id).
-                                                Select(activ => activ != null ? item.GetValue(activ).ToString() : "").DefaultIfEmpty().FirstOrDefault();
-                                            Cell cell = new Cell().Add(new Paragraph(attToPdf).SetFont(roboto));
-                                            table.AddCell(cell);
+                                            if (val == "Status")
+                                            {
+                                                Cell cell = new Cell().Add(new Paragraph(CheckAttendance(attendance)).SetFont(roboto));
+                                                table.AddCell(cell);
+                                            }
+                                            else
+                                            {
+                                                PropertyInfo item = typeof(AttendanceStud).GetProperty(val);
+                                                string attToPdf = attendances.Where(x => x.IdAttendance == attendance.IdAttendance && x.IDStudent == stud.Id).
+                                                    Select(activ => activ != null ? item.GetValue(activ).ToString() : "").DefaultIfEmpty().FirstOrDefault();
+                                                Cell cell = new Cell().Add(new Paragraph(attToPdf).SetFont(roboto));
+                                                table.AddCell(cell);
+                                            }
                                         }
                                         else
                                         {
@@ -713,10 +768,18 @@ namespace CSAS
                             var name = studDict.TryGetValue(i, out string value);
                             dbNames.TryGetValue(value, out string val);
                             generalCount++;
-                            PropertyInfo item = typeof(Student).GetProperty(val);
-                            var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
-                            Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
-                            table.AddCell(cell);
+                            if (val == "ISIC")
+                            {
+                                Cell cell = new Cell().Add(new Paragraph(CheckIsic(stud)));
+                                table.AddCell(cell);
+                            }
+                            else
+                            {
+                                PropertyInfo item = typeof(Student).GetProperty(val);
+                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+                                Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
+                                table.AddCell(cell);
+                            }
                         }
 
                         for (int i = 0; i < finalGradeColumnsCount; i++)
@@ -821,9 +884,16 @@ namespace CSAS
                         {
                             generalCount++;
                             dbNames.TryGetValue(column.ColumnName, out string val);
-                            PropertyInfo item = typeof(Student).GetProperty(val);
-                            var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
-                            row[column.ColumnName] = st;
+                            if (val == "ISIC")
+                            {
+                                row[column.ColumnName] = CheckIsic(stud);
+                            }
+                            else
+                            {
+                                PropertyInfo item = typeof(Student).GetProperty(val);
+                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+                                row[column.ColumnName] = st;
+                            }
                         }
                         else
                         {
@@ -946,9 +1016,16 @@ namespace CSAS
                             {
                                 generalCount++;
                                 dbNames.TryGetValue(column.ColumnName, out string val);
-                                PropertyInfo item = typeof(Student).GetProperty(val);
-                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
-                                row[column.ColumnName] = st;
+                                if (val == "ISIC")
+                                {
+                                    row[column.ColumnName] = CheckIsic(stud);
+                                }
+                                else
+                                {
+                                    PropertyInfo item = typeof(Student).GetProperty(val);
+                                    var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+                                    row[column.ColumnName] = st;
+                                }
                             }
                             else
                             {
@@ -1233,11 +1310,20 @@ namespace CSAS
 
                                 var name = studDict.TryGetValue(i, out string value);
                                 dbNames.TryGetValue(value, out string val);
-                                PropertyInfo item = typeof(Student).GetProperty(val);
-                                var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
 
-                                Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
-                                table.AddCell(cell);
+                                if (val == "ISIC")
+                                {
+                                    Cell cell = new Cell().Add(new Paragraph(CheckIsic(stud)));
+                                    table.AddCell(cell);
+                                }
+                                else
+                                {
+                                    PropertyInfo item = typeof(Student).GetProperty(val);
+                                    var st = students.Where(x => x.Id == stud.Id).Select(stu => (string)item.GetValue(stu).ToString()).FirstOrDefault();
+
+                                    Cell cell = new Cell().Add(new Paragraph(st).SetFont(roboto));
+                                    table.AddCell(cell);
+                                }
                             }
                             else
                             {

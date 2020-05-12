@@ -175,7 +175,7 @@ namespace CSAS
 
                         case "Študent":
                             var studs = AttList.Where(t => t.Type == CheckType()).Select(x => x.Meno + " " + x.Priezvisko);
-                            comboBox5.ResetText();
+                             comboBox5.ResetText();
                             comboBox5.Items.Clear();
 
                             foreach (var std in studs.Distinct())
@@ -187,18 +187,19 @@ namespace CSAS
                             }
                             comboBox5.Enabled = true;
                             break;
-
                     }
-                    attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    attGrid.Columns["Date"].HeaderText = "Dátum";
-                    attGrid.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    attGrid.Columns["ID_Kruzok"].HeaderText = "Krúžok";
-                    attGrid.Columns["Type"].HeaderText = "Typ";
-                    attGrid.Columns["Id"].Visible = false;
-                    attGrid.Columns["IdAttendance"].Visible = false;
-                    attGrid.MultiSelect = true;
-                    attGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
+                    if (attGrid.Rows.Count>0 || attGrid.DataSource != null)
+                    {
+                        attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        attGrid.Columns["Date"].HeaderText = "Dátum";
+                        attGrid.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        attGrid.Columns["ID_Kruzok"].HeaderText = "Krúžok";
+                        attGrid.Columns["Type"].HeaderText = "Typ";
+                        attGrid.Columns["Id"].Visible = false;
+                        attGrid.Columns["IdAttendance"].Visible = false;
+                        attGrid.MultiSelect = true;
+                        attGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    }
                 }
             }
             catch (Exception ex)
@@ -300,16 +301,19 @@ namespace CSAS
                             attGrid.DataSource = AttList.Where(t => t.Type == CheckType());
                             break;
                     }
-                    attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    attGrid.Columns["IdAttendance"].Visible = false;
-                    attGrid.Columns["Id"].Visible = false;
-                    attGrid.Columns["Date"].HeaderText = "Dátum";
-                    attGrid.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                    attGrid.Columns["Type"].HeaderText = "Typ";
-                    attGrid.Columns["ID_Kruzok"].HeaderText = "Krúžok";
-                    //attGrid.Columns["Comment"].Visible = false;
-                    attGrid.MultiSelect = true;
-                    attGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    if (attGrid.Rows.Count > 0 || attGrid.DataSource != null)
+                    {
+                        attGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        attGrid.Columns["IdAttendance"].Visible = false;
+                        attGrid.Columns["Id"].Visible = false;
+                        attGrid.Columns["Date"].HeaderText = "Dátum";
+                        attGrid.Columns["Date"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                        attGrid.Columns["Type"].HeaderText = "Typ";
+                        attGrid.Columns["ID_Kruzok"].HeaderText = "Krúžok";
+                        //attGrid.Columns["Comment"].Visible = false;
+                        attGrid.MultiSelect = true;
+                        attGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                    }
 
                 }
             }
@@ -435,8 +439,8 @@ namespace CSAS
                             con.SubmitChanges(ConflictMode.FailOnFirstConflict);
                         }
                         //GetAttendance();
-                        Filter();
-                        if ((int?)attGrid.CurrentRow.Cells[7].Value != null)
+                        Filter();                        
+                        if (attGrid.Rows.Count>0 && (int?)attGrid.CurrentRow.Cells[7].Value != null)
                         {
                             idStud = (int?)attGrid.CurrentRow.Cells[7].Value;
                             if (idStud != null)
@@ -691,6 +695,7 @@ namespace CSAS
                                         attendance.IsReplacable = true;
                                     }
                                 }
+                                attendance.Comment = string.Empty;
                                 break;
 
                             case "Nahradené":
@@ -715,6 +720,8 @@ namespace CSAS
                                 {
                                     attendance.IsReplacable = false;
                                 }
+                                attendance.Comment = string.Empty;
+
                                 con.SubmitChanges();
                                 break;
 
@@ -741,6 +748,7 @@ namespace CSAS
                                         attendance.IsReplacable = true;
                                     }
                                 }
+                                attendance.Comment = string.Empty;
                                 break;
 
                             default: break;

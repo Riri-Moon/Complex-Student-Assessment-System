@@ -136,11 +136,11 @@
             this.OdoslatBtnSendForm.DrawShadows = true;
             this.OdoslatBtnSendForm.HighEmphasis = true;
             this.OdoslatBtnSendForm.Icon = null;
-            this.OdoslatBtnSendForm.Location = new System.Drawing.Point(1036, 571);
+            this.OdoslatBtnSendForm.Location = new System.Drawing.Point(969, 571);
             this.OdoslatBtnSendForm.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.OdoslatBtnSendForm.MouseState = MaterialSkin.MouseState.HOVER;
             this.OdoslatBtnSendForm.Name = "OdoslatBtnSendForm";
-            this.OdoslatBtnSendForm.Size = new System.Drawing.Size(84, 36);
+            this.OdoslatBtnSendForm.Size = new System.Drawing.Size(87, 36);
             this.OdoslatBtnSendForm.TabIndex = 4;
             this.OdoslatBtnSendForm.Text = "Odoslať";
             this.OdoslatBtnSendForm.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -164,7 +164,7 @@
             this.SelectAllBtnPrimaryEmail.AutoSize = true;
             this.SelectAllBtnPrimaryEmail.Depth = 0;
             this.SelectAllBtnPrimaryEmail.Font = new System.Drawing.Font("Roboto", 10F);
-            this.SelectAllBtnPrimaryEmail.Location = new System.Drawing.Point(798, 114);
+            this.SelectAllBtnPrimaryEmail.Location = new System.Drawing.Point(798, 109);
             this.SelectAllBtnPrimaryEmail.Margin = new System.Windows.Forms.Padding(0);
             this.SelectAllBtnPrimaryEmail.MouseLocation = new System.Drawing.Point(-1, -1);
             this.SelectAllBtnPrimaryEmail.MouseState = MaterialSkin.MouseState.HOVER;
@@ -181,7 +181,7 @@
             this.SelectAllSecondaryEmail.AutoSize = true;
             this.SelectAllSecondaryEmail.Depth = 0;
             this.SelectAllSecondaryEmail.Font = new System.Drawing.Font("Roboto", 10F);
-            this.SelectAllSecondaryEmail.Location = new System.Drawing.Point(798, 166);
+            this.SelectAllSecondaryEmail.Location = new System.Drawing.Point(798, 146);
             this.SelectAllSecondaryEmail.Margin = new System.Windows.Forms.Padding(0);
             this.SelectAllSecondaryEmail.MouseLocation = new System.Drawing.Point(-1, -1);
             this.SelectAllSecondaryEmail.MouseState = MaterialSkin.MouseState.HOVER;
@@ -219,7 +219,7 @@
             this.GroupComboEmail.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.GroupComboEmail.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.GroupComboEmail.FormattingEnabled = true;
-            this.GroupComboEmail.Location = new System.Drawing.Point(954, 222);
+            this.GroupComboEmail.Location = new System.Drawing.Point(954, 190);
             this.GroupComboEmail.Name = "GroupComboEmail";
             this.GroupComboEmail.Size = new System.Drawing.Size(121, 25);
             this.GroupComboEmail.TabIndex = 10;
@@ -229,7 +229,7 @@
             this.GroupCheckBtn.AutoSize = true;
             this.GroupCheckBtn.Depth = 0;
             this.GroupCheckBtn.Font = new System.Drawing.Font("Roboto", 10F);
-            this.GroupCheckBtn.Location = new System.Drawing.Point(798, 213);
+            this.GroupCheckBtn.Location = new System.Drawing.Point(798, 183);
             this.GroupCheckBtn.Margin = new System.Windows.Forms.Padding(0);
             this.GroupCheckBtn.MouseLocation = new System.Drawing.Point(-1, -1);
             this.GroupCheckBtn.MouseState = MaterialSkin.MouseState.HOVER;
@@ -252,7 +252,7 @@
             this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Size = new System.Drawing.Size(132, 36);
+            this.materialFlatButton1.Size = new System.Drawing.Size(136, 36);
             this.materialFlatButton1.TabIndex = 12;
             this.materialFlatButton1.Text = "Pridať prílohy";
             this.materialFlatButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -287,7 +287,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 622);
+            this.ClientSize = new System.Drawing.Size(1085, 622);
             this.Controls.Add(this.AttachmentsGrid);
             this.Controls.Add(this.materialFlatButton1);
             this.Controls.Add(this.GroupCheckBtn);

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.StudentGrid = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -62,38 +62,38 @@
             this.StudentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.StudentGrid.BackgroundColor = System.Drawing.Color.White;
             this.StudentGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.StudentGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.StudentGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.StudentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.StudentGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.StudentGrid.DefaultCellStyle = dataGridViewCellStyle8;
             this.StudentGrid.GridColor = System.Drawing.Color.White;
             this.StudentGrid.Location = new System.Drawing.Point(28, 118);
             this.StudentGrid.MultiSelect = false;
             this.StudentGrid.Name = "StudentGrid";
             this.StudentGrid.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 8.25F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.StudentGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Roboto", 8.25F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.StudentGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.StudentGrid.RowHeadersVisible = false;
             this.StudentGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.StudentGrid.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
@@ -111,7 +111,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label1.Location = new System.Drawing.Point(476, 125);
+            this.label1.Location = new System.Drawing.Point(449, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(205, 18);
             this.label1.TabIndex = 5;
@@ -121,7 +121,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label2.Location = new System.Drawing.Point(503, 225);
+            this.label2.Location = new System.Drawing.Point(476, 225);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 18);
             this.label2.TabIndex = 6;
@@ -131,7 +131,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label3.Location = new System.Drawing.Point(529, 292);
+            this.label3.Location = new System.Drawing.Point(502, 288);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 18);
             this.label3.TabIndex = 7;
@@ -141,7 +141,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label4.Location = new System.Drawing.Point(506, 319);
+            this.label4.Location = new System.Drawing.Point(479, 319);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(175, 18);
             this.label4.TabIndex = 8;
@@ -151,17 +151,17 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label5.Location = new System.Drawing.Point(619, 368);
+            this.label5.Location = new System.Drawing.Point(542, 375);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 18);
+            this.label5.Size = new System.Drawing.Size(112, 18);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Známka";
+            this.label5.Text = "Finálna známka";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label6.Location = new System.Drawing.Point(488, 156);
+            this.label6.Location = new System.Drawing.Point(461, 156);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(193, 18);
             this.label6.TabIndex = 10;
@@ -171,7 +171,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Roboto", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.label7.Location = new System.Drawing.Point(466, 190);
+            this.label7.Location = new System.Drawing.Point(439, 190);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(215, 18);
             this.label7.TabIndex = 11;
@@ -182,7 +182,7 @@
             this.MaxPtsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MaxPtsBox.Depth = 0;
             this.MaxPtsBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.MaxPtsBox.Location = new System.Drawing.Point(696, 118);
+            this.MaxPtsBox.Location = new System.Drawing.Point(669, 118);
             this.MaxPtsBox.MaxLength = 6;
             this.MaxPtsBox.MouseState = MaterialSkin.MouseState.OUT;
             this.MaxPtsBox.Multiline = false;
@@ -197,7 +197,7 @@
             this.SemPtsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SemPtsBox.Depth = 0;
             this.SemPtsBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.SemPtsBox.Location = new System.Drawing.Point(696, 149);
+            this.SemPtsBox.Location = new System.Drawing.Point(669, 149);
             this.SemPtsBox.MaxLength = 5;
             this.SemPtsBox.MouseState = MaterialSkin.MouseState.OUT;
             this.SemPtsBox.Multiline = false;
@@ -212,7 +212,7 @@
             this.LecPtsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LecPtsBox.Depth = 0;
             this.LecPtsBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.LecPtsBox.Location = new System.Drawing.Point(696, 183);
+            this.LecPtsBox.Location = new System.Drawing.Point(669, 183);
             this.LecPtsBox.MaxLength = 5;
             this.LecPtsBox.MouseState = MaterialSkin.MouseState.OUT;
             this.LecPtsBox.Multiline = false;
@@ -227,7 +227,7 @@
             this.TotalPtsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TotalPtsBox.Depth = 0;
             this.TotalPtsBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.TotalPtsBox.Location = new System.Drawing.Point(696, 218);
+            this.TotalPtsBox.Location = new System.Drawing.Point(669, 218);
             this.TotalPtsBox.MaxLength = 6;
             this.TotalPtsBox.MouseState = MaterialSkin.MouseState.OUT;
             this.TotalPtsBox.Multiline = false;
@@ -236,13 +236,14 @@
             this.TotalPtsBox.TabIndex = 4;
             this.TotalPtsBox.Text = "";
             this.TotalPtsBox.UseTallSize = false;
+            this.TotalPtsBox.TextChanged += new System.EventHandler(this.TotalPtsBox_TextChanged);
             // 
             // MissedSemBox
             // 
             this.MissedSemBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MissedSemBox.Depth = 0;
             this.MissedSemBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.MissedSemBox.Location = new System.Drawing.Point(696, 285);
+            this.MissedSemBox.Location = new System.Drawing.Point(669, 281);
             this.MissedSemBox.MaxLength = 2;
             this.MissedSemBox.MouseState = MaterialSkin.MouseState.OUT;
             this.MissedSemBox.Multiline = false;
@@ -257,7 +258,7 @@
             this.MissedLecBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MissedLecBox.Depth = 0;
             this.MissedLecBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.MissedLecBox.Location = new System.Drawing.Point(696, 312);
+            this.MissedLecBox.Location = new System.Drawing.Point(669, 312);
             this.MissedLecBox.MaxLength = 2;
             this.MissedLecBox.MouseState = MaterialSkin.MouseState.OUT;
             this.MissedLecBox.Multiline = false;
@@ -272,7 +273,7 @@
             this.FinalGradeBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.FinalGradeBox.Depth = 0;
             this.FinalGradeBox.Font = new System.Drawing.Font("Roboto", 12F);
-            this.FinalGradeBox.Location = new System.Drawing.Point(696, 368);
+            this.FinalGradeBox.Location = new System.Drawing.Point(669, 368);
             this.FinalGradeBox.MaxLength = 50;
             this.FinalGradeBox.MouseState = MaterialSkin.MouseState.OUT;
             this.FinalGradeBox.Multiline = false;
@@ -289,7 +290,7 @@
             this.GradeBtn.DrawShadows = true;
             this.GradeBtn.HighEmphasis = true;
             this.GradeBtn.Icon = null;
-            this.GradeBtn.Location = new System.Drawing.Point(689, 435);
+            this.GradeBtn.Location = new System.Drawing.Point(662, 435);
             this.GradeBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.GradeBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.GradeBtn.Name = "GradeBtn";
@@ -306,7 +307,7 @@
             this.materialRadioButton1.AutoSize = true;
             this.materialRadioButton1.Checked = true;
             this.materialRadioButton1.Depth = 0;
-            this.materialRadioButton1.Location = new System.Drawing.Point(387, 63);
+            this.materialRadioButton1.Location = new System.Drawing.Point(360, 69);
             this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -323,7 +324,7 @@
             // 
             this.materialRadioButton2.AutoSize = true;
             this.materialRadioButton2.Depth = 0;
-            this.materialRadioButton2.Location = new System.Drawing.Point(599, 63);
+            this.materialRadioButton2.Location = new System.Drawing.Point(572, 69);
             this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -349,7 +350,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 494);
+            this.ClientSize = new System.Drawing.Size(784, 493);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.materialRadioButton2);
             this.Controls.Add(this.materialRadioButton1);

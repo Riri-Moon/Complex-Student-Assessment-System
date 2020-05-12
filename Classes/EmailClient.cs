@@ -7,14 +7,11 @@ using System.Linq;
 
 namespace CSAS
 {
-
-
     public class EmailSettings
     {
         public string ApiKey { get; set; }
         public string EmailAddress { get; set; }
     }
-
 
     public class EmailBody
     {
@@ -81,9 +78,6 @@ namespace CSAS
                 System.Windows.Forms.MessageBox.Show("Nastala chyba, prosím kontaktujte poverenú osobu");
                 return;
             }
-
         }
-
-
     }
 }

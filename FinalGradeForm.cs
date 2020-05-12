@@ -189,6 +189,13 @@ namespace CSAS
         {
             try
             {
+                MaxPtsBox.Text = 0.ToString();
+                SemPtsBox.Text = 0.ToString();
+                LecPtsBox.Text = 0.ToString();
+                TotalPtsBox.Text = 0.ToString();
+                MissedLecBox.Text = 0.ToString();
+                MissedSemBox.Text = 0.ToString();
+
                 using (StudentDBDataContext con = new StudentDBDataContext(conn_str))
                 {
                     double maxPoints = 0;
@@ -205,7 +212,6 @@ namespace CSAS
 
                     if (materialRadioButton1.Checked)
                     {
-
                         IQueryable<Activity> allActivities = null;
                         ActivityTemplate bonusPtsLectureTemp = null;
                         ActivityTemplate bonusPtsSeminarTemp = null; ;
@@ -247,6 +253,33 @@ namespace CSAS
 
                         if (allActivities.Count() <= 0 || allActivities == null)
                         {
+                            if (bonusPtsSeminar != null || bonusPtsSeminar.Count() > 0)
+                            {
+                                foreach (var seminar in bonusPtsSeminar)
+                                {
+                                    bonusSem += seminar.Hodnotenie;
+                                }
+                            }
+                            else
+                            {
+                                bonusSem += 0;
+                            }
+
+                            if (bonusPtsLecture != null && bonusPtsLecture.Count() > 0)
+                            {
+                                foreach (var lecture in bonusPtsLecture)
+                                {
+                                    bonusLec += lecture.Hodnotenie;
+                                }
+                            }
+                            else
+                            {
+                                bonusLec += 0;
+                            }
+
+                            SemPtsBox.Text = bonusSem.ToString();
+                            LecPtsBox.Text = bonusLec.ToString();
+                            TotalPtsBox.Text = (bonusSem + bonusLec).ToString();
                             return;
                         }
 
@@ -256,7 +289,7 @@ namespace CSAS
                             acquiredPoints += activity.Hodnotenie;
                         }
 
-                        if (bonusPtsSeminar != null)
+                        if (bonusPtsSeminar != null || bonusPtsSeminar.Count() > 0)
                         {
                             foreach (var seminar in bonusPtsSeminar)
                             {
@@ -289,34 +322,7 @@ namespace CSAS
                         MissedLecBox.Text = totalAttendance.TotalAbsentLecture.ToString();
                         MissedSemBox.Text = totalAttendance.TotalAbsentSeminar.ToString();
 
-                        string grade;
-                        if (totalPoints >= currentUser.AGrade)
-                        {
-                            grade = "A";
-                        }
-                        else if (totalPoints >= currentUser.BGrade)
-                        {
-                            grade = "B";
-                        }
-                        else if (totalPoints >= currentUser.CGrade)
-                        {
-                            grade = "C";
-
-                        }
-                        else if (totalPoints >= currentUser.DGrade)
-                        {
-                            grade = "D";
-
-                        }
-                        else if (totalPoints >= currentUser.EGrade)
-                        {
-                            grade = "E";
-                        }
-                        else
-                        {
-                            grade = "Fx";
-                        }
-                        FinalGradeBox.Text = grade;
+                        Grade(totalPoints, currentUser);
                     }
                     else
                     {
@@ -336,6 +342,38 @@ namespace CSAS
                 Logger newLog = new Logger();
                 newLog.LogError(ex);
             }
+        }
+
+        private void Grade(double? totalPoints ,User currentUser)
+        {
+            string grade;
+            if (totalPoints >= currentUser.AGrade)
+            {
+                grade = "A";
+            }
+            else if (totalPoints >= currentUser.BGrade)
+            {
+                grade = "B";
+            }
+            else if (totalPoints >= currentUser.CGrade)
+            {
+                grade = "C";
+
+            }
+            else if (totalPoints >= currentUser.DGrade)
+            {
+                grade = "D";
+
+            }
+            else if (totalPoints >= currentUser.EGrade)
+            {
+                grade = "E";
+            }
+            else
+            {
+                grade = "Fx";
+            }
+            FinalGradeBox.Text = grade;
         }
 
         //Nacitavanie studentov do datagridu 
@@ -411,37 +449,37 @@ namespace CSAS
                     }
                     if (!float.TryParse(MaxPtsBox.Text, out float maxPoints))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         MaxPtsBox.Select();
                         return false;
                     }
                     if (!float.TryParse(SemPtsBox.Text, out float semPts))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         SemPtsBox.Select();
                         return false;
                     }
                     if (!float.TryParse(LecPtsBox.Text, out float lecPts))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         LecPtsBox.Select();
                         return false;
                     }
                     if (!int.TryParse(MissedLecBox.Text, out int missedLec))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         MissedLecBox.Select();
                         return false;
                     }
                     if (!int.TryParse(MissedSemBox.Text, out int missedSem))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         SemPtsBox.Select();
                         return false;
                     }
                     if (!float.TryParse(TotalPtsBox.Text, out float totalPts))
                     {
-                        MessageBox.Show("Pole musí obsahovať len čísla");
+                        MessageBox.Show("Pole musí obsahovať len čísla a nemôže byť prázdne");
                         TotalPtsBox.Select();
                         return false;
                     }
@@ -472,6 +510,21 @@ namespace CSAS
 
         private void FinalGradeForm_Load(object sender, EventArgs e)
         {
+        }
+
+        private void TotalPtsBox_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (double.TryParse(TotalPtsBox.Text, out var result))
+                {
+                    Grade(result, currentUser);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 

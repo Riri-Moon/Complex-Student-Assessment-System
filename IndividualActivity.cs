@@ -253,7 +253,7 @@ namespace CSAS
                         var link = Interaction.InputBox("Ak si neželáte zaslať dodatočné informácie o úlohe, nechajte prázdne", "Dodatočná správa", "Viac informácií nájdete na: ", -1, -1);
                         SendActivityCreated(studentAddress, activityForEmailSending, link);
                     }
-                    else if (currUser.ApiKey == string.Empty)
+                    else if (currUser.ApiKey == string.Empty && SendMeBox.Checked == true || SendingEmailCheck.Checked == true|| ActCreatedCheckBox.Checked==true)
                     {
                         MessageBox.Show("ApiKey je prázdny, aktivita bude vytvorená ale žiaden email nebude odoslaný pokým nebude pridaný ApiKey");
                     }

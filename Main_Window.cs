@@ -215,10 +215,17 @@ namespace CSAS
             {
                 using (var con = new StudentDBDataContext(conn_str))
                 {
-
-                    if (Student_Grid.SelectedRows.Count > 0)
+                    int selectedStudent = 0;
+                    if (Student_Grid.SelectedRows.Count > 0 )
                     {
-                        var selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
+                        if (Student_Grid.CurrentRow == null)
+                        {
+                             selectedStudent = (int)Student_Grid.SelectedRows[0].Cells[0].Value;
+                        }
+                        else
+                        {
+                             selectedStudent = (int)Student_Grid.CurrentRow.Cells[0].Value;
+                        }
                         var acts = con.GetTable<Activity>().Where(x => x.IdUser == currentUser.Id);
 
                         if (acts.Count() > 0)
